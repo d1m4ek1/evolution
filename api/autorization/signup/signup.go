@@ -23,7 +23,7 @@ const (
 func createAccount(s general.SignUpData, w http.ResponseWriter) {
 	var user string
 
-	database.Tables.QueryRow(`SELECT login FORM users_data WHERE login=$1`, s.Login).Scan(&user)
+	database.Tables.QueryRow(database.SelectLogin, s.Login).Scan(&user)
 	if user != "" {
 		e := newerror.ErrorClient{Value: "Логин занят!", Number: 200}
 
@@ -34,13 +34,11 @@ func createAccount(s general.SignUpData, w http.ResponseWriter) {
 	}
 
 	if user == "" {
-		if _, err := database.Tables.Exec(`INSERT INTO users_data (login, password, email, token) 
-			VALUES ($1, $2, $3, $4)`, s.Login, s.Password, s.Email, s.Token); err != nil {
+		if _, err := database.Tables.Exec(database.InsertNewUserData, s.Login, s.Password, s.Email, s.Token); err != nil {
 			fmt.Println(newerror.Wrap(errorCreateAccount, "Query at db: 1", err))
 		}
 
-		if _, err := database.Tables.Exec(`INSERT INTO users (name) 
-			VALUES ($1)`, s.Nickname); err != nil {
+		if _, err := database.Tables.Exec(database.InsertNewUser, s.Nickname); err != nil {
 			fmt.Println(newerror.Wrap(errorCreateAccount, "Query at db: 2", err))
 		}
 

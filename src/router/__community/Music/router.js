@@ -1,13 +1,13 @@
-import VueRouter from "vue-router";
+import VueRouter from 'vue-router';
 
-import Music from "/src/pages/__community/Music/components/Music.vue"
+import Music from '../../../pages/__community/Music/components/Music.vue';
 
 export default new VueRouter({
-    routes: [
-        {
-            path: "/music",
-            component: Music,
-        },
-    ],
-    mode: "history",
+  routes: [
+    {
+      path: '/music',
+      component: Music,
+    },
+  ],
+  mode: 'history',
 });

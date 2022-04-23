@@ -91,7 +91,7 @@ directoryFixed();
         this.showHideComponent = true;
       }
     },
-    hideComponent(data) {
+    hideComponent(data = Object) {
       this.showHideDirectory = data.hide;
       this.showHideComponent = false;
     },

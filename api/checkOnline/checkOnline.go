@@ -25,16 +25,16 @@ func CheckOnline(_ http.ResponseWriter, r *http.Request) {
 
 			var user string
 
-			database.Tables.QueryRow(`SELECT login FROM users_data WHERE id=$1 AND token=$2`, userId.Value, token.Value).Scan(&user)
+			database.Tables.QueryRow(database.SelectLoginForIdToken, userId.Value, token.Value).Scan(&user)
 
 			if user != "" {
-				if _, err := database.Tables.Exec(`UPDATE users SET network_status='online' WHERE id=$1 AND network_status<>'online'`, userId.Value); err != nil {
+				if _, err := database.Tables.Exec(database.UpdateNetworkStatusOnline, userId.Value); err != nil {
 					fmt.Println(newerror.Wrap(errorCheckOnline, "Query at db: 2", err))
 				}
 
 				t := time.NewTimer(10 * time.Second)
 				<-t.C
-				if _, err := database.Tables.Exec(`UPDATE users SET network_status='offline' WHERE id=$1 AND network_status<>'offline'`, userId.Value); err != nil {
+				if _, err := database.Tables.Exec(database.UpdateNetworkStatusOffline, userId.Value); err != nil {
 					fmt.Println(newerror.Wrap(errorCheckOnline, "Query at db: 3", err))
 				}
 			}

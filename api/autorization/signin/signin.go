@@ -24,8 +24,7 @@ func getDataSignIn(s *general.SignInData, w http.ResponseWriter) (general.UserDa
 
 	data := general.UserData{}
 
-	err := database.Tables.QueryRow(`SELECT ud.id, u.network_status, ud.token FROM
-	users u, users_data ud WHERE ud.login=$1 AND ud.password=$2 AND ud.id=u.id`, s.Login, s.Password).Scan(&data.UserId, &data.NetworkStatus, &s.OldToken)
+	err := database.Tables.QueryRow(database.SelectUserDataSignIn, s.Login, s.Password).Scan(&data.UserId, &data.NetworkStatus, &s.OldToken)
 	if err != nil {
 		e := newerror.ErrorClient{Value: "Неверный логин или пароль", Number: 200}
 		if err := json.NewEncoder(w).Encode(&e); err != nil {
@@ -35,7 +34,7 @@ func getDataSignIn(s *general.SignInData, w http.ResponseWriter) (general.UserDa
 	}
 
 	if !s.OldToken.Valid {
-		if _, err := database.Tables.Exec(`UPDATE users_data SET token=$1 WHERE users_data.id=$2`, s.NewToken, data.UserId); err != nil {
+		if _, err := database.Tables.Exec(database.UpdateTokenNotNull, s.NewToken, data.UserId); err != nil {
 			fmt.Println(newerror.Wrap(errorGetData, "Query at db: 3", err))
 		}
 	} else {
@@ -43,7 +42,7 @@ func getDataSignIn(s *general.SignInData, w http.ResponseWriter) (general.UserDa
 	}
 
 	if data.NetworkStatus == "offline" {
-		if _, err := database.Tables.Exec(`UPDATE users SET network_status='online' WHERE id=$1`, data.UserId); err != nil {
+		if _, err := database.Tables.Exec(database.UpdateNetworkStatusOnline, data.UserId); err != nil {
 			fmt.Println(newerror.Wrap(errorGetData, "Query at db: 2", err))
 		}
 	}

@@ -21,7 +21,7 @@ Vue.use(VueRouter);
     settings: false,
     title: {
       show: false,
-      value: String(),
+      value: '',
     },
   },
   methods: {

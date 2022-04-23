@@ -1,7 +1,7 @@
 const delayedLoading = () => {
   if (document.documentElement.clientWidth <= 960) {
     setTimeout(() => {
-      document.querySelectorAll('.delayed-loading').forEach((item) => {
+      document.querySelectorAll('.delayed-loading').forEach((item = String) => {
         const elem = item;
         const src = elem.getAttribute('delayed-loading');
 
@@ -9,7 +9,7 @@ const delayedLoading = () => {
       });
     }, 500);
   } else {
-    document.querySelectorAll('.delayed-loading').forEach((item) => {
+    document.querySelectorAll('.delayed-loading').forEach((item = String) => {
       const elem = item;
       const src = elem.getAttribute('delayed-loading');
 

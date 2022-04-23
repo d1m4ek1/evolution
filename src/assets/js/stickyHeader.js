@@ -5,14 +5,14 @@ const stickyHeader = () => {
     let x1 = null;
     let y1 = null;
 
-    const handleTouchStart = (e = Object()) => {
+    const handleTouchStart = (e = Object) => {
       const firstTouch = e.touches[0];
 
       x1 = firstTouch.clientX;
       y1 = firstTouch.clientY;
     };
 
-    const handleTouchMove = (e) => {
+    const handleTouchMove = (e = Object) => {
       if (!x1 || !y1) {
         return false;
       }

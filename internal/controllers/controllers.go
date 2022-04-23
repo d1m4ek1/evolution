@@ -105,7 +105,7 @@ func replyBasedOnToken(r *ReplyDaseOnToken) {
 func getUserData(token *http.Cookie) general.HeaderData {
 	var headerData general.HeaderData
 	if token != nil {
-		if err := database.Tables.QueryRow(`SELECT ud.id, ud.user_custom_id FROM users_data ud WHERE ud.token=$1`, token.Value).Scan(&headerData.UserId, &headerData.CustomId); err != nil {
+		if err := database.Tables.QueryRow(database.SelectUserData, token.Value).Scan(&headerData.UserId, &headerData.CustomId); err != nil {
 			fmt.Println(newerror.Wrap(errorGetUserData, "Query at db: 1", err))
 			return general.HeaderData{}
 		}

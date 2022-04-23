@@ -1,12 +1,12 @@
 export default {
-  update(el, binding, vnode) {
+  update(el = Object, binding = Object, vnode = Object) {
     const binVal = binding.value;
     const vnodeContext = vnode.context;
     const elem = binVal.id !== undefined ? document.getElementById(binVal.id) : el;
 
-    document.addEventListener('click', (event) => {
+    document.addEventListener('click', (event = Object) => {
       if (binVal.val.length === 3) {
-        Object.keys(vnodeContext).forEach((item) => {
+        Object.keys(vnodeContext).forEach((item = String) => {
           const elemObject = item;
 
           if (elemObject === binVal.val[0]) {
@@ -33,7 +33,7 @@ export default {
       }
 
       if (binVal.val.length === 2) {
-        Object.keys(vnodeContext).forEach((item) => {
+        Object.keys(vnodeContext).forEach((item = String) => {
           const elemObject = item;
 
           if (elemObject === binVal.val[0]) {
@@ -55,7 +55,7 @@ export default {
       }
 
       if (binVal.val.length === 1) {
-        Object.keys(vnodeContext).forEach((item) => {
+        Object.keys(vnodeContext).forEach((item = String) => {
           const elemObject = item;
 
           if (elemObject === binVal.val[0]) {
