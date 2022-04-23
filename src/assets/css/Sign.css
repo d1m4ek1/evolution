@@ -1,0 +1,68 @@
+.card-sign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-sign-content {
+    display: flex;
+    flex-direction: column;
+}
+.card-sign-content h2, .card-sign-content button, .card-sign-content input {
+    margin: 5px 0;
+}
+
+.description {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 20px 0;
+    border-bottom: 1px solid rgb(235, 235, 235);
+}
+.link-forgot {
+    text-align: center;
+}
+
+.description-content input {
+    min-width: 250px;
+}
+.description-content:not(:last-child) {
+    padding-right: 30px;
+}
+.not-valid {
+    border: 1px solid red;
+    box-shadow: 0 0 0 3px red;
+}
+
+.necessarily {
+    position: relative;
+}
+.necessarily::before {
+    content: '*';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    color: red;
+    font-size: 18px;
+    z-index: 1;
+}
+
+.description button {
+    margin-bottom: 20px;
+}
+.description p {
+    text-align: center;
+    width: 100%;
+}
+.link-forgot {
+    padding-top: 20px;
+}
+
+@media screen and (max-width: 600px) {
+    .description-content:not(:last-child) {
+        padding: 0;
+    }
+    .description-content {
+        width: 100%;
+    }
+}
