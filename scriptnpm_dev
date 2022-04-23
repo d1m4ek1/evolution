@@ -1,0 +1,14 @@
+echo "-----------------------------------"
+echo "Builder mode => DEVELOPER"
+echo "I execute the command 'npm run dev'"
+echo "Project builder => Webpack 5"
+echo "-----------------------------------"
+
+npm run dev
+echo ""
+echo "-----------------------------------"
+echo "I execute the command 'node style_loader/setStyle.js'"
+echo "Style builder => setStyle.js"
+echo "-----------------------------------"
+
+node style_loader/setStyle.js
