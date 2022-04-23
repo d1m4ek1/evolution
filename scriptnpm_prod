@@ -7,8 +7,8 @@ echo "-----------------------------------"
 npm run prod
 echo ""
 echo "-----------------------------------"
-echo "I execute the command 'node style_loader/setStyle.js'"
-echo "Style builder => setStyle.js"
+echo "I execute the command 'node ionium/indexIonium.js'"
+echo "Style builder => indexIonium.js"
 echo "-----------------------------------"
 
-node style_loader/setStyle.js
+node ionium/indexIonium.js

@@ -26,9 +26,7 @@ const stickyHeader = () => {
       if (Math.abs(xDiff) > Math.abs(yDiff)) {
         // right
         if (xDiff > 0) {
-          document.querySelector(
-            '.header_sticky',
-          ).style.transform = 'translateX(0px)';
+          document.querySelector('.header_sticky').style.transform = 'translateX(0px)';
           document
             .querySelector('.main')
             .classList.remove('main_squeeze_before_remove');
@@ -41,11 +39,10 @@ const stickyHeader = () => {
           document
             .querySelector('.main__body_content')
             .classList.add('main_squeeze');
+          document.body.style.overflow = 'hidden';
           stickyHeaderOpened = true;
         } else if (stickyHeaderOpened) {
-          document.querySelector(
-            '.header_sticky',
-          ).style.transform = 'translateX(-200px)';
+          document.querySelector('.header_sticky').style.transform = 'translateX(-200px)';
           document
             .querySelector('.main')
             .classList.remove('main_squeeze_before_add');
@@ -58,6 +55,7 @@ const stickyHeader = () => {
           document
             .querySelector('.main__body_content')
             .classList.add('main_unclench');
+          document.body.style.overflow = null;
           setTimeout(() => {
             document
               .querySelector('.main')

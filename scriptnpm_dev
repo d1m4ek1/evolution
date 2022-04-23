@@ -8,7 +8,7 @@ npm run dev
 echo ""
 echo "-----------------------------------"
 echo "I execute the command 'node ionium/indexIonium.js'"
-echo "Style builder => setStyle.js"
+echo "Style builder => indexIonium.js"
 echo "-----------------------------------"
 
 node ionium/indexIonium.js
