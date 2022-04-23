@@ -1,5 +1,5 @@
 node_modules
-./internal
-./scriptnpm_dev
-./scriptnpm_prod
-./ui
+/internal
+/ui
+scriptnpm_dev
+scriptnpm_prod
