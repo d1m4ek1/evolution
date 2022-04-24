@@ -7,7 +7,7 @@
         {{ if $.ProfileData.Name }}
         <title>{{ $.ProfileData.Name }}</title>
         {{ else}}
-        <title>Profile</title>
+        <title>Профиль</title>
         {{ end }}
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,7 +15,6 @@
         {$ path_style="/src/assets/css/index.css" $}
         {$ path_style="/src/assets/css/Profile.css" $}
         {$ path_style="/src/assets/css/UserProfile/UserMain.css" $}
-
         {$ path_style="/src/assets/css/Header/Header.css" $}
         {$ path_style="/src/assets/css/Header/StickyHeader.css" $}
     </head>
@@ -23,7 +22,11 @@
         <!-- Area of visibility VUE.js -->
         <div id="wrapper" class="show_content">
             <div class="preloader" :class="setDeletePreloader" v-if="preload">
-                <h1>iNote</h1>
+                {{ if $.ProfileData.Name }}
+                <h1>Evade | {{ $.ProfileData.Name }}</h1>
+                {{ else}}
+                <h1>Evade | Profile</h1>
+                {{ end }}
                 <div class="progress"></div>
             </div>
             <!-- START Header block -->
