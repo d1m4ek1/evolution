@@ -1,7 +1,9 @@
 <template>
   <div class="card-sign show_content">
+    <section class="title">
+      <h1>Вход в аккаунт</h1>
+    </section>
     <div class="card-sign-content">
-      <h2>Вход в аккаунт</h2>
       <input
         v-model="dataSignIn.login"
         type="text"
@@ -19,18 +21,14 @@
   </div>
 </template>
 
-<style scoped>
-  @import "/src/assets/css/Sign.css";
-</style>
-
 <script>
-import MD5 from "crypto-js/md5";
-function rndsh(sumString) {
-  const symbolArr =
-    "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
-  var rtsdnr = "";
-  for (let i = 0; i < sumString; i++) {
-    var index = Math.floor(Math.random() * symbolArr.length);
+import MD5 from 'crypto-js/md5';
+
+function rndsh(sumString = Number()) {
+  const symbolArr = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+  let rtsdnr = '';
+  for (let i = 0; i < sumString; i += 1) {
+    const index = Math.floor(Math.random() * symbolArr.length);
     rtsdnr += symbolArr[index];
   }
   return rtsdnr;
@@ -46,24 +44,24 @@ export default {
     };
   },
   methods: {
-    sendData: function () {
-      let cookie = `token=${MD5(rndsh(64)) + rndsh(8)}`;
+    sendData() {
+      const cookie = `token=${MD5(rndsh(64)) + rndsh(8)}`;
       fetch(
         `/api/signin_account?signin=true&login=${
           this.dataSignIn.login
-        }&password=${MD5(this.dataSignIn.password)}&${cookie}`
-      ).then((response) => {
-        response.json().then((data) => {
-          if(data.error == undefined && data.num == undefined) {
-            if(data.olt != "") {
+        }&password=${MD5(this.dataSignIn.password)}&${cookie}`,
+      ).then((response = Object) => {
+        response.json().then((data = Object) => {
+          if (data.error === undefined && data.num === undefined) {
+            if (data.olt !== '') {
               document.cookie = `token=${data.olt}; path=/;`;
             } else {
               document.cookie = `${cookie}; path=/;`;
             }
-            document.cookie = `userId=${data.user_id}; path=/;`
-            window.location.href = `/${data.user_id}`
+            document.cookie = `userId=${data.user_id}; path=/;`;
+            window.location.href = `/${data.user_id}`;
           } else {
-            this.error = data.error
+            this.error = data.error;
           }
         });
       });

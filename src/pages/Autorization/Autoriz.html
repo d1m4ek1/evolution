@@ -7,15 +7,16 @@
         <title>Авторизация</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {$ path_style="/src/assets/css/index.css" $}
-        {$ path_style="/src/assets/css/Header/Header.css" $}
+        {$ path_style="/src/assets/css/index.css" $} 
+        {$ path_style="/src/assets/css/Sign.css" $}
+        {$ path_style="/src/assets/css/Header/Header.css" $} 
         {$ path_style="/src/assets/css/Header/StickyHeader.css" $}
     </head>
     <body>
         <!-- Area of visibility VUE.js -->
         <div id="wrapper" class="show_content">
             <div class="preloader" :class="setDeletePreloader" v-if="preload">
-                <h1>Evade | Autrization</h1>
+                <h1>Evade | Autorization</h1>
                 <div class="progress"></div>
             </div>
             <!-- START Header block -->
@@ -97,9 +98,7 @@
                                 v-show="settings"
                             >
                                 <div class="add_window__content">
-                                    <a href="/customize"
-                                        >Настроить профиль</a
-                                    >
+                                    <a href="/customize">Настроить профиль</a>
                                     <a href="/customize/shop"
                                         >Настроить магазин</a
                                     >
@@ -119,10 +118,14 @@
                         </div>
                         {{ else }}
                         <div class="header_nav__item">
-                            <a href="/signin">Вход</a>
+                            <router-link to="/signin"
+                                >Вход</router-link
+                            >
                         </div>
                         <div class="header_nav__item">
-                            <a href="/signup">Регистрация</a>
+                            <router-link to="/signup"
+                                >Регистрация</router-link
+                            >
                         </div>
                         <div class="header_nav__item">
                             <a href="/directory">Справочник</a>

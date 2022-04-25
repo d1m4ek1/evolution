@@ -1,7 +1,9 @@
 <template>
   <div class="card-sign show_content">
+    <section class="title">
+      <h1>Регистрация аккаунта</h1>
+    </section>
     <div class="card-sign-content">
-      <h2>Регистрация аккаунта</h2>
       <div class="description">
         <div
           class="description-content"
@@ -66,18 +68,14 @@
   </div>
 </template>
 
-<style scoped>
-@import "/src/assets/css/Sign.css";
-</style>
-
 <script>
-import MD5 from "crypto-js/md5";
-function rndsh(sumString) {
-  const symbolArr =
-    "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
-  var rtsdnr = "";
-  for (let i = 0; i < sumString; i++) {
-    var index = Math.floor(Math.random() * symbolArr.length);
+import MD5 from 'crypto-js/md5';
+
+function rndsh(sumString = Number()) {
+  const symbolArr = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+  let rtsdnr = '';
+  for (let i = 0; i < sumString; i += 1) {
+    const index = Math.floor(Math.random() * symbolArr.length);
     rtsdnr += symbolArr[index];
   }
   return rtsdnr;
@@ -88,38 +86,38 @@ export default {
       inputs: {
         logins: [
           {
-            id: "nickname",
-            placeholder: "Псевдоним",
-            type: "text",
+            id: 'nickname',
+            placeholder: 'Псевдоним',
+            type: 'text',
             maxlength: 110,
             value: String(),
           },
           {
-            id: "email",
-            placeholder: "Электронная почта",
-            type: "email",
+            id: 'email',
+            placeholder: 'Электронная почта',
+            type: 'email',
             value: String(),
           },
           {
-            id: "login",
-            placeholder: "Логин",
-            type: "text",
+            id: 'login',
+            placeholder: 'Логин',
+            type: 'text',
             value: String(),
           },
         ],
         passwords: [
           {
-            id: "password",
-            placeholder: "Пароль",
-            type: "password",
+            id: 'password',
+            placeholder: 'Пароль',
+            type: 'password',
             value: String(),
             valid: false,
             conf: true,
           },
           {
-            id: "password",
-            placeholder: "Подтвердить пароль",
-            type: "password",
+            id: 'password',
+            placeholder: 'Подтвердить пароль',
+            type: 'password',
             value: String(),
             valid: false,
           },
@@ -128,40 +126,41 @@ export default {
       validation: {
         symbols: {
           valid: false,
-          value: "Разрешены только буквы и цифры!",
+          value: 'Разрешены только буквы и цифры!',
         },
         same: {
           valid: false,
-          value: "Пароли не совпадают!",
+          value: 'Пароли не совпадают!',
         },
         backupKey: {
           valid: false,
-          value: "Разрешены только буквы и цифры!",
+          value: 'Разрешены только буквы и цифры!',
         },
         allInputs: {
-          value: "Заполните все поля!",
+          value: 'Заполните все поля!',
           valid: false,
         },
       },
-      urlCreateAccount: Array(),
+      urlCreateAccount: [],
     };
   },
   methods: {
-    validPassword: function (e = String(), obj) {
+    validPassword(e = String(), obj = { valid: Boolean() }) {
+      const validPassword = obj;
       if (
         e.match(
-          /([\!\@\#\$\%\^\&\*\(\)\{\}\[\]\:\;\"\'\<\.\>\,\?/\\\|\~\`\№\?\-\_\=\+])/g
+          /([!@#$%^&*(){}[]:;"'<\.>,\?\/\|~`№\?-_=\+])/g,
         )
       ) {
-        obj.valid = true;
+        validPassword.valid = true;
         this.validation.symbols.valid = true;
       } else {
         this.validation.symbols.valid = false;
-        obj.valid = false;
+        validPassword.valid = false;
       }
     },
-    samePassword: function (e = String(), id) {
-      let newId = id == 0 ? 1 : 0;
+    samePassword(e = String(), id = String()) {
+      const newId = id === 0 ? 1 : 0;
       if (e !== this.inputs.passwords[newId].value) {
         this.inputs.passwords[newId].valid = true;
         this.validation.same.valid = true;
@@ -170,37 +169,35 @@ export default {
         this.validation.same.valid = false;
       }
     },
-    createUrl: function () {
-      this.urlCreateAccount = Array();
+    createUrl() {
+      this.urlCreateAccount = [];
 
-      for (let key in this.inputs) {
-        for (let i = 0; i < this.inputs[key].length; i++) {
+      Object.keys(this.inputs).forEach((key = String()) => {
+        for (let i = 0; i < this.inputs[key].length; i += 1) {
           const el = this.inputs[key][i];
-          if (el.value !== "" && el.valid !== true) {
+          if (el.value !== '' && el.valid !== true) {
             switch (key) {
-              case "passwords":
-                if (!el.conf)
-                  this.urlCreateAccount.push(el.id + "=" + MD5(el.value));
+              case 'passwords':
+                if (!el.conf) this.urlCreateAccount.push(`${el.id}=${MD5(el.value)}`);
                 break;
               default:
-                if (!el.conf)
-                  this.urlCreateAccount.push(el.id + "=" + el.value);
+                if (!el.conf) this.urlCreateAccount.push(`${el.id}=${el.value}`);
                 break;
             }
           } else {
-            this.urlCreateAccount = Array();
+            this.urlCreateAccount = [];
             this.validation.allInputs.valid = true;
             return;
           }
         }
-      }
+      });
     },
-    createAccount: function () {
+    createAccount() {
       if (this.urlCreateAccount.length !== 0) {
-        let cookie = `token=${MD5(rndsh(64)) + rndsh(8)}`;
+        const cookie = `token=${MD5(rndsh(64)) + rndsh(8)}`;
 
         fetch(
-          `/api/create_account?${this.urlCreateAccount.join("&")}&${cookie}`
+          `/api/create_account?${this.urlCreateAccount.join('&')}&${cookie}`,
         )
           .then((response) => {
             response.json().then((data) => {
@@ -209,12 +206,12 @@ export default {
                 fetch(
                   `/api/signin_account?signin=true&login=${
                     this.inputs.logins[2].value
-                  }&password=${MD5(this.inputs.passwords[1].value)}&${cookie}`
-                ).then((response) => {
-                  response.json().then((data) => {
-                    if (data.user_id != undefined) {
-                      document.cookie = `userId=${data.user_id}; path=/;`;
-                      window.location.href = `/${data.user_id}`;
+                  }&password=${MD5(this.inputs.passwords[1].value)}&${cookie}`,
+                ).then((preresponse) => {
+                  preresponse.json().then((predata) => {
+                    if (predata.user_id !== undefined) {
+                      document.cookie = `userId=${predata.user_id}; path=/;`;
+                      window.location.href = `/${predata.user_id}`;
                     }
                   });
                 });

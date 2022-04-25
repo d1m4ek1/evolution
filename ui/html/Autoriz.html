@@ -7,15 +7,16 @@
         <title>Авторизация</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="/ui/assets/css/index.css">
-        <link rel="stylesheet" href="/ui/assets/css/Header/Header.css">
+        <link rel="stylesheet" href="/ui/assets/css/index.css"> 
+        <link rel="stylesheet" href="/ui/assets/css/Sign.css">
+        <link rel="stylesheet" href="/ui/assets/css/Header/Header.css"> 
         <link rel="stylesheet" href="/ui/assets/css/Header/StickyHeader.css">
-    <link rel="icon" href="/ui/assets/images/favicon.png"><script defer src="/ui/assets/js/_autoriz.bca21c797db913da904f.js"></script></head>
+    <link rel="icon" href="/ui/assets/images/favicon.png"><script defer src="/ui/assets/js/_autoriz.33e7443e056a37a991d9.js"></script></head>
     <body>
         <!-- Area of visibility VUE.js -->
         <div id="wrapper" class="show_content">
             <div class="preloader" :class="setDeletePreloader" v-if="preload">
-                <h1>Evade | Autrization</h1>
+                <h1>Evade | Autorization</h1>
                 <div class="progress"></div>
             </div>
             <!-- START Header block -->
@@ -97,9 +98,7 @@
                                 v-show="settings"
                             >
                                 <div class="add_window__content">
-                                    <a href="/customize"
-                                        >Настроить профиль</a
-                                    >
+                                    <a href="/customize">Настроить профиль</a>
                                     <a href="/customize/shop"
                                         >Настроить магазин</a
                                     >
@@ -119,10 +118,14 @@
                         </div>
                         {{ else }}
                         <div class="header_nav__item">
-                            <a href="/signin">Вход</a>
+                            <router-link to="/signin"
+                                >Вход</router-link
+                            >
                         </div>
                         <div class="header_nav__item">
-                            <a href="/signup">Регистрация</a>
+                            <router-link to="/signup"
+                                >Регистрация</router-link
+                            >
                         </div>
                         <div class="header_nav__item">
                             <a href="/directory">Справочник</a>
