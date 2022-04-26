@@ -3,7 +3,9 @@ package signup
 import (
 	"encoding/json"
 	"fmt"
+	"math/rand"
 	"net/http"
+	"time"
 
 	"iNote/www/internal/database"
 	newerror "iNote/www/pkg/NewError"
@@ -20,6 +22,62 @@ const (
 	errorCreateAccount string = pathToError + "createAccount"
 )
 
+var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+func setConnectionIdentificate(id int) string {
+	var length int = 63
+
+	rand.Seed(time.Now().UnixNano())
+
+	var token = make([]rune, length)
+
+	for i := range token {
+		token[i] = letters[rand.Intn(len(letters))]
+	}
+
+	return string(token) + fmt.Sprint(id)
+}
+
+func setSettingsIdentificate(id int) string {
+	var length int = 63
+
+	rand.Seed(time.Now().UnixNano())
+
+	var token = make([]rune, length)
+
+	for i := range token {
+		token[i] = letters[rand.Intn(len(letters))]
+	}
+
+	return string(token) + fmt.Sprint(id)
+}
+
+func completeTheRestTables(id int, s general.SignUpData) error {
+	if _, err := database.Tables.Exec(database.InsertNewUser, id, s.Nickname); err != nil {
+		fmt.Println(errorCreateAccount, "Query at db: 1", err)
+		return fmt.Errorf("<- completeTheRestTables")
+	}
+
+	var connectionId string = setConnectionIdentificate(id)
+	var settingsId string = setSettingsIdentificate(id)
+
+	if _, err := database.Tables.Exec(database.InsertIdentifiers, id, connectionId, settingsId); err != nil {
+		fmt.Println(errorCreateAccount, "Query at db: 2", err)
+		return fmt.Errorf("<- completeTheRestTables")
+	}
+
+	if _, err := database.Tables.Exec(database.InsertConnection, connectionId); err != nil {
+		fmt.Println(errorCreateAccount, "Query at db: 3", err)
+		return fmt.Errorf("<- completeTheRestTables")
+	}
+	if _, err := database.Tables.Exec(database.InsertSettings, settingsId); err != nil {
+		fmt.Println(errorCreateAccount, "Query at db: 3", err)
+		return fmt.Errorf("<- completeTheRestTables")
+	}
+
+	return nil
+}
+
 func createAccount(s general.SignUpData, w http.ResponseWriter) {
 	var user string
 
@@ -34,12 +92,14 @@ func createAccount(s general.SignUpData, w http.ResponseWriter) {
 	}
 
 	if user == "" {
-		if _, err := database.Tables.Exec(database.InsertNewUserData, s.Login, s.Password, s.Email, s.Token); err != nil {
+		var identificate int
+		err := database.Tables.QueryRow(database.InsertNewUserData, s.Login, s.Password, s.Email, s.Token).Scan(&identificate)
+		if err != nil {
 			fmt.Println(newerror.Wrap(errorCreateAccount, "Query at db: 1", err))
 		}
 
-		if _, err := database.Tables.Exec(database.InsertNewUser, s.Nickname); err != nil {
-			fmt.Println(newerror.Wrap(errorCreateAccount, "Query at db: 2", err))
+		if err := completeTheRestTables(identificate, s); err != nil {
+			fmt.Println(newerror.Wrap(errorCreateAccount, "resInserted", err))
 		}
 
 		type AutBool struct {

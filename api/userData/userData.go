@@ -28,7 +28,11 @@ func profileDefault(id string) (general.ProfileData, string) {
 	database.Tables.QueryRow(database.SelectIdForIdOrCustomId, id, id).Scan(&user)
 
 	if user != "" {
-		if err := database.Tables.QueryRow(database.SelectProfileData, id).Scan(&pdd.Logo, &pdd.Banner, &pdd.Name, pq.Array(&pdd.Position), pq.Array(&da.Audience), &pdd.Verif, &pdd.NetworkStatus); err != nil {
+		if err := database.Tables.QueryRow(database.SelectProfileData, id).Scan(&pdd.Name, pq.Array(&pdd.Position), pq.Array(&da.Audience), &pdd.Verif, &pdd.NetworkStatus); err != nil {
+			fmt.Println(newerror.Wrap(errorProfileDefault, "Query at db: 2", err))
+		}
+		if err := database.Tables.QueryRow(`SELECT sgs.logo, sgs.banner FROM settings sgs,identifiers ids 
+		WHERE ids.user_id=$1 AND ids.settings_id=sgs.settings_id`, id).Scan(&pdd.Logo, &pdd.Banner); err != nil {
 			fmt.Println(newerror.Wrap(errorProfileDefault, "Query at db: 2", err))
 		}
 
