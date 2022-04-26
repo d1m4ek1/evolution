@@ -74,6 +74,13 @@ type SettingsData struct {
 	Title string
 }
 
+type SettingsProfileData struct {
+	Name    string `json:"name"`
+	Logo    string `json:"logo"`
+	Banner  string `json:"banner"`
+	AboutMe string `json:"aboutMe"`
+}
+
 func (S *SettingsData) SetTitle(s string) {
 	switch s {
 	case "profile":
