@@ -93,6 +93,7 @@
         >
           Сбросить аватарку
         </button>
+        <p class="error" v-if="userData.logo.error !== ''">{{ userData.logo.error }}</p>
       </div>
     </div>
     <!-- BANNER -->
@@ -131,6 +132,7 @@
         >
           Сбросить баннер
         </button>
+        <p class="error" v-if="userData.banner.error !== ''">{{ userData.banner.error }}</p>
       </div>
     </div>
     <!-- ABOUT ME -->
@@ -264,11 +266,15 @@ export default {
         logo: {
           old: '',
           preview: '',
+          file: null,
+          error: '',
           new: '',
         },
         banner: {
           old: '',
           preview: '',
+          file: null,
+          error: '',
           new: '',
         },
         name: {
@@ -320,12 +326,37 @@ export default {
   },
   methods: {
     traceFile(e = Object, key = String) {
-      this.userData[key].new = e.target.files[0].name;
-      console.log(e.target.files[0].name);
+      const extens = ['.png', '.jpg', '.jpeg', '.gif'];
+      let extenErrorCount = 0;
 
-      const reader = new FileReader();
-      this.addListeners(reader, key);
-      reader.readAsDataURL(e.target.files[0]);
+      extens.forEach((exten = String) => {
+        if (e.target.files[0].name.indexOf(exten) !== -1) {
+          const fileName = e.target.files[0].name.split('.');
+
+          if (
+            fileName[fileName.length - 1] === 'png'
+              || fileName[fileName.length - 1] === 'jpg'
+              || fileName[fileName.length - 1] === 'jpeg'
+              || fileName[fileName.length - 1] === 'gif'
+          ) {
+            this.userData[key].new = e.target.files[0].name;
+            this.userData[key].error = '';
+            this.userData[key].file = e.target.files;
+
+            const reader = new FileReader();
+            this.addListeners(reader, key);
+            reader.readAsDataURL(e.target.files[0]);
+          } else {
+            this.userData[key].error = 'Файл не является изображением';
+          }
+        } else {
+          extenErrorCount += 1;
+        }
+      });
+
+      if (extenErrorCount === 4) {
+        this.userData[key].error = 'Файл не является изображением';
+      }
     },
     validateLogoBanner(logo = String, banner = String) {
       if (logo === 'not_logo.png') {
@@ -373,9 +404,10 @@ export default {
       });
     },
     saveSettings() {
-      const defUrl = '/api/set_settings/profile?';
-      let fullUrl = '';
+      const defUrl = '/api/save_settings/profile?';
       const urlParam = [];
+      const formData = new FormData();
+      let fullUrl = '';
 
       this.userData.aboutMe.title.new = document.querySelector('.aboutme_content').innerHTML;
 
@@ -385,7 +417,7 @@ export default {
             if (this.userData.aboutMe[key].new !== '') {
               if (
                 this.userData.aboutMe[key].old
-                !== this.userData.aboutMe[key].new
+                !== this.userData.aboutMe[key].new && this.userData.aboutMe[key].new !== ''
               ) {
                 urlParam.push(
                   `aboutMe_${key}=${encodeURIComponent(
@@ -400,7 +432,7 @@ export default {
             if (this.userData.connection[key].new !== '') {
               if (
                 this.userData.connection[key].old
-                !== this.userData.connection[key].new
+                !== this.userData.connection[key].new && this.userData.connection[key].new !== ''
               ) {
                 urlParam.push(
                   `${key}=${encodeURIComponent(
@@ -410,6 +442,21 @@ export default {
               }
             }
           });
+        } else if (keyMain === 'logo' || keyMain === 'banner') {
+          if (
+            this.userData[keyMain].old
+                !== this.userData[keyMain].new && this.userData[keyMain].new !== ''
+          ) {
+            if (this.userData[keyMain].file !== null) {
+              console.log(this.userData[keyMain].file);
+              formData.append(keyMain, this.userData[keyMain].file[0]);
+              urlParam.push(
+                `${keyMain}=${encodeURIComponent(
+                  this.userData[keyMain].new,
+                )}`,
+              );
+            }
+          }
         } else if (this.userData[keyMain].new !== '') {
           if (this.userData[keyMain].old !== this.userData[keyMain].new) {
             urlParam.push(
@@ -420,11 +467,13 @@ export default {
       });
 
       fullUrl += defUrl + urlParam.join('&');
-      console.log(fullUrl);
 
-      // if (fullUrl !== defUrl) {
-      //   fetch(fullUrl).catch((error) => console.error(error));
-      // }
+      if (fullUrl !== defUrl) {
+        fetch(fullUrl, {
+          method: 'POST',
+          body: formData,
+        }).catch((error) => console.error(error));
+      }
     },
     resetSettings() {
       Object.keys(this.userData).forEach((keyMain = String) => {

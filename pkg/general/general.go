@@ -58,6 +58,19 @@ type ProfileData struct {
 	Auth          bool     `json:"auth"`
 }
 
+func (P *ProfileData) ValidLogoBanner(logo string, banner string) {
+	if banner != "not_banner.png" {
+		P.Banner = "/profile/banner/saved/" + banner
+	} else {
+		P.Banner = "/profile/banner/notBanner/not_banner.png"
+	}
+	if logo != "not_logo.png" {
+		P.Logo = "/profile/logo/saved/" + logo
+	} else {
+		P.Logo = "/profile/logo/notLogo/not_logo.png"
+	}
+}
+
 type DataArray struct {
 	Position []string `json:"position"`
 	Audience []string `json:"audience"`

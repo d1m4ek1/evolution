@@ -78,6 +78,7 @@ func handle() {
 	// API SETTINGS
 	// PROFILE
 	rtr.HandleFunc("/api/get_settings/profile", setprofile.GetSettings)
+	rtr.HandleFunc("/api/save_settings/profile", setprofile.SaveSettings)
 
 	// API CHECK STATUS
 	rtr.HandleFunc("/api/check_status", checkonline.CheckOnline)

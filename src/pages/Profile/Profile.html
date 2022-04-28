@@ -311,17 +311,15 @@
                             <div class="content_title">
                                 <div class="content_images">
                                     <div class="banner">
-                                        {{ $banner := "/profile/banner/notBanner/"}}
                                         <img
-                                            src="{{ $banner }}{{ $.ProfileData.Banner }}"
+                                            src="{{ $.ProfileData.Banner }}"
                                         />
                                     </div>
                                     <div
                                         class="logo {{ $.ProfileData.NetworkStatus }}"
                                     >
-                                        {{ $logo := "/profile/logo/notLogo/" }}
                                         <img
-                                            src="{{ $logo }}{{ $.ProfileData.Logo }}"
+                                            src="{{ $.ProfileData.Logo }}"
                                         />
                                     </div>
                                 </div>
