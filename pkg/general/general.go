@@ -75,10 +75,18 @@ type SettingsData struct {
 }
 
 type SettingsProfileData struct {
-	Name    string `json:"name"`
-	Logo    string `json:"logo"`
-	Banner  string `json:"banner"`
-	AboutMe string `json:"aboutMe"`
+	Name           string `json:"name"`
+	Logo           string `json:"logo"`
+	Banner         string `json:"banner"`
+	ThemePage      string `json:"themePage"`
+	Language       string `json:"language"`
+	AboutMeTitle   string `json:"aboutMeTitle"`
+	AboutMeContent string `json:"aboutMeContent"`
+	Telegram       string `json:"telegram"`
+	Instagram      string `json:"instagram"`
+	Facebook       string `json:"facebook"`
+	Vk             string `json:"vk"`
+	Tiktok         string `json:"tiktok"`
 }
 
 func (S *SettingsData) SetTitle(s string) {

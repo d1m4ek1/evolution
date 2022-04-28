@@ -345,7 +345,8 @@ textarea {
 }
 
 .btn,
-input {
+input,
+select {
     position: relative;
     min-width: 100px;
     min-height: 30px;
