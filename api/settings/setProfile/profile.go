@@ -103,7 +103,7 @@ func validFile(s, id string) (string, error) {
 
 func saveImage(r *http.Request, keyFile string, userId string) {
 	var oldFilePath string
-	database.Tables.QueryRow(fmt.Sprintf(`SELECT sgs.%s FROM settings sgs,identifiers ids 
+	database.Tables.QueryRow(fmt.Sprintf(`SELECT sgs.%s FROM settings sgs, identifiers ids 
 	WHERE ids.user_id=$1 AND ids.settings_id=sgs.settings_id`, keyFile), userId).Scan(&oldFilePath)
 
 	if r.Method == "POST" {
@@ -135,8 +135,9 @@ func saveImage(r *http.Request, keyFile string, userId string) {
 			}
 			defer dst.Close()
 
-			database.Tables.Exec(fmt.Sprintf(`UPDATE settings SET %s=$1 FROM identifiers WHERE 
-			identifiers.user_id=$2 AND identifiers.settings_id=settings.settings_id;`, keyFile), filePath, userId)
+			var idSettings string
+			database.Tables.QueryRow(`SELECT settings_id FROM identifiers WHERE user_id=$1`, userId).Scan(&idSettings)
+			database.Tables.Exec(fmt.Sprintf(`UPDATE settings SET %s=$1 WHERE settings_id=$2`, keyFile), filePath, idSettings)
 
 			io.Copy(dst, src)
 		}
@@ -155,9 +156,9 @@ func SaveSettings(w http.ResponseWriter, r *http.Request) {
 		}
 		for _, v := range keyParamSettings {
 			if r.URL.Query().Get(v) != "" {
-				if _, err := database.Tables.Exec(fmt.Sprintf(`UPDATE users SET %s=$1
-				FROM identifiers WHERE identifiers.user_id=$2
-				AND settings.settings_id=identifiers.settings_id;`, v), r.URL.Query().Get(v), userId.Value); err != nil {
+				if _, err := database.Tables.Exec(fmt.Sprintf(`UPDATE settings SET %s=$1
+				FROM identifiers ids, settings sgs WHERE ids.user_id=$2
+				AND sgs.settings_id=ids.settings_id;`, v), r.URL.Query().Get(v), userId.Value); err != nil {
 					fmt.Println(newerror.Wrap(errorSetSettings, "Query at db: 1", err))
 				}
 			}
@@ -165,8 +166,8 @@ func SaveSettings(w http.ResponseWriter, r *http.Request) {
 		for _, v := range keyParamConnection {
 			if r.URL.Query().Get(v) != "" {
 				if _, err := database.Tables.Exec(fmt.Sprintf(`UPDATE connection SET %s=$1
-				FROM identifiers WHERE identifiers.user_id=$2
-				AND connection.connection_id=identifiers.connection_id;`, v), r.URL.Query().Get(v), userId.Value); err != nil {
+				FROM identifiers ids, connection ctc WHERE ids.user_id=$2
+				AND ctc.connection_id=ids.connection_id;`, v), r.URL.Query().Get(v), userId.Value); err != nil {
 					fmt.Println(newerror.Wrap(errorSetSettings, "Query at db: 2", err))
 				}
 			}
