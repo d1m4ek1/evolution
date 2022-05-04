@@ -39,6 +39,14 @@ ol>li {
     box-sizing: border-box;
 }
 
+.connect_bd {
+    color: rgb(255, 255, 255);
+    background-color: rgb(126, 255, 126);
+    padding: 10px 10px;
+    margin: 20px 0;
+    width: 100%;
+}
+
 .preloader {
     position: fixed;
     width: 100%;

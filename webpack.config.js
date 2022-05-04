@@ -41,7 +41,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/i,
+        test: /\.(sass|css)$/i,
         exclude: /node_modules/,
         use: ['style-loader', 'vue-style-loader', 'css-loader'],
       },

@@ -5,14 +5,21 @@ const stickyHeader = () => {
     let x1 = null;
     let y1 = null;
 
-    const handleTouchStart = (e = Object) => {
+    const handleTouchStart = (e) => {
+      if (
+        e.target.offsetParent !== null
+        && e.target.offsetParent.classList[0] === 'swiper-slide'
+      ) {
+        return;
+      }
+
       const firstTouch = e.touches[0];
 
       x1 = firstTouch.clientX;
       y1 = firstTouch.clientY;
     };
 
-    const handleTouchMove = (e = Object) => {
+    const handleTouchMove = (e) => {
       if (!x1 || !y1) {
         return false;
       }

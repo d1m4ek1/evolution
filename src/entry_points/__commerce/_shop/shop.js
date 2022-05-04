@@ -6,6 +6,8 @@ import hideElemDir from '../../../assets/js/hideElem';
 import '../../../assets/js/delayedLoading';
 import '../../../assets/js/stickyHeader';
 
+import Swiper from '../../../assets/js/SwiperVue/swiper-bundle';
+
 window.Vue = require('vue');
 
 Vue.directive('hide-elem', hideElemDir);
@@ -93,3 +95,15 @@ Vue.use(VueRouter);
   },
   router,
 }))();
+
+const swiper = new Swiper('.community-choice-slider', {
+  slidesPerView: 'auto',
+  spaceBetween: 30,
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.community-choice-next',
+    prevEl: '.community-choice-prev',
+  },
+});
+swiper.slidesPerViewDynamic(2);

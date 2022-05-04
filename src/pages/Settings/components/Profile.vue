@@ -1,8 +1,11 @@
 <template>
   <section class="container settings_content">
+    <h1 class="connect_bd">Связано с Базой данных</h1>
     <!-- NICKNAME -->
     <div class="change_section">
-      <h2>Изменить мой псевдоним</h2>
+      <div class="change_section__title">
+        <h2>Изменить мой псевдоним</h2>
+      </div>
       <div class="change_content">
         <h3>Псевдоним сейчас</h3>
         <div class="inlineblock">
@@ -19,7 +22,9 @@
     </div>
     <!-- LANGUAGE -->
     <div class="change_section">
-      <h2>Изменить язык сайта</h2>
+      <div class="change_section__title">
+        <h2>Изменить язык сайта</h2>
+      </div>
       <div class="change_content">
         <h3>Язык сайта сейчас</h3>
         <div class="inlineblock">
@@ -39,7 +44,9 @@
     </div>
     <!-- THEME PAGE -->
     <div class="change_section">
-      <h2>Изменить тему сайта</h2>
+      <div class="change_section__title">
+        <h2>Изменить тему сайта</h2>
+      </div>
       <div class="change_content">
         <h3>Тема сейчас</h3>
         <div class="inlineblock">
@@ -59,7 +66,9 @@
     </div>
     <!-- AVA -->
     <div class="change_section">
-      <h2>Изменить аватарку</h2>
+      <div class="change_section__title">
+        <h2>Изменить аватарку</h2>
+      </div>
       <div class="change_content">
         <h3>Аватарка сейчас</h3>
         <div class="inlineblock">
@@ -98,7 +107,9 @@
     </div>
     <!-- BANNER -->
     <div class="change_section">
-      <h2>Изменить баннер</h2>
+      <div class="change_section__title">
+        <h2>Изменить баннер</h2>
+      </div>
       <div class="change_content">
         <h3>Баннер сейчас</h3>
         <div class="inlineblock">
@@ -137,7 +148,9 @@
     </div>
     <!-- ABOUT ME -->
     <div class="change_section">
-      <h2>Изменить информацию "Обо мне"</h2>
+      <div class="change_section__title">
+        <h2>Изменить информацию "Обо мне"</h2>
+      </div>
       <div class="change_content">
         <h3>Название</h3>
         <div class="inlineblock">
@@ -169,7 +182,9 @@
     </div>
     <!-- CONNECTION -->
     <div class="change_section">
-      <h2>Изменить контактную информацию</h2>
+      <div class="change_section__title">
+        <h2>Изменить контактную информацию</h2>
+      </div>
       <div class="change_content">
         <h3>Telegram</h3>
         <div class="inlineblock">
@@ -448,7 +463,6 @@ export default {
                 !== this.userData[keyMain].new && this.userData[keyMain].new !== ''
           ) {
             if (this.userData[keyMain].file !== null) {
-              console.log(this.userData[keyMain].file);
               formData.append(keyMain, this.userData[keyMain].file[0]);
               urlParam.push(
                 `${keyMain}=${encodeURIComponent(
