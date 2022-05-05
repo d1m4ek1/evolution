@@ -29,7 +29,7 @@
             </div>
           </div>
           <div class="message_item__banner">
-            <img src="/profile/banner/notBanner/not_banner.jpg" />
+            <img src="/profile/banner/notBanner/not_banner.png" />
           </div>
         </div>
         <div class="message_item">
@@ -46,7 +46,7 @@
             </div>
           </div>
           <div class="message_item__banner">
-            <img src="/profile/banner/notBanner/not_banner.jpg" />
+            <img src="/profile/banner/notBanner/not_banner.png" />
           </div>
         </div>
       </div>

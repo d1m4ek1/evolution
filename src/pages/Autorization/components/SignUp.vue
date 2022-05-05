@@ -1,70 +1,49 @@
 <template>
-  <div class="card-sign show_content">
-    <section class="title">
-      <h1>Регистрация аккаунта</h1>
-    </section>
-    <div class="card-sign-content">
-      <div class="description">
-        <div
-          class="description-content"
-          v-for="(item, idx) in inputs.logins"
-          :key="idx + '2'"
-        >
-          <p>{{ item.placeholder }}</p>
-          <div class="necessarily">
-            <input
-              v-model="item.value"
-              :type="item.type"
-              :name="item.id"
-              :placeholder="item.placeholder + '...'"
-              :maxlength="item.maxlength"
-            />
-          </div>
+  <div class="card-sign-content">
+    <div class="description">
+      <div
+        class="description-content"
+        v-for="(item, idx) in inputs.logins"
+        :key="idx + '2'"
+      >
+        <div class="necessarily">
+          <input
+            v-model="item.value"
+            :type="item.type"
+            :name="item.id"
+            :placeholder="item.placeholder + '...'"
+            :maxlength="item.maxlength"
+          />
         </div>
       </div>
-      <div class="description">
-        <div
-          class="description-content"
-          v-for="(item, idx) in inputs.passwords"
-          :key="idx + '3'"
-        >
-          <p>{{ item.placeholder }}</p>
-          <div class="necessarily">
-            <input
-              v-model="item.value"
-              @input="
-                validPassword($event.target.value, item),
-                  samePassword($event.target.value, idx)
-              "
-              :class="{ 'not-valid': item.valid }"
-              :type="item.type"
-              :name="item.id"
-              :placeholder="item.placeholder + '...'"
-            />
-          </div>
+      <div
+        class="description-content"
+        v-for="(item, idx) in inputs.passwords"
+        :key="idx + '3'"
+      >
+        <div class="necessarily">
+          <input
+            v-model="item.value"
+            @input="
+              validPassword($event.target.value, item),
+                samePassword($event.target.value, idx)
+            "
+            :class="{ 'not-valid': item.valid }"
+            :type="item.type"
+            :name="item.id"
+            :placeholder="item.placeholder + '...'"
+          />
         </div>
-      </div>
-      <div class="description">
-        <button @click="createUrl(), createAccount()" class="btn">
-          Зарегистрироваться
-        </button>
-        <p v-if="validation.symbols.valid">{{ validation.symbols.value }}</p>
-        <p v-if="validation.same.valid">{{ validation.same.value }}</p>
-        <p v-if="validation.allInputs.valid">
-          {{ validation.allInputs.value }}
-        </p>
-        <p>
-          Нажимая кнопку «Зарегистрироваться», вы принимаете
-          <a href="/directory/terms-of-use"
-            > пользовательское соглашение</a
-          >
-          и <a href="/directory/privacy-policy">политику конфиденциальности.</a>
-        </p>
-      </div>
-      <div class="link-forgot">
-        <a href="#">Забыли логин или пароль?</a>
       </div>
     </div>
+    <button @click="createUrl(), createAccount()" class="btn">
+      Зарегистрироваться
+    </button>
+    <p v-if="validation.symbols.valid">{{ validation.symbols.value }}</p>
+    <p v-if="validation.same.valid">{{ validation.same.value }}</p>
+    <p v-if="validation.allInputs.valid">
+      {{ validation.allInputs.value }}
+    </p>
   </div>
 </template>
 
@@ -147,11 +126,7 @@ export default {
   methods: {
     validPassword(e = String(), obj = { valid: Boolean() }) {
       const validPassword = obj;
-      if (
-        e.match(
-          /([!@#$%^&*(){}[]:;"'<\.>,\?\/\|~`№\?-_=\+])/g,
-        )
-      ) {
+      if (e.match(/([!@#$%^&*(){}[]:;"'<\.>,\?\/\|~`№\?-_=\+])/g)) {
         validPassword.valid = true;
         this.validation.symbols.valid = true;
       } else {
@@ -178,10 +153,10 @@ export default {
           if (el.value !== '' && el.valid !== true) {
             switch (key) {
               case 'passwords':
-                if (!el.conf) this.urlCreateAccount.push(`${el.id}=${MD5(el.value)}`);
+                if (!el.conf) { this.urlCreateAccount.push(`${el.id}=${MD5(el.value)}`); }
                 break;
               default:
-                if (!el.conf) this.urlCreateAccount.push(`${el.id}=${el.value}`);
+                if (!el.conf) { this.urlCreateAccount.push(`${el.id}=${el.value}`); }
                 break;
             }
           } else {

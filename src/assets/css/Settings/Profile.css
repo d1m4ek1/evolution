@@ -53,6 +53,14 @@
 .inlineblock_right select {
   width: 100%;
 }
+#label_input_drop .img {
+  overflow: hidden;
+  max-height: 350px;
+}
+#label_input_drop .img img {
+  max-width: none;
+  position: relative;
+}
 .img img {
   max-width: 250px;
 }

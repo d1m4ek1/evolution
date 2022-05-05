@@ -1,96 +1,198 @@
-.card-sign-content {
+#wrapper {
+    overflow: hidden !important;
+    position: relative;
+    height: 100vh;
+}
+
+.main__body_content a {
+    color: white;
+}
+
+.main {
+    height: 100%;
+}
+
+.main__body_content {
+    width: 100%;
+    height: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
 }
 
-.card-sign-content h2,
-.card-sign-content button,
-.card-sign-content input {
-    margin: 5px 0;
-}
-
-.description {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: start;
-        -ms-flex-pack: start;
-            justify-content: flex-start;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    padding: 20px 0;
-    border-bottom: 1px solid rgb(235, 235, 235);
-}
-
-.link-forgot {
-    text-align: center;
-}
-
-.card-sign-content input {
-    min-width: 250px;
-}
-
-.description-content:not(:last-child) {
-    padding-right: 30px;
-}
-
-.not-valid {
-    border: 1px solid red;
-    -webkit-box-shadow: 0 0 0 3px red;
-            box-shadow: 0 0 0 3px red;
-}
-
-.necessarily {
-    position: relative;
-}
-
-.necessarily::before {
-    content: '*';
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    color: red;
-    font-size: 18px;
+.main__body_content .privacy-policy {
     z-index: 1;
+    margin-top: 20px;
+    max-width: 416px;
+    color: white;
+    padding: 0 8px;
 }
 
-.description button {
-    margin-bottom: 20px;
+.background-slides {
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
-.description p {
-    text-align: center;
+.slide-first,
+.slide-second {
+    position: absolute;
+    top: 0;
+    -webkit-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
     width: 100%;
 }
 
-.link-forgot {
-    padding-top: 20px;
+.hide-slide-first {
+    -webkit-animation-name: hideslider;
+            animation-name: hideslider;
+    -webkit-animation-duration: 2s;
+            animation-duration: 2s;
 }
 
-@media screen and (max-width: 600px) {
-    .description-content:not(:last-child) {
-        padding: 0;
-    }
-
-    .description-content {
+@-webkit-keyframes hideslider {
+    0% {
         width: 100%;
     }
 
-    .card-sign-content {
-        -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+    100% {
+        width: 0;
     }
+}
 
-    .card-sign-content input {
+@keyframes hideslider {
+    0% {
         width: 100%;
     }
+
+    100% {
+        width: 0;
+    }
+}
+
+.hide-slide-second {
+    -webkit-animation-name: hidesliderSecond;
+            animation-name: hidesliderSecond;
+    -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+}
+
+@-webkit-keyframes hidesliderSecond {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes hidesliderSecond {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+.slide-first {
+    left: 0;
+}
+
+.slide-second {
+    left: 100%;
+}
+
+.background-slide>img {
+    width: 100%;
+    height: 100vh;
+}
+
+.card-sign {
+    position: relative;
+    max-width: 416px;
+    width: 100%;
+    min-height: 530px;
+    padding: 20px;
+    margin: 0 20px;
+    border: 8px solid rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.card-sign p {
+    color: white;
+}
+
+.title {
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
+.title a {
+    text-decoration: none;
+    font-size: 26px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.title a:first-child {
+    margin-right: 25px;
+}
+
+.active-title {
+    position: relative;
+}
+
+.active-title::before {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+}
+
+.card-sign-content input {
+    background-color: rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    border: none;
+    border-radius: unset;
+    height: 45px;
+    font-size: 22px;
+    color: white;
+}
+
+.card-sign-content .description button {
+    margin-bottom: 20px;
+}
+
+.card-sign-content button {
+    position: absolute;
+    width: 90%;
+    left: 20px;
+    bottom: 20px;
+    border-radius: 3px;
+    background-color: black;
+    color: white;
+    height: 50px;
+    font-size: 26px;
+    border: none;
+}
+
+.card-sign-content button:focus {
+    -webkit-box-shadow: none;
+            box-shadow: none;
 }

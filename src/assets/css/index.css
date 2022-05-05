@@ -228,14 +228,6 @@ ol>li {
     white-space: inherit;
 }
 
-.title h1 {
-    background-color: white;
-}
-
-.title h2 {
-    background-color: #f1f1f1;
-}
-
 .subcontent {
     border: 2px solid rgb(208, 208, 208);
     border-radius: 10px;

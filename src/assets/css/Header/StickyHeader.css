@@ -43,16 +43,6 @@
             box-shadow: none !important;
 }
 
-.main_squeeze {
-    -webkit-animation-name: mainSqueeze;
-            animation-name: mainSqueeze;
-    -webkit-animation-duration: .5s;
-            animation-duration: .5s;
-    -webkit-transform: scale(.95);
-        -ms-transform: scale(.95);
-            transform: scale(.95);
-}
-
 .main_squeeze_before_add::before,
 .main_squeeze_before_remove::before {
     content: "";
@@ -118,63 +108,5 @@
 
     100% {
         opacity: 0;
-    }
-}
-
-.main_unclench {
-    -webkit-animation-name: mainUnclench;
-            animation-name: mainUnclench;
-    -webkit-animation-duration: .5s;
-            animation-duration: .5s;
-    -webkit-transform: scale(1);
-        -ms-transform: scale(1);
-            transform: scale(1);
-}
-
-@-webkit-keyframes mainSqueeze {
-    0% {
-        -webkit-transform: scale(1);
-                transform: scale(1);
-    }
-
-    100% {
-        -webkit-transform: scale(.95);
-                transform: scale(.95);
-    }
-}
-
-@keyframes mainSqueeze {
-    0% {
-        -webkit-transform: scale(1);
-                transform: scale(1);
-    }
-
-    100% {
-        -webkit-transform: scale(.95);
-                transform: scale(.95);
-    }
-}
-
-@-webkit-keyframes mainUnclench {
-    0% {
-        -webkit-transform: scale(.95);
-                transform: scale(.95);
-    }
-
-    100% {
-        -webkit-transform: scale(1);
-                transform: scale(1);
-    }
-}
-
-@keyframes mainUnclench {
-    0% {
-        -webkit-transform: scale(.95);
-                transform: scale(.95);
-    }
-
-    100% {
-        -webkit-transform: scale(1);
-                transform: scale(1);
     }
 }

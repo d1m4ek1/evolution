@@ -6,10 +6,14 @@
     <section class="meesages_content__folders">
       <div class="messages_folders">
         <div class="messages_folder">
-          <router-link tag="button" to="/messages" class="btn">Все сообщения</router-link>
+          <router-link tag="button" to="/messages" class="btn"
+            >Все сообщения</router-link
+          >
         </div>
         <div class="messages_folder">
-          <router-link tag="button" to="/messages/favorites" class="btn">Избранные сообщения</router-link>
+          <router-link tag="button" to="/messages/favorites" class="btn"
+            >Избранные сообщения</router-link
+          >
         </div>
       </div>
     </section>
@@ -29,7 +33,7 @@
             </div>
           </div>
           <div class="message_item__banner">
-            <img src="/profile/banner/notBanner/not_banner.jpg" />
+            <img src="/profile/banner/notBanner/not_banner.png" />
           </div>
         </div>
       </div>

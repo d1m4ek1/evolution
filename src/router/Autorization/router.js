@@ -9,11 +9,14 @@ export default new VueRouter({
     {
       path: '/signin',
       component: SignIn,
+      props: { activetitle: 'signin' },
     },
     {
       path: '/signup',
       component: SignUp,
+      props: { activetitle: 'signup' },
     },
   ],
   mode: 'history',
+  linkActiveClass: 'active-title',
 });

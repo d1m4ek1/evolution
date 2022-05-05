@@ -67,17 +67,17 @@
 export default {
   data() {
     return {
-      test: 'test'
+      test: 'test',
     };
   },
   methods: {
-    scrollBottom: function() {
-      let messageView = document.getElementById("message_view");
+    scrollBottom() {
+      const messageView = document.getElementById('message_view');
       messageView.scrollTop = messageView.scrollHeight;
-    }
+    },
   },
-  mounted: function() {
-    this.scrollBottom()
-  }
+  mounted() {
+    this.scrollBottom();
+  },
 };
 </script>

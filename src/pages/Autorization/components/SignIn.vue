@@ -1,9 +1,5 @@
 <template>
-  <div class="card-sign show_content">
-    <section class="title">
-      <h1>Вход в аккаунт</h1>
-    </section>
-    <div class="card-sign-content">
+  <div class="card-sign-content">
       <input
         v-model="dataSignIn.login"
         type="text"
@@ -17,8 +13,10 @@
         placeholder="Пароль..."
       />
       <button @click="sendData()" class="btn">Вход</button>
+      <div class="link-forgot">
+        <a href="#">Забыли логин или пароль?</a>
+      </div>
     </div>
-  </div>
 </template>
 
 <script>

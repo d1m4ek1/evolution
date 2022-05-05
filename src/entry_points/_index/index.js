@@ -41,12 +41,6 @@ Vue.directive('hide-elem', hideElemDir);
       document
         .querySelector('.main')
         .classList.add('main_squeeze_before_remove');
-      document
-        .querySelector('.main__body_content')
-        .classList.remove('main_squeeze');
-      document
-        .querySelector('.main__body_content')
-        .classList.add('main_unclench');
       setTimeout(() => {
         document
           .querySelector('.main')

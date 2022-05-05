@@ -12,6 +12,7 @@ window.Vue = require('vue');
 Vue.use(VueRouter);
 
 (() => new Vue({
+  props: ['activetitle'],
   el: '#wrapper',
   delimiters: ['{%', '%}'],
   data: {
@@ -19,6 +20,9 @@ Vue.use(VueRouter);
     commerce: false,
     community: false,
     settings: false,
+    activeTitle: {
+      signup: false,
+    },
   },
   methods: {
     signOut() {
@@ -40,12 +44,6 @@ Vue.use(VueRouter);
       document
         .querySelector('.main')
         .classList.add('main_squeeze_before_remove');
-      document
-        .querySelector('.main__body_content')
-        .classList.remove('main_squeeze');
-      document
-        .querySelector('.main__body_content')
-        .classList.add('main_unclench');
       setTimeout(() => {
         document
           .querySelector('.main')
@@ -55,6 +53,42 @@ Vue.use(VueRouter);
     deletePreloader() {
       setTimeout(() => {
         this.preload = false;
+      }, 1000);
+    },
+    changeBackground() {
+      const route = this.$route.matched[0].props.default.activetitle;
+      if (route === 'signin') {
+        document.querySelector('.slide-first').style.left = '0';
+        document.querySelector('.slide-second').style.left = '100%';
+        document
+          .querySelector('.slide-first')
+          .classList.remove('hide-slide-first');
+        document
+          .querySelector('.slide-first')
+          .classList.add('hide-slide-second');
+        document
+          .querySelector('.slide-second')
+          .classList.add('hide-slide-first');
+        this.activeTitle.signup = false;
+      } else {
+        document.querySelector('.slide-first').style.left = '0';
+        document.querySelector('.slide-second').style.left = '0';
+        document
+          .querySelector('.slide-second')
+          .classList.remove('hide-slide-first');
+        document
+          .querySelector('.slide-first')
+          .classList.remove('hide-slide-second');
+        document
+          .querySelector('.slide-first')
+          .classList.add('hide-slide-first');
+        this.activeTitle.signup = true;
+      }
+      document.getElementById('signin').style.pointerEvents = 'none';
+      document.getElementById('signup').style.pointerEvents = 'none';
+      setTimeout(() => {
+        document.getElementById('signin').style.pointerEvents = 'unset';
+        document.getElementById('signup').style.pointerEvents = 'unset';
       }, 1000);
     },
   },
@@ -86,7 +120,11 @@ Vue.use(VueRouter);
       };
     },
   },
+  updated() {
+    this.changeBackground();
+  },
   created() {
+    this.changeBackground();
     this.deletePreloader();
   },
   router,
