@@ -60,36 +60,12 @@ Vue.use(VueRouter);
       if (route === 'signin') {
         document.querySelector('.slide-first').style.left = '0';
         document.querySelector('.slide-second').style.left = '100%';
-        document
-          .querySelector('.slide-first')
-          .classList.remove('hide-slide-first');
-        document
-          .querySelector('.slide-first')
-          .classList.add('hide-slide-second');
-        document
-          .querySelector('.slide-second')
-          .classList.add('hide-slide-first');
         this.activeTitle.signup = false;
       } else {
-        document.querySelector('.slide-first').style.left = '0';
+        document.querySelector('.slide-first').style.left = '-100%';
         document.querySelector('.slide-second').style.left = '0';
-        document
-          .querySelector('.slide-second')
-          .classList.remove('hide-slide-first');
-        document
-          .querySelector('.slide-first')
-          .classList.remove('hide-slide-second');
-        document
-          .querySelector('.slide-first')
-          .classList.add('hide-slide-first');
         this.activeTitle.signup = true;
       }
-      document.getElementById('signin').style.pointerEvents = 'none';
-      document.getElementById('signup').style.pointerEvents = 'none';
-      setTimeout(() => {
-        document.getElementById('signin').style.pointerEvents = 'unset';
-        document.getElementById('signup').style.pointerEvents = 'unset';
-      }, 1000);
     },
   },
   computed: {

@@ -25,6 +25,7 @@
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+            justify-content: center;
 }
 
 .main__body_content .privacy-policy {
@@ -36,7 +37,7 @@
 }
 
 .background-slides {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
 }
@@ -49,60 +50,6 @@
     -o-transition: 1s;
     transition: 1s;
     width: 100%;
-}
-
-.hide-slide-first {
-    -webkit-animation-name: hideslider;
-            animation-name: hideslider;
-    -webkit-animation-duration: 2s;
-            animation-duration: 2s;
-}
-
-@-webkit-keyframes hideslider {
-    0% {
-        width: 100%;
-    }
-
-    100% {
-        width: 0;
-    }
-}
-
-@keyframes hideslider {
-    0% {
-        width: 100%;
-    }
-
-    100% {
-        width: 0;
-    }
-}
-
-.hide-slide-second {
-    -webkit-animation-name: hidesliderSecond;
-            animation-name: hidesliderSecond;
-    -webkit-animation-duration: 1s;
-            animation-duration: 1s;
-}
-
-@-webkit-keyframes hidesliderSecond {
-    0% {
-        width: 0;
-    }
-
-    100% {
-        width: 100%;
-    }
-}
-
-@keyframes hidesliderSecond {
-    0% {
-        width: 0;
-    }
-
-    100% {
-        width: 100%;
-    }
 }
 
 .slide-first {
@@ -165,6 +112,11 @@
     background-color: white;
 }
 
+.card-sign-block {
+    position: relative;
+    height: 100%;
+}
+
 .card-sign-content input {
     background-color: rgba(255, 255, 255, 0.2);
     margin-bottom: 20px;
@@ -181,9 +133,9 @@
 
 .card-sign-content button {
     position: absolute;
-    width: 90%;
-    left: 20px;
-    bottom: 20px;
+    width: 100%;
+    left: 0;
+    bottom: 0;
     border-radius: 3px;
     background-color: black;
     color: white;

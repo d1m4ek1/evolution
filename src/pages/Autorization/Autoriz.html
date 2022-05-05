@@ -207,10 +207,10 @@
         <!-- BACKGROUND SLIDER -->
         <div class="background-slides">
             <div class="background-slide slide-first">
-                <img src="../../assets/images/autoriz/signin.png" alt="">
+                <img src="../../assets/images/autoriz/signin.png">
             </div>
             <div class="background-slide slide-second">
-                <img src="../../assets/images/autoriz/signup.png" alt="">
+                <img src="../../assets/images/autoriz/signup.png">
             </div>
         </div>
         <!-- END BACKGROUD SLIDER -->
@@ -219,11 +219,13 @@
         <main class="main indent-top">
             <div class="main__body_content container">
                 <div class="card-sign show_content">
-                    <section class="title">
-                        <router-link id="signin" to="/signin">Войти</router-link>
-                        <router-link id="signup" to="/signup">Зарегистрироваться</router-link>
-                    </section>
-                    <router-view></router-view>
+                    <div class="card-sign-block">
+                        <section class="title">
+                            <router-link id="signin" to="/signin">Войти</router-link>
+                            <router-link id="signup" to="/signup">Зарегистрироваться</router-link>
+                        </section>
+                        <router-view></router-view>
+                    </div>
                 </div>
                 <p v-if="activeTitle.signup" class="privacy-policy">
                     Нажимая кнопку «Зарегистрироваться», вы принимаете
