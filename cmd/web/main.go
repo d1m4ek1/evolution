@@ -10,7 +10,7 @@ import (
 	"iNote/www/api/autorization/signout"
 	"iNote/www/api/autorization/signup"
 	checkonline "iNote/www/api/checkOnline"
-	setprofile "iNote/www/api/settings/setProfile"
+	"iNote/www/api/settings"
 	"iNote/www/internal/controllers"
 	"iNote/www/internal/database"
 	newerror "iNote/www/pkg/NewError"
@@ -77,8 +77,11 @@ func handle() {
 
 	// API SETTINGS
 	// PROFILE
-	rtr.HandleFunc("/api/get_settings/profile", setprofile.GetSettings)
-	rtr.HandleFunc("/api/save_settings/profile", setprofile.SaveSettings)
+	rtr.HandleFunc("/api/get_settings/profile", settings.GetProfileSettings)
+	rtr.HandleFunc("/api/save_settings/profile", settings.SaveProfileSettings)
+	// PERSONAL DATA
+	rtr.HandleFunc("/api/get_settings/personal_data", settings.GetPersonalData)
+	rtr.HandleFunc("/api/save_settings/personal_data", settings.SavePersonalData)
 
 	// API CHECK STATUS
 	rtr.HandleFunc("/api/check_status", checkonline.CheckOnline)

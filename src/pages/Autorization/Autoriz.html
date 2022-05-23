@@ -81,12 +81,6 @@
                     </div>
                     {{ else }}
                     <div class="header_nav__item">
-                        <router-link to="/signin">Вход</router-link>
-                    </div>
-                    <div class="header_nav__item">
-                        <router-link to="/signup">Регистрация</router-link>
-                    </div>
-                    <div class="header_nav__item">
                         <a href="/directory">Справочник</a>
                     </div>
                     {{ end }}
@@ -186,13 +180,6 @@
                     </button>
                 </div>
                 {{ else }}
-                <div class="header_sticky_nav__item">
-                    <router-link tag="button" class="btn" @click="hideStickyHeader()" to="/signin">Вход</router-link>
-                </div>
-                <div class="header_sticky_nav__item">
-                    <router-link tag="button" class="btn" @click="hideStickyHeader()" to="/signup">Регистрация
-                    </router-link>
-                </div>
                 <div class="header_sticky_nav__item">
                     <div class="btn btn_link">
                         <a @click="hideStickyHeader()" href="/directory"></a>

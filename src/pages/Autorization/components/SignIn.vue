@@ -12,10 +12,10 @@
         name="password"
         placeholder="Пароль..."
       />
-      <button @click="sendData()" class="btn">Вход</button>
       <div class="link-forgot">
         <a href="#">Забыли логин или пароль?</a>
       </div>
+      <button @click="sendData()" class="btn">Вход</button>
     </div>
 </template>
 

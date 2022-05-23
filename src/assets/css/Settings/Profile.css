@@ -3,6 +3,7 @@
 }
 .error {
   color: red;
+  border: 1px solid red;
 }
 .change_section__title {
   padding-bottom: 20px;
@@ -12,16 +13,14 @@
 }
 .note {
   position: relative;
-  width: fit-content;
+  padding-left: 10px;
 }
 .note::before {
   content: "!";
   position: absolute;
-  right: -30px;
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  display: block;
   border: 1px solid #8b8bff;
   color: #8b8bff;
   text-align: center;
