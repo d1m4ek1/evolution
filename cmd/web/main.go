@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 
+	confirmdata "iNote/www/api/autorization/confirmData"
 	"iNote/www/api/autorization/signin"
 	"iNote/www/api/autorization/signout"
 	"iNote/www/api/autorization/signup"
@@ -82,6 +83,9 @@ func handle() {
 	// PERSONAL DATA
 	rtr.HandleFunc("/api/get_settings/personal_data", settings.GetPersonalData)
 	rtr.HandleFunc("/api/save_settings/personal_data", settings.SavePersonalData)
+
+	// API CONFIRM
+	rtr.HandleFunc("/api/confirm", confirmdata.ConfirmPassword)
 
 	// API CHECK STATUS
 	rtr.HandleFunc("/api/check_status", checkonline.CheckOnline)

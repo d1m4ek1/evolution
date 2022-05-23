@@ -85,39 +85,43 @@
     </div>
     <!-- SAVE BUTTON OR DEFAULT SETTINGS -->
     <div class="change_section btns">
-      <div class="change_content">
+      <template v-if="!completePassword.completed">
+        <div class="change_content">
+          <div class="change_content__title">
+            <h3>Подтверждение</h3>
+            <p>
+              Только с подтверждением пароля, можно изменить персональные
+              данные.<span class="note"></span><br />
+              <a href="#">Забыли пароль?</a>
+            </p>
+          </div>
+          <div class="inlineblock">
+            <input
+              v-model="completePassword.password"
+              name="now_password"
+              type="password"
+              placeholder="Текущий пароль..."
+            />
+          </div>
+        </div>
+        <button @click="sendOnConfirmPassword()" class="btn">
+          Подвердить пароль
+        </button>
+      </template>
+      <template v-else>
         <div class="change_content__title">
-          <h3>Подтверждение</h3>
           <p>
-            Только с подтверждением пароля, можно изменить персональные
-            данные.<span class="note"></span><br />
-            <a href="#">Забыли пароль?</a>
+            Сохраняя данные вы согласны с
+            <a href="/directory/terms-of-use"> пользовательским соглашением</a>
+            и
+            <a href="/directory/privacy-policy"
+              >политикой конфиденциальности.</a
+            >
+            <span class="note"></span>
           </p>
         </div>
-        <div class="inlineblock">
-          <input
-            name="now_password"
-            type="password"
-            placeholder="Текущий пароль..."
-          />
-        </div>
-      </div>
-      <div class="change_content__title">
-        <p>
-          Сохраняя данные вы согласны с
-          <a href="/directory/terms-of-use"> пользовательским соглашением</a> и
-          <a href="/directory/privacy-policy">политикой конфиденциальности.</a>
-          <span class="note"></span>
-        </p>
-      </div>
-      <button @click="completePassword()" class="btn">Подвердить пароль</button>
-      <button
-        v-if="completePassword.completed"
-        @click="saveSettings()"
-        class="btn"
-      >
-        Сохранить
-      </button>
+        <button @click="saveSettings()" class="btn">Сохранить</button>
+      </template>
       <button @click="resetSettings()" class="btn btn-red">
         Сбросить все изменения
       </button>
@@ -126,6 +130,8 @@
 </template>
 
 <script>
+import MD5 from 'crypto-js/md5';
+
 export default {
   data() {
     return {
@@ -140,21 +146,25 @@ export default {
             {
               new: '',
               placeholder: 'Первый ключ',
+              param: 'backupkey_one',
               error: false,
             },
             {
               new: '',
               placeholder: 'Второй ключ',
+              param: 'backupkey_two',
               error: false,
             },
             {
               new: '',
               placeholder: 'Третий ключ',
+              param: 'backupkey_three',
               error: false,
             },
             {
               new: '',
               placeholder: 'Четвертый ключ',
+              param: 'backupkey_four',
               error: false,
             },
           ],
@@ -200,9 +210,55 @@ export default {
       }
     },
     saveSettings() {
-      const defUrl = '/api/save_settings/profile?';
+      const defUrl = '/api/save_settings/personal_data?';
       const urlParam = [];
-      const fullUrl = '';
+      let fullUrl = '';
+      fullUrl = defUrl;
+
+      let voidCounter = 0;
+
+      for (let i = 0; i < this.userData.backupKeys.keys.length; i += 1) {
+        const temporaryKey = this.userData.backupKeys.keys[i];
+
+        if (temporaryKey.new !== '' && voidCounter !== 4) {
+          voidCounter += 1;
+        }
+      }
+
+      if (voidCounter === 4) {
+        voidCounter = 0;
+        for (let j = 0; j < this.userData.backupKeys.keys.length; j += 1) {
+          const key = this.userData.backupKeys.keys[j];
+          urlParam.push(`${key.param}=${encodeURIComponent(MD5(key.new))}`);
+        }
+      }
+
+      fullUrl += urlParam.join('&');
+
+      if (fullUrl !== defUrl) {
+        fetch(fullUrl, {
+          method: 'POST',
+        }).then((response) => {
+          if (response.ok) {
+            setTimeout(() => {
+              window.location.reload();
+            }, 3000);
+          }
+        }).catch((error) => console.error(error));
+      }
+    },
+    sendOnConfirmPassword() {
+      if (this.completePassword.password !== '') {
+        fetch(`/api/confirm?conf_pass=${MD5(this.completePassword.password)}`, {
+          method: 'GET',
+        })
+          .then((response) => {
+            response.json().then((data) => {
+              this.completePassword.completed = data.pass;
+            });
+          })
+          .catch((error) => console.log(error));
+      }
     },
   },
   created() {
