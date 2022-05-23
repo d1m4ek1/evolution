@@ -46,7 +46,11 @@
           </p>
         </div>
         <div class="inlineblock">
-          <input type="password" placeholder="Новый пароль..." />
+          <input
+            v-model="userData.password.new"
+            type="password"
+            placeholder="Новый пароль..."
+          />
         </div>
         <div class="inlineblock">
           <button class="btn">Сгенерировать пароль</button>
@@ -75,6 +79,7 @@
           </div>
           <div class="inlineblock_right">
             <input
+              v-model="userData.email.new"
               type="email"
               placeholder="example@example.com"
               maxlength="80"
@@ -169,8 +174,13 @@ export default {
             },
           ],
         },
+        password: {
+          param: 'password',
+          new: '',
+        },
         email: {
           old: '',
+          param: 'email',
           new: '',
         },
       },
@@ -233,18 +243,27 @@ export default {
         }
       }
 
+      if (this.userData.password.new !== '') {
+        urlParam.push(`${this.userData.password.param}=${MD5(this.userData.password.new)}`);
+      }
+      if (this.userData.email.old !== this.userData.email.new && this.userData.email.new !== '') {
+        urlParam.push(`${this.userData.email.param}=${this.userData.email.new}`);
+      }
+
       fullUrl += urlParam.join('&');
 
       if (fullUrl !== defUrl) {
         fetch(fullUrl, {
           method: 'POST',
-        }).then((response) => {
-          if (response.ok) {
-            setTimeout(() => {
-              window.location.reload();
-            }, 3000);
-          }
-        }).catch((error) => console.error(error));
+        })
+          .then((response) => {
+            if (response.ok) {
+              setTimeout(() => {
+                window.location.reload();
+              }, 3000);
+            }
+          })
+          .catch((error) => console.error(error));
       }
     },
     sendOnConfirmPassword() {

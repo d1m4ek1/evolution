@@ -78,21 +78,30 @@ func GetPersonalData(w http.ResponseWriter, r *http.Request) {
 }
 
 func savePersonalData(userId string, r *http.Request) {
-	var pdParams = []string{"backupkey_one", "backupkey_two", "backupkey_three", "backupkey_four", "new_password", "email"}
+	var pdParams = [2]string{"password", "email"}
 	var backupKey string
 
-	if r.URL.Query().Get(pdParams[0]) != "" && r.URL.Query().Get(pdParams[1]) != "" &&
-		r.URL.Query().Get(pdParams[2]) != "" && r.URL.Query().Get(pdParams[3]) != "" {
+	if r.URL.Query().Get("backupkey_one") != "" && r.URL.Query().Get("backupkey_two") != "" &&
+		r.URL.Query().Get("backupkey_three") != "" && r.URL.Query().Get("backupkey_four") != "" {
 
 		backupKey = fmt.Sprintf("{%s, %s, %s, %s}",
-			r.URL.Query().Get(pdParams[0]),
-			r.URL.Query().Get(pdParams[1]),
-			r.URL.Query().Get(pdParams[2]),
-			r.URL.Query().Get(pdParams[3]))
+			r.URL.Query().Get("backupkey_one"),
+			r.URL.Query().Get("backupkey_two"),
+			r.URL.Query().Get("backupkey_three"),
+			r.URL.Query().Get("backupkey_four"))
 
 		if _, err := database.Tables.Exec(`UPDATE users_data SET backup_keys=$1 WHERE id=$2`, backupKey, userId); err != nil {
 			fmt.Println(newerror.Wrap(errorsavePersonalData, "Query at db: 1", err))
 			return
+		}
+	}
+
+	for _, v := range pdParams {
+		if r.URL.Query().Get(v) != "" {
+			if _, err := database.Tables.Exec(fmt.Sprintf(`UPDATE users_data SET %s=$1 WHERE id=$2`, v), r.URL.Query().Get(v), userId); err != nil {
+				fmt.Println(newerror.Wrap(errorsavePersonalData, "Query at db: 1", err))
+				return
+			}
 		}
 	}
 }
