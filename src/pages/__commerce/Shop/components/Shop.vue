@@ -16,8 +16,7 @@
                 <h3>Название</h3>
                 <p>Цена от-до</p>
                 <p>Кол-во покупок</p>
-                <button class="btn">Купить</button>
-                <button class="btn">Лицензии</button>
+                <a class="btn-link">Купить</a>
                 <a href="#">Права потребителя</a>
               </div>
             </div>
@@ -30,7 +29,6 @@
                 <p>Цена от-до</p>
                 <p>Кол-во покупок</p>
                 <button class="btn">Купить</button>
-                <button class="btn">Лицензии</button>
                 <a href="#">Права потребителя</a>
               </div>
             </div>
@@ -43,7 +41,6 @@
                 <p>Цена от-до</p>
                 <p>Кол-во покупок</p>
                 <button class="btn">Купить</button>
-                <button class="btn">Лицензии</button>
                 <a href="#">Права потребителя</a>
               </div>
             </div>
@@ -56,7 +53,6 @@
                 <p>Цена от-до</p>
                 <p>Кол-во покупок</p>
                 <button class="btn">Купить</button>
-                <button class="btn">Лицензии</button>
                 <a href="#">Права потребителя</a>
               </div>
             </div>
@@ -69,7 +65,6 @@
                 <p>Цена от-до</p>
                 <p>Кол-во покупок</p>
                 <button class="btn">Купить</button>
-                <button class="btn">Лицензии</button>
                 <a href="#">Права потребителя</a>
               </div>
             </div>
@@ -82,7 +77,6 @@
                 <p>Цена от-до</p>
                 <p>Кол-во покупок</p>
                 <button class="btn">Купить</button>
-                <button class="btn">Лицензии</button>
                 <a href="#">Права потребителя</a>
               </div>
             </div>
@@ -95,7 +89,6 @@
                 <p>Цена от-до</p>
                 <p>Кол-во покупок</p>
                 <button class="btn">Купить</button>
-                <button class="btn">Лицензии</button>
                 <a href="#">Права потребителя</a>
               </div>
             </div>
@@ -117,7 +110,6 @@
             <p>Цена от-до</p>
             <p>Кол-во покупок</p>
             <button class="btn">Купить</button>
-            <button class="btn">Лицензии</button>
             <a href="#">Права потребителя</a>
           </div>
         </div>
@@ -130,7 +122,7 @@
             <p>Цена от-до</p>
             <p>Кол-во покупок</p>
             <button class="btn">Купить</button>
-            <button class="btn">Лицензии</button>
+
             <a href="#">Права потребителя</a>
           </div>
         </div>
@@ -143,7 +135,7 @@
             <p>Цена от-до</p>
             <p>Кол-во покупок</p>
             <button class="btn">Купить</button>
-            <button class="btn">Лицензии</button>
+
             <a href="#">Права потребителя</a>
           </div>
         </div>
@@ -156,7 +148,7 @@
             <p>Цена от-до</p>
             <p>Кол-во покупок</p>
             <button class="btn">Купить</button>
-            <button class="btn">Лицензии</button>
+
             <a href="#">Права потребителя</a>
           </div>
         </div>
@@ -169,7 +161,7 @@
             <p>Цена от-до</p>
             <p>Кол-во покупок</p>
             <button class="btn">Купить</button>
-            <button class="btn">Лицензии</button>
+
             <a href="#">Права потребителя</a>
           </div>
         </div>
@@ -182,7 +174,6 @@
             <p>Цена от-до</p>
             <p>Кол-во покупок</p>
             <button class="btn">Купить</button>
-            <button class="btn">Лицензии</button>
             <a href="#">Права потребителя</a>
           </div>
         </div>
@@ -195,7 +186,6 @@
             <p>Цена от-до</p>
             <p>Кол-во покупок</p>
             <button class="btn">Купить</button>
-            <button class="btn">Лицензии</button>
             <a href="#">Права потребителя</a>
           </div>
         </div>

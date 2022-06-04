@@ -48,12 +48,14 @@
         <div class="inlineblock">
           <input
             v-model="userData.password.new"
-            type="password"
+            type="text"
             placeholder="Новый пароль..."
           />
         </div>
         <div class="inlineblock">
-          <button class="btn">Сгенерировать пароль</button>
+          <button @click="generatePassword()" class="btn">
+            Сгенерировать пароль - 20 символов
+          </button>
         </div>
       </div>
     </div>
@@ -136,6 +138,16 @@
 
 <script>
 import MD5 from 'crypto-js/md5';
+
+function rndsh(sumString = Number()) {
+  const symbolArr = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+  let rtsdnr = '';
+  for (let i = 0; i < sumString; i += 1) {
+    const index = Math.floor(Math.random() * symbolArr.length);
+    rtsdnr += symbolArr[index];
+  }
+  return rtsdnr;
+}
 
 export default {
   data() {
@@ -244,10 +256,17 @@ export default {
       }
 
       if (this.userData.password.new !== '') {
-        urlParam.push(`${this.userData.password.param}=${MD5(this.userData.password.new)}`);
+        urlParam.push(
+          `${this.userData.password.param}=${MD5(this.userData.password.new)}`,
+        );
       }
-      if (this.userData.email.old !== this.userData.email.new && this.userData.email.new !== '') {
-        urlParam.push(`${this.userData.email.param}=${this.userData.email.new}`);
+      if (
+        this.userData.email.old !== this.userData.email.new
+        && this.userData.email.new !== ''
+      ) {
+        urlParam.push(
+          `${this.userData.email.param}=${this.userData.email.new}`,
+        );
       }
 
       fullUrl += urlParam.join('&');
@@ -278,6 +297,9 @@ export default {
           })
           .catch((error) => console.log(error));
       }
+    },
+    generatePassword() {
+      this.userData.password.new = rndsh(20);
     },
   },
   created() {
