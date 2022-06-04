@@ -6,10 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	confirmdata "iNote/www/api/autorization/confirmData"
-	"iNote/www/api/autorization/signin"
-	"iNote/www/api/autorization/signout"
-	"iNote/www/api/autorization/signup"
+	"iNote/www/api/authorization"
 	checkonline "iNote/www/api/checkOnline"
 	"iNote/www/api/settings"
 	"iNote/www/internal/controllers"
@@ -70,11 +67,11 @@ func handle() {
 
 	// API ACCOUNT
 	// SIGN UP
-	rtr.HandleFunc("/api/create_account", signup.SignUp)
+	rtr.HandleFunc("/api/create_account", authorization.SignUp)
 	// SIGN IN
-	rtr.HandleFunc("/api/signin_account", signin.SignIn)
+	rtr.HandleFunc("/api/signin_account", authorization.SignIn)
 	// SIGN OUT
-	rtr.HandleFunc("/api/signout_account", signout.SignOut)
+	rtr.HandleFunc("/api/signout_account", authorization.SignOut)
 
 	// API SETTINGS
 	// PROFILE
@@ -85,7 +82,7 @@ func handle() {
 	rtr.HandleFunc("/api/save_settings/personal_data", settings.SavePersonalData)
 
 	// API CONFIRM
-	rtr.HandleFunc("/api/confirm", confirmdata.ConfirmPassword)
+	rtr.HandleFunc("/api/confirm", authorization.ConfirmPassword)
 
 	// API CHECK STATUS
 	rtr.HandleFunc("/api/check_status", checkonline.CheckOnline)

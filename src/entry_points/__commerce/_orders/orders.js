@@ -1,9 +1,9 @@
 // JS IMPORTS
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import 'lazysizes';
 import router from '../../../router/__commerce/Orders/router';
 import hideElemDir from '../../../assets/js/hideElem';
-import '../../../assets/js/delayedLoading';
 import '../../../assets/js/stickyHeader';
 
 window.Vue = require('vue');

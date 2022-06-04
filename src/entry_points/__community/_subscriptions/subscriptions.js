@@ -3,7 +3,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import router from '../../../router/__community/Subscriptions/router';
 import hideElemDir from '../../../assets/js/hideElem';
-import '../../../assets/js/delayedLoading';
+import 'lazysizes';
 import '../../../assets/js/stickyHeader';
 
 window.Vue = require('vue');

@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	checksignin "iNote/www/api/autorization/checkSignin"
+	"iNote/www/api/authorization"
 	"iNote/www/internal/database"
 	newerror "iNote/www/pkg/NewError"
 	"io"
@@ -81,7 +81,7 @@ func GetProfileSettings(w http.ResponseWriter, r *http.Request) {
 	userId, _ := r.Cookie("userId")
 
 	if token != nil && userId != nil {
-		var user checksignin.CheckSignin = checksignin.CheckSignin{
+		var user authorization.CheckSignin = authorization.CheckSignin{
 			Id:       userId.Value,
 			Token:    token.Value,
 			Autorize: false,
@@ -216,7 +216,7 @@ func SaveProfileSettings(w http.ResponseWriter, r *http.Request) {
 	userId, _ := r.Cookie("userId")
 
 	if token != nil && userId != nil {
-		var user checksignin.CheckSignin = checksignin.CheckSignin{
+		var user authorization.CheckSignin = authorization.CheckSignin{
 			Id:       userId.Value,
 			Token:    token.Value,
 			Autorize: false,

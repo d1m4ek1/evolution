@@ -1,7 +1,7 @@
 // JS IMPORTS
 import Vue from 'vue';
 import hideElemDir from '../../assets/js/hideElem';
-import '../../assets/js/delayedLoading';
+import 'lazysizes';
 import '../../assets/js/stickyHeader';
 
 import '../../assets/js/checkStatus';

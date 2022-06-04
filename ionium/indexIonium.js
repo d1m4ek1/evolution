@@ -46,14 +46,14 @@ class Ionium {
           const pathToStyle = fileContent.match(/{\$(.*?)\$}/g);
 
           if (pathToStyle) {
-            for (let j = 0; j < pathToStyle.length; j += 1) {
-              const pathItem = pathToStyle[j];
-              pathToStyle[j] = pathItem.replace(
+            for (i = 0; i < pathToStyle.length; i += 1) {
+              const pathItem = pathToStyle[i];
+              pathToStyle[i] = pathItem.replace(
                 /{\$ path_style="(.*?)" \$}/g,
                 '$1',
               );
 
-              let fileName = pathToStyle[j].replace(
+              let fileName = pathToStyle[i].replace(
                 /\/src\/assets\/css\//g,
                 '',
               );
@@ -125,14 +125,14 @@ class Ionium {
           const pathToStyle = fileContent.match(/{\$(.*?)\$}/g);
 
           if (pathToStyle) {
-            for (let j = 0; j < pathToStyle.length; j += 1) {
-              const pathItem = pathToStyle[j];
-              pathToStyle[j] = pathItem.replace(
+            for (i = 0; i < pathToStyle.length; i += 1) {
+              const pathItem = pathToStyle[i];
+              pathToStyle[i] = pathItem.replace(
                 /{\$ path_style="(.*?)" \$}/g,
                 '$1',
               );
 
-              const fileName = pathToStyle[j].replace(
+              const fileName = pathToStyle[i].replace(
                 /\/src\/assets\/css\//g,
                 '',
               );

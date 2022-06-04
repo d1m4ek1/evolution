@@ -37,8 +37,8 @@
                             <div class="header_main_logo block-link">
                                 <a class="point-link" href="/"></a>
                                 <img
-                                    class="delayed-loading"
-                                    delayed-loading="/ui/assets/images/main_logo.png"
+                                    class="lazyload"
+                                    data-src="/ui/assets/images/main_logo.png"
                                 />
                             </div>
                         </div>
@@ -151,8 +151,8 @@
                         <div class="header_sticky_main_logo block-link">
                             <a class="point-link" href="/"></a>
                             <img
-                                class="delayed-loading"
-                                delayed-loading="/ui/assets/images/main_logo.png"
+                                class="lazyload"
+                                data-src="/ui/assets/images/main_logo.png"
                             />
                         </div>
                     </div>
@@ -312,15 +312,15 @@
                             <div class="content_title">
                                 <div class="content_images">
                                     <div class="banner">
-                                        <img
-                                            src="{{ $.ProfileData.Banner }}"
+                                        <img class="lazyload"
+                                            data-src="{{ $.ProfileData.Banner }}"
                                         />
                                     </div>
                                     <div
                                         class="logo {{ $.ProfileData.NetworkStatus }}"
                                     >
-                                        <img
-                                            src="{{ $.ProfileData.Logo }}"
+                                        <img class="lazyload"
+                                            data-src="{{ $.ProfileData.Logo }}"
                                         />
                                     </div>
                                 </div>

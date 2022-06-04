@@ -19,7 +19,7 @@
           <router-link to="/messages/control"></router-link>
           <div class="message_item__info">
             <div class="message_item__logo online">
-              <img src="/profile/logo/notLogo/not_logo.png" />
+              <img class="lazyload" data-src="/profile/logo/notLogo/not_logo.png" />
             </div>
             <div class="message_item__name">
               <h2>Name</h2>
@@ -29,14 +29,14 @@
             </div>
           </div>
           <div class="message_item__banner">
-            <img src="/profile/banner/notBanner/not_banner.png" />
+            <img class="lazyload" data-src="/profile/banner/notBanner/not_banner.png" />
           </div>
         </div>
         <div class="message_item">
           <router-link to="/messages/control"></router-link>
           <div class="message_item__info">
             <div class="message_item__logo online">
-              <img src="/profile/logo/notLogo/not_logo.png" />
+              <img class="lazyload" data-src="/profile/logo/notLogo/not_logo.png" />
             </div>
             <div class="message_item__name">
               <h2>Name</h2>
@@ -46,7 +46,7 @@
             </div>
           </div>
           <div class="message_item__banner">
-            <img src="/profile/banner/notBanner/not_banner.png" />
+            <img class="lazyload" data-src="/profile/banner/notBanner/not_banner.png" />
           </div>
         </div>
       </div>

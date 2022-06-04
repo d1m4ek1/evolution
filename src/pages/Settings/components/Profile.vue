@@ -73,7 +73,7 @@
         <h3>Аватарка сейчас</h3>
         <div class="inlineblock">
           <div class="inlineblock_left img">
-            <img :src="userData.logo.old" />
+            <img class="lazyload" :data-src="userData.logo.old" />
           </div>
           <div class="upload_content">
             <input
@@ -89,7 +89,7 @@
               </template>
               <template v-else>
                 <div class="img">
-                  <img :src="userData.logo.preview" />
+                  <img class="lazyload" :data-src="userData.logo.preview" />
                 </div>
               </template>
             </label>
@@ -114,7 +114,7 @@
         <h3>Баннер сейчас</h3>
         <div class="inlineblock">
           <div class="inlineblock_left banner">
-            <img :src="userData.banner.old" alt="Нет баннера" />
+            <img class="lazyload" :data-src="userData.banner.old" alt="Нет баннера" />
           </div>
           <div class="upload_content">
             <input
@@ -130,7 +130,7 @@
               </template>
               <template v-else>
                 <div class="img">
-                  <img :src="userData.banner.preview" alt="Нет баннера" />
+                  <img class="lazyload" :data-src="userData.banner.preview" alt="Нет баннера" />
                 </div>
               </template>
             </label>

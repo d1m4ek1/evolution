@@ -7,7 +7,7 @@
       <h1>Name</h1>
       <div class="message_block_img online">
         <a href="/1"></a>
-        <img src="/profile/logo/notLogo/not_logo.png" />
+        <img class="lazyload" data-src="/profile/logo/notLogo/not_logo.png" />
       </div>
     </section>
     <section class="message__main_content">
