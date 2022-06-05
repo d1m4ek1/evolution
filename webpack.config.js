@@ -126,6 +126,7 @@ module.exports = {
     new copyPlugin({
       patterns: [
         { from: 'src/assets/images/', to: 'assets/images/' },
+        { from: 'src/templates/', to: 'templates/' },
       ],
     }),
     new FaviconsWebpackPlugin({
