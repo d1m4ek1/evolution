@@ -26,7 +26,7 @@
                             <div class="header_main_logo block-link">
                                 <a class="point-link" href="/"></a>
                                 <img
-                                class="lazyload"
+                                    class="lazyload"
                                     data-src="/ui/assets/images/main_logo.png"
                                 />
                             </div>
@@ -40,7 +40,7 @@
                                 class="open_window"
                                 v-hide-elem="{id:'add_community', val:['community']}"
                                 @click="community = !community"
-                                >Сообщество
+                                >Проекты
                                 <span
                                     class="arrow_list_close"
                                     :class="rotateArrowCommunity"
@@ -52,9 +52,9 @@
                                 v-show="community"
                             >
                                 <div class="add_window__content">
-                                    <a href="/messages">Сообщения</a>
-                                    <a href="/music">Музыка</a>
-                                    <a href="/subscriptions">Подписки</a>
+                                    <a href="/insocial">inSocial - общение с подписчиками</a>
+                                    <a href="/inmusic">inMusic - музыка всего мира</a>
+                                    <a href="/inbeats">inBeats - торговля битов</a>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                                 v-show="commerce"
                             >
                                 <div class="add_window__content">
-                                    <a href="/shop">Магазин</a>
+                                    <a href="/subscriptions">Подписки</a>
                                     <a href="/orders">Заказы</a>
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
                         <div class="header_sticky_main_logo block-link">
                             <a class="point-link" href="/"></a>
                             <img
-                            class="lazyload"
+                                class="lazyload"
                                 data-src="/ui/assets/images/main_logo.png"
                             />
                         </div>
@@ -159,7 +159,7 @@
                         <div class="btn btn_link">
                             <a @click="community = !community"></a>
                             <p>
-                                Сообщество
+                                Проекты
                                 <span
                                     class="arrow_list_close"
                                     :class="rotateArrowCommunity"
@@ -170,23 +170,23 @@
                             <div class="btn btn_link">
                                 <a
                                     @click="hideStickyHeader()"
-                                    href="/messages"
+                                    href="/insocial"
                                 ></a>
-                                <p>Сообщения</p>
+                                <p>inSocial</p>
                             </div>
                             <div class="btn btn_link">
                                 <a
                                     @click="hideStickyHeader()"
-                                    href="/music"
+                                    href="/inmusic"
                                 ></a>
-                                <p>Музыка</p>
+                                <p>inMusic</p>
                             </div>
                             <div class="btn btn_link">
                                 <a
                                     @click="hideStickyHeader()"
-                                    href="/subscriptions"
+                                    href="/inbeats"
                                 ></a>
-                                <p>Подписки</p>
+                                <p>inBeats</p>
                             </div>
                         </div>
                     </div>
@@ -203,8 +203,11 @@
                         </div>
                         <div v-show="commerce" class="sticy_add_window">
                             <div class="btn btn_link">
-                                <a @click="hideStickyHeader()" href="/shop"></a>
-                                <p>Магазин</p>
+                                <a
+                                    @click="hideStickyHeader()"
+                                    href="/subscriptions"
+                                ></a>
+                                <p>Подписки</p>
                             </div>
                             <div class="btn btn_link">
                                 <a

@@ -8,10 +8,10 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- <script src="http://localhost:8098"></script> -->
-        <link rel="stylesheet" href="/ui/assets/css/yFkpe59MaFK68HMJi3F.css" type="text/css">
-        <link rel="stylesheet" href="/ui/assets/css/KDVyHszusDXNCR8xTqu.css" type="text/css">
-        <link rel="stylesheet" href="/ui/assets/css/Header/cLwDO3XjkdRtuV9uZkX.css" type="text/css">
-        <link rel="stylesheet" href="/ui/assets/css/Header/RerAHHNOfTgwkDvACPZ.css" type="text/css">
+        <link rel="stylesheet" href="/ui/assets/css/o5KwrUMgit1WcWmAmqU.css" type="text/css">
+        <link rel="stylesheet" href="/ui/assets/css/2O8LSnuoxLm8ktLBxbz.css" type="text/css">
+        <link rel="stylesheet" href="/ui/assets/css/Header/edia5KSCDgHZl3h2w9v.css" type="text/css">
+        <link rel="stylesheet" href="/ui/assets/css/Header/JypmxDVNOICLob8G1By.css" type="text/css">
     <link rel="icon" href="/ui/assets/images/favicon.png"><script defer src="/ui/assets/js/_index.6fa169839d95c27d4d69.js"></script></head>
     <body>
         <!-- Area of visibility VUE.js -->
@@ -31,7 +31,7 @@
                             <div class="header_main_logo block-link">
                                 <a class="point-link" href="/"></a>
                                 <img
-                                class="lazyload"
+                                    class="lazyload"
                                     data-src="/ui/assets/images/main_logo.png"
                                 />
                             </div>
@@ -45,7 +45,7 @@
                                 class="open_window"
                                 v-hide-elem="{id:'add_community', val:['community']}"
                                 @click="community = !community"
-                                >Сообщество
+                                >Проекты
                                 <span
                                     class="arrow_list_close"
                                     :class="rotateArrowCommunity"
@@ -57,9 +57,9 @@
                                 v-show="community"
                             >
                                 <div class="add_window__content">
-                                    <a href="/messages">Сообщения</a>
-                                    <a href="/music">Музыка</a>
-                                    <a href="/subscriptions">Подписки</a>
+                                    <a href="/insocial">inSocial - общение с подписчиками</a>
+                                    <a href="/inmusic">inMusic - музыка всего мира</a>
+                                    <a href="/inbeats">inBeats - торговля битов</a>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                                 v-show="commerce"
                             >
                                 <div class="add_window__content">
-                                    <a href="/shop">Магазин</a>
+                                    <a href="/subscriptions">Подписки</a>
                                     <a href="/orders">Заказы</a>
                                 </div>
                             </div>
@@ -102,7 +102,9 @@
                                 v-show="settings"
                             >
                                 <div class="add_window__content">
-                                    <a href="/customize">Настроить профиль</a>
+                                    <a href="/customize"
+                                        >Настроить профиль</a
+                                    >
                                     <a href="/customize/shop"
                                         >Настроить магазин</a
                                     >
@@ -143,7 +145,7 @@
                         <div class="header_sticky_main_logo block-link">
                             <a class="point-link" href="/"></a>
                             <img
-                            class="lazyload"
+                                class="lazyload"
                                 data-src="/ui/assets/images/main_logo.png"
                             />
                         </div>
@@ -162,7 +164,7 @@
                         <div class="btn btn_link">
                             <a @click="community = !community"></a>
                             <p>
-                                Сообщество
+                                Проекты
                                 <span
                                     class="arrow_list_close"
                                     :class="rotateArrowCommunity"
@@ -173,23 +175,23 @@
                             <div class="btn btn_link">
                                 <a
                                     @click="hideStickyHeader()"
-                                    href="/messages"
+                                    href="/insocial"
                                 ></a>
-                                <p>Сообщения</p>
+                                <p>inSocial</p>
                             </div>
                             <div class="btn btn_link">
                                 <a
                                     @click="hideStickyHeader()"
-                                    href="/music"
+                                    href="/inmusic"
                                 ></a>
-                                <p>Музыка</p>
+                                <p>inMusic</p>
                             </div>
                             <div class="btn btn_link">
                                 <a
                                     @click="hideStickyHeader()"
-                                    href="/subscriptions"
+                                    href="/inbeats"
                                 ></a>
-                                <p>Подписки</p>
+                                <p>inBeats</p>
                             </div>
                         </div>
                     </div>
@@ -206,8 +208,11 @@
                         </div>
                         <div v-show="commerce" class="sticy_add_window">
                             <div class="btn btn_link">
-                                <a @click="hideStickyHeader()" href="/shop"></a>
-                                <p>Магазин</p>
+                                <a
+                                    @click="hideStickyHeader()"
+                                    href="/subscriptions"
+                                ></a>
+                                <p>Подписки</p>
                             </div>
                             <div class="btn btn_link">
                                 <a

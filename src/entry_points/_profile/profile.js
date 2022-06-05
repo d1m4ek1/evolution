@@ -19,6 +19,10 @@ Vue.use(VueRouter);
     commerce: false,
     community: false,
     settings: false,
+    aboutme: {
+      title: '',
+      content: '',
+    },
   },
   methods: {
     signOut() {
@@ -53,6 +57,15 @@ Vue.use(VueRouter);
         this.preload = false;
       }, 1000);
     },
+    getDataProfile() {
+      const userId = window.location.pathname.split('/');
+      fetch(`/api/get_data_profile?get_data=all&user_id=${userId[1]}`).then((response) => {
+        response.json().then((data) => {
+          this.aboutme.title = data.aboutmeTitle;
+          this.aboutme.content = data.aboutmeContent;
+        });
+      });
+    },
   },
   computed: {
     dropHeader() {
@@ -84,6 +97,7 @@ Vue.use(VueRouter);
   },
   created() {
     this.deletePreloader();
+    this.getDataProfile();
   },
   router,
 })

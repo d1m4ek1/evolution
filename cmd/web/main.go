@@ -8,6 +8,7 @@ import (
 
 	"iNote/www/api/authorization"
 	checkonline "iNote/www/api/checkOnline"
+	dataprofile "iNote/www/api/dataProfile"
 	"iNote/www/api/settings"
 	"iNote/www/internal/controllers"
 	"iNote/www/internal/database"
@@ -37,9 +38,15 @@ func handle() {
 	rtr.HandleFunc("/signup", controllers.AutorizTemplate)
 
 	// MESSAGE ROUTERS
-	rtr.HandleFunc("/messages", controllers.MessagesTemplate)
-	rtr.HandleFunc("/messages/favorites", controllers.MessagesTemplate)
-	rtr.HandleFunc("/messages/control", controllers.MessagesTemplate)
+	rtr.HandleFunc("/insocial", controllers.InSocialTemplate)
+	rtr.HandleFunc("/insocial/favorites", controllers.InSocialTemplate)
+	rtr.HandleFunc("/insocial/control", controllers.InSocialTemplate)
+
+	// MUSIC ROUTERS
+	rtr.HandleFunc("/inmusic", controllers.InMusicTemplate)
+
+	// SUBSCRIPTIONS ROUTERS
+	rtr.HandleFunc("/inbeats", controllers.InBeatsTemplate)
 
 	// SETTINGS ROUTERS
 	rtr.HandleFunc("/customize", controllers.SettingsTemplate)
@@ -49,17 +56,11 @@ func handle() {
 	rtr.HandleFunc("/directory", controllers.DirectoryTemplate)
 	rtr.HandleFunc("/directory/{dircontent}", controllers.DirectoryTemplate)
 
-	// MUSIC ROUTERS
-	rtr.HandleFunc("/music", controllers.MusicTemplate)
-
 	// SUBSCRIPTIONS ROUTERS
 	rtr.HandleFunc("/subscriptions", controllers.SubscriptionsTemplate)
 
 	// SUBSCRIPTIONS ROUTERS
 	rtr.HandleFunc("/orders", controllers.OrdersTemplate)
-
-	// SUBSCRIPTIONS ROUTERS
-	rtr.HandleFunc("/shop", controllers.ShopTemplate)
 
 	// PROFILE ROUTERS
 	rtr.HandleFunc("/{userName}", controllers.ProfileTemplate)
@@ -80,6 +81,9 @@ func handle() {
 	// PERSONAL DATA
 	rtr.HandleFunc("/api/get_settings/personal_data", settings.GetPersonalData)
 	rtr.HandleFunc("/api/save_settings/personal_data", settings.SavePersonalData)
+
+	// API PROFILE
+	rtr.HandleFunc("/api/get_data_profile", dataprofile.ControlDataProfile)
 
 	// API CONFIRM
 	rtr.HandleFunc("/api/confirm", authorization.ConfirmPassword)

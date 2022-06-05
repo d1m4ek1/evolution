@@ -102,7 +102,9 @@
         >
           Сбросить аватарку
         </button>
-        <p class="error" v-if="userData.logo.error !== ''">{{ userData.logo.error }}</p>
+        <p class="error" v-if="userData.logo.error !== ''">
+          {{ userData.logo.error }}
+        </p>
       </div>
     </div>
     <!-- BANNER -->
@@ -114,7 +116,11 @@
         <h3>Баннер сейчас</h3>
         <div class="inlineblock">
           <div class="inlineblock_left banner">
-            <img class="lazyload" :data-src="userData.banner.old" alt="Нет баннера" />
+            <img
+              class="lazyload"
+              :data-src="userData.banner.old"
+              alt="Нет баннера"
+            />
           </div>
           <div class="upload_content">
             <input
@@ -130,7 +136,11 @@
               </template>
               <template v-else>
                 <div class="img">
-                  <img class="lazyload" :data-src="userData.banner.preview" alt="Нет баннера" />
+                  <img
+                    class="lazyload"
+                    :data-src="userData.banner.preview"
+                    alt="Нет баннера"
+                  />
                 </div>
               </template>
             </label>
@@ -143,7 +153,9 @@
         >
           Сбросить баннер
         </button>
-        <p class="error" v-if="userData.banner.error !== ''">{{ userData.banner.error }}</p>
+        <p class="error" v-if="userData.banner.error !== ''">
+          {{ userData.banner.error }}
+        </p>
       </div>
     </div>
     <!-- ABOUT ME -->
@@ -175,7 +187,11 @@
             </div>
           </div>
           <div class="inlineblock_right">
-            <div class="write_text aboutme_content" contenteditable=""></div>
+            <textarea
+              v-model="userData.aboutMe.content.new"
+              type="text"
+              maxlength="2500"
+            />
           </div>
         </div>
       </div>
@@ -350,9 +366,9 @@ export default {
 
           if (
             fileName[fileName.length - 1] === 'png'
-              || fileName[fileName.length - 1] === 'jpg'
-              || fileName[fileName.length - 1] === 'jpeg'
-              || fileName[fileName.length - 1] === 'gif'
+            || fileName[fileName.length - 1] === 'jpg'
+            || fileName[fileName.length - 1] === 'jpeg'
+            || fileName[fileName.length - 1] === 'gif'
           ) {
             this.userData[key].new = e.target.files[0].name;
             this.userData[key].error = '';
@@ -424,30 +440,34 @@ export default {
       const formData = new FormData();
       let fullUrl = '';
 
-      this.userData.aboutMe.title.new = document.querySelector('.aboutme_content').innerHTML;
-
       Object.keys(this.userData).forEach((keyMain = String) => {
         if (keyMain === 'aboutMe') {
-          Object.keys(this.userData.aboutMe).forEach((key = String) => {
-            if (this.userData.aboutMe[key].new !== '') {
-              if (
-                this.userData.aboutMe[key].old
-                !== this.userData.aboutMe[key].new && this.userData.aboutMe[key].new !== ''
-              ) {
-                urlParam.push(
-                  `aboutMe_${key}=${encodeURIComponent(
-                    this.userData.aboutMe[key].new,
-                  )}`,
-                );
-              }
-            }
-          });
+          if (
+            this.userData.aboutMe.title.old !== this.userData.aboutMe.title.new
+          ) {
+            urlParam.push(
+              `aboutme_title=${encodeURIComponent(
+                this.userData.aboutMe.title.new,
+              )}`,
+            );
+          }
+          if (
+            this.userData.aboutMe.content.old
+            !== this.userData.aboutMe.content.new
+          ) {
+            urlParam.push(
+              `aboutme_content=${encodeURIComponent(
+                this.userData.aboutMe.content.new,
+              )}`,
+            );
+          }
         } else if (keyMain === 'connection') {
           Object.keys(this.userData.connection).forEach((key = String) => {
             if (this.userData.connection[key].new !== '') {
               if (
                 this.userData.connection[key].old
-                !== this.userData.connection[key].new && this.userData.connection[key].new !== ''
+                  !== this.userData.connection[key].new
+                && this.userData.connection[key].new !== ''
               ) {
                 urlParam.push(
                   `${key}=${encodeURIComponent(
@@ -459,15 +479,13 @@ export default {
           });
         } else if (keyMain === 'logo' || keyMain === 'banner') {
           if (
-            this.userData[keyMain].old
-                !== this.userData[keyMain].new && this.userData[keyMain].new !== ''
+            this.userData[keyMain].old !== this.userData[keyMain].new
+            && this.userData[keyMain].new !== ''
           ) {
             if (this.userData[keyMain].file !== null) {
               formData.append(keyMain, this.userData[keyMain].file[0]);
               urlParam.push(
-                `${keyMain}=${encodeURIComponent(
-                  this.userData[keyMain].new,
-                )}`,
+                `${keyMain}=${encodeURIComponent(this.userData[keyMain].new)}`,
               );
             }
           }
@@ -486,7 +504,13 @@ export default {
         fetch(fullUrl, {
           method: 'POST',
           body: formData,
-        }).catch((error) => console.error(error));
+        })
+          .then((response) => {
+            if (response.ok) {
+              window.location.reload();
+            }
+          })
+          .catch((error) => console.error(error));
       }
     },
     resetSettings() {
