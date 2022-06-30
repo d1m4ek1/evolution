@@ -2,8 +2,8 @@
     position: fixed;
     top: 0;
     -webkit-transform: translateX(-200px);
-        -ms-transform: translateX(-200px);
-            transform: translateX(-200px);
+    -ms-transform: translateX(-200px);
+    transform: translateX(-200px);
     width: 200px;
     height: 130%;
     background-color: #f1f1f1;
@@ -20,8 +20,8 @@
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     padding: 10px;
 }
 
@@ -40,7 +40,7 @@
 
 .btn_sticky_header:focus {
     -webkit-box-shadow: none !important;
-            box-shadow: none !important;
+    box-shadow: none !important;
 }
 
 .main_squeeze_before_add::before,
@@ -58,17 +58,17 @@
 .main_squeeze_before_add::before {
     opacity: 1;
     -webkit-animation-name: opacityAddBefore;
-            animation-name: opacityAddBefore;
+    animation-name: opacityAddBefore;
     -webkit-animation-duration: .5s;
-            animation-duration: .5s;
+    animation-duration: .5s;
 }
 
 .main_squeeze_before_remove::before {
     opacity: 0;
     -webkit-animation-name: opacityRemoveBefore;
-            animation-name: opacityRemoveBefore;
+    animation-name: opacityRemoveBefore;
     -webkit-animation-duration: .5s;
-            animation-duration: .5s;
+    animation-duration: .5s;
 }
 
 @-webkit-keyframes opacityAddBefore {

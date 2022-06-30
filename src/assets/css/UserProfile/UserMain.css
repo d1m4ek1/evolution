@@ -4,14 +4,14 @@
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
 }
 
 .subprofile_item {
     border: 1px solid #ababab;
     -webkit-box-shadow: 0 0 5px 3px rgba(0, 0, 0, .2);
-            box-shadow: 0 0 5px 3px rgba(0, 0, 0, .2);
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, .2);
     border-radius: 5px;
     padding: 20px;
     margin: 10px 0;

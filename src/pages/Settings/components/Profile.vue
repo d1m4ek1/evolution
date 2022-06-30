@@ -52,11 +52,11 @@
         <div class="inlineblock">
           <div class="inlineblock_left">
             <div class="old_text">
-              <h2>{{ userData.themePage.old }}</h2>
+              <h2>{{ userData.theme_page.old }}</h2>
             </div>
           </div>
           <div class="inlineblock_right">
-            <select v-model="userData.themePage.new">
+            <select v-model="userData.theme_page.new">
               <option value="white">Светлая тема</option>
               <option value="dark">Темная тема</option>
             </select>
@@ -73,7 +73,7 @@
         <h3>Аватарка сейчас</h3>
         <div class="inlineblock">
           <div class="inlineblock_left img">
-            <img class="lazyload" :data-src="userData.logo.old" />
+            <img :src="userData.logo.old" />
           </div>
           <div class="upload_content">
             <input
@@ -89,7 +89,7 @@
               </template>
               <template v-else>
                 <div class="img">
-                  <img class="lazyload" :data-src="userData.logo.preview" />
+                  <img :src="userData.logo.preview" />
                 </div>
               </template>
             </label>
@@ -117,8 +117,7 @@
         <div class="inlineblock">
           <div class="inlineblock_left banner">
             <img
-              class="lazyload"
-              :data-src="userData.banner.old"
+              :src="userData.banner.old"
               alt="Нет баннера"
             />
           </div>
@@ -137,8 +136,7 @@
               <template v-else>
                 <div class="img">
                   <img
-                    class="lazyload"
-                    :data-src="userData.banner.preview"
+                    :src="userData.banner.preview"
                     alt="Нет баннера"
                   />
                 </div>
@@ -182,9 +180,7 @@
         <h3>Содержимое</h3>
         <div class="inlineblock">
           <div class="inlineblock_left">
-            <div class="old_text">
-              {{ userData.aboutMe.content.old }}
-            </div>
+            <div class="old_text" v-html="userData.aboutMe.content.old"></div>
           </div>
           <div class="inlineblock_right">
             <textarea
@@ -326,7 +322,7 @@ export default {
             new: '',
           },
         },
-        themePage: {
+        theme_page: {
           old: '',
           new: '',
         },
@@ -391,14 +387,14 @@ export default {
     },
     validateLogoBanner(logo = String, banner = String) {
       if (logo === 'not_logo.png') {
-        this.userData.logo.old = '/profile/logo/notLogo/not_logo.png';
+        this.userData.logo.old = '/user_images/profile/logo/notLogo/not_logo.png';
       } else {
-        this.userData.logo.old = `/profile/logo/saved/${logo}`;
+        this.userData.logo.old = `/user_images/profile/logo/saved/${logo}`;
       }
       if (banner === 'not_banner.png') {
-        this.userData.banner.old = '/profile/banner/notBanner/not_banner.png';
+        this.userData.banner.old = '/user_images/profile/banner/notBanner/not_banner.png';
       } else {
-        this.userData.banner.old = `/profile/banner/saved/${banner}`;
+        this.userData.banner.old = `/user_images/profile/banner/saved/${banner}`;
       }
     },
     validateLanguage(lang = String) {
@@ -422,7 +418,7 @@ export default {
           this.validateLanguage(data.language);
 
           this.userData.name.old = data.name;
-          this.userData.themePage.old = data.themePage;
+          this.userData.theme_page.old = data.themePage;
           this.userData.aboutMe.title.old = data.aboutMeTitle;
           this.userData.aboutMe.content.old = data.aboutMeContent;
 
@@ -443,7 +439,7 @@ export default {
       Object.keys(this.userData).forEach((keyMain = String) => {
         if (keyMain === 'aboutMe') {
           if (
-            this.userData.aboutMe.title.old !== this.userData.aboutMe.title.new
+            this.userData.aboutMe.title.old !== this.userData.aboutMe.title.new && this.userData.aboutMe.title.new !== ""
           ) {
             urlParam.push(
               `aboutme_title=${encodeURIComponent(
@@ -453,7 +449,7 @@ export default {
           }
           if (
             this.userData.aboutMe.content.old
-            !== this.userData.aboutMe.content.new
+            !== this.userData.aboutMe.content.new && this.userData.aboutMe.content.new !== ""
           ) {
             urlParam.push(
               `aboutme_content=${encodeURIComponent(

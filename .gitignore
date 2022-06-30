@@ -1,7 +1,5 @@
 node_modules
-internal
+backend/internal/database
 ui
-profile
-scriptnpm_dev
-scriptnpm_prod
+user_images
 git

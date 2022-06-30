@@ -1,386 +1,300 @@
 {{ define "index" }}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Evade</title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <!-- <script src="http://localhost:8098"></script> -->
-        <link rel="stylesheet" href="/ui/assets/css/FYd88G8g8Q7IKRIs2G3.css" type="text/css">
-        <link rel="stylesheet" href="/ui/assets/css/RDdE7jidIAheiNvpqAx.css" type="text/css">
-        <link rel="stylesheet" href="/ui/assets/css/Header/UIO19WXhiy4547q6RyH.css" type="text/css">
-        <link rel="stylesheet" href="/ui/assets/css/Header/FgsMAxCALdstH0ihINc.css" type="text/css">
-    <link rel="icon" href="/ui/assets/images/favicon.png"><script defer src="/ui/assets/js/_index.6fa169839d95c27d4d69.js"></script></head>
-    <body>
-        <!-- Area of visibility VUE.js -->
-        <div id="wrapper" class="show_content">
-            <!-- Preloader -->
-            <div class="preloader" :class="setDeletePreloader" v-if="preload">
-                <h1>Evade | Home</h1>
-                <div class="progress"></div>
-            </div>
-            <!-- END preloader -->
 
-            <!-- START Header block -->
-            <header class="header" v-if="dropHeader">
-                <div class="container">
-                    <div class="header_nav">
-                        <div class="header_nav__item">
-                            <div class="header_main_logo block-link">
-                                <a class="point-link" href="/"></a>
-                                <img
-                                    class="lazyload"
-                                    data-src="/ui/assets/images/main_logo.png"
-                                />
-                            </div>
-                        </div>
-                        {{ if $.HeaderData.Auth }}
-                        <div class="header_nav__item">
-                            <a href="/{{ $.HeaderData.UserId }}">Профиль</a>
-                        </div>
-                        <div class="header_nav__item">
-                            <a
-                                class="open_window"
-                                v-hide-elem="{id:'add_community', val:['community']}"
-                                @click="community = !community"
-                                >Проекты
-                                <span
-                                    class="arrow_list_close"
-                                    :class="rotateArrowCommunity"
-                                ></span>
-                            </a>
-                            <div
-                                id="add_community"
-                                class="add_window"
-                                v-show="community"
-                            >
-                                <div class="add_window__content">
-                                    <a href="/insocial">inSocial - общение с подписчиками</a>
-                                    <a href="/inmusic">inMusic - музыка всего мира</a>
-                                    <a href="/inbeats">inBeats - торговля битов</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="header_nav__item">
-                            <a
-                                class="open_window"
-                                v-hide-elem="{id:'add_commerce', val:['commerce']}"
-                                @click="commerce = !commerce"
-                                >Коммерция
-                                <span
-                                    class="arrow_list_close"
-                                    :class="rotateArrowCommerce"
-                                ></span
-                            ></a>
-                            <div
-                                id="add_commerce"
-                                class="add_window"
-                                v-show="commerce"
-                            >
-                                <div class="add_window__content">
-                                    <a href="/subscriptions">Подписки</a>
-                                    <a href="/orders">Заказы</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="header_nav__item">
-                            <a
-                                class="open_window"
-                                v-hide-elem="{id:'add_settings', val:['settings']}"
-                                @click="settings = !settings"
-                                >Настройки
-                                <span
-                                    class="arrow_list_close"
-                                    :class="rotateArrowSettings"
-                                ></span
-                            ></a>
-                            <div
-                                id="add_settings"
-                                class="add_window"
-                                v-show="settings"
-                            >
-                                <div class="add_window__content">
-                                    <a href="/customize"
-                                        >Настроить профиль</a
-                                    >
-                                    <a href="/customize/shop"
-                                        >Настроить магазин</a
-                                    >
-                                    <a href="/customize/personal-data"
-                                        >Настроить личные данные</a
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="header_nav__item">
-                            <a href="/directory">Справочник</a>
-                        </div>
-                        <div class="header_nav__item">
-                            <button @click="signOut()" class="btn">
-                                Выход
-                            </button>
-                        </div>
-                        {{ else }}
-                        <div class="header_nav__item">
-                            <a href="/signin">Вход</a>
-                        </div>
-                        <div class="header_nav__item">
-                            <a href="/signup">Регистрация</a>
-                        </div>
-                        <div class="header_nav__item">
-                            <a href="/directory">Справочник</a>
-                        </div>
-                        {{ end }}
-                    </div>
-                </div>
-            </header>
-            <!-- END Header block -->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Evade</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <script src="http://localhost:8098"></script> -->
+    <link rel="stylesheet" href="/ui/assets/css/8vTBvE28VeqgQayHlTQ.css" type="text/css">
+    <link rel="stylesheet" href="/ui/assets/css/uJtk9P6WVd79KQxxLhW.css" type="text/css">
+    <link rel="stylesheet" href="/ui/assets/css/Header/0Eb9mKPsd4DuuyOzZII.css" type="text/css">
+    <link rel="stylesheet" href="/ui/assets/css/Header/K14HcpWvsuHFOEgApY0.css" type="text/css">
+<link rel="icon" href="/ui/assets/images/favicon.png"><script defer src="/ui/assets/js/_index.ec8fcc23dc1999fd6e68.js"></script></head>
 
-            <!-- START STICKY HEADER block -->
-            <header class="header_sticky" v-if="showStickyHeader">
-                <div class="header_sticky_nav">
-                    <div class="header_sticky_nav__item">
-                        <div class="header_sticky_main_logo block-link">
+<body>
+    <!-- Area of visibility VUE.typescript -->
+    <div id="wrapper" class="show_content">
+        <!-- Preloader -->
+        <div class="preloader" :class="setDeletePreloader" v-if="preload">
+            <h1>Evade | Home</h1>
+            <div class="progress"></div>
+        </div>
+        <!-- END preloader -->
+
+        <!-- START Header block -->
+        <header class="header" v-if="dropHeader">
+            <div class="container">
+                <div class="header_nav">
+                    <div class="header_nav__item">
+                        <div class="header_main_logo block-link">
                             <a class="point-link" href="/"></a>
-                            <img
-                                class="lazyload"
-                                data-src="/ui/assets/images/main_logo.png"
-                            />
+                            <img class="lazyload" data-src="/ui/assets/images/main_logo.png" />
                         </div>
                     </div>
                     {{ if $.HeaderData.Auth }}
-                    <div class="header_sticky_nav__item">
-                        <div class="btn btn_link">
-                            <a
-                                @click="hideStickyHeader()"
-                                href="/{{ $.HeaderData.UserId }}"
-                            ></a>
-                            <p>Профиль</p>
-                        </div>
+                    <div class="header_nav__item">
+                        <a href="/{{ $.HeaderData.UserId }}">Профиль</a>
                     </div>
-                    <div class="header_sticky_nav__item">
-                        <div class="btn btn_link">
-                            <a @click="community = !community"></a>
-                            <p>
-                                Проекты
-                                <span
-                                    class="arrow_list_close"
-                                    :class="rotateArrowCommunity"
-                                ></span>
-                            </p>
-                        </div>
-                        <div v-show="community" class="sticy_add_window">
-                            <div class="btn btn_link">
-                                <a
-                                    @click="hideStickyHeader()"
-                                    href="/insocial"
-                                ></a>
-                                <p>inSocial</p>
-                            </div>
-                            <div class="btn btn_link">
-                                <a
-                                    @click="hideStickyHeader()"
-                                    href="/inmusic"
-                                ></a>
-                                <p>inMusic</p>
-                            </div>
-                            <div class="btn btn_link">
-                                <a
-                                    @click="hideStickyHeader()"
-                                    href="/inbeats"
-                                ></a>
-                                <p>inBeats</p>
+                    <div class="header_nav__item">
+                        <a class="open_window" v-hide-elem="{id:'add_community', val:['community']}"
+                            @click="community = !community">Проекты
+                            <span class="arrow_list_close" :class="rotateArrowCommunity"></span>
+                        </a>
+                        <div id="add_community" class="add_window" v-show="community">
+                            <div class="add_window__content">
+                                <a href="/insocial">inSocial - общение с подписчиками</a>
+                                <a href="/inmusic">inMusic - музыка всего мира</a>
+                                <a href="/inbeats">inBeats - торговля битов</a>
                             </div>
                         </div>
                     </div>
-                    <div class="header_sticky_nav__item">
-                        <div class="btn btn_link">
-                            <a @click="commerce = !commerce"></a>
-                            <p>
-                                Коммерция
-                                <span
-                                    class="arrow_list_close"
-                                    :class="rotateArrowCommerce"
-                                ></span>
-                            </p>
-                        </div>
-                        <div v-show="commerce" class="sticy_add_window">
-                            <div class="btn btn_link">
-                                <a
-                                    @click="hideStickyHeader()"
-                                    href="/subscriptions"
-                                ></a>
-                                <p>Подписки</p>
-                            </div>
-                            <div class="btn btn_link">
-                                <a
-                                    @click="hideStickyHeader()"
-                                    href="/orders"
-                                ></a>
-                                <p>Заказы</p>
+                    <div class="header_nav__item">
+                        <a class="open_window" v-hide-elem="{id:'add_commerce', val:['commerce']}"
+                            @click="commerce = !commerce">Коммерция
+                            <span class="arrow_list_close" :class="rotateArrowCommerce"></span></a>
+                        <div id="add_commerce" class="add_window" v-show="commerce">
+                            <div class="add_window__content">
+                                <a href="/subscriptions">Подписки</a>
+                                <a href="/orders">Заказы</a>
                             </div>
                         </div>
                     </div>
-                    <div class="header_sticky_nav__item">
-                        <div class="btn btn_link">
-                            <a @click="settings = !settings"></a>
-                            <p>Настройки</p>
-                            <span
-                                class="arrow_list_close"
-                                :class="rotateArrowSettings"
-                            ></span>
-                        </div>
-                        <div v-show="settings" class="sticy_add_window">
-                            <div class="btn btn_link">
-                                <a
-                                    @click="hideStickyHeader()"
-                                    href="/customize"
-                                ></a>
-                                <p>Настроить профиль</p>
-                            </div>
-                            <div class="btn btn_link">
-                                <a
-                                    @click="hideStickyHeader()"
-                                    href="/customize/shop"
-                                ></a>
-                                <p>Настроить магазин</p>
-                            </div>
-                            <div class="btn btn_link">
-                                <a
-                                    @click="hideStickyHeader()"
-                                    href="/customize/personal-data"
-                                ></a>
-                                <p>Настроить личные данные</p>
+                    <div class="header_nav__item">
+                        <a class="open_window" v-hide-elem="{id:'add_settings', val:['settings']}"
+                            @click="settings = !settings">Настройки
+                            <span class="arrow_list_close" :class="rotateArrowSettings"></span></a>
+                        <div id="add_settings" class="add_window" v-show="settings">
+                            <div class="add_window__content">
+                                <a href="/customize">Настроить профиль</a>
+                                <a href="/customize/shop">Настроить магазин</a>
+                                <a href="/customize/personal-data">Настроить личные данные</a>
                             </div>
                         </div>
                     </div>
-                    <div class="header_sticky_nav__item">
-                        <div class="btn btn_link">
-                            <a
-                                @click="hideStickyHeader()"
-                                href="/directory"
-                            ></a>
-                            <p>Справочник</p>
-                        </div>
+                    <div class="header_nav__item">
+                        <a href="/directory">Справочник</a>
                     </div>
-                    <div class="header_sticky_nav__item">
-                        <button
-                            @click="signOut(), hideStickyHeader()"
-                            class="btn"
-                        >
+                    <div class="header_nav__item">
+                        <button @click="signOut()" class="btn">
                             Выход
                         </button>
                     </div>
                     {{ else }}
-                    <div class="header_sticky_nav__item">
-                        <div class="btn btn_link">
-                            <a @click="hideStickyHeader()" href="/signin"></a>
-                            <p>Вход</p>
-                        </div>
+                    <div class="header_nav__item">
+                        <a href="/signin">Вход</a>
                     </div>
-                    <div class="header_sticky_nav__item">
-                        <div class="btn btn_link">
-                            <a @click="hideStickyHeader()" href="/signup"></a>
-                            <p>Регистрация</p>
-                        </div>
+                    <div class="header_nav__item">
+                        <a href="/signup">Регистрация</a>
                     </div>
-                    <div class="header_sticky_nav__item">
-                        <div class="btn btn_link">
-                            <a
-                                @click="hideStickyHeader()"
-                                href="/directory"
-                            ></a>
-                            <p>Справочник</p>
-                        </div>
+                    <div class="header_nav__item">
+                        <a href="/directory">Справочник</a>
                     </div>
                     {{ end }}
                 </div>
-            </header>
-            <!-- END STICKY HEADER block -->
+            </div>
+        </header>
+        <!-- END Header block -->
 
-            <!-- START Main block for VUE.JS -->
-            <main class="main indent-top">
-                <div class="main__body_content container">
-                    <div class="news show_content">
-                        <section class="container title">
-                            <h1>Новости Evade</h1>
-                        </section>
-                        <section class="container news_content">
-                            <div class="news_block">
-                                <h2>Сегодня 03.30.2022, второе обновление!</h2>
-                                <div class="news_block__content">
-                                    <p>Изменения:</p>
-                                    <ul>
-                                        <li>
-                                            Добавлена система online/offline
-                                        </li>
-                                        <li>
-                                            Исправлены не значительные ошибки на
-                                            сервере
-                                        </li>
-                                    </ul>
-                                    <p>Проект продолжает развиваться</p>
-                                    <p>
-                                        На сегодняшний день проект имеет
-                                        состояние:
-                                        <i>Закрытая АЛЬФА-версия: 1.0.7</i>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="news_block">
-                                <h2>Сегодня 03.30.2022, первое обновление!</h2>
-                                <div class="news_block__content">
-                                    <p>Изменения:</p>
-                                    <ul>
-                                        <li>
-                                            Добавлен скелет мобильной версии
-                                        </li>
-                                        <li>
-                                            Изменена шапка при мобильной версии,
-                                            свайпни вправо и откроется шапка,
-                                            свайпни влево шапка закроется
-                                        </li>
-                                        <li>
-                                            Добавлен скелет под-контента в
-                                            профиле
-                                        </li>
-                                        <li>
-                                            Исправлены не значительные ошибки на
-                                            сервере
-                                        </li>
-                                    </ul>
-                                    <p>Проект продолжает развиваться</p>
-                                    <p>
-                                        На сегодняшний день проект имеет
-                                        состояние:
-                                        <i>Закрытая АЛЬФА-версия: 1.0.6</i>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="news_block">
-                                <h2>Сегодня 03.29.2022, первый домен!</h2>
-                                <div class="news_block__content">
-                                    <p>
-                                        Сегодня первый день проекта на домене, а
-                                        также и первая новость
-                                    </p>
-                                    <p>Проект продолжает развиваться</p>
-                                    <p>
-                                        На сегодняшний день проект имеет
-                                        состояние:
-                                        <i>Закрытая АЛЬФА-версия: 1.0.5</i>
-                                    </p>
-                                </div>
-                            </div>
-                        </section>
+        <!-- START STICKY HEADER block -->
+        <header class="header_sticky" v-if="showStickyHeader">
+            <div class="header_sticky_nav">
+                <div class="header_sticky_nav__item">
+                    <div class="header_sticky_main_logo block-link">
+                        <a class="point-link" href="/"></a>
+                        <img class="lazyload" data-src="/ui/assets/images/main_logo.png" />
                     </div>
                 </div>
-            </main>
-            <!-- END Main block for VUE.JS -->
-        </div>
-        <!-- END Area of visibility VUE.js -->
-    </body>
+                {{ if $.HeaderData.Auth }}
+                <div class="header_sticky_nav__item">
+                    <div class="btn btn_link">
+                        <a @click="hideStickyHeader()" href="/{{ $.HeaderData.UserId }}"></a>
+                        <p>Профиль</p>
+                    </div>
+                </div>
+                <div class="header_sticky_nav__item">
+                    <div class="btn btn_link">
+                        <a @click="community = !community"></a>
+                        <p>
+                            Проекты
+                            <span class="arrow_list_close" :class="rotateArrowCommunity"></span>
+                        </p>
+                    </div>
+                    <div v-show="community" class="sticy_add_window">
+                        <div class="btn btn_link">
+                            <a @click="hideStickyHeader()" href="/insocial"></a>
+                            <p>inSocial</p>
+                        </div>
+                        <div class="btn btn_link">
+                            <a @click="hideStickyHeader()" href="/inmusic"></a>
+                            <p>inMusic</p>
+                        </div>
+                        <div class="btn btn_link">
+                            <a @click="hideStickyHeader()" href="/inbeats"></a>
+                            <p>inBeats</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="header_sticky_nav__item">
+                    <div class="btn btn_link">
+                        <a @click="commerce = !commerce"></a>
+                        <p>
+                            Коммерция
+                            <span class="arrow_list_close" :class="rotateArrowCommerce"></span>
+                        </p>
+                    </div>
+                    <div v-show="commerce" class="sticy_add_window">
+                        <div class="btn btn_link">
+                            <a @click="hideStickyHeader()" href="/subscriptions"></a>
+                            <p>Подписки</p>
+                        </div>
+                        <div class="btn btn_link">
+                            <a @click="hideStickyHeader()" href="/orders"></a>
+                            <p>Заказы</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="header_sticky_nav__item">
+                    <div class="btn btn_link">
+                        <a @click="settings = !settings"></a>
+                        <p>Настройки</p>
+                        <span class="arrow_list_close" :class="rotateArrowSettings"></span>
+                    </div>
+                    <div v-show="settings" class="sticy_add_window">
+                        <div class="btn btn_link">
+                            <a @click="hideStickyHeader()" href="/customize"></a>
+                            <p>Настроить профиль</p>
+                        </div>
+                        <div class="btn btn_link">
+                            <a @click="hideStickyHeader()" href="/customize/shop"></a>
+                            <p>Настроить магазин</p>
+                        </div>
+                        <div class="btn btn_link">
+                            <a @click="hideStickyHeader()" href="/customize/personal-data"></a>
+                            <p>Настроить личные данные</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="header_sticky_nav__item">
+                    <div class="btn btn_link">
+                        <a @click="hideStickyHeader()" href="/directory"></a>
+                        <p>Справочник</p>
+                    </div>
+                </div>
+                <div class="header_sticky_nav__item">
+                    <button @click="signOut(), hideStickyHeader()" class="btn">
+                        Выход
+                    </button>
+                </div>
+                {{ else }}
+                <div class="header_sticky_nav__item">
+                    <div class="btn btn_link">
+                        <a @click="hideStickyHeader()" href="/signin"></a>
+                        <p>Вход</p>
+                    </div>
+                </div>
+                <div class="header_sticky_nav__item">
+                    <div class="btn btn_link">
+                        <a @click="hideStickyHeader()" href="/signup"></a>
+                        <p>Регистрация</p>
+                    </div>
+                </div>
+                <div class="header_sticky_nav__item">
+                    <div class="btn btn_link">
+                        <a @click="hideStickyHeader()" href="/directory"></a>
+                        <p>Справочник</p>
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </header>
+        <!-- END STICKY HEADER block -->
+
+        <!-- START Main block for VUE.JS -->
+        <main class="main indent-top">
+            <div class="main__body_content container">
+                <div class="news show_content">
+                    <section class="container title">
+                        <h1>Новости Evade</h1>
+                    </section>
+                    <section class="container news_content">
+                        <div class="news_block">
+                            <h2>Сегодня 03.30.2022, второе обновление!</h2>
+                            <div class="news_block__content">
+                                <p>Изменения:</p>
+                                <ul>
+                                    <li>
+                                        Добавлена система online/offline
+                                    </li>
+                                    <li>
+                                        Исправлены не значительные ошибки на
+                                        сервере
+                                    </li>
+                                </ul>
+                                <p>Проект продолжает развиваться</p>
+                                <p>
+                                    На сегодняшний день проект имеет
+                                    состояние:
+                                    <i>Закрытая АЛЬФА-версия: 1.0.7</i>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="news_block">
+                            <h2>Сегодня 03.30.2022, первое обновление!</h2>
+                            <div class="news_block__content">
+                                <p>Изменения:</p>
+                                <ul>
+                                    <li>
+                                        Добавлен скелет мобильной версии
+                                    </li>
+                                    <li>
+                                        Изменена шапка при мобильной версии,
+                                        свайпни вправо и откроется шапка,
+                                        свайпни влево шапка закроется
+                                    </li>
+                                    <li>
+                                        Добавлен скелет под-контента в
+                                        профиле
+                                    </li>
+                                    <li>
+                                        Исправлены не значительные ошибки на
+                                        сервере
+                                    </li>
+                                </ul>
+                                <p>Проект продолжает развиваться</p>
+                                <p>
+                                    На сегодняшний день проект имеет
+                                    состояние:
+                                    <i>Закрытая АЛЬФА-версия: 1.0.6</i>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="news_block">
+                            <h2>Сегодня 03.29.2022, первый домен!</h2>
+                            <div class="news_block__content">
+                                <p>
+                                    Сегодня первый день проекта на домене, а
+                                    также и первая новость
+                                </p>
+                                <p>Проект продолжает развиваться</p>
+                                <p>
+                                    На сегодняшний день проект имеет
+                                    состояние:
+                                    <i>Закрытая АЛЬФА-версия: 1.0.5</i>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+        <!-- END Main block for VUE.JS -->
+    </div>
+    <!-- END Area of visibility VUE.typescript -->
+</body>
+
 </html>
 {{ end }}

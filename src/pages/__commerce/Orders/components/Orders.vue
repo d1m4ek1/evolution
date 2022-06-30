@@ -1,7 +1,7 @@
 <template>
-    <div class="messages show_content">
-        <section class="title">
+  <div class="messages show_content">
+    <section class="title">
       <h1>Заказы</h1>
     </section>
-    </div>
+  </div>
 </template>

@@ -1,38 +1,41 @@
 {{ define "inmusic" }}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Музыка</title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {$ path_style="/src/assets/css/index.css" $}
-        {$ path_style="/src/assets/css/Header/Header.css" $}
-        {$ path_style="/src/assets/css/Header/StickyHeader.css" $}
-    </head>
-    <body>
-        <!-- Area of visibility VUE.js -->
-        <div id="wrapper" class="show_content">
-            <div class="preloader" :class="setDeletePreloader" v-if="preload">
-                <h1>Evade | Music</h1>
-                <div class="progress"></div>
-            </div>
-            
-            <!-- HEADER LAYOUT TEMPLATES -->
-            {{ template "header_layout" . }}
-            {{ template "stickyheader_layout" . }}
-            <!-- END HEADER LAYOUT TEMPLATES -->
 
-            <!-- START Main block for VUE.JS -->
-            <main class="main indent-top">
-                <div class="main__body_content container">
-                    <router-view></router-view>
-                </div>
-            </main>
-            <!-- END Main block for VUE.JS -->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>inMusic</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {$ path_style="/src/assets/css/index.css" $}
+    {$ path_style="/src/assets/css/Header/Header.css" $}
+    {$ path_style="/src/assets/css/Header/StickyHeader.css" $}
+</head>
+
+<body>
+    <!-- Area of visibility VUE.typescript -->
+    <div id="wrapper" class="show_content">
+        <div class="preloader" :class="setDeletePreloader" v-if="preload">
+            <h1>Evade | Project | inMusic</h1>
+            <div class="progress"></div>
         </div>
-        <!-- END Area of visibility VUE.js -->
-    </body>
+
+        <!-- HEADER LAYOUT TEMPLATES -->
+        {$ load_template="header_layout" $}
+        {$ load_template="stickyheader_layout" $}
+        <!-- END HEADER LAYOUT TEMPLATES -->
+
+        <!-- START Main block for VUE.JS -->
+        <main class="main indent-top">
+            <div class="main__body_content container">
+                <router-view></router-view>
+            </div>
+        </main>
+        <!-- END Main block for VUE.JS -->
+    </div>
+    <!-- END Area of visibility VUE.typescript -->
+</body>
+
 </html>
 {{ end }}

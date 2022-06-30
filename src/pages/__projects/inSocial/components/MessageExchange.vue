@@ -1,13 +1,11 @@
 <template>
   <div class="messages show_content">
     <section class="message_header">
-      <router-link tag="button" class="btn" to="/insocial"
-        >Назад</router-link
-      >
+      <router-link tag="button" class="btn" to="/insocial">Назад</router-link>
       <h1>Name</h1>
       <div class="message_block_img online">
         <a href="/1"></a>
-        <img class="lazyload" data-src="/profile/logo/notLogo/not_logo.png" />
+        <img class="lazyload" data-src="/user_images/profile/logo/notLogo/not_logo.png" />
       </div>
     </section>
     <section class="message__main_content">
@@ -67,12 +65,12 @@
 export default {
   data() {
     return {
-      test: 'test',
+      test: "test",
     };
   },
   methods: {
     scrollBottom() {
-      const messageView = document.getElementById('message_view');
+      const messageView = document.getElementById("message_view");
       messageView.scrollTop = messageView.scrollHeight;
     },
   },

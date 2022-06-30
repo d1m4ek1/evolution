@@ -8,12 +8,14 @@
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
 }
+
 .messages_folder {
     width: 48%;
 }
+
 .messages_folder .btn {
     height: 60px;
     font-size: 18px;
@@ -24,17 +26,19 @@
 .mesages_content {
     margin-top: 60px;
 }
+
 .message_items {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     width: 100%;
     height: auto;
 }
+
 .message_item {
     cursor: pointer;
     height: 75px;
@@ -43,19 +47,20 @@
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: start;
-        -ms-flex-pack: start;
-            justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     position: relative;
     margin: 15px 0;
     border-radius: 10px;
     -webkit-box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
-            box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
+    box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
     overflow: hidden;
 }
-.message_item > a {
+
+.message_item>a {
     position: absolute;
     top: 0;
     left: 0;
@@ -63,38 +68,45 @@
     height: 100%;
     z-index: 2;
 }
+
 .message_item__control {
     z-index: 3;
 }
+
 .message_item:hover .message_item__banner {
     -webkit-transform: scale(1.1);
-        -ms-transform: scale(1.1);
-            transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
 }
+
 .message_item__info {
     background-color: rgb(255, 255, 255);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     height: 100%;
     width: 40%;
     padding: 0 10px;
     z-index: 1;
 }
+
 .message_item__logo {
     background-color: white;
     width: 60px;
     height: 60px;
 }
-.message_item__logo, .message_item__logo img {
+
+.message_item__logo,
+.message_item__logo img {
     border-radius: 50%;
 }
+
 .message_item__banner {
     -webkit-transition: 1s;
     -o-transition: 1s;
@@ -116,22 +128,25 @@
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-pack: space-evenly;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly;
+    -ms-flex-pack: space-evenly;
+    justify-content: space-evenly;
     margin-bottom: 10px;
 }
+
 .message_header button {
     width: 20%;
 }
+
 .message_block_img {
     border-radius: 50%;
     position: relative;
     width: 50px;
     height: 50px;
 }
+
 .message_block_img a {
     position: absolute;
     top: 0;
@@ -139,6 +154,7 @@
     width: 100%;
     height: 100%;
 }
+
 .message_block_img img {
     border-radius: 50%;
 }
@@ -152,9 +168,10 @@
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
 }
+
 .message_view {
     border: 1px solid rgb(211, 211, 211);
     border-radius: 10px;
@@ -164,37 +181,43 @@
     margin-bottom: 10px;
 
 }
-.message_view_friend, .message_view_me {
+
+.message_view_friend,
+.message_view_me {
     width: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: end;
-        -ms-flex-align: end;
-            align-items: flex-end;
+    -ms-flex-align: end;
+    align-items: flex-end;
 }
+
 .message_view_friend {
     -webkit-box-pack: start;
-        -ms-flex-pack: start;
-            justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
 }
+
 .message_view_me {
     -webkit-box-pack: end;
-        -ms-flex-pack: end;
-            justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
 }
+
 .message_send {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     width: 100%;
 }
+
 .message_send .write_message {
     min-height: 70px;
     max-height: 200px;
@@ -203,17 +226,21 @@
     overflow-y: auto;
     outline: none;
 }
+
 .write_message {
     padding: 10px;
     border: 1px solid rgb(211, 211, 211);
     border-radius: 10px;
 }
+
 .control_message {
     width: 20%;
 }
+
 .control_message button {
     height: 70px;
 }
+
 .message_view_friend__content {
     background-color: rgb(0, 76, 255);
     color: white;
@@ -228,6 +255,7 @@
     border-bottom-right-radius: 10px;
     margin-bottom: 15px;
 }
+
 .message_view_me__content {
     border: 1px solid rgb(211, 211, 211);
     padding: 10px;
@@ -241,12 +269,16 @@
     border-bottom-left-radius: 10px;
     margin-bottom: 15px;
 }
+
 .message_view_img__friend {
     margin-right: 15px;
 }
-.message_view_friend, .message_view_me {
+
+.message_view_friend,
+.message_view_me {
     margin: 5px 0;
 }
+
 .message_date {
     font-size: 12px;
     color: rgb(160, 160, 160);
@@ -259,17 +291,22 @@
         background-color: rgba(255, 255, 255, 0.6);
         width: 100%;
     }
+
     .message_item__banner {
         width: 100%;
     }
+
     .message_item__logo {
         width: 50px;
         height: 50px;
     }
+
     .message__main_content {
         height: 85vh;
     }
-    .message_view_friend__content, .message_view_me__content {
+
+    .message_view_friend__content,
+    .message_view_me__content {
         max-width: none;
     }
 }

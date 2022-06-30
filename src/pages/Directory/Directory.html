@@ -13,16 +13,16 @@
         {$ path_style="/src/assets/css/Header/StickyHeader.css" $}
     </head>
     <body>
-        <!-- Area of visibility VUE.js -->
+        <!-- Area of visibility VUE.typescript -->
         <div id="wrapper" class="show_content">
             <div class="preloader" :class="setDeletePreloader" v-if="preload">
                 <h1>Evade | Directory</h1>
                 <div class="progress"></div>
             </div>
-            
+
             <!-- HEADER LAYOUT TEMPLATES -->
-            {{ template "header_layout" . }}
-            {{ template "stickyheader_layout" . }}
+            {$ load_template="header_layout" $}
+            {$ load_template="stickyheader_layout" $}
             <!-- END HEADER LAYOUT TEMPLATES -->
 
             <!-- START Main block for VUE.JS -->
@@ -141,7 +141,7 @@
             </main>
             <!-- END Main block for VUE.JS -->
         </div>
-        <!-- END Area of visibility VUE.js -->
+        <!-- END Area of visibility VUE.typescript -->
     </body>
 </html>
 {{ end }}

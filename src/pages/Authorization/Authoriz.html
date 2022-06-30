@@ -1,0 +1,66 @@
+{{ define "autoriz"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Авторизация</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {$ path_style="/src/assets/css/index.css" $}
+    {$ path_style="/src/assets/css/Sign.css" $}
+    {$ path_style="/src/assets/css/Header/Header.css" $}
+    {$ path_style="/src/assets/css/Header/StickyHeader.css" $}
+</head>
+
+<body>
+    <!-- Area of visibility VUE.typescript -->
+    <div id="wrapper" class="show_content">
+        <div class="preloader" :class="setDeletePreloader" v-if="preload">
+            <h1>Evade | Autorization</h1>
+            <div class="progress"></div>
+        </div>
+
+        <!-- HEADER LAYOUT TEMPLATES -->
+        {$ load_template="header_layout" $}
+        {$ load_template="stickyheader_layout" $}
+        <!-- END HEADER LAYOUT TEMPLATES -->
+
+        <!-- BACKGROUND SLIDER -->
+        <div class="background-slides">
+            <div class="background-slide slide-first">
+                <img src="../../assets/images/autoriz/signin.png">
+            </div>
+            <div class="background-slide slide-second">
+                <img src="../../assets/images/autoriz/signup.png">
+            </div>
+        </div>
+        <!-- END BACKGROUD SLIDER -->
+
+        <!-- START Main block for VUE.JS -->
+        <main class="main indent-top">
+            <div class="main__body_content container">
+                <div class="card-sign show_content">
+                    <div class="card-sign-block">
+                        <section class="title">
+                            <router-link id="signin" to="/signin">Войти</router-link>
+                            <router-link id="signup" to="/signup">Зарегистрироваться</router-link>
+                        </section>
+                        <router-view></router-view>
+                    </div>
+                </div>
+                <p v-if="activeTitle.signup" class="privacy-policy">
+                    Нажимая кнопку «Зарегистрироваться», вы принимаете
+                    <a href="/directory/terms-of-use"> пользовательское соглашение</a>
+                    и <a href="/directory/privacy-policy">политику конфиденциальности.</a>
+                </p>
+            </div>
+        </main>
+        <!-- END Main block for VUE.JS -->
+    </div>
+    <!-- END Area of visibility VUE.typescript -->
+</body>
+
+</html>
+{{ end }}

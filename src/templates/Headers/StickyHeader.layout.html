@@ -1,0 +1,115 @@
+{$ define_template="stickyheader_layout" $}
+<!-- START STICKY HEADER block -->
+<header class="header_sticky" v-if="showStickyHeader">
+  <div class="header_sticky_nav">
+    <div class="header_sticky_nav__item">
+      <div class="header_sticky_main_logo block-link">
+        <a class="point-link" href="/"></a>
+        <img class="lazyload" data-src="/ui/assets/images/main_logo.png" />
+      </div>
+    </div>
+    {{ if $.HeaderData.Auth }}
+    <div class="header_sticky_nav__item">
+      <div class="btn btn_link">
+        <a @click="hideStickyHeader()" href="/{{ $.HeaderData.UserId }}"></a>
+        <p>Профиль</p>
+      </div>
+    </div>
+    <div class="header_sticky_nav__item">
+      <div class="btn btn_link">
+        <a @click="community = !community"></a>
+        <p>
+          Проекты
+          <span class="arrow_list_close" :class="rotateArrowCommunity"></span>
+        </p>
+      </div>
+      <div v-show="community" class="sticy_add_window">
+        <div class="btn btn_link">
+          <a @click="hideStickyHeader()" href="/insocial"></a>
+          <p>inSocial</p>
+        </div>
+        <div class="btn btn_link">
+          <a @click="hideStickyHeader()" href="/inmusic"></a>
+          <p>inMusic</p>
+        </div>
+        <div class="btn btn_link">
+          <a @click="hideStickyHeader()" href="/inbeats"></a>
+          <p>inBeats</p>
+        </div>
+      </div>
+    </div>
+    <div class="header_sticky_nav__item">
+      <div class="btn btn_link">
+        <a @click="commerce = !commerce"></a>
+        <p>
+          Коммерция
+          <span class="arrow_list_close" :class="rotateArrowCommerce"></span>
+        </p>
+      </div>
+      <div v-show="commerce" class="sticy_add_window">
+        <div class="btn btn_link">
+          <a @click="hideStickyHeader()" href="/subscriptions"></a>
+          <p>Подписки</p>
+        </div>
+        <div class="btn btn_link">
+          <a @click="hideStickyHeader()" href="/orders"></a>
+          <p>Заказы</p>
+        </div>
+      </div>
+    </div>
+    <div class="header_sticky_nav__item">
+      <div class="btn btn_link">
+        <a @click="settings = !settings"></a>
+        <p>Настройки</p>
+        <span class="arrow_list_close" :class="rotateArrowSettings"></span>
+      </div>
+      <div v-show="settings" class="sticy_add_window">
+        <div class="btn btn_link">
+          <a @click="hideStickyHeader()" href="/customize"></a>
+          <p>Настроить профиль</p>
+        </div>
+        <div class="btn btn_link">
+          <a @click="hideStickyHeader()" href="/customize/shop"></a>
+          <p>Настроить магазин</p>
+        </div>
+        <div class="btn btn_link">
+          <a @click="hideStickyHeader()" href="/customize/personal-data"></a>
+          <p>Настроить личные данные</p>
+        </div>
+      </div>
+    </div>
+    <div class="header_sticky_nav__item">
+      <div class="btn btn_link">
+        <a @click="hideStickyHeader()" href="/directory"></a>
+        <p>Справочник</p>
+      </div>
+    </div>
+    <div class="header_sticky_nav__item">
+      <button @click="signOut(), hideStickyHeader()" class="btn">
+        Выход
+      </button>
+    </div>
+    {{ else }}
+    <div class="header_sticky_nav__item">
+      <div class="btn btn_link">
+        <a @click="hideStickyHeader()" href="/signin"></a>
+        <p>Вход</p>
+      </div>
+    </div>
+    <div class="header_sticky_nav__item">
+      <div class="btn btn_link">
+        <a @click="hideStickyHeader()" href="/signup"></a>
+        <p>Регистрация</p>
+      </div>
+    </div>
+    <div class="header_sticky_nav__item">
+      <div class="btn btn_link">
+        <a @click="hideStickyHeader()" href="/directory"></a>
+        <p>Справочник</p>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</header>
+<!-- END STICKY HEADER block -->
+{$ end_template $}

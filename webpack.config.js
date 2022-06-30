@@ -12,16 +12,16 @@ const pathEntryFiles = '/src/entry_points/';
 module.exports = {
   devtool: 'inline-source-map',
   entry: {
-    _index: `${pathEntryFiles}_index/index.js`,
-    _autoriz: `${pathEntryFiles}_autoriz/autoriz.js`,
-    _profile: `${pathEntryFiles}_profile/profile.js`,
-    _directory: `${pathEntryFiles}_directory/directory.js`,
-    _settings: `${pathEntryFiles}_settings/settings.js`,
-    _insocial: `${pathEntryFiles}__projects/_insocial/insocial.js`,
-    _inmusic: `${pathEntryFiles}__projects/_inmusic/inmusic.js`,
-    _inbeats: `${pathEntryFiles}__projects/_inbeats/inbeats.js`,
-    _subscriptions: `${pathEntryFiles}__commerce/_subscriptions/subscriptions.js`,
-    _orders: `${pathEntryFiles}__commerce/_orders/orders.js`,
+    _index: `${pathEntryFiles}_index/index.ts`,
+    _autoriz: `${pathEntryFiles}_autoriz/autoriz.ts`,
+    _profile: `${pathEntryFiles}_profile/profile.ts`,
+    _directory: `${pathEntryFiles}_directory/directory.ts`,
+    _settings: `${pathEntryFiles}_settings/settings.ts`,
+    _insocial: `${pathEntryFiles}__projects/insocial.ts`,
+    _inmusic: `${pathEntryFiles}__projects/inmusic.ts`,
+    _inbeats: `${pathEntryFiles}__projects/inbeats.ts`,
+    _subscriptions: `${pathEntryFiles}__commerce/subscriptions.ts`,
+    _orders: `${pathEntryFiles}__commerce/orders.ts`,
   },
   output: {
     filename: 'assets/js/[name].[chunkhash].js',
@@ -46,6 +46,11 @@ module.exports = {
         use: ['style-loader', 'vue-style-loader', 'css-loader'],
       },
       {
+        test: /\.ts?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -60,6 +65,7 @@ module.exports = {
             css: 'vue-style-loader!css-loader',
           },
           hotReload: true,
+          appendTsSuffixTo: [/\.vue$/],
         },
       },
       {
@@ -79,8 +85,8 @@ module.exports = {
       chunks: ['_index'],
     }),
     new HtmlWebpackPlugin({
-      filename: 'html/Autoriz.html',
-      template: 'src/pages/Autorization/Autoriz.html',
+      filename: 'html/Authoriz.html',
+      template: 'src/pages/Authorization/Authoriz.html',
       chunks: ['_autoriz'],
     }),
     new HtmlWebpackPlugin({
@@ -137,7 +143,9 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      vue$: 'vue/dist/vue.js',
+      '@': path.resolve(__dirname, "./src/"),
+      vue$: 'vue/dist/vue.esm.js',
     },
+    extensions: [".ts", ".js", ".vue"]
   },
 };

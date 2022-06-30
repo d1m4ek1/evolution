@@ -25,8 +25,8 @@
     -ms-flex-direction: column;
     flex-direction: column;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
 
 .main__body_content .privacy-policy {
@@ -85,7 +85,7 @@
 
 .title {
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
@@ -156,9 +156,11 @@
     #wrapper {
         height: unset;
     }
+
     .card-sign-block .btn {
         position: unset;
     }
+
     .card-sign {
         height: 100%;
     }
