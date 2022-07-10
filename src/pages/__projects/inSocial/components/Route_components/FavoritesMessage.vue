@@ -6,12 +6,12 @@
     <section class="meesages_content__folders">
       <div class="messages_folders">
         <div class="messages_folder">
-          <router-link tag="button" to="/insocial" class="btn"
+          <router-link tag="button" to="/inSocial" class="btn"
             >Все сообщения</router-link
           >
         </div>
         <div class="messages_folder">
-          <router-link tag="button" to="/insocial/favorites" class="btn"
+          <router-link tag="button" to="/inSocial/favorites" class="btn"
             >Избранные сообщения</router-link
           >
         </div>

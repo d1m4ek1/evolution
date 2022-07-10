@@ -5,7 +5,7 @@ import InBeats from '@/pages/__projects/inBeats/components/inBeats.vue';
 export default new VueRouter({
   routes: [
     {
-      path: '/inbeats',
+      path: '/inBeats',
       component: InBeats,
     },
   ],

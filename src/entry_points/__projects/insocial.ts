@@ -7,6 +7,9 @@ import 'lazysizes';
 import '../../assets/typescript/stickyHeader';
 import MODULE_STICKY_HEADER from "../../assets/typescript/modules/StickyHeader.module";
 import MODULE_SIGN_OUT from "@/assets/typescript/modules/SignOut.module";
+import MODULE_CHECK_AUTHORIZE_USER from "@/assets/typescript/modules/CheckAuthorize.module";
+import StickyHeader from "@/assets/typescript/stickyHeader";
+StickyHeader()
 
 window.Vue = require('vue');
 
@@ -21,6 +24,8 @@ Vue.use(VueRouter);
     commerce: false,
     community: false,
     settings: false,
+    subscribers: [],
+    subscriptions: [],
   },
   methods: {
     signOut() {
@@ -33,6 +38,19 @@ Vue.use(VueRouter);
       setTimeout(() => {
         this.preload = false;
       }, 1000);
+    },
+    getDataSubscriptions() {
+      fetch(`/api/get_user_card_messages`)
+          .then(response => {
+            if(!response.ok) {
+              console.error(response.statusText)
+              return
+            }
+            response.json().then(data => {
+              this.subscribers = data.isCardSubscribers
+              this.subscriptions = data.isCardSubscriptions
+            })
+          })
     },
   },
   computed: {
@@ -65,6 +83,8 @@ Vue.use(VueRouter);
   },
   created() {
     this.deletePreloader();
+    this.getDataSubscriptions();
+    MODULE_CHECK_AUTHORIZE_USER();
   },
   router,
 }))();

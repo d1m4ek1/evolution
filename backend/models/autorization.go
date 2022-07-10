@@ -116,7 +116,7 @@ func SetNetworkStatusOnline(ctx *sqlx.DB, userID int64) error {
 		WHERE 
 		    user_id=$1 
 		  AND 
-		    net_status<>'online'`, userID); err != nil {
+		    net_status='offline'`, userID); err != nil {
 		newerror.Wrap("ctx.DB.Exec", err)
 		return err
 	}

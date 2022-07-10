@@ -5,11 +5,6 @@ interface iHeaderElements {
   main: HTMLElement
   mainBodyContent: HTMLElement
 }
-const headerElements: iHeaderElements = {
-  headerSticky: document.querySelector('.header_sticky'),
-  main: document.querySelector('.main'),
-  mainBodyContent: document.querySelector('.main__body_content')
-}
 
 const StickyHeader = (): void => {
   if (document.documentElement.clientWidth <= 960) {
@@ -44,6 +39,12 @@ const StickyHeader = (): void => {
       if (Math.abs(xDiff) > Math.abs(yDiff)) {
         // right
         if (xDiff > 0) {
+
+          const headerElements: iHeaderElements = {
+            headerSticky: document.querySelector('.header_sticky'),
+            main: document.querySelector('.main'),
+            mainBodyContent: document.querySelector('.main__body_content')
+          }
           headerElements.headerSticky.style.transform = 'translateX(0px)';
 
           headerElements.main.classList.remove('main_squeeze_before_remove');
@@ -56,6 +57,12 @@ const StickyHeader = (): void => {
           stickyHeaderOpened = true;
 
         } else if (stickyHeaderOpened) {
+          
+          const headerElements: iHeaderElements = {
+            headerSticky: document.querySelector('.header_sticky'),
+            main: document.querySelector('.main'),
+            mainBodyContent: document.querySelector('.main__body_content')
+          }
           headerElements.headerSticky.style.transform = 'translateX(-200px)';
 
           headerElements.main.classList.remove('main_squeeze_before_add');

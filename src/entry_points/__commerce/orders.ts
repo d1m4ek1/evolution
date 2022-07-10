@@ -6,6 +6,8 @@ import router from '../../router/__commerce/orders.router';
 import hideElemDir from '../../assets/typescript/hideElem';
 import '../../assets/typescript/stickyHeader';
 import MODULE_SIGN_OUT from "@/assets/typescript/modules/SignOut.module";
+import StickyHeader from "@/assets/typescript/stickyHeader";
+StickyHeader()
 
 window.Vue = require('vue');
 

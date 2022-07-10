@@ -14,7 +14,7 @@ func SelectProfileData(ctx *sqlx.DB, userID int64) ([]string, error) {
 		FROM 
 		    settings 
 		WHERE 
-		    id=$1`, userID); err != nil {
+		    settings_id=(SELECT settings_id FROM identifiers WHERE user_id=$1)`, userID); err != nil {
 		newerror.Wrap("ctx.Get", err)
 		return nil, err
 	}

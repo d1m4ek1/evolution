@@ -8,6 +8,8 @@ import '../../assets/typescript/stickyHeader';
 import MODULE_CHECK_AUTHORIZE_USER from '../../assets/typescript/modules/CheckAuthorize.module';
 import MODULE_STICKY_HEADER from "../../assets/typescript/modules/StickyHeader.module";
 import MODULE_SIGN_OUT from "@/assets/typescript/modules/SignOut.module";
+import StickyHeader from "@/assets/typescript/stickyHeader";
+StickyHeader()
 
 window.Vue = require('vue');
 

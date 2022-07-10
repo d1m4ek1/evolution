@@ -8,6 +8,8 @@ import '../../assets/typescript/stickyHeader';
 import MODULE_CHECK_AUTHORIZE_USER from '../../assets/typescript/modules/CheckAuthorize.module';
 import MODULE_STICKY_HEADER from "../../assets/typescript/modules/StickyHeader.module";
 import MODULE_SIGN_OUT from "@/assets/typescript/modules/SignOut.module";
+import StickyHeader from "@/assets/typescript/stickyHeader";
+StickyHeader()
 
 window.Vue = require('vue');
 
@@ -26,6 +28,8 @@ Vue.use(VueRouter);
       title: '',
       content: '',
     },
+    isSubscriber: false,
+    isCountSubscribers: 0
   },
   methods: {
     signOut() {
@@ -50,6 +54,61 @@ Vue.use(VueRouter);
         },
       );
     },
+    appendSubscriber(id) {
+      fetch(`/api/append_subscriber?append_id=${id}`, {
+        method: "POST"
+      }).then((response: Response) => {
+        if (response.ok) {
+          this.isSubscriber = true
+          this.getCountSubscriber();
+        }
+      }).catch((error) => console.error(error))
+    },
+    checkSubcriber() {
+      let userId: string = window.location.pathname.split('/')[1]
+      fetch(`/api/check_subscriber?check_id=${userId}`, {
+        method: "GET"
+      }).then((response: Response) => {
+        if (!response.ok) {
+          console.error(response.statusText)
+          return
+        }
+
+        response.json().then((data) => {
+          this.isSubscriber = data.isSubscriber
+          this.getCountSubscriber();
+        })
+      }).catch(error => console.error(error))
+    },
+    deleteSubscriber(id) {
+      fetch(`/api/delete_subscriber?delete_id=${id}`, {
+        method: "DELETE"
+      }).then((response: Response) => {
+        if (!response.ok) {
+          this.isSubscriber = true
+          console.error(response.statusText)
+        } else {
+          this.isSubscriber = false
+          this.getCountSubscriber();
+        }
+      }).catch(error => console.error(error))
+    },
+    getCountSubscriber() {
+      let userId: string = window.location.pathname.split('/')[1]
+      fetch(`/api/count_subscriber?check_id=${userId}`,
+          {
+            method: "GET"
+          }).then((response: Response) => {
+            if (!response.ok) {
+              console.error(response.statusText)
+              return
+            }
+
+            response.json().then(data => {
+              this.isCountSubscribers = data.isCountSubscriber
+            })
+      }).catch(error => console.error(error))
+    }
   },
   computed: {
     dropHeader() {
@@ -82,6 +141,8 @@ Vue.use(VueRouter);
   created() {
     this.deletePreloader();
     this.getDataProfile();
+    this.checkSubcriber();
+    this.getCountSubscriber();
     MODULE_CHECK_AUTHORIZE_USER();
   },
   router,

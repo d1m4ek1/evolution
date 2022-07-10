@@ -66,11 +66,6 @@
     border: 1px solid black;
 }
 
-.content_header__user_data button:hover {
-    background-color: red;
-    color: white;
-}
-
 .content_subheader {
     display: -webkit-box;
     display: -ms-flexbox;

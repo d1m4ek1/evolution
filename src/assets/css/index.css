@@ -78,6 +78,16 @@ ol>li {
     animation-duration: 1s;
 }
 
+.not_subs {
+    background-color: red !important;
+    color: white !important;
+}
+
+.yes_subs {
+    background-color: #d5d5d5 !important;
+    color: white !important;
+}
+
 @-webkit-keyframes preloaderBlock {
     0% {
         opacity: 1;

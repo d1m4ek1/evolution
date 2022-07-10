@@ -6,7 +6,9 @@ import (
 	"html/template"
 	"iNote/www/backend/api/authorization"
 	dataprofile "iNote/www/backend/api/dataProfile"
+	"iNote/www/backend/api/messages"
 	"iNote/www/backend/api/settings"
+	"iNote/www/backend/api/subscription"
 	"iNote/www/backend/internal/controllers"
 	"iNote/www/backend/internal/database"
 	newerror "iNote/www/backend/pkg/NewError"
@@ -14,11 +16,6 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
-)
-
-// PATHS
-const (
-	pathToError string = "cmd/web/main -> Function "
 )
 
 func initTemplates() *template.Template {
@@ -60,15 +57,15 @@ func handle(ctx *sqlx.DB) {
 	ginRouter.GET("/signup", controllers.AutorizTemplate(ctx))
 
 	// MESSAGE ROUTERS
-	ginRouter.GET("/insocial", controllers.InSocialTemplate(ctx))
-	ginRouter.GET("/insocial/favorites", controllers.InSocialTemplate(ctx))
-	ginRouter.GET("/insocial/control", controllers.InSocialTemplate(ctx))
+	ginRouter.GET("/inSocial", controllers.InSocialTemplate(ctx))
+	ginRouter.GET("/inSocial/favorites", controllers.InSocialTemplate(ctx))
+	ginRouter.GET("/inSocial/chat_:chatId", controllers.InSocialTemplate(ctx))
 
 	// MUSIC ROUTERS
-	ginRouter.GET("/inmusic", controllers.InMusicTemplate(ctx))
+	ginRouter.GET("/inMusic", controllers.InMusicTemplate(ctx))
 
 	//SUBSCRIPTIONS ROUTERS
-	ginRouter.GET("/inbeats", controllers.InBeatsTemplate(ctx))
+	ginRouter.GET("/inBeats", controllers.InBeatsTemplate(ctx))
 
 	// SETTINGS ROUTERS
 	ginRouter.GET("/customize", controllers.SettingsTemplate(ctx))
@@ -112,6 +109,16 @@ func handle(ctx *sqlx.DB) {
 
 	// API CHECK AUTORIZATION
 	ginRouter.GET("/api/check_authorization", authorization.CheckAuthoriztion(ctx))
+
+	// API SUBSRIBERS
+	ginRouter.POST("/api/append_subscriber", subscription.AppendSubscription(ctx))
+	ginRouter.DELETE("/api/delete_subscriber", subscription.DeleteSubscription(ctx))
+	ginRouter.GET("/api/check_subscriber", subscription.CheckSubscriber(ctx))
+	ginRouter.GET("/api/count_subscriber", subscription.CountSubscriber(ctx))
+
+	// API MESSAGES
+	ginRouter.GET("/api/get_user_card_messages", messages.GetUserCardMessages(ctx))
+	ginRouter.GET("/api/check_chat", messages.CheckChat(ctx))
 
 	// WEBSOCKET
 	ginRouter.GET("/websocket/connect", websocket.WebSocketConnect(ctx))

@@ -7,6 +7,8 @@ import 'lazysizes';
 import '../../assets/typescript/stickyHeader';
 import MODULE_STICKY_HEADER from "../../assets/typescript/modules/StickyHeader.module";
 import MODULE_SIGN_OUT from "@/assets/typescript/modules/SignOut.module";
+import StickyHeader from "@/assets/typescript/stickyHeader";
+StickyHeader()
 
 window.Vue = require('vue');
 

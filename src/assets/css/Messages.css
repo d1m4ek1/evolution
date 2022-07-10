@@ -40,7 +40,6 @@
 }
 
 .message_item {
-    cursor: pointer;
     height: 75px;
     width: 100%;
     display: -webkit-box;
@@ -70,7 +69,10 @@
 }
 
 .message_item__control {
-    z-index: 3;
+    display: flex;
+}
+.message_item__control button {
+    margin: 0 5px;
 }
 
 .message_item:hover .message_item__banner {
@@ -80,7 +82,7 @@
 }
 
 .message_item__info {
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.6);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -91,7 +93,7 @@
     -ms-flex-align: center;
     align-items: center;
     height: 100%;
-    width: 40%;
+    width: 100%;
     padding: 0 10px;
     z-index: 1;
 }
@@ -106,6 +108,9 @@
 .message_item__logo img {
     border-radius: 50%;
 }
+.message_item__logo img {
+    height: 100% !important;
+}
 
 .message_item__banner {
     -webkit-transition: 1s;
@@ -113,8 +118,9 @@
     transition: 1s;
     position: absolute;
     right: 0;
-    width: 60%;
+    width: 100%;
     height: auto;
+    filter: blur(5px);
 }
 
 /* Message Exchange */
@@ -282,6 +288,30 @@
 .message_date {
     font-size: 12px;
     color: rgb(160, 160, 160);
+}
+
+.indicator_new_view_message {
+    position: relative;
+}
+
+.indicator_new_view_message.message_view_me__content::before,
+.indicator_new_view_message.message_view_friend__content::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #007aff;
+    display: block;
+}
+
+.indicator_new_view_message.message_view_friend__content::before {
+    right: -20px;
+}
+
+.indicator_new_view_message.message_view_me__content::before {
+    left: -20px;
 }
 
 

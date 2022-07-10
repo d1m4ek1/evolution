@@ -12,19 +12,19 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <link rel="stylesheet" href="/ui/assets/css/8vTBvE28VeqgQayHlTQ.css" type="text/css">
-        <link rel="stylesheet" href="/ui/assets/css/gvQrydgJAVliFIB49km.css" type="text/css">
-        <link rel="stylesheet" href="/ui/assets/css/UserProfile/4cuLPW5QVPIjla0zYOp.css" type="text/css">
-        <link rel="stylesheet" href="/ui/assets/css/Header/0Eb9mKPsd4DuuyOzZII.css" type="text/css">
-        <link rel="stylesheet" href="/ui/assets/css/Header/K14HcpWvsuHFOEgApY0.css" type="text/css">
-    <link rel="icon" href="/ui/assets/images/favicon.png"><script defer src="/ui/assets/js/_profile.c233a1b4e683bbf878d7.js"></script></head>
+        <link rel="stylesheet" href="/ui/assets/css/xGhVcsKpvthiK67vFpU.css" type="text/css">
+        <link rel="stylesheet" href="/ui/assets/css/WnESDRRRJ7OYjEnhc6Z.css" type="text/css">
+        <link rel="stylesheet" href="/ui/assets/css/UserProfile/vjcWhnZc9krajRtapUb.css" type="text/css">
+        <link rel="stylesheet" href="/ui/assets/css/Header/QHNfP5LwltWO5PsnIEZ.css" type="text/css">
+        <link rel="stylesheet" href="/ui/assets/css/Header/p87203SBb6QVyz5ux5n.css" type="text/css">
+    <link rel="icon" href="/ui/assets/images/favicon.png"><script defer src="/ui/assets/js/_profile.aede6f8a40549a429e20.js"></script></head>
     <body>
         <!-- Area of visibility VUE.typescript -->
         <div id="wrapper" class="show_content">
             <div class="preloader" :class="setDeletePreloader" v-if="preload">
                 {{ if $.ProfileData.Name }}
                 <h1>Evade | {{ $.ProfileData.Name }}</h1>
-                {{ else}}
+                {{ else }}
                 <h1>Evade | Profile</h1>
                 {{ end }}
                 <div class="progress"></div>
@@ -53,9 +53,9 @@
                 </a>
                 <div id="add_community" class="add_window" v-show="community">
                     <div class="add_window__content">
-                        <a href="/insocial">inSocial - общение с подписчиками</a>
-                        <a href="/inmusic">inMusic - музыка всего мира</a>
-                        <a href="/inbeats">inBeats - торговля битов</a>
+                        <a href="/inSocial">inSocial - общение с подписчиками</a>
+                        <a href="/inMusic">inMusic - музыка всего мира</a>
+                        <a href="/inBeats">inBeats - торговля битов</a>
                     </div>
                 </div>
             </div>
@@ -134,15 +134,15 @@
       </div>
       <div v-show="community" class="sticy_add_window">
         <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/insocial"></a>
+          <a @click="hideStickyHeader()" href="/inSocial"></a>
           <p>inSocial</p>
         </div>
         <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/inmusic"></a>
+          <a @click="hideStickyHeader()" href="/inMusic"></a>
           <p>inMusic</p>
         </div>
         <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/inbeats"></a>
+          <a @click="hideStickyHeader()" href="/inBeats"></a>
           <p>inBeats</p>
         </div>
       </div>
@@ -253,11 +253,14 @@
                                     </div>
                                     <div class="content_header__user_data">
                                         <h3>
-                                            Подписчики: {{ $.ProfileData.Audience }}
+                                            Подписчики: {% isCountSubscribers %}
                                         </h3>
                                         {{ if not $.ProfileData.Auth }}
-                                        <button class="btn not_subs">
+                                        <button v-if="!isSubscriber" class="btn not_subs" @click="appendSubscriber('{{ $.HeaderData.UserUrlId }}')">
                                             Подписаться
+                                        </button>
+                                        <button v-else class="btn yes_subs" @click="deleteSubscriber('{{ $.HeaderData.UserUrlId }}')">
+                                            Отписаться
                                         </button>
                                         {{ end }}
                                     </div>
@@ -278,7 +281,7 @@
                                         >
                                     </div>
                                     <div class="content_subheader__item">
-                                        <a href="/messages">Сообщение</a>
+                                        <a href="/insocial">Сообщение</a>
                                     </div>
                                 </div>
                             </div>

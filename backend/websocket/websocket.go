@@ -63,6 +63,7 @@ func WebSocketConnect(ctx *sqlx.DB) gin.HandlerFunc {
 				newerror.Wrap("upgraded.Upgrade", err)
 				return
 			}
+			defer conn.Close()
 
 			login, err := models.SelectLoginByIdToken(ctx, userIDConv, token)
 			if err != nil {

@@ -173,6 +173,9 @@ export default {
 
         fetch(
           `/api/create_account?${this.urlCreateAccount.join('&')}&${cookie}`,
+            {
+              method: 'POST'
+            }
         )
           .then((response) => {
             response.json().then((data) => {

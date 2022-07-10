@@ -24,7 +24,7 @@
             <div class="preloader" :class="setDeletePreloader" v-if="preload">
                 {{ if $.ProfileData.Name }}
                 <h1>Evade | {{ $.ProfileData.Name }}</h1>
-                {{ else}}
+                {{ else }}
                 <h1>Evade | Profile</h1>
                 {{ end }}
                 <div class="progress"></div>
@@ -63,11 +63,14 @@
                                     </div>
                                     <div class="content_header__user_data">
                                         <h3>
-                                            Подписчики: {{ $.ProfileData.Audience }}
+                                            Подписчики: {% isCountSubscribers %}
                                         </h3>
                                         {{ if not $.ProfileData.Auth }}
-                                        <button class="btn not_subs">
+                                        <button v-if="!isSubscriber" class="btn not_subs" @click="appendSubscriber('{{ $.HeaderData.UserUrlId }}')">
                                             Подписаться
+                                        </button>
+                                        <button v-else class="btn yes_subs" @click="deleteSubscriber('{{ $.HeaderData.UserUrlId }}')">
+                                            Отписаться
                                         </button>
                                         {{ end }}
                                     </div>
@@ -88,7 +91,7 @@
                                         >
                                     </div>
                                     <div class="content_subheader__item">
-                                        <a href="/messages">Сообщение</a>
+                                        <a href="/insocial">Сообщение</a>
                                     </div>
                                 </div>
                             </div>
