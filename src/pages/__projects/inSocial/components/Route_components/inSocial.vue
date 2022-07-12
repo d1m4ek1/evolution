@@ -20,7 +20,12 @@
     <section>
       <div class="mesages_content">
         <h2>Чаты</h2>
-        <p v-if="chats === undefined">{{ notifications.nullChats }}</p>
+        <p v-if="chats === undefined || chats.error">{{ notifications.nullChats }}</p>
+        <template v-else>
+          <div class="message_items" v-for="item in chats">
+            <ui-chat-item :chat-data-item="item"></ui-chat-item>
+          </div>
+        </template>
       </div>
       <div class="mesages_content">
         <h2>Подписки</h2>
@@ -61,6 +66,7 @@
 
 <script>
 import UIMessageItem from '@/pages/__projects/inSocial/components/Ui_components/UiMessageItem';
+import UiChatItem from '@/pages/__projects/inSocial/components/Ui_components/UiChatItem';
 
 export default {
   props: {
@@ -74,7 +80,8 @@ export default {
         nullSubscribers: "На вас пока никто не подписан",
         nullSubscriptions: "Вы не подписаны ни на одного пользователя",
         nullChats: "Вы еще не переписывались"
-      }
+      },
+      chatDataItems: []
     }
   },
   methods: {
@@ -100,6 +107,7 @@ export default {
     }
   },
   components: {
+    UiChatItem,
     "ui-message-item": UIMessageItem }
 }
 </script>

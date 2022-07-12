@@ -82,6 +82,7 @@
 }
 
 .message_item__info {
+    position: relative;
     background-color: rgba(255, 255, 255, 0.6);
     display: -webkit-box;
     display: -ms-flexbox;
@@ -96,6 +97,43 @@
     width: 100%;
     padding: 0 10px;
     z-index: 1;
+}
+
+.message_item__info > a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.new_message_animation {
+    animation-name: newMessage;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+@-webkit-keyframes newMessage {
+    from {
+        box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
+    }
+    50% {
+        box-shadow: 0 0 6px 3px #4fa3ff;
+    }
+    to {
+        box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
+    }
+}
+@keyframes newMessage {
+    from {
+        box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
+    }
+    50% {
+        box-shadow: 0 0 6px 3px #4fa3ff;
+    }
+    to {
+        box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
+    }
 }
 
 .message_item__logo {

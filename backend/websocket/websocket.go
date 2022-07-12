@@ -1,6 +1,7 @@
 package websocket
 
 import (
+	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"github.com/jmoiron/sqlx"
@@ -9,32 +10,46 @@ import (
 	"strconv"
 )
 
-var users = make(map[string]*WSConnect)
+var users = make(map[int64]WSConnect)
 
 var upgraded = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
+	Subprotocols:    []string{"contact"},
 }
 
 type WSConnect struct {
-	Name string          `json:"json"`
-	Conn *websocket.Conn `json:"conn"`
+	Id        int64           `json:"id"`
+	Name      string          `json:"name"`
+	NetStatus string          `json:"netStatus"`
+	Conn      *websocket.Conn `json:"conn"`
 }
 
-func appendClient(conn *websocket.Conn, login string) {
-	if _, ok := users[login]; !ok {
-		users[login] = &WSConnect{
-			Name: login,
-			Conn: conn,
+type GettedMessage struct {
+	ChatId         string `json:"chatId"`
+	SenderId       int64  `json:"sender_id"`
+	RecipientId    int64  `json:"recipient_id"`
+	IsMessageCheck bool   `json:"isMessageCheck"`
+	Message        string `json:"message"`
+	Date           string `json:"date"`
+}
+
+func appendClient(conn *websocket.Conn, login string, userID int64) {
+	if _, ok := users[userID]; !ok {
+		users[userID] = WSConnect{
+			Id:        userID,
+			Name:      login,
+			NetStatus: "online",
+			Conn:      conn,
 		}
 	}
 }
 
 func listenConnect(ctx *sqlx.DB, conn *websocket.Conn, login string, userID int64) {
 	for {
-		mt, _, err := conn.ReadMessage()
+		mt, message, err := conn.ReadMessage()
 		if err != nil || mt == websocket.CloseMessage {
-			delete(users, login)
+			delete(users, userID)
 
 			if err := models.SetNetworkStatusOffline(ctx, userID); err != nil {
 				newerror.Wrap("models.SetNetworkStatusOnline", err)
@@ -42,6 +57,49 @@ func listenConnect(ctx *sqlx.DB, conn *websocket.Conn, login string, userID int6
 			}
 
 			break
+		}
+
+		if message != nil {
+			var messageJSON GettedMessage
+			if err := json.Unmarshal(message, &messageJSON); err != nil {
+				newerror.Wrap("json.Unmarshal", err)
+				return
+			}
+			if messageJSON.IsMessageCheck {
+				if err := models.SetMessage(ctx, messageJSON.ChatId, messageJSON.Message); err != nil {
+					newerror.Wrap("models.SetMessage", err)
+					return
+				}
+
+				if _, ok := users[messageJSON.RecipientId]; ok {
+					if err := users[messageJSON.RecipientId].Conn.WriteMessage(mt, []byte("checked")); err != nil {
+						newerror.Wrap("users[messageJSON.RecipientId].Conn.WriteMessage", err)
+						return
+					}
+				}
+			} else {
+				messageString, err := json.Marshal(models.SendMessage{
+					SenderId: messageJSON.SenderId,
+					Message:  messageJSON.Message,
+					Date:     messageJSON.Date,
+				})
+				if err != nil {
+					newerror.Wrap("json.Marshal", err)
+					return
+				}
+
+				if err := models.SetNewMessage(ctx, messageJSON.ChatId, string(messageString)); err != nil {
+					newerror.Wrap("models.SetNewMessage", err)
+					return
+				}
+
+				if _, ok := users[messageJSON.RecipientId]; ok {
+					if err := users[messageJSON.RecipientId].Conn.WriteMessage(mt, messageString); err != nil {
+						newerror.Wrap("users[messageJSON.RecipientId].Conn.WriteMessage", err)
+						return
+					}
+				}
+			}
 		}
 	}
 }
@@ -76,7 +134,7 @@ func WebSocketConnect(ctx *sqlx.DB) gin.HandlerFunc {
 				return
 			}
 
-			appendClient(conn, login)
+			appendClient(conn, login, userIDConv)
 			listenConnect(ctx, conn, login, userIDConv)
 		}
 	})

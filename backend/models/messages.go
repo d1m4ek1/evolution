@@ -1,7 +1,7 @@
 package models
 
 import (
-	"database/sql"
+	"encoding/json"
 	"fmt"
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
@@ -22,8 +22,24 @@ type ChatData struct {
 	ChatId      int64          `json:"chatId" db:"chat_id"`
 	UserIDOne   int64          `json:"userIDOne" db:"user_id_one"`
 	UserIDTwo   int64          `json:"userIDTwo" db:"user_id_two"`
-	Messages    sql.NullString `json:"messages"`
-	NewMessages sql.NullString `json:"newMessages" db:"new_messages"`
+	Messages    pq.StringArray `json:"messages"`
+	NewMessages pq.StringArray `json:"newMessages" db:"new_messages"`
+	UserDataOne string         `json:"userDataOne" db:"user_data_one"`
+	UserDataTwo string         `json:"userDataTwo" db:"user_data_two"`
+}
+
+type CompanionData struct {
+	UserId    int64  `json:"userId" db:"user_id"`
+	Logo      string `json:"logo"`
+	Banner    string `json:"banner"`
+	Name      string `json:"name"`
+	NetStatus string `json:"netStatus" db:"net_status"`
+}
+
+type SendMessage struct {
+	SenderId int64  `json:"sender_id"`
+	Message  string `json:"message"`
+	Date     string `json:"date"`
 }
 
 func generateTplSubs(ids []int64) (tpl []string) {
@@ -105,12 +121,89 @@ func SelectUserCardMessages(ctx *sqlx.DB, userID int64) ([]UserCardMessagesItems
 	return isCardSubscriptions, isCardSubscribers, nil
 }
 
-func SelectChat(ctx *sqlx.DB, userIDOne int64, userIDTwo int64) (ChatData, error) {
+func selectChatByID(ctx *sqlx.DB, chatID int64) (ChatData, error) {
+	var chatData ChatData
+	if err := ctx.Get(&chatData, `
+		SELECT
+				*
+		FROM
+				chats
+		WHERE
+			chat_id=$1`, chatID); err != nil {
+		newerror.Wrap("ctx.Get", err)
+		return ChatData{}, err
+	}
+	return chatData, nil
+}
+
+func getUserDataChat(ctx *sqlx.DB, userIDOne, userIDTwo int64) (string, string, error) {
+	var companionOne, companionTwo CompanionData
+	var jsonCompanionOne, jsonCompanionTwo []byte
+	var err error
+
+	if err := ctx.Get(&companionOne, `
+	SELECT
+	    u.user_id,
+	    u.name,
+	    s.logo,
+	    s.banner,
+	    u.net_status
+	FROM
+	    users AS u,
+	    settings AS s
+	WHERE
+	    u.user_id=$1 AND s.settings_id=(SELECT settings_id FROM identifiers WHERE user_id=$2)`, userIDOne, userIDOne); err != nil {
+		newerror.Wrap("ctx.Get", err)
+		return "", "", err
+	}
+
+	if err := ctx.Get(&companionTwo, `
+	SELECT
+	    u.user_id,
+	    u.name,
+	    s.logo,
+	    s.banner,
+	    u.net_status
+	FROM
+	    users AS u,
+	    settings AS s
+	WHERE
+	    u.user_id=$1 AND s.settings_id=(SELECT settings_id FROM identifiers WHERE user_id=$2)`, userIDTwo, userIDTwo); err != nil {
+		newerror.Wrap("ctx.Get", err)
+		return "", "", err
+	}
+
+	jsonCompanionOne, err = json.Marshal(companionOne)
+	if err != nil {
+		newerror.Wrap("json.Marshal", err)
+		return "", "", err
+	}
+
+	jsonCompanionTwo, err = json.Marshal(companionTwo)
+	if err != nil {
+		newerror.Wrap("json.Marshal", err)
+		return "", "", err
+	}
+
+	return string(jsonCompanionOne), string(jsonCompanionTwo), nil
+}
+
+func SelectChat(ctx *sqlx.DB, userIDOne, userIDTwo, chatID int64) (ChatData, error) {
 	var chatData ChatData
 	var isChatData bool
+	var chatIDVariantOne, chatIDVariantTwo string
 
-	chatIDVariantOne := fmt.Sprintf("%d%d", userIDOne, userIDTwo)
-	chatIDVariantTwo := fmt.Sprintf("%d%d", userIDTwo, userIDOne)
+	if chatID != 0 {
+		chatData, err := selectChatByID(ctx, chatID)
+		if err != nil {
+			newerror.Wrap("selectChatByID", err)
+			return ChatData{}, err
+		}
+		return chatData, nil
+	}
+
+	chatIDVariantOne = fmt.Sprintf("%d%d", userIDOne, userIDTwo)
+	chatIDVariantTwo = fmt.Sprintf("%d%d", userIDTwo, userIDOne)
 
 	if err := ctx.Get(&isChatData, `
 	SELECT
@@ -123,12 +216,18 @@ func SelectChat(ctx *sqlx.DB, userIDOne int64, userIDTwo int64) (ChatData, error
 		return ChatData{}, err
 	}
 
+	userDataOne, userDataTwo, err := getUserDataChat(ctx, userIDOne, userIDTwo)
+	if err != nil {
+		newerror.Wrap("getUserDataChat", err)
+		return ChatData{}, err
+	}
+
 	if !isChatData {
 		if _, err := ctx.DB.Exec(`
 		INSERT INTO
-		chats (user_id_one, user_id_two, chat_id)
+		chats (user_id_one, user_id_two, chat_id, user_data_one, user_data_two)
 		VALUES 
-		($1, $2, $3)`, userIDOne, userIDTwo, chatIDVariantOne); err != nil {
+		($1, $2, $3, $4, $5)`, userIDOne, userIDTwo, chatIDVariantOne, userDataOne, userDataTwo); err != nil {
 			newerror.Wrap("ctx.DB.Exec", err)
 			return ChatData{}, err
 		}
@@ -146,4 +245,50 @@ func SelectChat(ctx *sqlx.DB, userIDOne int64, userIDTwo int64) (ChatData, error
 	}
 
 	return chatData, nil
+}
+
+func SelectChatItems(ctx *sqlx.DB, userID int64) ([]ChatData, error) {
+	var chatDataItems []ChatData
+
+	if err := ctx.Select(&chatDataItems, `
+	SELECT
+	    *
+	FROM
+	    chats
+	WHERE
+	    user_id_one=$1 OR user_id_two=$2`, userID, userID); err != nil {
+		newerror.Wrap("ctx.Select", err)
+		return nil, err
+	}
+
+	return chatDataItems, nil
+}
+
+func SetNewMessage(ctx *sqlx.DB, chatID string, message string) error {
+	if _, err := ctx.DB.Exec(`
+	UPDATE
+				chats
+	SET
+	    new_messages=array_append(new_messages, $1)
+	WHERE
+	    chat_id=$2`, message, chatID); err != nil {
+		newerror.Wrap("ctx.DB.Exec", err)
+		return err
+	}
+	return nil
+}
+
+func SetMessage(ctx *sqlx.DB, chatID string, message string) error {
+	if _, err := ctx.DB.Exec(fmt.Sprintf(`
+	UPDATE
+				chats
+	SET
+	    messages=messages || '{%s}',
+			new_messages=null
+	WHERE
+	    chat_id=$1`, message), chatID); err != nil {
+		newerror.Wrap("ctx.DB.Exec", err)
+		return err
+	}
+	return nil
 }

@@ -9,6 +9,7 @@ import MODULE_CHECK_AUTHORIZE_USER from '../../assets/typescript/modules/CheckAu
 import MODULE_STICKY_HEADER from "../../assets/typescript/modules/StickyHeader.module";
 import MODULE_SIGN_OUT from "@/assets/typescript/modules/SignOut.module";
 import StickyHeader from "@/assets/typescript/stickyHeader";
+import GetCookie from "@/assets/typescript/getCookie";
 StickyHeader()
 
 window.Vue = require('vue');
@@ -29,7 +30,8 @@ Vue.use(VueRouter);
       content: '',
     },
     isSubscriber: false,
-    isCountSubscribers: 0
+    isCountSubscribers: 0,
+    tester: String
   },
   methods: {
     signOut() {
@@ -108,6 +110,19 @@ Vue.use(VueRouter);
               this.isCountSubscribers = data.isCountSubscriber
             })
       }).catch(error => console.error(error))
+    },
+    openChat() {
+      let userId = GetCookie("userId")
+      let userIdTwo = window.location.pathname.split('/')[1]
+      if (userId !== undefined) {
+        fetch(`/api/check_chat?user_id_two=${userIdTwo}`, {
+          method: "GET"
+        }).then(response => {
+          response.json().then(data => {
+            window.location.pathname = `/inSocial/chat_${data.chatId}`
+          })
+        })
+      }
     }
   },
   computed: {

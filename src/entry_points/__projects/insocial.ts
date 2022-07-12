@@ -26,6 +26,7 @@ Vue.use(VueRouter);
     settings: false,
     subscribers: [],
     subscriptions: [],
+    chatDataItems: Object
   },
   methods: {
     signOut() {
@@ -52,6 +53,15 @@ Vue.use(VueRouter);
             })
           })
     },
+    getAllChats() {
+      fetch("/api/get_all_chats", {
+        method: "GET"
+      }).then(response => {
+        response.json().then(data => {
+          this.chatDataItems = data
+        })
+      })
+    }
   },
   computed: {
     dropHeader() {
@@ -85,6 +95,10 @@ Vue.use(VueRouter);
     this.deletePreloader();
     this.getDataSubscriptions();
     MODULE_CHECK_AUTHORIZE_USER();
+    this.getAllChats();
+  },
+  mounted() {
+    this.getAllChats()
   },
   router,
 }))();

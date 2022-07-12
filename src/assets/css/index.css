@@ -24,6 +24,8 @@ div>img {
 
 a {
     color: rgb(0, 154, 255);
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 h1 {

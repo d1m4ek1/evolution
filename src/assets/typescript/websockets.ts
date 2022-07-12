@@ -1,6 +1,6 @@
-const websocket: WebSocket = new WebSocket('ws://localhost:8000/websocket/connect', 'echo-protocol');
+export const websocket: WebSocket = new WebSocket('ws://localhost:8000/websocket/connect', 'contact');
 
-export const EventMessage = (mess): void => {
+export const EventMessageSend = (mess: string): void => {
   websocket.send(mess)
 }
 
@@ -10,7 +10,7 @@ const OpenConnectWebSocket = (): void => {
     console.log('Conection opened');
   });
 
-  websocket.addEventListener('close', (): void => {
+  websocket.addEventListener('close', (event): void => {
     console.log('Conection closed');
   });
 };

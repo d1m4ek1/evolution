@@ -119,6 +119,7 @@ func handle(ctx *sqlx.DB) {
 	// API MESSAGES
 	ginRouter.GET("/api/get_user_card_messages", messages.GetUserCardMessages(ctx))
 	ginRouter.GET("/api/check_chat", messages.CheckChat(ctx))
+	ginRouter.GET("/api/get_all_chats", messages.GetAllChats(ctx))
 
 	// WEBSOCKET
 	ginRouter.GET("/websocket/connect", websocket.WebSocketConnect(ctx))
