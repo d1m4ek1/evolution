@@ -48,11 +48,12 @@
 </template>
 
 <script>
-import MD5 from 'crypto-js/md5';
+import MD5 from "crypto-js/md5";
 
 function rndsh(sumString = Number()) {
-  const symbolArr = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
-  let rtsdnr = '';
+  const symbolArr =
+    "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+  let rtsdnr = "";
   for (let i = 0; i < sumString; i += 1) {
     const index = Math.floor(Math.random() * symbolArr.length);
     rtsdnr += symbolArr[index];
@@ -65,38 +66,38 @@ export default {
       inputs: {
         logins: [
           {
-            id: 'nickname',
-            placeholder: 'Псевдоним',
-            type: 'text',
+            id: "nickname",
+            placeholder: "Псевдоним",
+            type: "text",
             maxlength: 110,
             value: String(),
           },
           {
-            id: 'email',
-            placeholder: 'Электронная почта',
-            type: 'email',
+            id: "email",
+            placeholder: "Электронная почта",
+            type: "email",
             value: String(),
           },
           {
-            id: 'login',
-            placeholder: 'Логин',
-            type: 'text',
+            id: "login",
+            placeholder: "Логин",
+            type: "text",
             value: String(),
           },
         ],
         passwords: [
           {
-            id: 'password',
-            placeholder: 'Пароль',
-            type: 'password',
+            id: "password",
+            placeholder: "Пароль",
+            type: "password",
             value: String(),
             valid: false,
             conf: true,
           },
           {
-            id: 'password',
-            placeholder: 'Подтвердить пароль',
-            type: 'password',
+            id: "password",
+            placeholder: "Подтвердить пароль",
+            type: "password",
             value: String(),
             valid: false,
           },
@@ -105,18 +106,18 @@ export default {
       validation: {
         symbols: {
           valid: false,
-          value: 'Разрешены только буквы и цифры!',
+          value: "Разрешены только буквы и цифры!",
         },
         same: {
           valid: false,
-          value: 'Пароли не совпадают!',
+          value: "Пароли не совпадают!",
         },
         backupKey: {
           valid: false,
-          value: 'Разрешены только буквы и цифры!',
+          value: "Разрешены только буквы и цифры!",
         },
         allInputs: {
-          value: 'Заполните все поля!',
+          value: "Заполните все поля!",
           valid: false,
         },
       },
@@ -150,13 +151,17 @@ export default {
       Object.keys(this.inputs).forEach((key = String()) => {
         for (let i = 0; i < this.inputs[key].length; i += 1) {
           const el = this.inputs[key][i];
-          if (el.value !== '' && el.valid !== true) {
+          if (el.value !== "" && el.valid !== true) {
             switch (key) {
-              case 'passwords':
-                if (!el.conf) { this.urlCreateAccount.push(`${el.id}=${MD5(el.value)}`); }
+              case "passwords":
+                if (!el.conf) {
+                  this.urlCreateAccount.push(`${el.id}=${MD5(el.value)}`);
+                }
                 break;
               default:
-                if (!el.conf) { this.urlCreateAccount.push(`${el.id}=${el.value}`); }
+                if (!el.conf) {
+                  this.urlCreateAccount.push(`${el.id}=${el.value}`);
+                }
                 break;
             }
           } else {
@@ -172,10 +177,10 @@ export default {
         const cookie = `token=${MD5(rndsh(64)) + rndsh(8)}`;
 
         fetch(
-          `/api/create_account?${this.urlCreateAccount.join('&')}&${cookie}`,
-            {
-              method: 'POST'
-            }
+          `/api/create_account?${this.urlCreateAccount.join("&")}&${cookie}`,
+          {
+            method: "POST",
+          }
         )
           .then((response) => {
             response.json().then((data) => {
@@ -184,7 +189,7 @@ export default {
                 fetch(
                   `/api/signin_account?signin=true&login=${
                     this.inputs.logins[2].value
-                  }&password=${MD5(this.inputs.passwords[1].value)}&${cookie}`,
+                  }&password=${MD5(this.inputs.passwords[1].value)}&${cookie}`
                 ).then((preresponse) => {
                   preresponse.json().then((predata) => {
                     if (predata.user_id !== undefined) {
@@ -199,6 +204,11 @@ export default {
           .catch((err) => console.error(err));
       }
     },
+  },
+  created() {
+    this.$emit("changed-background", {
+      backgroundNumber: 2,
+    });
   },
 };
 </script>

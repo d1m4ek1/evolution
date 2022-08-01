@@ -17,8 +17,8 @@
         </p>
       </div>
       <div class="change_content">
-        <template v-for="(item, idx) in userData.backupKeys.keys">
-          <h3 :key="idx">Ключи восстановления #{{ idx + 1 }}</h3>
+        <template v-for="(item, idx) in userData.backupKeys.keys" :key="idx">
+          <h3>Ключи восстановления #{{ idx + 1 }}</h3>
           <div class="inlineblock">
             <input
               v-model="item.new"
@@ -137,11 +137,12 @@
 </template>
 
 <script>
-import MD5 from 'crypto-js/md5';
+import MD5 from "crypto-js/md5";
 
 function rndsh(sumString = Number()) {
-  const symbolArr = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
-  let rtsdnr = '';
+  const symbolArr =
+    "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+  let rtsdnr = "";
   for (let i = 0; i < sumString; i += 1) {
     const index = Math.floor(Math.random() * symbolArr.length);
     rtsdnr += symbolArr[index];
@@ -153,7 +154,7 @@ export default {
   data() {
     return {
       completePassword: {
-        password: '',
+        password: "",
         completed: false,
       },
       userData: {
@@ -161,39 +162,39 @@ export default {
           available: false,
           keys: [
             {
-              new: '',
-              placeholder: 'Первый ключ',
-              param: 'backupkey_one',
+              new: "",
+              placeholder: "Первый ключ",
+              param: "backupkey_one",
               error: false,
             },
             {
-              new: '',
-              placeholder: 'Второй ключ',
-              param: 'backupkey_two',
+              new: "",
+              placeholder: "Второй ключ",
+              param: "backupkey_two",
               error: false,
             },
             {
-              new: '',
-              placeholder: 'Третий ключ',
-              param: 'backupkey_three',
+              new: "",
+              placeholder: "Третий ключ",
+              param: "backupkey_three",
               error: false,
             },
             {
-              new: '',
-              placeholder: 'Четвертый ключ',
-              param: 'backupkey_four',
+              new: "",
+              placeholder: "Четвертый ключ",
+              param: "backupkey_four",
               error: false,
             },
           ],
         },
         password: {
-          param: 'password',
-          new: '',
+          param: "password",
+          new: "",
         },
         email: {
-          old: '',
-          param: 'email',
-          new: '',
+          old: "",
+          param: "email",
+          new: "",
         },
       },
     };
@@ -203,7 +204,7 @@ export default {
       return window.location.reload();
     },
     getUserData() {
-      fetch('/api/get_settings/personal_data').then((response) => {
+      fetch("/api/get_settings/personal_data").then((response) => {
         response.json().then((data) => {
           this.userData.backupKeys.available = data.bcpk;
           this.userData.email.old = data.eml;
@@ -212,16 +213,16 @@ export default {
     },
     fieldsNotEmpty(id) {
       this.userData.backupKeys.keys.forEach((item, index) => {
-        if (index !== id && item.new === '') {
+        if (index !== id && item.new === "") {
           this.userData.backupKeys.keys[index].error = true;
         } else {
           this.userData.backupKeys.keys[index].error = false;
         }
       });
       let countError = 0;
-      if (this.userData.backupKeys.keys[id].new === '') {
+      if (this.userData.backupKeys.keys[id].new === "") {
         this.userData.backupKeys.keys.forEach((item) => {
-          if (item.new === '' && countError !== 4) countError += 1;
+          if (item.new === "" && countError !== 4) countError += 1;
         });
         if (countError === 4) {
           countError = 0;
@@ -232,9 +233,9 @@ export default {
       }
     },
     saveSettings() {
-      const defUrl = '/api/save_settings/personal_data?';
+      const defUrl = "/api/save_settings/personal_data?";
       const urlParam = [];
-      let fullUrl = '';
+      let fullUrl = "";
       fullUrl = defUrl;
 
       let voidCounter = 0;
@@ -242,7 +243,7 @@ export default {
       for (let i = 0; i < this.userData.backupKeys.keys.length; i += 1) {
         const temporaryKey = this.userData.backupKeys.keys[i];
 
-        if (temporaryKey.new !== '' && voidCounter !== 4) {
+        if (temporaryKey.new !== "" && voidCounter !== 4) {
           voidCounter += 1;
         }
       }
@@ -255,25 +256,25 @@ export default {
         }
       }
 
-      if (this.userData.password.new !== '') {
+      if (this.userData.password.new !== "") {
         urlParam.push(
-          `${this.userData.password.param}=${MD5(this.userData.password.new)}`,
+          `${this.userData.password.param}=${MD5(this.userData.password.new)}`
         );
       }
       if (
-        this.userData.email.old !== this.userData.email.new
-        && this.userData.email.new !== ''
+        this.userData.email.old !== this.userData.email.new &&
+        this.userData.email.new !== ""
       ) {
         urlParam.push(
-          `${this.userData.email.param}=${this.userData.email.new}`,
+          `${this.userData.email.param}=${this.userData.email.new}`
         );
       }
 
-      fullUrl += urlParam.join('&');
+      fullUrl += urlParam.join("&");
 
       if (fullUrl !== defUrl) {
         fetch(fullUrl, {
-          method: 'POST',
+          method: "POST",
         })
           .then((response) => {
             if (response.ok) {
@@ -286,9 +287,9 @@ export default {
       }
     },
     sendOnConfirmPassword() {
-      if (this.completePassword.password !== '') {
+      if (this.completePassword.password !== "") {
         fetch(`/api/confirm?conf_pass=${MD5(this.completePassword.password)}`, {
-          method: 'GET',
+          method: "GET",
         })
           .then((response) => {
             response.json().then((data) => {

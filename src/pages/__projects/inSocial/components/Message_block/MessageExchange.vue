@@ -10,21 +10,36 @@
     </section>
     <section class="message__main_content">
       <div id="message_view" class="message_view">
-        <p v-if="messageItems.error">{{ messageItems.error }}</p>
-        <template v-else>
-          <template v-for="item in messageItems">
-            <div :class="defineMessage(item.sender_id, 'main')" :id="item.message_id">
+        <template
+          v-if="$store.state.chatData !== undefined && arrayIdChat !== null"
+        >
+          <template
+            v-for="(item, idx) in $store.state.chatData[arrayIdChat].messages"
+            :key="idx + 'def_message'"
+          >
+            <div
+              :class="defineMessage(item.sender_id, 'main')"
+              :id="item.message_id"
+            >
               <div :class="defineMessage(item.sender_id, 'content')">
                 <p>{{ item.message }}</p>
                 <p class="message_date">Date: {{ item.date }}</p>
               </div>
             </div>
           </template>
-        </template>
-        <template v-if="!newMessageItems.error">
-          <template v-for="item in newMessageItems">
-            <div :class="defineMessage(item.sender_id, 'main')" :id="item.message_id">
-              <div class="indicator_new_view_message" :class="defineMessage(item.sender_id, 'content')">
+          <template
+            v-for="(item, idx) in $store.state.chatData[arrayIdChat]
+              .newMessages"
+            :key="idx + 'new_message'"
+          >
+            <div
+              :class="defineMessage(item.sender_id, 'main')"
+              :id="item.message_id"
+            >
+              <div
+                class="indicator_new_view_message"
+                :class="defineMessage(item.sender_id, 'content')"
+              >
                 <p>{{ item.message }}</p>
                 <p class="message_date">Date: {{ item.date }}</p>
               </div>
@@ -34,9 +49,9 @@
       </div>
       <div class="message_send">
         <div
-            @input="onListenMessage"
-            class="write_message placeholder_block"
-            contenteditable
+          @input="onListenMessage"
+          class="write_message placeholder_block"
+          contenteditable
         ></div>
         <div class="control_message">
           <button @click="sendMessage()" class="btn send">Отправить</button>
@@ -56,15 +71,18 @@
 </style>
 
 <script>
-import GetCookie from '@/assets/typescript/getCookie';
-import { EventMessageSend, websocket } from '@/assets/typescript/websockets';
+import GetCookie from "../../../../../assets/javascript/getCookie.js";
+import {
+  EventMessageSend,
+  websocket,
+} from "../../../../../assets/javascript/websockets.js";
 
 export default {
   props: {
-    chatData: Object,
+    chatDataId: String,
     name: String,
     logo: String,
-    netStatus: String
+    netStatus: String,
   },
   data() {
     return {
@@ -74,13 +92,27 @@ export default {
         netStatus: "",
       },
       myId: Number,
-      friendId: '',
-      messageItems: [],
-      newMessageItems: [],
+      friendId: "",
+      chatIdParsed: 0,
+      arrayIdChat: null,
       messageListener: {
-        message: String
-      }
+        message: String,
+      },
+      dataSetted: false,
     };
+  },
+  watch: {
+    "$store.getters.getChatData": {
+      deep: true,
+      handler() {
+        if (this.$store.getters.getChatData !== undefined) {
+          if (!this.dataSetted) {
+            this.setStartMessage();
+          }
+          this.setNewMessages();
+        }
+      },
+    },
   },
   methods: {
     scrollBottom() {
@@ -89,173 +121,133 @@ export default {
     },
     defineMessage(senderId, block) {
       if (senderId === this.myId) {
-        if (block === "main") return "message_view_me"
-        if (block === "content") return "message_view_me__content"
+        if (block === "main") return "message_view_me";
+        if (block === "content") return "message_view_me__content";
       } else {
-        if (block === "main") return "message_view_friend"
-        if (block === "content") return "message_view_friend__content"
-      }
-    },
-    getDataChat() {
-      let chatId = window.location.pathname.split('/')[2].replace("chat_", "")
-
-      if (chatId !== "" && chatId !== undefined && chatId !== null) {
-        fetch(`/api/check_chat?chat_id=${chatId}`, {
-          method: "GET"
-        }).then(response => {
-          response.json().then(data => {
-            let userDataOne = JSON.parse(data.userDataOne)
-            let userDataTwo = JSON.parse(data.userDataTwo)
-
-
-            if (userDataOne.userId !== this.myId) {
-              Object.keys(this.preData).forEach(key => {
-                this.preData[key] = userDataOne[key]
-              })
-              this.friendId = userDataOne.userId
-            }
-            if (userDataTwo.userId !== this.myId) {
-              Object.keys(this.preData).forEach(key => {
-                this.preData[key] = userDataTwo[key]
-              })
-              this.friendId = userDataTwo.userId
-            }
-
-            if (data.messages !== null) {
-              this.messageItems = JSON.parse(`[${data.messages}]`)
-            } else {
-              this.messageItems = {error: "Вы никому не писали"}
-            }
-            if (data.newMessages !== null) {
-              this.newMessageItems = JSON.parse(`[${data.newMessages}]`)
-            } else {
-              this.newMessageItems = {error: "Новых сообщений нет"}
-            }
-          })
-        })
+        if (block === "main") return "message_view_friend";
+        if (block === "content") return "message_view_friend__content";
       }
     },
     setLogo() {
-      if (this.preData.logo === 'not_logo.png') {
-        return '/user_images/profile/logo/notLogo/not_logo.png'
+      if (this.preData.logo === "not_logo.png") {
+        return "/user_images/profile/logo/notLogo/not_logo.png";
       }
-      return `/user_images/profile/logo/saved/${this.preData.logo}`
+      return `/user_images/profile/logo/saved/${this.preData.logo}`;
     },
     getDate() {
-      let date = new Date()
-      let day = date.getDay() < 10 ? `0${date.getDay()}` : date.getDay()
-      let month = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
-      return `${day}.${month}.${date.getFullYear()}`
+      const date = new Date();
+      const day = date.getDay() < 10 ? `0${date.getDay()}` : date.getDay();
+      const month =
+        date.getMonth() + 1 < 10
+          ? `0${date.getMonth() + 1}`
+          : date.getMonth() + 1;
+      return `${day}.${month}.${date.getFullYear()}`;
     },
     sendMessage() {
-      if(this.messageListener.message !== "" && this.messageListener.message !== undefined) {
-        if (!Array.isArray(this.newMessageItems)) {
-          this.newMessageItems = []
-        }
-        this.newMessageItems.push({
+      if (
+        this.messageListener.message !== "" &&
+        this.messageListener.message !== undefined
+      ) {
+        this.$store.state.chatData[this.arrayIdChat].newMessages.push({
           sender_id: this.myId,
           message: this.messageListener.message,
-          date: this.getDate()
-        })
-        EventMessageSend(JSON.stringify({
-          chatId: window.location.pathname.split('/')[2].replace("chat_", ""),
-          sender_id: this.myId,
-          recipient_id: this.friendId,
-          message: this.messageListener.message,
-          date: this.getDate()
-        }))
+          date: this.getDate(),
+        });
 
-        this.messageListener.message = ""
-        document.querySelector(".write_message").innerHTML = ""
+        EventMessageSend(
+          JSON.stringify({
+            chatId: this.$attrs.id,
+            sender_id: this.myId,
+            recipient_id: this.friendId,
+            message: this.messageListener.message,
+            date: this.getDate(),
+          })
+        );
+        this.messageListener.message = "";
+        document.querySelector(".write_message").innerHTML = "";
       }
     },
     onListenMessage(event) {
-      this.messageListener.message = event.target.innerText
+      this.messageListener.message = event.target.innerText;
       if (event.target.innerText === "\n") {
-        document.querySelector(".write_message").innerHTML = ""
+        document.querySelector(".write_message").innerHTML = "";
       }
     },
     setNewMessages() {
-      setTimeout(()=> {
-        if (Array.isArray(this.newMessageItems) && this.newMessageItems.length !== 0 || this.newMessageItems.error) {
-          if (!Array.isArray(this.messageItems)) {
-            this.messageItems = []
-          }
-          let counter = 0
-          for (let i = 0; i < this.newMessageItems.length; i++) {
-            if (this.myId !== this.newMessageItems[i].sender_id) {
-              this.messageItems.push(this.newMessageItems[i])
-              counter++
-            }
-          }
-          if (counter !== 0) {
-            let str = []
-            for (let i = 0; i < this.newMessageItems.length; i++) {
-              str.push(`${JSON.stringify(this.newMessageItems[i])}`)
-            }
-            EventMessageSend(JSON.stringify({
-              isMessageCheck: true,
-              message: JSON.stringify(str).replace(/^.|.$/g,""),
-              chatId: window.location.pathname.split('/')[2].replace("chat_", ""),
-              recipient_id: this.friendId
-            }))
-            this.newMessageItems = []
+      const chatItem = this.$store.state.chatData[this.arrayIdChat];
+      if (chatItem.newMessages.length !== 0) {
+        let counter = 0;
+        for (let i = 0; i < chatItem.newMessages.length; i++) {
+          if (this.myId !== chatItem.newMessages[i].sender_id) {
+            counter++;
           }
         }
-      }, 500)
-    }
+
+        if (counter !== 0) {
+          const str = [];
+          for (let i = 0; i < chatItem.newMessages.length; i++) {
+            str.push(`${JSON.stringify(chatItem.newMessages[i])}`);
+          }
+          EventMessageSend(
+            JSON.stringify({
+              isMessageCheck: true,
+              message: JSON.stringify(str).replace(/^.|.$/g, ""),
+              chatId: this.$attrs.id,
+              recipient_id: this.friendId,
+            })
+          );
+
+          chatItem.messages.push(...chatItem.newMessages);
+          chatItem.newMessages = [];
+
+          this.dataSetted = true;
+        }
+      }
+    },
+    setStartMessage() {
+      for (let i = 0; i < this.$store.state.chatData.length; i++) {
+        const element = this.$store.state.chatData[i];
+
+        if (element.chatId === this.chatIdParsed) {
+          this.arrayIdChat = i;
+          break;
+        }
+      }
+
+      Object.keys(this.preData).forEach((key) => {
+        this.preData[key] = this[key];
+      });
+
+      const chatItem = this.$store.state.chatData[this.arrayIdChat];
+
+      if (this.myId !== chatItem.userIDOne) {
+        this.friendId = chatItem.userIDOne;
+
+        this.preData.logo = chatItem.userDataOne.logo;
+        this.preData.name = chatItem.userDataOne.name;
+      }
+      if (this.myId !== chatItem.userIDTwo) {
+        this.friendId = chatItem.userIDTwo;
+
+        this.preData.logo = chatItem.userDataTwo.logo;
+        this.preData.name = chatItem.userDataTwo.name;
+      }
+    },
   },
   created() {
-    this.myId = Number(GetCookie("userId"))
+    this.myId = Number(GetCookie("userId"));
+    this.chatIdParsed = Number(this.$attrs.id);
 
-    if (this.chatData !== undefined) {
-      if (this.chatData.messages !== null) {
-        this.messageItems = JSON.parse(`[${this.chatData.messages}]`)
-      } else {
-        this.messageItems = {error: "Вы никому не писали"}
-      }
-      if (this.chatData.newMessages !== null) {
-        this.newMessageItems = JSON.parse(`[${this.chatData.newMessages}]`)
-      } else {
-        this.newMessageItems = {error: "Новых сообщений нет"}
-      }
-
-      Object.keys(this.preData).forEach(key => {
-        this.preData[key] = this[key]
-      })
-
-      if (this.myId !== this.chatData.userIDOne) {
-        this.friendId = this.chatData.userIDOne
-      }
-      if (this.myId !== this.chatData.userIDTwo) {
-        this.friendId = this.chatData.userIDTwo
-      }
-    } else {
-      this.getDataChat()
+    if (this.name !== undefined && this.logo !== undefined) {
+      this.setStartMessage();
+      this.dataSetted = true;
     }
-
-    websocket.addEventListener("message", (event) => {
-      if (event.data === "checked") {
-        if (!Array.isArray(this.messageItems)) {
-          this.messageItems = []
-        }
-        this.messageItems.push(...this.newMessageItems)
-        this.newMessageItems = []
-        return
-      }
-      if (this.newMessageItems.error) {
-        this.newMessageItems = []
-      }
-      this.newMessageItems.push(JSON.parse(event.data))
-    })
-
-    this.setNewMessages()
+    if (this.$store.getters.chatData !== undefined) {
+      this.setNewMessages();
+    }
   },
   mounted() {
     this.scrollBottom();
   },
-  updated() {
-    this.setNewMessages()
-  }
 };
 </script>

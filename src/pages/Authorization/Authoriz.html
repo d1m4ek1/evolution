@@ -45,9 +45,10 @@
                     <div class="card-sign-block">
                         <section class="title">
                             <router-link id="signin" to="/signin">Войти</router-link>
-                            <router-link id="signup" to="/signup">Зарегистрироваться</router-link>
+                            <router-link id="signup" to="/signup">Зарегистрироваться
+                            </router-link>
                         </section>
-                        <router-view></router-view>
+                        <router-view @changed-background="onChangenBackground"></router-view>
                     </div>
                 </div>
                 <p v-if="activeTitle.signup" class="privacy-policy">

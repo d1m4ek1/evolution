@@ -1,11 +1,10 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/jmoiron/sqlx"
 	"html/template"
 	"iNote/www/backend/api/authorization"
 	dataprofile "iNote/www/backend/api/dataProfile"
+	getteruserdata "iNote/www/backend/api/getterUserData"
 	"iNote/www/backend/api/messages"
 	"iNote/www/backend/api/settings"
 	"iNote/www/backend/api/subscription"
@@ -16,6 +15,9 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+
+	"github.com/gin-gonic/gin"
+	"github.com/jmoiron/sqlx"
 )
 
 func initTemplates() *template.Template {
@@ -124,6 +126,9 @@ func handle(ctx *sqlx.DB) {
 	// WEBSOCKET
 	ginRouter.GET("/websocket/connect", websocket.WebSocketConnect(ctx))
 
+	// API USER DATA
+	ginRouter.GET("/api/get_user_data_default", getteruserdata.GetUserDataDefault(ctx))
+
 	log.Println("Function handler -> Routings initialized")
 
 	ginRouter.StaticFS("/ui/images/", http.Dir("./ui/images/"))
@@ -135,8 +140,8 @@ func handle(ctx *sqlx.DB) {
 	log.Println("Function handler -> Server started successfully")
 
 	// localhost:8000 or 127.0.0.1:8000
-	if err := ginRouter.Run(":8000"); err != nil {
-		newerror.Wrap("ginRouter.Run(\":8000\")", err)
+	if err := ginRouter.Run(":8080"); err != nil {
+		newerror.Wrap("ginRouter.Run(\":8080\")", err)
 	}
 }
 

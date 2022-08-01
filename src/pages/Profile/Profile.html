@@ -1,108 +1,103 @@
 {{ define "profile" }}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        {{ if $.ProfileData.Name }}
-        <title>{{ $.ProfileData.Name }}</title>
-        {{ else }}
-        <title>Профиль</title>
-        {{ end }}
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        {$ path_style="/src/assets/css/index.css" $}
-        {$ path_style="/src/assets/css/Profile.css" $}
-        {$ path_style="/src/assets/css/UserProfile/UserMain.css" $}
-        {$ path_style="/src/assets/css/Header/Header.css" $}
-        {$ path_style="/src/assets/css/Header/StickyHeader.css" $}
-    </head>
-    <body>
-        <!-- Area of visibility VUE.typescript -->
-        <div id="wrapper" class="show_content">
-            <div class="preloader" :class="setDeletePreloader" v-if="preload">
-                {{ if $.ProfileData.Name }}
-                <h1>Evade | {{ $.ProfileData.Name }}</h1>
-                {{ else }}
-                <h1>Evade | Profile</h1>
-                {{ end }}
-                <div class="progress"></div>
-            </div>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    {{ if $.ProfileData.Name }}
+    <title>{{ $.ProfileData.Name }}</title>
+    {{ else }}
+    <title>Профиль</title>
+    {{ end }}
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-            <!-- HEADER LAYOUT TEMPLATES -->
-            {$ load_template="header_layout" $}
-            {$ load_template="stickyheader_layout" $}
-            <!-- END HEADER LAYOUT TEMPLATES -->
+    {$ path_style="/src/assets/css/index.css" $}
+    {$ path_style="/src/assets/css/Profile.css" $}
+    {$ path_style="/src/assets/css/UserProfile/UserMain.css" $}
+    {$ path_style="/src/assets/css/Header/Header.css" $}
+    {$ path_style="/src/assets/css/Header/StickyHeader.css" $}
+</head>
 
-            <!-- START Main block for VUE.JS -->
-            <main class="main indent-top">
-                <div class="main__body_content container">
-                    <div class="profile show_content">
-                        <h1 class="connect_bd">Связано с Базой данных</h1>
-                        <div class="content_header">
-                            <div class="content_title">
-                                <div class="content_images">
-                                    <div class="banner">
-                                        <img class="lazyload"
-                                            data-src="{{ $.ProfileData.Banner }}"
-                                        />
-                                    </div>
-                                    <div
-                                        class="logo {{ $.ProfileData.NetworkStatus }}"
-                                    >
-                                        <img class="lazyload"
-                                            data-src="{{ $.ProfileData.Logo }}"
-                                        />
-                                    </div>
+<body>
+    <!-- Area of visibility VUE.typescript -->
+    <div id="wrapper" class="show_content">
+        <div class="preloader" :class="setDeletePreloader" v-if="preload">
+            {{ if $.ProfileData.Name }}
+            <h1>Evade | {{ $.ProfileData.Name }}</h1>
+            {{ else }}
+            <h1>Evade | Profile</h1>
+            {{ end }}
+            <div class="progress"></div>
+        </div>
+
+        <!-- HEADER LAYOUT TEMPLATES -->
+        {$ load_template="header_layout" $}
+        {$ load_template="stickyheader_layout" $}
+        <!-- END HEADER LAYOUT TEMPLATES -->
+
+        <!-- START Main block for VUE.JS -->
+        <main class="main indent-top">
+            <div class="main__body_content container">
+                <div class="profile show_content">
+                    <h1 class="connect_bd">Связано с Базой данных</h1>
+                    <div class="content_header">
+                        <div class="content_title">
+                            <div class="content_images">
+                                <div class="banner">
+                                    <img class="lazyload" data-src="{{ $.ProfileData.Banner }}" />
                                 </div>
-                                <div class="content_header__main_data">
-                                    <div class="content_header__user_data">
-                                        <h1>{{ $.ProfileData.Name }}</h1>
-                                        <!-- <h2>{ userData.position }</h2> -->
-                                    </div>
-                                    <div class="content_header__user_data">
-                                        <h3>
-                                            Подписчики: {% isCountSubscribers %}
-                                        </h3>
-                                        {{ if not $.ProfileData.Auth }}
-                                        <button v-if="!isSubscriber" class="btn not_subs" @click="appendSubscriber('{{ $.HeaderData.UserUrlId }}')">
-                                            Подписаться
-                                        </button>
-                                        <button v-else class="btn yes_subs" @click="deleteSubscriber('{{ $.HeaderData.UserUrlId }}')">
-                                            Отписаться
-                                        </button>
-                                        {{ end }}
-                                    </div>
+                                <div class="logo {{ $.ProfileData.NetworkStatus }}">
+                                    <img class="lazyload" data-src="{{ $.ProfileData.Logo }}" />
                                 </div>
                             </div>
-                            <div class="content_subheader">
-                                <div class="content_subheader__items">
-                                    <div class="content_subheader__item">
-                                        <router-link
-                                            :to="`/{{ $.HeaderData.UserUrlId }}`"
-                                            >Новости</router-link
-                                        >
-                                    </div>
-                                    <div class="content_subheader__item">
-                                        <router-link
-                                            :to="`/{{ $.HeaderData.UserUrlId }}/aboutMe`"
-                                            >Обо мне</router-link
-                                        >
-                                    </div>
-                                    <div class="content_subheader__item">
-                                        <a @click="openChat()">Сообщение</a>
-                                    </div>
+                            <div class="content_header__main_data">
+                                <div class="content_header__user_data">
+                                    <h1>{{ $.ProfileData.Name }}</h1>
+                                    <!-- <h2>{ userData.position }</h2> -->
+                                </div>
+                                <div class="content_header__user_data">
+                                    <h3>
+                                        Подписчики: {% isCountSubscribers %}
+                                    </h3>
+                                    {{ if not $.ProfileData.Auth }}
+                                    <button v-if="!isSubscriber" class="btn not_subs"
+                                        @click="appendSubscriber('{{ $.HeaderData.UserUrlId }}')">
+                                        Подписаться
+                                    </button>
+                                    <button v-else class="btn yes_subs"
+                                        @click="deleteSubscriber('{{ $.HeaderData.UserUrlId }}')">
+                                        Отписаться
+                                    </button>
+                                    {{ end }}
                                 </div>
                             </div>
                         </div>
-                        <router-view :title="aboutme.title" :content="aboutme.content"></router-view>
+                        <div class="content_subheader">
+                            <div class="content_subheader__items">
+                                <div class="content_subheader__item">
+                                    <router-link :to="`/{{ $.HeaderData.UserUrlId }}`">Новости</router-link>
+                                </div>
+                                <div class="content_subheader__item">
+                                    <router-link :to="`/{{ $.HeaderData.UserUrlId }}/aboutMe`">Обо мне</router-link>
+                                </div>
+                                <div class="content_subheader__item">
+                                    <a @click="openChat()">Сообщение</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <router-view :title="aboutme.title" :content="aboutme.content"></router-view>
                 </div>
-            </main>
-            <!-- END Main block for VUE.JS -->
-        </div>
-        <!-- END Area of visibility VUE.typescript -->
-    </body>
+            </div>
+            <ui-message-notificate :chat-data="chatData" :show-notif="showNotifMessage" @close-notif="onCloseNotif">
+            </ui-message-notificate>
+        </main>
+        <!-- END Main block for VUE.JS -->
+    </div>
+    <!-- END Area of visibility VUE.typescript -->
+</body>
+
 </html>
 {{ end }}

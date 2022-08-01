@@ -36,12 +36,6 @@ type CompanionData struct {
 	NetStatus string `json:"netStatus" db:"net_status"`
 }
 
-type SendMessage struct {
-	SenderId int64  `json:"sender_id"`
-	Message  string `json:"message"`
-	Date     string `json:"date"`
-}
-
 func generateTplSubs(ids []int64) (tpl []string) {
 	for _, id := range ids {
 		tpl = append(tpl, fmt.Sprintf(`u.user_id=%d AND s.settings_id=(SELECT settings_id FROM identifiers ids WHERE ids.user_id=%d)`, id, id))

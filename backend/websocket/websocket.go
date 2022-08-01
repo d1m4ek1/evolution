@@ -2,12 +2,14 @@ package websocket
 
 import (
 	"encoding/json"
-	"github.com/gin-gonic/gin"
-	"github.com/gorilla/websocket"
-	"github.com/jmoiron/sqlx"
+	"fmt"
 	"iNote/www/backend/models"
 	newerror "iNote/www/backend/pkg/NewError"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
+	"github.com/gorilla/websocket"
+	"github.com/jmoiron/sqlx"
 )
 
 var users = make(map[int64]WSConnect)
@@ -72,16 +74,17 @@ func listenConnect(ctx *sqlx.DB, conn *websocket.Conn, login string, userID int6
 				}
 
 				if _, ok := users[messageJSON.RecipientId]; ok {
-					if err := users[messageJSON.RecipientId].Conn.WriteMessage(mt, []byte("checked")); err != nil {
+					if err := users[messageJSON.RecipientId].Conn.WriteMessage(mt,
+						[]byte(fmt.Sprintf(`{"checked":true, "chatId": %s}`, messageJSON.ChatId))); err != nil {
 						newerror.Wrap("users[messageJSON.RecipientId].Conn.WriteMessage", err)
 						return
 					}
 				}
 			} else {
-				messageString, err := json.Marshal(models.SendMessage{
-					SenderId: messageJSON.SenderId,
-					Message:  messageJSON.Message,
-					Date:     messageJSON.Date,
+				messageString, err := json.Marshal(gin.H{
+					"sender_id": messageJSON.SenderId,
+					"message":   messageJSON.Message,
+					"date":      messageJSON.Date,
 				})
 				if err != nil {
 					newerror.Wrap("json.Marshal", err)
@@ -93,8 +96,19 @@ func listenConnect(ctx *sqlx.DB, conn *websocket.Conn, login string, userID int6
 					return
 				}
 
+				messageFull, err := json.Marshal(gin.H{
+					"chatId":    messageJSON.ChatId,
+					"sender_id": messageJSON.SenderId,
+					"message":   messageJSON.Message,
+					"date":      messageJSON.Date,
+				})
+				if err != nil {
+					newerror.Wrap("json.Marshal", err)
+					return
+				}
+
 				if _, ok := users[messageJSON.RecipientId]; ok {
-					if err := users[messageJSON.RecipientId].Conn.WriteMessage(mt, messageString); err != nil {
+					if err := users[messageJSON.RecipientId].Conn.WriteMessage(mt, messageFull); err != nil {
 						newerror.Wrap("users[messageJSON.RecipientId].Conn.WriteMessage", err)
 						return
 					}

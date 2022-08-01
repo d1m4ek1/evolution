@@ -1,14 +1,13 @@
 <template>
-  <div class="message_item"
-       :class="{'new_message_animation': chatDataItem.newMessages.String !== ''}"
-       :id="`message_item_${chatDataItem.chatId}`">
+  <div
+    class="message_item"
+    :class="{ new_message_animation: chatDataItem.newMessages.length !== 0 }"
+    :id="`message_item_${chatDataItem.chatId}`"
+  >
     <div class="message_item__info">
       <a @click="openChat()"></a>
       <div class="message_item__logo" :class="dataFriend.netStatus">
-        <img
-            class="lazyload"
-            :data-src="setLogo"
-        />
+        <img class="lazyload" :data-src="setLogo" />
       </div>
       <div class="message_item__name">
         <h2>Чат с {{ dataFriend.name }}</h2>
@@ -19,91 +18,89 @@
       </div>
     </div>
     <div class="message_item__banner">
-      <img
-          class="lazyload"
-          :data-src="setBanner"
-      />
+      <img class="lazyload" :data-src="setBanner" />
     </div>
   </div>
 </template>
 
 <script>
-import GetCookie from '@/assets/typescript/getCookie';
+import GetCookie from "../../../../../assets/javascript/getCookie.js";
 
 export default {
   props: {
-    chatDataItem: Object
+    chatDataItem: Object,
   },
   data() {
     return {
       myId: Number,
       dataFriend: {
-        id: '',
-        name: '',
-        logo: '',
-        banner: '',
-        netStatus: '',
-        chatData: Object
+        id: "",
+        name: "",
+        logo: "",
+        banner: "",
+        netStatus: "",
+        chatData: Object,
       },
-      friendId: 0
-    }
+      friendId: 0,
+    };
   },
   methods: {
     initDataFriend() {
       if (this.chatDataItem.userIDOne !== this.myId) {
-        let jsonUser = JSON.parse(this.chatDataItem.userDataOne)
+        let jsonUser = this.chatDataItem.userDataOne;
         this.dataFriend = {
           id: this.chatDataItem.userIDOne,
           name: jsonUser.name,
           logo: jsonUser.logo,
           banner: jsonUser.banner,
-        }
-        this.friendId = this.chatDataItem.userIDOne
+        };
+        this.friendId = this.chatDataItem.userIDOne;
       }
       if (this.chatDataItem.userIDTwo !== this.myId) {
-        let jsonUser = JSON.parse(this.chatDataItem.userDataTwo)
+        let jsonUser = this.chatDataItem.userDataTwo;
         this.dataFriend = {
           id: this.chatDataItem.userIDTwo,
           name: jsonUser.name,
           logo: jsonUser.logo,
           banner: jsonUser.banner,
-        }
-        this.friendId = this.chatDataItem.userIDTwo
+        };
+        this.friendId = this.chatDataItem.userIDTwo;
       }
     },
     openChat() {
+      let l = this.chatDataItem;
       this.$router.push({
-        name: 'chat',
+        name: "chat",
         params: {
           id: this.chatDataItem.chatId,
-          chatData: this.chatDataItem,
+          chatDataId: this.chatDataItem.chatId,
           name: this.dataFriend.name,
           logo: this.dataFriend.logo,
-        }
-      })
+        },
+      });
     },
   },
   computed: {
     setLogo() {
-      if (this.dataFriend.logo !== '') {
-        if (this.dataFriend.logo === 'not_logo.png') {
-          return '/user_images/profile/logo/notLogo/not_logo.png'
+      if (this.dataFriend.logo !== "") {
+        if (this.dataFriend.logo === "not_logo.png") {
+          return "/user_images/profile/logo/notLogo/not_logo.png";
         }
-        return `/user_images/profile/logo/saved/${this.dataFriend.logo}`
+        return `/user_images/profile/logo/saved/${this.dataFriend.logo}`;
       }
     },
     setBanner() {
-      if (this.dataFriend.banner !== '') {
-        if (this.dataFriend.banner === 'not_banner.png') {
-          return '/user_images/profile/banner/notBanner/not_banner.png'
+      if (this.dataFriend.banner !== "") {
+        if (this.dataFriend.banner === "not_banner.png") {
+          return "/user_images/profile/banner/notBanner/not_banner.png";
         }
-        return `/user_images/profile/banner/saved/${this.dataFriend.banner}`
+        return `/user_images/profile/banner/saved/${this.dataFriend.banner}`;
       }
     },
   },
   created() {
-    this.myId = Number(GetCookie("userId"))
-    this.initDataFriend()
-  }
+    this.myId = Number(GetCookie("userId"));
+    this.initDataFriend();
+  },
 };
 </script>

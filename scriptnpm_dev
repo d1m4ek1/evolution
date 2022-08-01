@@ -5,11 +5,18 @@ echo "Project builder => Webpack 5"
 echo "-----------------------------------"
 
 npm run dev
+
 echo ""
 echo "-----------------------------------"
-echo "I execute the command 'node/tsc ionium/indexIonium.ts'"
-echo "Style builder => indexIonium.ts"
+echo "I execute the command 'node ionium/indexIonium.js'"
+echo "Style builder => indexIonium.js"
 echo "-----------------------------------"
 
-tsc ionium/indexIonium.ts
 node ionium/indexIonium.js
+
+echo ""
+echo "-----------------------------------"
+echo "I execute the command 'go run ./backend/cmd/web'"
+echo "-----------------------------------"
+
+go run ./backend/cmd/web
