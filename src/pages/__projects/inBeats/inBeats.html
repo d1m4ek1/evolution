@@ -33,6 +33,8 @@
             <div class="main__body_content container">
                 <router-view></router-view>
             </div>
+            <ui-message-notificate :chat-data="chatData" :show-notif="showNotifMessage" @close-notif="onCloseNotif">
+            </ui-message-notificate>
         </main>
         <!-- END Main block for VUE.JS -->
     </div>

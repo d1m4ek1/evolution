@@ -1,10 +1,11 @@
 package authorization
 
 import (
+	"iNote/www/backend/models"
+	newerror "iNote/www/backend/pkg/newerror"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jmoiron/sqlx"
-	"iNote/www/backend/models"
-	newerror "iNote/www/backend/pkg/NewError"
 )
 
 func SignOut(ctx *sqlx.DB) gin.HandlerFunc {
@@ -14,7 +15,7 @@ func SignOut(ctx *sqlx.DB) gin.HandlerFunc {
 
 		if token != "" {
 			if err := models.UserSignOut(ctx, userId); err != nil {
-				newerror.Wrap("models.UserSignOut", err)
+				newerror.NewAppError("models.UserSignOut", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 		}

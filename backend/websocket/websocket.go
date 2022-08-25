@@ -4,13 +4,16 @@ import (
 	"encoding/json"
 	"fmt"
 	"iNote/www/backend/models"
-	newerror "iNote/www/backend/pkg/NewError"
+	newerror "iNote/www/backend/pkg/newerror"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"github.com/jmoiron/sqlx"
 )
+
+const pathToLogFile string = "backend/logs/logs.txt"
+const isTimeAmPm bool = true
 
 var users = make(map[int64]WSConnect)
 
@@ -54,7 +57,7 @@ func listenConnect(ctx *sqlx.DB, conn *websocket.Conn, login string, userID int6
 			delete(users, userID)
 
 			if err := models.SetNetworkStatusOffline(ctx, userID); err != nil {
-				newerror.Wrap("models.SetNetworkStatusOnline", err)
+				newerror.NewAppError("models.SetNetworkStatusOnline", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 
@@ -64,19 +67,19 @@ func listenConnect(ctx *sqlx.DB, conn *websocket.Conn, login string, userID int6
 		if message != nil {
 			var messageJSON GettedMessage
 			if err := json.Unmarshal(message, &messageJSON); err != nil {
-				newerror.Wrap("json.Unmarshal", err)
+				newerror.NewAppError("json.Unmarshal", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 			if messageJSON.IsMessageCheck {
 				if err := models.SetMessage(ctx, messageJSON.ChatId, messageJSON.Message); err != nil {
-					newerror.Wrap("models.SetMessage", err)
+					newerror.NewAppError("models.SetMessage", err, pathToLogFile, isTimeAmPm)
 					return
 				}
 
 				if _, ok := users[messageJSON.RecipientId]; ok {
 					if err := users[messageJSON.RecipientId].Conn.WriteMessage(mt,
 						[]byte(fmt.Sprintf(`{"checked":true, "chatId": %s}`, messageJSON.ChatId))); err != nil {
-						newerror.Wrap("users[messageJSON.RecipientId].Conn.WriteMessage", err)
+						newerror.NewAppError("users[messageJSON.RecipientId].Conn.WriteMessage", err, pathToLogFile, isTimeAmPm)
 						return
 					}
 				}
@@ -87,12 +90,12 @@ func listenConnect(ctx *sqlx.DB, conn *websocket.Conn, login string, userID int6
 					"date":      messageJSON.Date,
 				})
 				if err != nil {
-					newerror.Wrap("json.Marshal", err)
+					newerror.NewAppError("json.Marshal", err, pathToLogFile, isTimeAmPm)
 					return
 				}
 
 				if err := models.SetNewMessage(ctx, messageJSON.ChatId, string(messageString)); err != nil {
-					newerror.Wrap("models.SetNewMessage", err)
+					newerror.NewAppError("models.SetNewMessage", err, pathToLogFile, isTimeAmPm)
 					return
 				}
 
@@ -103,13 +106,13 @@ func listenConnect(ctx *sqlx.DB, conn *websocket.Conn, login string, userID int6
 					"date":      messageJSON.Date,
 				})
 				if err != nil {
-					newerror.Wrap("json.Marshal", err)
+					newerror.NewAppError("json.Marshal", err, pathToLogFile, isTimeAmPm)
 					return
 				}
 
 				if _, ok := users[messageJSON.RecipientId]; ok {
 					if err := users[messageJSON.RecipientId].Conn.WriteMessage(mt, messageFull); err != nil {
-						newerror.Wrap("users[messageJSON.RecipientId].Conn.WriteMessage", err)
+						newerror.NewAppError("users[messageJSON.RecipientId].Conn.WriteMessage", err, pathToLogFile, isTimeAmPm)
 						return
 					}
 				}
@@ -126,25 +129,25 @@ func WebSocketConnect(ctx *sqlx.DB) gin.HandlerFunc {
 		if token != "" && userID != "" {
 			userIDConv, err := strconv.ParseInt(userID, 10, 0)
 			if err != nil {
-				newerror.Wrap("strconv.ParseInt", err)
+				newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 
 			conn, err := upgraded.Upgrade(context.Writer, context.Request, nil)
 			if err != nil {
-				newerror.Wrap("upgraded.Upgrade", err)
+				newerror.NewAppError("upgraded.Upgrade", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 			defer conn.Close()
 
 			login, err := models.SelectLoginByIdToken(ctx, userIDConv, token)
 			if err != nil {
-				newerror.Wrap("models.SelectLoginByIdToken", err)
+				newerror.NewAppError("models.SelectLoginByIdToken", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 
 			if err := models.SetNetworkStatusOnline(ctx, userIDConv); err != nil {
-				newerror.Wrap("models.SetNetworkStatusOnline", err)
+				newerror.NewAppError("models.SetNetworkStatusOnline", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 

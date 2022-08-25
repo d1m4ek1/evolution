@@ -1,27 +1,29 @@
 {{ define "directory" }}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Справочник</title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="/ui/assets/css/EUMdm6kAppJWQ4noDsa.css" type="text/css">
-        <link rel="stylesheet" href="/ui/assets/css/3ycd0Fk9LeKlqYjP45t.css" type="text/css">
-        <link rel="stylesheet" href="/ui/assets/css/Header/DZHftSm1GwwvwN5v2q0.css" type="text/css">
-        <link rel="stylesheet" href="/ui/assets/css/Header/AYgITDWsgLzbGDxKBby.css" type="text/css">
-    <link rel="icon" href="/ui/assets/images/favicon.png"><script defer src="/ui/assets/js/_directory.03fabb67d4961cfe3a2b.js"></script></head>
-    <body>
-        <!-- Area of visibility VUE.typescript -->
-        <div id="wrapper" class="show_content">
-            <div class="preloader" :class="setDeletePreloader" v-if="preload">
-                <h1>Evade | Directory</h1>
-                <div class="progress"></div>
-            </div>
 
-            <!-- HEADER LAYOUT TEMPLATES -->
-            
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Справочник</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/ui/assets/css/0lMOD3tJ6oGqrJmYrCg.css" type="text/css">
+    <link rel="stylesheet" href="/ui/assets/css/fs85qqERzHrPr6MBPpS.css" type="text/css">
+    <link rel="stylesheet" href="/ui/assets/css/Header/xUOKcswYTpTqhg5bjE5.css" type="text/css">
+    <link rel="stylesheet" href="/ui/assets/css/Header/Rn1Uu2sTdpl7LNWDBYE.css" type="text/css">
+<link rel="icon" href="/ui/assets/images/favicon.png"><script defer src="/ui/assets/js/_directory.788852ffeeede0aa28f0.js"></script></head>
+
+<body>
+    <!-- Area of visibility VUE.typescript -->
+    <div id="wrapper" class="show_content">
+        <div class="preloader" :class="setDeletePreloader" v-if="preload">
+            <h1>Evade | Directory</h1>
+            <div class="progress"></div>
+        </div>
+
+        <!-- HEADER LAYOUT TEMPLATES -->
+        
 <!-- START Header block -->
 <header class="header" v-if="dropHeader">
     <div class="container">
@@ -67,7 +69,7 @@
                 <div id="add_settings" class="add_window" v-show="settings">
                     <div class="add_window__content">
                         <a href="/customize">Настроить профиль</a>
-                        <a href="/customize/shop">Настроить магазин</a>
+                        <a href="/customize/inBeats">Настроить inBeats</a>
                         <a href="/customize/personal-data">Настроить личные данные</a>
                     </div>
                 </div>
@@ -96,8 +98,7 @@
 </header>
 <!-- END Header block -->
 
-
-            
+        
 <!-- START STICKY HEADER block -->
 <header class="header_sticky" v-if="showStickyHeader">
   <div class="header_sticky_nav">
@@ -168,8 +169,8 @@
           <p>Настроить профиль</p>
         </div>
         <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/customize/shop"></a>
-          <p>Настроить магазин</p>
+          <a @click="hideStickyHeader()" href="/customize/inBeats"></a>
+          <p>Настроить inBeats</p>
         </div>
         <div class="btn btn_link">
           <a @click="hideStickyHeader()" href="/customize/personal-data"></a>
@@ -212,126 +213,124 @@
 </header>
 <!-- END STICKY HEADER block -->
 
+        <!-- END HEADER LAYOUT TEMPLATES -->
 
-            <!-- END HEADER LAYOUT TEMPLATES -->
-
-            <!-- START Main block for VUE.JS -->
-            <main class="main indent-top">
-                <div class="main__body_content container">
-                    <div class="directory show_content">
-                        <h1 class="connect_bd">Осталось наполнить текстовым контентом</h1>
-                        <section class="title">
-                            <h1>Справочник</h1>
+        <!-- START Main block for VUE.JS -->
+        <main class="main indent-top">
+            <div class="main__body_content container">
+                <div class="directory show_content">
+                    <h1 class="connect_bd">Осталось наполнить текстовым контентом</h1>
+                    <section class="title">
+                        <h1>Справочник</h1>
+                    </section>
+                    <div class="directory_items">
+                        <section v-if="showHideDirectory" class="directory_content">
+                            <h2>
+                                Пункт 1. Основная документация и информация
+                                о сайте
+                            </h2>
+                            <ol>
+                                <li>
+                                    <router-link to="/directory/basic-documentation" @click.native="showComponent()">
+                                        Основная документация</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/directory/service-information" @click.native="showComponent()">
+                                        Информация о сервисе</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/directory/service-founders" @click.native="showComponent()">
+                                        Основатели сервиса</router-link>
+                                </li>
+                            </ol>
+                            <h2>Пункт 2. Юридическая информация</h2>
+                            <ol>
+                                <li>
+                                    <router-link to="/directory/privacy-policy" @click.native="showComponent()">Политика
+                                        конфендициальности</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/directory/terms-of-use" @click.native="showComponent()">
+                                        Пользовательское
+                                        соглашение</router-link>
+                                </li>
+                            </ol>
+                            <h2>Пункт 3. Правила нашего сервиса</h2>
+                            <ol>
+                                <li>Позже...</li>
+                                <li>Позже...</li>
+                                <li>Позже...</li>
+                            </ol>
+                            <h2>Пункт 4. Техническая поддержка</h2>
+                            <ol>
+                                <li>Позже...</li>
+                                <li>Позже...</li>
+                                <li>Позже...</li>
+                            </ol>
+                            <h2>Пункт 5. Лицензии к трекам и битам</h2>
+                            <ol>
+                                <li>MP3 LEASE</li>
+                                <li>WAV LEASE</li>
+                                <li>TRACK OUT</li>
+                                <li>EXCLUSIVE</li>
+                                <li>CUSTOM</li>
+                            </ol>
+                            <h2>Пункт 6. Оплата и комиссии</h2>
+                            <ol>
+                                <li>Позже...</li>
+                                <li>Позже...</li>
+                                <li>Позже...</li>
+                            </ol>
+                            <h2>Пункт 7. Информация о подписках</h2>
+                            <ol>
+                                <li>PREMIUM</li>
+                                <li>ADVERTISING</li>
+                                <li>Позже...</li>
+                            </ol>
+                            <h2>
+                                Пункт 8. Информация о системе достижений и
+                                наградах
+                            </h2>
+                            <ol>
+                                <li>Позже...</li>
+                                <li>Позже...</li>
+                                <li>Позже...</li>
+                            </ol>
+                            <h2>Пункт 9. Ссылки на странице</h2>
+                            <ol>
+                                <li>
+                                    <router-link to="/directory/profile" @click.native="showComponent()">Профиль
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/directory/commerce" @click.native="showComponent()">Коммерция
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/directory/community" @click.native="showComponent()">Сообщество
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/directory/settings" @click.native="showComponent()">Настройки
+                                    </router-link>
+                                </li>
+                            </ol>
                         </section>
-                        <div class="directory_items">
-                            <section v-if="showHideDirectory" class="directory_content">
-                                <h2>
-                                    Пункт 1. Основная документация и информация
-                                    о сайте
-                                </h2>
-                                <ol>
-                                    <li>
-                                        <router-link
-                                            to="/directory/basic-documentation"
-                                            @click.native="showComponent()"
-                                            >Основная документация</router-link
-                                        >
-                                    </li>
-                                    <li><router-link
-                                        to="/directory/service-information"
-                                        @click.native="showComponent()"
-                                        >Информация о сервисе</router-link
-                                    ></li>
-                                    <li><router-link
-                                        to="/directory/service-founders"
-                                        @click.native="showComponent()"
-                                        >Основатели сервиса</router-link
-                                    ></li>
-                                </ol>
-                                <h2>Пункт 2. Юридическая информация</h2>
-                                <ol>
-                                    <li>
-                                        <router-link
-                                            to="/directory/privacy-policy"
-                                            @click.native="showComponent()"
-                                            >Политика
-                                            конфендициальности</router-link
-                                        >
-                                    </li>
-                                    <li>
-                                        <router-link
-                                            to="/directory/terms-of-use"
-                                            @click.native="showComponent()"
-                                            >Пользовательское
-                                            соглашение</router-link
-                                        >
-                                    </li>
-                                </ol>
-                                <h2>Пункт 3. Правила нашего сервиса</h2>
-                                <ol>
-                                    <li>Позже...</li>
-                                    <li>Позже...</li>
-                                    <li>Позже...</li>
-                                </ol>
-                                <h2>Пункт 4. Техническая поддержка</h2>
-                                <ol>
-                                    <li>Позже...</li>
-                                    <li>Позже...</li>
-                                    <li>Позже...</li>
-                                </ol>
-                                <h2>Пункт 5. Лицензии к трекам и битам</h2>
-                                <ol>
-                                    <li>MP3 LEASE</li>
-                                    <li>WAV LEASE</li>
-                                    <li>TRACK OUT</li>
-                                    <li>EXCLUSIVE</li>
-                                    <li>CUSTOM</li>
-                                </ol>
-                                <h2>Пункт 6. Оплата и комиссии</h2>
-                                <ol>
-                                    <li>Позже...</li>
-                                    <li>Позже...</li>
-                                    <li>Позже...</li>
-                                </ol>
-                                <h2>Пункт 7. Информация о подписках</h2>
-                                <ol>
-                                    <li>PREMIUM</li>
-                                    <li>ADVERTISING</li>
-                                    <li>Позже...</li>
-                                </ol>
-                                <h2>
-                                    Пункт 8. Информация о системе достижений и
-                                    наградах
-                                </h2>
-                                <ol>
-                                    <li>Позже...</li>
-                                    <li>Позже...</li>
-                                    <li>Позже...</li>
-                                </ol>
-                                <h2>Пункт 9. Ссылки на странице</h2>
-                                <ol>
-                                    <li><router-link to="/directory/profile"
-                                        @click.native="showComponent()">Профиль</router-link></li>
-                                    <li><router-link to="/directory/commerce"
-                                        @click.native="showComponent()">Коммерция</router-link></li>
-                                    <li><router-link to="/directory/community"
-                                        @click.native="showComponent()">Сообщество</router-link></li>
-                                    <li><router-link to="/directory/settings"
-                                        @click.native="showComponent()">Настройки</router-link></li>
-                                </ol>
-                            </section>
-                            <section v-if="showHideComponent" class="directory_content__explanation">
-                                <div class="directory_fixed">
-                                    <router-view @hidecomponent="hideComponent"></router-view>
-                                </div>
-                            </section>
-                        </div>
+                        <section v-if="showHideComponent" class="directory_content__explanation">
+                            <div class="directory_fixed">
+                                <router-view @hidecomponent="hideComponent"></router-view>
+                            </div>
+                        </section>
                     </div>
                 </div>
-            </main>
-            <!-- END Main block for VUE.JS -->
-        </div>
-        <!-- END Area of visibility VUE.typescript -->
-    </body>
+            </div>
+            <ui-message-notificate :chat-data="chatData" :show-notif="showNotifMessage" @close-notif="onCloseNotif">
+            </ui-message-notificate>
+        </main>
+        <!-- END Main block for VUE.JS -->
+    </div>
+    <!-- END Area of visibility VUE.typescript -->
+</body>
+
 </html>
 {{ end }}

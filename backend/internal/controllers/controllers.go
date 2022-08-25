@@ -1,32 +1,16 @@
 package controllers
 
 import (
+	"iNote/www/backend/pkg/general"
+	"iNote/www/backend/pkg/newerror"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jmoiron/sqlx"
-	"iNote/www/backend/pkg/NewError"
-	"iNote/www/backend/pkg/general"
-	"net/http"
 )
 
-// Path to error
-const (
-	pathToError string = "internal/controllers -> Function "
-)
-
-// ERRORS
-const (
-	errorHomeTemplate          string = pathToError + "HomeTemplate"
-	errorInSocialTemplate      string = pathToError + "InSocialTemplate"
-	errorProfileTemplate       string = pathToError + "ProfileTemplate"
-	errorAutorizTemplate       string = pathToError + "AutorizTemplate"
-	errorGetUserData           string = pathToError + "getUserData"
-	errorSettingsTemplate      string = pathToError + "SettingsTemplate"
-	errorInMusicTemplate       string = pathToError + "InMusicTemplate"
-	errorSubscriptionsTemplate string = pathToError + "SubscriptionsTemplate"
-	errorOrdersTemplate        string = pathToError + "OrdersTemplate"
-	errorInBeatsTemplate       string = pathToError + "InBeatsTemplate"
-	errorDirectoryTemplate     string = pathToError + "DirectoryTemplate"
-)
+const pathToLogFile string = "backend/logs/logs.txt"
+const isTimeAmPm bool = true
 
 // Path to main templates
 const (
@@ -110,7 +94,7 @@ func defineHeaderForAutorize(ctx *sqlx.DB, token string) general.HeaderData {
 			    users_data ud 
 			WHERE 
 			    ud.token=$1`, token).Scan(&headerData.UserId, &headerData.CustomId); err != nil {
-			newerror.Wrap("Query at db: 1", err)
+			newerror.NewAppError("ctx.DB.QueryRow", err, pathToLogFile, isTimeAmPm)
 			return general.HeaderData{}
 		}
 

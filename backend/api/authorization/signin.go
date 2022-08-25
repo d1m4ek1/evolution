@@ -2,27 +2,18 @@ package authorization
 
 import (
 	"database/sql"
+	"iNote/www/backend/models"
+	"iNote/www/backend/pkg/newerror"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jmoiron/sqlx"
-	"iNote/www/backend/models"
-	"iNote/www/backend/pkg/NewError"
-	"net/http"
 )
 
 type UserData struct {
-	UserId int64 `json:"user_id"`
-	//Name   string `json:"name"`
-	//Birthday      sql.NullString `json:"birthday"`
-	//Position      []string       `json:"position"`
-	//MainAddress   []int          `json:"mainAddress"`
+	UserId        int64  `json:"user_id"`
 	NetworkStatus string `json:"netStatus"`
-	//Logo          string         `json:"logo"`
-	//Banner        string         `json:"banner"`
-	//Audience      []string       `json:"audience"`
-	//Verif         sql.NullString `json:"verif"`
-	//FirstName     sql.NullString `json:"firstName"`
-	//LastName      sql.NullString `json:"lastName"`
-	Token string `json:"olt"`
+	Token         string `json:"olt"`
 }
 
 type SignInData struct {
@@ -38,7 +29,7 @@ func getDataSignIn(ctx *sqlx.DB, context *gin.Context, s *SignInData) (UserData,
 
 	data.UserId, data.NetworkStatus, err = models.SignInData(ctx, s.Login, s.Password, s.NewToken)
 	if err != nil {
-		newerror.Wrap("models.SignInData", err)
+		newerror.NewAppError("models.SignInData", err, pathToLogFile, isTimeAmPm)
 		context.JSON(http.StatusOK, gin.H{
 			"error": "Неверный логин или пароль",
 		})

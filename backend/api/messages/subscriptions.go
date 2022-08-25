@@ -1,12 +1,13 @@
 package messages
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/jmoiron/sqlx"
 	"iNote/www/backend/models"
-	newerror "iNote/www/backend/pkg/NewError"
+	newerror "iNote/www/backend/pkg/newerror"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
+	"github.com/jmoiron/sqlx"
 )
 
 func getUserAuthData(context *gin.Context) (string, int64, error) {
@@ -14,7 +15,7 @@ func getUserAuthData(context *gin.Context) (string, int64, error) {
 	userId, _ := context.Cookie("userId")
 	userIDConv, err := strconv.ParseInt(userId, 10, 0)
 	if err != nil {
-		newerror.Wrap("strconv.ParseInt", err)
+		newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 		return "", 0, err
 	}
 
@@ -25,7 +26,7 @@ func GetUserCardMessages(ctx *sqlx.DB) gin.HandlerFunc {
 	return gin.HandlerFunc(func(context *gin.Context) {
 		token, userID, err := getUserAuthData(context)
 		if err != nil {
-			newerror.Wrap("getUserAuthData", err)
+			newerror.NewAppError("getUserAuthData", err, pathToLogFile, isTimeAmPm)
 		}
 
 		user := models.CheckSignin{
@@ -34,14 +35,14 @@ func GetUserCardMessages(ctx *sqlx.DB) gin.HandlerFunc {
 			Autorize: false,
 		}
 		if err := user.CheckUserOnSignin(ctx); err != nil {
-			newerror.Wrap("user.CheckUserOnSignin", err)
+			newerror.NewAppError("user.CheckUserOnSignin", err, pathToLogFile, isTimeAmPm)
 			return
 		}
 
 		if user.Autorize {
 			isCardSubscriptions, isCardSubscribers, err := models.SelectUserCardMessages(ctx, user.Id)
 			if err != nil {
-				newerror.Wrap("models.SelectUserCardMessages", err)
+				newerror.NewAppError("models.SelectUserCardMessages", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 			context.JSON(http.StatusOK, gin.H{

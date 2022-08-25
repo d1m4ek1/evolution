@@ -2,8 +2,9 @@ package models
 
 import (
 	"database/sql"
+	newerror "iNote/www/backend/pkg/newerror"
+
 	"github.com/jmoiron/sqlx"
-	newerror "iNote/www/backend/pkg/NewError"
 )
 
 func SelectSubscriber(ctx *sqlx.DB, userID int64, checkUserID string) (isSubscriber bool, err error) {
@@ -14,7 +15,7 @@ func SelectSubscriber(ctx *sqlx.DB, userID int64, checkUserID string) (isSubscri
 	    users 
 	WHERE 
 	    user_id=$2`, userID, checkUserID); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return false, err
 	}
 	return isSubscriber, nil
@@ -27,7 +28,7 @@ func SetAppendSubscriber(ctx *sqlx.DB, userID int64, appendUserID int64) error {
 	SET
 	    subscribers=array_append(subscribers, $1)
 	WHERE user_id=$2`, userID, appendUserID); err != nil {
-		newerror.Wrap("ctx.DB.Exec", err)
+		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 
@@ -37,7 +38,7 @@ func SetAppendSubscriber(ctx *sqlx.DB, userID int64, appendUserID int64) error {
 	SET
 	    subscriptions=array_append(subscriptions, $1)
 	WHERE user_id=$2`, appendUserID, userID); err != nil {
-		newerror.Wrap("ctx.DB.Exec", err)
+		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 	return nil
@@ -50,7 +51,7 @@ func SetDeleteSubscriber(ctx *sqlx.DB, userID int64, deleteUserId int64) error {
 	SET
 	    subscribers=array_remove(subscribers, $1)
 	WHERE user_id=$2`, userID, deleteUserId); err != nil {
-		newerror.Wrap("ctx.DB.Exec", err)
+		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 
@@ -60,7 +61,7 @@ func SetDeleteSubscriber(ctx *sqlx.DB, userID int64, deleteUserId int64) error {
 	SET
 	    subscriptions=array_remove(subscriptions, $1)
 	WHERE user_id=$2`, deleteUserId, userID); err != nil {
-		newerror.Wrap("ctx.DB.Exec", err)
+		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 
@@ -75,7 +76,7 @@ func SelectCountSubscriber(ctx *sqlx.DB, userID int64) (isCount sql.NullInt64, e
 	    users
 	WHERE
 	    user_id=$1`, userID); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return sql.NullInt64{}, err
 	}
 	return isCount, nil

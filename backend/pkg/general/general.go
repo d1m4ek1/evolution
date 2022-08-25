@@ -2,17 +2,13 @@ package general
 
 import (
 	"database/sql"
+	newerror "iNote/www/backend/pkg/newerror"
+
 	"github.com/jmoiron/sqlx"
-	newerror "iNote/www/backend/pkg/NewError"
 )
 
-const (
-	pathToError string = "pkg/general -> Function "
-)
-
-const (
-	errorProfileDefault string = pathToError + "profileDefault"
-)
+const pathToLogFile string = "backend/logs/logs.txt"
+const isTimeAmPm bool = true
 
 type SignUpData struct {
 	Nickname string
@@ -94,7 +90,7 @@ func (S *SignUpData) ValidData(s *SignUpData) {
 
 func (PD *ProfileData) ProfileUser(ctx *sqlx.DB, id int64, token string) error {
 	if err := ctx.Get(&PD.Auth, `SELECT count(*) = 1 FROM users_data WHERE id=$1 AND token=$2`, id, token); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 	return nil

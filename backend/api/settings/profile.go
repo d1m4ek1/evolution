@@ -5,16 +5,20 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/jmoiron/sqlx"
 	"iNote/www/backend/models"
-	"iNote/www/backend/pkg/NewError"
+	"iNote/www/backend/pkg/newerror"
 	"io"
 	"net/http"
 	"os"
 	"strconv"
 	"strings"
+
+	"github.com/gin-gonic/gin"
+	"github.com/jmoiron/sqlx"
 )
+
+const pathToLogFile string = "backend/logs/logs.txt"
+const isTimeAmPm bool = true
 
 var keyQueryFiles = [2]string{"logo", "banner"}
 var keyQueryUser = [1]string{"name"}
@@ -27,7 +31,7 @@ func GetProfileSettings(ctx *sqlx.DB) gin.HandlerFunc {
 		userId, _ := context.Cookie("userId")
 		userIDConv, err := strconv.ParseInt(userId, 10, 0)
 		if err != nil {
-			newerror.Wrap("strconv.ParseInt", err)
+			newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 			return
 		}
 
@@ -38,14 +42,14 @@ func GetProfileSettings(ctx *sqlx.DB) gin.HandlerFunc {
 				Autorize: false,
 			}
 			if err := user.CheckUserOnSignin(ctx); err != nil {
-				newerror.Wrap("user.CheckUserOnSignin", err)
+				newerror.NewAppError("user.CheckUserOnSignin", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 
 			if user.Autorize {
 				userData, err := models.SelectProfileSettings(ctx, userIDConv)
 				if err != nil {
-					newerror.Wrap("models.SelectProfileSettings", err)
+					newerror.NewAppError("models.SelectProfileSettings", err, pathToLogFile, isTimeAmPm)
 					return
 				}
 				context.JSON(http.StatusOK, userData)
@@ -58,7 +62,7 @@ func GetProfileSettings(ctx *sqlx.DB) gin.HandlerFunc {
 }
 
 func exists(s string, key string) bool {
-	if _, err := os.Stat("./user_images/profile/" + key + "/saved/" + s); !os.IsNotExist(err) {
+	if _, err := os.Stat("./user_files/profile/" + key + "/saved/" + s); !os.IsNotExist(err) {
 		return false
 	}
 	return true
@@ -99,44 +103,44 @@ func validFile(s string, id int64) (string, error) {
 func saveImage(ctx *sqlx.DB, context *gin.Context, keyFile string, userID int64) {
 	oldFilePath, err := models.SelectFilePath(ctx, keyFile, userID)
 	if err != nil {
-		newerror.Wrap("models.SelectFilePath", err)
+		newerror.NewAppError("models.SelectFilePath", err, pathToLogFile, isTimeAmPm)
 		return
 	}
 
 	src, hdr, err := context.Request.FormFile(keyFile)
 	if err != nil {
-		newerror.Wrap("context.Request.FormFile", err)
+		newerror.NewAppError("context.Request.FormFile", err, pathToLogFile, isTimeAmPm)
 		return
 	}
 	defer src.Close()
 
 	if exists(oldFilePath, keyFile) {
-		os.Remove("user_images/profile/" + keyFile + "/saved/" + oldFilePath)
+		os.Remove("user_files/profile/" + keyFile + "/saved/" + oldFilePath)
 	}
 
 	filePath, err := validFile(hdr.Filename, userID)
 	if err != nil {
-		newerror.Wrap("validFile", err)
+		newerror.NewAppError("validFile", err, pathToLogFile, isTimeAmPm)
 		return
 	}
 
 	if filePath != "" {
 		filePath = strings.Replace(filePath, "=", "", -1)
 
-		dst, err := os.Create("user_images/profile/" + keyFile + "/saved/" + filePath)
+		dst, err := os.Create("user_files/profile/" + keyFile + "/saved/" + filePath)
 		if err != nil {
-			newerror.Wrap("os.Create", err)
+			newerror.NewAppError("os.Create", err, pathToLogFile, isTimeAmPm)
 			return
 		}
 		defer dst.Close()
 
 		if err := models.SetFilePath(ctx, keyFile, filePath, userID); err != nil {
-			newerror.Wrap("models.SetFilePath", err)
+			newerror.NewAppError("models.SetFilePath", err, pathToLogFile, isTimeAmPm)
 			return
 		}
 
 		if _, err := io.Copy(dst, src); err != nil {
-			newerror.Wrap("io.Copy", err)
+			newerror.NewAppError("io.Copy", err, pathToLogFile, isTimeAmPm)
 			return
 		}
 	}
@@ -183,7 +187,7 @@ func saveNewSettings(ctx *sqlx.DB, context *gin.Context, userID int64) {
 		strings.Join(tplSettings, ","),
 		strings.Join(tplConnection, ","),
 		strings.Join(tplUser, ","), userID); err != nil {
-		newerror.Wrap("models.SetSettingsProfile", err)
+		newerror.NewAppError("models.SetSettingsProfile", err, pathToLogFile, isTimeAmPm)
 		return
 	}
 }
@@ -194,7 +198,7 @@ func SaveProfileSettings(ctx *sqlx.DB) gin.HandlerFunc {
 		userId, _ := context.Cookie("userId")
 		userIDConv, err := strconv.ParseInt(userId, 10, 0)
 		if err != nil {
-			newerror.Wrap("strconv.ParseInt", err)
+			newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 			return
 		}
 
@@ -205,7 +209,7 @@ func SaveProfileSettings(ctx *sqlx.DB) gin.HandlerFunc {
 				Autorize: false,
 			}
 			if err := user.CheckUserOnSignin(ctx); err != nil {
-				newerror.Wrap("user.CheckUserOnSignin", err)
+				newerror.NewAppError("user.CheckUserOnSignin", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 

@@ -2,8 +2,9 @@ package models
 
 import (
 	"fmt"
+	newerror "iNote/www/backend/pkg/newerror"
+
 	"github.com/jmoiron/sqlx"
-	newerror "iNote/www/backend/pkg/NewError"
 )
 
 func CheckVerifByCustomID(ctx *sqlx.DB, customID string) (isVerify int64, err error) {
@@ -14,7 +15,7 @@ func CheckVerifByCustomID(ctx *sqlx.DB, customID string) (isVerify int64, err er
 		    users_data 
 		WHERE 
 		    id=$1 OR user_custom_id=$2`, customID, customID); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return 0, err
 	}
 	return isVerify, nil
@@ -38,7 +39,7 @@ func CheckVerifByIDUser(ctx *sqlx.DB, checkStrID string, checkIntID int64) (isVe
 		    users_data 
 		WHERE 
 		    id=$1`, newID); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return false, err
 	}
 	return isVerify, nil
@@ -54,7 +55,7 @@ func SelectLoginByIdToken(ctx *sqlx.DB, userID int64, token string) (login strin
 		    id=$1 
 		  AND
 		    token=$2`, userID, token); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return "", err
 	}
 	return login, nil
@@ -71,7 +72,7 @@ func VerifUser(ctx *sqlx.DB, login, password string) (isVerify bool, err error) 
 		  AND 
 		    password=$2`,
 		login, password).Scan(&isVerify); err != nil {
-		newerror.Wrap("ctx.DB.QueryRow", err)
+		newerror.NewAppError("ctx.DB.QueryRow", err, pathToLogFile, isTimeAmPm)
 		return false, err
 	}
 

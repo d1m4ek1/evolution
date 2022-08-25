@@ -1,9 +1,10 @@
 package models
 
 import (
+	newerror "iNote/www/backend/pkg/newerror"
+
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
-	newerror "iNote/www/backend/pkg/NewError"
 )
 
 func SelectProfileData(ctx *sqlx.DB, userID int64) ([]string, error) {
@@ -15,7 +16,7 @@ func SelectProfileData(ctx *sqlx.DB, userID int64) ([]string, error) {
 		    settings 
 		WHERE 
 		    settings_id=(SELECT settings_id FROM identifiers WHERE user_id=$1)`, userID); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return nil, err
 	}
 	return aboutme, nil

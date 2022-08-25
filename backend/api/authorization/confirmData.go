@@ -1,25 +1,26 @@
 package authorization
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/jmoiron/sqlx"
 	"iNote/www/backend/models"
-	newerror "iNote/www/backend/pkg/NewError"
+	newerror "iNote/www/backend/pkg/newerror"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
+	"github.com/jmoiron/sqlx"
 )
 
 func ConfirmPassword(ctx *sqlx.DB) gin.HandlerFunc {
 	return gin.HandlerFunc(func(context *gin.Context) {
 		token, _ := context.Cookie("token")
-		userId, _ := context.Cookie("userId")
-		userIDConv, err := strconv.ParseInt(userId, 10, 0)
+		userID, _ := context.Cookie("userId")
+		userIDConv, err := strconv.ParseInt(userID, 10, 0)
 		if err != nil {
-			newerror.Wrap("strconv.ParseInt", err)
+			newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 			return
 		}
 
-		if token != "" && userId != "" {
+		if token != "" && userID != "" {
 			user := models.CheckSignin{
 				Id:       userIDConv,
 				Token:    token,
@@ -27,14 +28,14 @@ func ConfirmPassword(ctx *sqlx.DB) gin.HandlerFunc {
 			}
 
 			if err := user.CheckUserOnSignin(ctx); err != nil {
-				newerror.Wrap("user.CheckUserOnSignin", err)
+				newerror.NewAppError("user.CheckUserOnSignin", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 
 			if user.Autorize {
 				confirmPassword := models.ConfirmitadePassword{}
 				if err := confirmPassword.ConfirmPassword(ctx, userIDConv, token, context.Query("conf_pass")); err != nil {
-					newerror.Wrap("confirmPassword.ConfirmPassword", err)
+					newerror.NewAppError("confirmPassword.ConfirmPassword", err, pathToLogFile, isTimeAmPm)
 					return
 				}
 

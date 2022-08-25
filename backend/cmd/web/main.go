@@ -10,7 +10,7 @@ import (
 	"iNote/www/backend/api/subscription"
 	"iNote/www/backend/internal/controllers"
 	"iNote/www/backend/internal/database"
-	newerror "iNote/www/backend/pkg/NewError"
+	newerror "iNote/www/backend/pkg/newerror"
 	"iNote/www/backend/websocket"
 	"log"
 	"net/http"
@@ -19,6 +19,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jmoiron/sqlx"
 )
+
+const pathToLogFile string = "backend/logs/logs.txt"
+const isTimeAmPm bool = true
 
 func initTemplates() *template.Template {
 	var files []string
@@ -30,7 +33,7 @@ func initTemplates() *template.Template {
 	for _, path := range paths {
 		file, err := filepath.Glob(path)
 		if err != nil {
-			newerror.Wrap("filepath.Glob", err)
+			newerror.NewAppError("filepath.Glob", err, pathToLogFile, isTimeAmPm)
 			return nil
 		}
 
@@ -39,7 +42,7 @@ func initTemplates() *template.Template {
 
 	tmpls, err := template.ParseFiles(files...)
 	if err != nil {
-		newerror.Wrap("template.ParseFiles", err)
+		newerror.NewAppError("template.ParseFiles", err, pathToLogFile, isTimeAmPm)
 		return nil
 	}
 
@@ -68,6 +71,7 @@ func handle(ctx *sqlx.DB) {
 
 	//SUBSCRIPTIONS ROUTERS
 	ginRouter.GET("/inBeats", controllers.InBeatsTemplate(ctx))
+	ginRouter.GET("/inBeats/user_:userId", controllers.InBeatsTemplate(ctx))
 
 	// SETTINGS ROUTERS
 	ginRouter.GET("/customize", controllers.SettingsTemplate(ctx))
@@ -141,7 +145,7 @@ func handle(ctx *sqlx.DB) {
 
 	// localhost:8000 or 127.0.0.1:8000
 	if err := ginRouter.Run(":8080"); err != nil {
-		newerror.Wrap("ginRouter.Run(\":8080\")", err)
+		newerror.NewAppError("ginRouter.Run(\":8080\")", err, pathToLogFile, isTimeAmPm)
 	}
 }
 

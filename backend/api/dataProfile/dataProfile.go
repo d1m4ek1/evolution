@@ -1,13 +1,17 @@
 package dataprofile
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/jmoiron/sqlx"
 	"iNote/www/backend/models"
-	"iNote/www/backend/pkg/NewError"
+	"iNote/www/backend/pkg/newerror"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
+	"github.com/jmoiron/sqlx"
 )
+
+const pathToLogFile string = "backend/logs/logs.txt"
+const isTimeAmPm bool = true
 
 // Path to error
 const (
@@ -28,13 +32,13 @@ func sendAllData(ctx *sqlx.DB, context *gin.Context, userId string) {
 
 	userIDConv, err := strconv.ParseInt(userId, 10, 0)
 	if err != nil {
-		newerror.Wrap("strconv.ParseInt", err)
+		newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 		return
 	}
 
 	aboutme, err := models.SelectProfileData(ctx, userIDConv)
 	if err != nil {
-		newerror.Wrap("Qmodels.SelectProfileData", err)
+		newerror.NewAppError("Qmodels.SelectProfileData", err, pathToLogFile, isTimeAmPm)
 		return
 	}
 

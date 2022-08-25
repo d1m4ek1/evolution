@@ -1,7 +1,7 @@
 package models
 
 import (
-	newerror "iNote/www/backend/pkg/NewError"
+	newerror "iNote/www/backend/pkg/newerror"
 
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
@@ -21,7 +21,7 @@ func SelectProfileDefault(ctx *sqlx.DB, userID int64) (name, netStatus, logo, ba
 		    id=$1`, userID).Scan(&name,
 		pq.Array(&position), pq.Array(&audience),
 		&verify, &netStatus); err != nil {
-		newerror.Wrap("ctx.DB.QueryRow", err)
+		newerror.NewAppError("ctx.DB.QueryRow", err, pathToLogFile, isTimeAmPm)
 		return "", "", "", "", false, nil, nil, err
 	}
 
@@ -36,7 +36,7 @@ func SelectProfileDefault(ctx *sqlx.DB, userID int64) (name, netStatus, logo, ba
 		    ids.user_id=$1 
 		  AND 
 		    ids.settings_id=sgs.settings_id`, userID).Scan(&logo, &banner); err != nil {
-		newerror.Wrap("ctx.DB.QueryRow", err)
+		newerror.NewAppError("ctx.DB.QueryRow", err, pathToLogFile, isTimeAmPm)
 		return "", "", "", "", false, nil, nil, err
 	}
 
@@ -51,7 +51,7 @@ func SelectUserDataDefault(ctx *sqlx.DB, userID int64) (name, logo string, err e
 		users
 	WHERE
 		id=$1`, userID).Scan(&name); err != nil {
-		newerror.Wrap("ctx.DB.QueryRow", err)
+		newerror.NewAppError("ctx.DB.QueryRow", err, pathToLogFile, isTimeAmPm)
 		return "", "", nil
 	}
 
@@ -65,7 +65,7 @@ func SelectUserDataDefault(ctx *sqlx.DB, userID int64) (name, logo string, err e
 		    ids.user_id=$1 
 		  AND 
 		    ids.settings_id=sgs.settings_id`, userID).Scan(&logo); err != nil {
-		newerror.Wrap("ctx.DB.QueryRow", err)
+		newerror.NewAppError("ctx.DB.QueryRow", err, pathToLogFile, isTimeAmPm)
 		return "", "", err
 	}
 

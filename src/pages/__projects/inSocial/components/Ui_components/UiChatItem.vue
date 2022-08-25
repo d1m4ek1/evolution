@@ -84,17 +84,17 @@ export default {
     setLogo() {
       if (this.dataFriend.logo !== "") {
         if (this.dataFriend.logo === "not_logo.png") {
-          return "/user_images/profile/logo/notLogo/not_logo.png";
+          return "/user_files/profile/logo/notLogo/not_logo.png";
         }
-        return `/user_images/profile/logo/saved/${this.dataFriend.logo}`;
+        return `/user_files/profile/logo/saved/${this.dataFriend.logo}`;
       }
     },
     setBanner() {
       if (this.dataFriend.banner !== "") {
         if (this.dataFriend.banner === "not_banner.png") {
-          return "/user_images/profile/banner/notBanner/not_banner.png";
+          return "/user_files/profile/banner/notBanner/not_banner.png";
         }
-        return `/user_images/profile/banner/saved/${this.dataFriend.banner}`;
+        return `/user_files/profile/banner/saved/${this.dataFriend.banner}`;
       }
     },
   },

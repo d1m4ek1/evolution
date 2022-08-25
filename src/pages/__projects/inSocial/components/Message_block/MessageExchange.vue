@@ -130,9 +130,9 @@ export default {
     },
     setLogo() {
       if (this.preData.logo === "not_logo.png") {
-        return "/user_images/profile/logo/notLogo/not_logo.png";
+        return "/user_files/profile/logo/notLogo/not_logo.png";
       }
-      return `/user_images/profile/logo/saved/${this.preData.logo}`;
+      return `/user_files/profile/logo/saved/${this.preData.logo}`;
     },
     getDate() {
       const date = new Date();
@@ -154,7 +154,7 @@ export default {
           date: this.getDate(),
         });
 
-        EventMessageSend(
+        websocket.send(
           JSON.stringify({
             chatId: this.$attrs.id,
             sender_id: this.myId,
@@ -163,6 +163,7 @@ export default {
             date: this.getDate(),
           })
         );
+
         this.messageListener.message = "";
         document.querySelector(".write_message").innerHTML = "";
       }
@@ -175,6 +176,7 @@ export default {
     },
     setNewMessages() {
       const chatItem = this.$store.state.chatData[this.arrayIdChat];
+
       if (chatItem.newMessages.length !== 0) {
         let counter = 0;
         for (let i = 0; i < chatItem.newMessages.length; i++) {
@@ -188,14 +190,16 @@ export default {
           for (let i = 0; i < chatItem.newMessages.length; i++) {
             str.push(`${JSON.stringify(chatItem.newMessages[i])}`);
           }
-          EventMessageSend(
-            JSON.stringify({
-              isMessageCheck: true,
-              message: JSON.stringify(str).replace(/^.|.$/g, ""),
-              chatId: this.$attrs.id,
-              recipient_id: this.friendId,
-            })
-          );
+          setTimeout(() => {
+            websocket.send(
+              JSON.stringify({
+                isMessageCheck: true,
+                message: JSON.stringify(str).replace(/^.|.$/g, ""),
+                chatId: this.$attrs.id,
+                recipient_id: this.friendId,
+              })
+            );
+          }, 500);
 
           chatItem.messages.push(...chatItem.newMessages);
           chatItem.newMessages = [];

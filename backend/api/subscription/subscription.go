@@ -2,13 +2,17 @@ package subscription
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/jmoiron/sqlx"
 	"iNote/www/backend/models"
-	newerror "iNote/www/backend/pkg/NewError"
+	newerror "iNote/www/backend/pkg/newerror"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
+	"github.com/jmoiron/sqlx"
 )
+
+const pathToLogFile string = "backend/logs/logs.txt"
+const isTimeAmPm bool = true
 
 func getUserAuthData(context *gin.Context) (string, int64, error) {
 	token, _ := context.Cookie("token")
@@ -20,7 +24,7 @@ func getUserAuthData(context *gin.Context) (string, int64, error) {
 	if userId != "" {
 		userIDConv, err = strconv.ParseInt(userId, 10, 0)
 		if err != nil {
-			newerror.Wrap("strconv.ParseInt", err)
+			newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 			return "", 0, err
 		}
 	}
@@ -32,7 +36,7 @@ func AppendSubscription(ctx *sqlx.DB) gin.HandlerFunc {
 	return gin.HandlerFunc(func(context *gin.Context) {
 		token, userID, err := getUserAuthData(context)
 		if err != nil {
-			newerror.Wrap("getUserAuthData", err)
+			newerror.NewAppError("getUserAuthData", err, pathToLogFile, isTimeAmPm)
 			return
 		}
 
@@ -45,19 +49,19 @@ func AppendSubscription(ctx *sqlx.DB) gin.HandlerFunc {
 				Autorize: false,
 			}
 			if err := user.CheckUserOnSignin(ctx); err != nil {
-				newerror.Wrap("user.CheckUserOnSignin", err)
+				newerror.NewAppError("user.CheckUserOnSignin", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 
 			if user.Autorize {
 				appendUserID, err := strconv.ParseInt(context.Query("append_id"), 10, 0)
 				if err != nil {
-					newerror.Wrap("strconv.ParseInt", err)
+					newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 					return
 				}
 
 				if err := models.SetAppendSubscriber(ctx, userID, appendUserID); err != nil {
-					newerror.Wrap("models.SetAppendSubscriber", err)
+					newerror.NewAppError("models.SetAppendSubscriber", err, pathToLogFile, isTimeAmPm)
 					return
 				}
 			} else {
@@ -73,7 +77,7 @@ func DeleteSubscription(ctx *sqlx.DB) gin.HandlerFunc {
 	return gin.HandlerFunc(func(context *gin.Context) {
 		token, userID, err := getUserAuthData(context)
 		if err != nil {
-			newerror.Wrap("getUserAuthData", err)
+			newerror.NewAppError("getUserAuthData", err, pathToLogFile, isTimeAmPm)
 		}
 
 		if token != "" && userID != 0 {
@@ -83,19 +87,19 @@ func DeleteSubscription(ctx *sqlx.DB) gin.HandlerFunc {
 				Autorize: false,
 			}
 			if err := user.CheckUserOnSignin(ctx); err != nil {
-				newerror.Wrap("user.CheckUserOnSignin", err)
+				newerror.NewAppError("user.CheckUserOnSignin", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 
 			if user.Autorize {
 				deleteUserID, err := strconv.ParseInt(context.Query("delete_id"), 10, 0)
 				if err != nil {
-					newerror.Wrap("strconv.ParseInt", err)
+					newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 					return
 				}
 
 				if err := models.SetDeleteSubscriber(ctx, userID, deleteUserID); err != nil {
-					newerror.Wrap("models.SetDeleteSubscriber", err)
+					newerror.NewAppError("models.SetDeleteSubscriber", err, pathToLogFile, isTimeAmPm)
 					return
 				}
 			} else {
@@ -111,13 +115,13 @@ func CheckSubscriber(ctx *sqlx.DB) gin.HandlerFunc {
 	return gin.HandlerFunc(func(context *gin.Context) {
 		token, userID, err := getUserAuthData(context)
 		if err != nil {
-			newerror.Wrap("getUserAuthData", err)
+			newerror.NewAppError("getUserAuthData", err, pathToLogFile, isTimeAmPm)
 		}
 
 		if token != "" && userID != 0 {
 			isSubscriber, err := models.SelectSubscriber(ctx, userID, context.Query("check_id"))
 			if err != nil {
-				newerror.Wrap("models.SelectSubscriber", err)
+				newerror.NewAppError("models.SelectSubscriber", err, pathToLogFile, isTimeAmPm)
 				context.JSON(http.StatusOK, gin.H{
 					"isSubscriber": false,
 				})
@@ -139,13 +143,13 @@ func CountSubscriber(ctx *sqlx.DB) gin.HandlerFunc {
 	return gin.HandlerFunc(func(context *gin.Context) {
 		userID, err := strconv.ParseInt(context.Query("check_id"), 10, 0)
 		if err != nil {
-			newerror.Wrap("strconv.ParseInt", err)
+			newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 			return
 		}
 
 		isCount, err := models.SelectCountSubscriber(ctx, userID)
 		if err != nil {
-			newerror.Wrap("models.SelectSubscriber", err)
+			newerror.NewAppError("models.SelectSubscriber", err, pathToLogFile, isTimeAmPm)
 			context.JSON(http.StatusOK, gin.H{
 				"isCount": 0,
 			})

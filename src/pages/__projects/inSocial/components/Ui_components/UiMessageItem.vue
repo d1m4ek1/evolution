@@ -91,15 +91,15 @@ export default {
   computed: {
     setLogo() {
       if (this.logo === "not_logo.png") {
-        return "/user_images/profile/logo/notLogo/not_logo.png";
+        return "/user_files/profile/logo/notLogo/not_logo.png";
       }
-      return `/user_images/profile/logo/saved/${this.logo}`;
+      return `/user_files/profile/logo/saved/${this.logo}`;
     },
     setBanner() {
       if (this.banner === "not_banner.png") {
-        return "/user_images/profile/banner/notBanner/not_banner.png";
+        return "/user_files/profile/banner/notBanner/not_banner.png";
       }
-      return `/user_images/profile/banner/saved/${this.banner}`;
+      return `/user_files/profile/banner/saved/${this.banner}`;
     },
   },
 };

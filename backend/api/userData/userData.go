@@ -1,13 +1,17 @@
 package userdata
 
 import (
+	"iNote/www/backend/models"
+	"iNote/www/backend/pkg/general"
+	"iNote/www/backend/pkg/newerror"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jmoiron/sqlx"
-	"iNote/www/backend/models"
-	"iNote/www/backend/pkg/NewError"
-	"iNote/www/backend/pkg/general"
-	"net/http"
 )
+
+const pathToLogFile string = "backend/logs/logs.txt"
+const isTimeAmPm bool = true
 
 type DataArray struct {
 	Position []string `json:"position"`
@@ -21,7 +25,7 @@ func profileDefault(ctx *sqlx.DB, id string) (general.ProfileData, int64, error)
 
 	isVerify, err := models.CheckVerifByCustomID(ctx, id)
 	if err != nil {
-		newerror.Wrap("models.CheckVerifByCustomID", err)
+		newerror.NewAppError("models.CheckVerifByCustomID", err, pathToLogFile, isTimeAmPm)
 		return general.ProfileData{}, 0, err
 	}
 
@@ -29,7 +33,7 @@ func profileDefault(ctx *sqlx.DB, id string) (general.ProfileData, int64, error)
 		pdd.Name, pdd.NetworkStatus, pdd.Logo, pdd.Banner, pdd.Verif,
 			dataArray.Position, dataArray.Audience, err = models.SelectProfileDefault(ctx, isVerify)
 		if err != nil {
-			newerror.Wrap("models.SelectProfileDefault", err)
+			newerror.NewAppError("models.SelectProfileDefault", err, pathToLogFile, isTimeAmPm)
 			return general.ProfileData{}, 0, err
 		}
 
@@ -51,7 +55,7 @@ func GetUserDataStatic(ctx *sqlx.DB, token, userUrlId string, context *gin.Conte
 	if token != "" {
 		if isVerify != 0 && token != "" {
 			if err := profileDefaultData.ProfileUser(ctx, isVerify, token); err != nil {
-				newerror.Wrap("profileDefaultData.ProfileUser", err)
+				newerror.NewAppError("profileDefaultData.ProfileUser", err, pathToLogFile, isTimeAmPm)
 				return general.ProfileData{}
 			}
 

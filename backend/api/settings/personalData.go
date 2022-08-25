@@ -2,13 +2,14 @@ package settings
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/jmoiron/sqlx"
 	"iNote/www/backend/models"
-	"iNote/www/backend/pkg/NewError"
+	"iNote/www/backend/pkg/newerror"
 	"net/http"
 	"strconv"
 	"strings"
+
+	"github.com/gin-gonic/gin"
+	"github.com/jmoiron/sqlx"
 )
 
 type personalData struct {
@@ -31,7 +32,7 @@ func getOldPersonalData(ctx *sqlx.DB, context *gin.Context, userId int64) {
 
 	userData.Email, backupKeys, err = models.SelectPersonalData(ctx, userId)
 	if err != nil {
-		newerror.Wrap("models.SelectPersonalData", err)
+		newerror.NewAppError("models.SelectPersonalData", err, pathToLogFile, isTimeAmPm)
 		return
 	}
 
@@ -46,7 +47,7 @@ func GetPersonalData(ctx *sqlx.DB) gin.HandlerFunc {
 		userId, _ := context.Cookie("userId")
 		userIDConv, err := strconv.ParseInt(userId, 10, 0)
 		if err != nil {
-			newerror.Wrap("strconv.ParseInt", err)
+			newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 			return
 		}
 
@@ -57,7 +58,7 @@ func GetPersonalData(ctx *sqlx.DB) gin.HandlerFunc {
 				Autorize: false,
 			}
 			if err := user.CheckUserOnSignin(ctx); err != nil {
-				newerror.Wrap("user.CheckUserOnSignin", err)
+				newerror.NewAppError("user.CheckUserOnSignin", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 
@@ -84,7 +85,7 @@ func SetPersonalData(ctx *sqlx.DB, context *gin.Context, userID int64) {
 			context.Query("backupkey_four"))
 
 		if err := models.SetBackupKeys(ctx, backupKey, userID); err != nil {
-			newerror.Wrap("Query at db: 1", err)
+			newerror.NewAppError("Query at db: 1", err, pathToLogFile, isTimeAmPm)
 			return
 		}
 	}
@@ -97,7 +98,7 @@ func SetPersonalData(ctx *sqlx.DB, context *gin.Context, userID int64) {
 	}
 
 	if err := models.SetPersonalData(ctx, strings.Join(personaltpl, ", "), userID); err != nil {
-		newerror.Wrap("models.SetPersonalData", err)
+		newerror.NewAppError("models.SetPersonalData", err, pathToLogFile, isTimeAmPm)
 		return
 	}
 }
@@ -108,7 +109,7 @@ func SavePersonalData(ctx *sqlx.DB) gin.HandlerFunc {
 		userId, _ := context.Cookie("userId")
 		userIDConv, err := strconv.ParseInt(userId, 10, 0)
 		if err != nil {
-			newerror.Wrap("strconv.ParseInt", err)
+			newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 			return
 		}
 
@@ -119,7 +120,7 @@ func SavePersonalData(ctx *sqlx.DB) gin.HandlerFunc {
 				Autorize: false,
 			}
 			if err := user.CheckUserOnSignin(ctx); err != nil {
-				newerror.Wrap("user.CheckUserOnSignin", err)
+				newerror.NewAppError("user.CheckUserOnSignin", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 

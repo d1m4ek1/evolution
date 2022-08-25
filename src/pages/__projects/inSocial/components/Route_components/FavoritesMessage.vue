@@ -25,7 +25,7 @@
             <div class="message_item__logo online">
               <img
                 class="lazyload"
-                data-src="/user_images/profile/logo/notLogo/not_logo.png"
+                data-src="/user_files/profile/logo/notLogo/not_logo.png"
               />
             </div>
             <div class="message_item__name">
@@ -38,7 +38,7 @@
           <div class="message_item__banner">
             <img
               class="lazyload"
-              data-src="/user_images/profile/banner/notBanner/not_banner.png"
+              data-src="/user_files/profile/banner/notBanner/not_banner.png"
             />
           </div>
         </div>

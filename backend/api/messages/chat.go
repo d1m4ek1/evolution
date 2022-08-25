@@ -1,13 +1,17 @@
 package messages
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/jmoiron/sqlx"
 	"iNote/www/backend/models"
-	newerror "iNote/www/backend/pkg/NewError"
+	newerror "iNote/www/backend/pkg/newerror"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
+	"github.com/jmoiron/sqlx"
 )
+
+const pathToLogFile string = "backend/logs/logs.txt"
+const isTimeAmPm bool = true
 
 func CheckChat(ctx *sqlx.DB) gin.HandlerFunc {
 	return gin.HandlerFunc(func(context *gin.Context) {
@@ -17,7 +21,7 @@ func CheckChat(ctx *sqlx.DB) gin.HandlerFunc {
 		userId, _ := context.Cookie("userId")
 		userIDConv, err := strconv.ParseInt(userId, 10, 0)
 		if err != nil {
-			newerror.Wrap("strconv.ParseInt", err)
+			newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 			return
 		}
 
@@ -30,14 +34,14 @@ func CheckChat(ctx *sqlx.DB) gin.HandlerFunc {
 				Autorize: false,
 			}
 			if err := user.CheckUserOnSignin(ctx); err != nil {
-				newerror.Wrap("user.CheckUserOnSignin", err)
+				newerror.NewAppError("user.CheckUserOnSignin", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 
 			if context.Query("user_id_two") != "" {
 				userIdTwo, err = strconv.ParseInt(context.Query("user_id_two"), 10, 0)
 				if err != nil {
-					newerror.Wrap("strconv.ParseInt", err)
+					newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 					return
 				}
 			}
@@ -45,7 +49,7 @@ func CheckChat(ctx *sqlx.DB) gin.HandlerFunc {
 			if context.Query("chat_id") != "" {
 				chatID, err = strconv.ParseInt(context.Query("chat_id"), 10, 0)
 				if err != nil {
-					newerror.Wrap("strconv.ParseInt", err)
+					newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 					return
 				}
 			}
@@ -53,7 +57,7 @@ func CheckChat(ctx *sqlx.DB) gin.HandlerFunc {
 			if user.Autorize {
 				chatData, err := models.SelectChat(ctx, userIDConv, userIdTwo, chatID)
 				if err != nil {
-					newerror.Wrap("models.SelectChat", err)
+					newerror.NewAppError("models.SelectChat", err, pathToLogFile, isTimeAmPm)
 					return
 				}
 
@@ -71,7 +75,7 @@ func GetAllChats(ctx *sqlx.DB) gin.HandlerFunc {
 		if token != "" && userId != "" {
 			userIDConv, err := strconv.ParseInt(userId, 10, 0)
 			if err != nil {
-				newerror.Wrap("strconv.ParseInt", err)
+				newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 			user := models.CheckSignin{
@@ -80,14 +84,14 @@ func GetAllChats(ctx *sqlx.DB) gin.HandlerFunc {
 				Autorize: false,
 			}
 			if err := user.CheckUserOnSignin(ctx); err != nil {
-				newerror.Wrap("user.CheckUserOnSignin", err)
+				newerror.NewAppError("user.CheckUserOnSignin", err, pathToLogFile, isTimeAmPm)
 				return
 			}
 
 			if user.Autorize {
 				chatDataItems, err := models.SelectChatItems(ctx, userIDConv)
 				if err != nil {
-					newerror.Wrap("models.SelectChatItems", err)
+					newerror.NewAppError("models.SelectChatItems", err, pathToLogFile, isTimeAmPm)
 					return
 				}
 

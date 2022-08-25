@@ -1,18 +1,19 @@
 package authorization
 
 import (
+	"iNote/www/backend/models"
+	"iNote/www/backend/pkg/general"
+	"iNote/www/backend/pkg/newerror"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jmoiron/sqlx"
-	"iNote/www/backend/models"
-	"iNote/www/backend/pkg/NewError"
-	"iNote/www/backend/pkg/general"
-	"net/http"
 )
 
 func createAccount(ctx *sqlx.DB, context *gin.Context, s general.SignUpData) {
 	user, err := models.CheckLogin(ctx, s.Login)
 	if err != nil {
-		newerror.Wrap("models.CheckLogin", err)
+		newerror.NewAppError("models.CheckLogin", err, pathToLogFile, isTimeAmPm)
 		return
 	}
 
@@ -25,7 +26,7 @@ func createAccount(ctx *sqlx.DB, context *gin.Context, s general.SignUpData) {
 
 	if !user {
 		if err := models.CreateAccount(ctx, s.Login, s.Password, s.Email, s.Token, s.Nickname); err != nil {
-			newerror.Wrap("models.CreateAccount", err)
+			newerror.NewAppError("models.CreateAccount", err, pathToLogFile, isTimeAmPm)
 			return
 		}
 

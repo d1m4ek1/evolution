@@ -3,10 +3,11 @@ package models
 import (
 	"encoding/json"
 	"fmt"
+	newerror "iNote/www/backend/pkg/newerror"
+	"strings"
+
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
-	newerror "iNote/www/backend/pkg/NewError"
-	"strings"
 )
 
 type UserCardMessagesItems struct {
@@ -58,7 +59,7 @@ func selectUserCardSubs(ctx *sqlx.DB, queryTpl string) ([]UserCardMessagesItems,
 	    settings s
 	WHERE %s`, queryTpl))
 	if err != nil {
-		newerror.Wrap("SelectUserCardSubs -> ctx.Query", err)
+		newerror.NewAppError("SelectUserCardSubs -> ctx.Query", err, pathToLogFile, isTimeAmPm)
 		return nil, err
 	}
 	defer rows.Close()
@@ -66,7 +67,7 @@ func selectUserCardSubs(ctx *sqlx.DB, queryTpl string) ([]UserCardMessagesItems,
 	for rows.Next() {
 		var i UserCardMessagesItems
 		if err := rows.Scan(&i.UserId, &i.Name, &i.NetStatus, &i.Logo, &i.Banner); err != nil {
-			newerror.Wrap("rows.Scan", err)
+			newerror.NewAppError("rows.Scan", err, pathToLogFile, isTimeAmPm)
 			return nil, err
 		}
 
@@ -90,7 +91,7 @@ func SelectUserCardMessages(ctx *sqlx.DB, userID int64) ([]UserCardMessagesItems
 	  	users
 	WHERE
 	    user_id=$1`, userID).Scan(pq.Array(&isSubscriptions), pq.Array(&isSubscribers)); err != nil {
-		newerror.Wrap("ctx.DB.QueryRow", err)
+		newerror.NewAppError("ctx.DB.QueryRow", err, pathToLogFile, isTimeAmPm)
 		return nil, nil, err
 	}
 
@@ -98,7 +99,7 @@ func SelectUserCardMessages(ctx *sqlx.DB, userID int64) ([]UserCardMessagesItems
 		isTplQuerySubscriptions = strings.Join(generateTplSubs(isSubscriptions), " OR ")
 		isCardSubscriptions, err = selectUserCardSubs(ctx, isTplQuerySubscriptions)
 		if err != nil {
-			newerror.Wrap("isCardSubscriptions -> selectUserCardSubs", err)
+			newerror.NewAppError("isCardSubscriptions -> selectUserCardSubs", err, pathToLogFile, isTimeAmPm)
 			return nil, nil, err
 		}
 	}
@@ -107,7 +108,7 @@ func SelectUserCardMessages(ctx *sqlx.DB, userID int64) ([]UserCardMessagesItems
 		isTplQuerySubscribers = strings.Join(generateTplSubs(isSubscribers), " OR ")
 		isCardSubscribers, err = selectUserCardSubs(ctx, isTplQuerySubscribers)
 		if err != nil {
-			newerror.Wrap("isCardSubscribers -> selectUserCardSubs", err)
+			newerror.NewAppError("isCardSubscribers -> selectUserCardSubs", err, pathToLogFile, isTimeAmPm)
 			return nil, nil, err
 		}
 	}
@@ -124,7 +125,7 @@ func selectChatByID(ctx *sqlx.DB, chatID int64) (ChatData, error) {
 				chats
 		WHERE
 			chat_id=$1`, chatID); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return ChatData{}, err
 	}
 	return chatData, nil
@@ -147,7 +148,7 @@ func getUserDataChat(ctx *sqlx.DB, userIDOne, userIDTwo int64) (string, string, 
 	    settings AS s
 	WHERE
 	    u.user_id=$1 AND s.settings_id=(SELECT settings_id FROM identifiers WHERE user_id=$2)`, userIDOne, userIDOne); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return "", "", err
 	}
 
@@ -163,19 +164,19 @@ func getUserDataChat(ctx *sqlx.DB, userIDOne, userIDTwo int64) (string, string, 
 	    settings AS s
 	WHERE
 	    u.user_id=$1 AND s.settings_id=(SELECT settings_id FROM identifiers WHERE user_id=$2)`, userIDTwo, userIDTwo); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return "", "", err
 	}
 
 	jsonCompanionOne, err = json.Marshal(companionOne)
 	if err != nil {
-		newerror.Wrap("json.Marshal", err)
+		newerror.NewAppError("json.Marshal", err, pathToLogFile, isTimeAmPm)
 		return "", "", err
 	}
 
 	jsonCompanionTwo, err = json.Marshal(companionTwo)
 	if err != nil {
-		newerror.Wrap("json.Marshal", err)
+		newerror.NewAppError("json.Marshal", err, pathToLogFile, isTimeAmPm)
 		return "", "", err
 	}
 
@@ -190,7 +191,7 @@ func SelectChat(ctx *sqlx.DB, userIDOne, userIDTwo, chatID int64) (ChatData, err
 	if chatID != 0 {
 		chatData, err := selectChatByID(ctx, chatID)
 		if err != nil {
-			newerror.Wrap("selectChatByID", err)
+			newerror.NewAppError("selectChatByID", err, pathToLogFile, isTimeAmPm)
 			return ChatData{}, err
 		}
 		return chatData, nil
@@ -206,13 +207,13 @@ func SelectChat(ctx *sqlx.DB, userIDOne, userIDTwo, chatID int64) (ChatData, err
 			chats
 	WHERE
     chat_id=$1 OR chat_id=$2`, chatIDVariantOne, chatIDVariantTwo); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return ChatData{}, err
 	}
 
 	userDataOne, userDataTwo, err := getUserDataChat(ctx, userIDOne, userIDTwo)
 	if err != nil {
-		newerror.Wrap("getUserDataChat", err)
+		newerror.NewAppError("getUserDataChat", err, pathToLogFile, isTimeAmPm)
 		return ChatData{}, err
 	}
 
@@ -222,7 +223,7 @@ func SelectChat(ctx *sqlx.DB, userIDOne, userIDTwo, chatID int64) (ChatData, err
 		chats (user_id_one, user_id_two, chat_id, user_data_one, user_data_two)
 		VALUES 
 		($1, $2, $3, $4, $5)`, userIDOne, userIDTwo, chatIDVariantOne, userDataOne, userDataTwo); err != nil {
-			newerror.Wrap("ctx.DB.Exec", err)
+			newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 			return ChatData{}, err
 		}
 	}
@@ -234,7 +235,7 @@ func SelectChat(ctx *sqlx.DB, userIDOne, userIDTwo, chatID int64) (ChatData, err
 				chats
 		WHERE
 			chat_id=$1 OR chat_id=$2`, chatIDVariantOne, chatIDVariantTwo); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return ChatData{}, err
 	}
 
@@ -251,7 +252,7 @@ func SelectChatItems(ctx *sqlx.DB, userID int64) ([]ChatData, error) {
 	    chats
 	WHERE
 	    user_id_one=$1 OR user_id_two=$2`, userID, userID); err != nil {
-		newerror.Wrap("ctx.Select", err)
+		newerror.NewAppError("ctx.Select", err, pathToLogFile, isTimeAmPm)
 		return nil, err
 	}
 
@@ -266,7 +267,7 @@ func SetNewMessage(ctx *sqlx.DB, chatID string, message string) error {
 	    new_messages=array_append(new_messages, $1)
 	WHERE
 	    chat_id=$2`, message, chatID); err != nil {
-		newerror.Wrap("ctx.DB.Exec", err)
+		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 	return nil
@@ -281,7 +282,7 @@ func SetMessage(ctx *sqlx.DB, chatID string, message string) error {
 			new_messages=null
 	WHERE
 	    chat_id=$1`, message), chatID); err != nil {
-		newerror.Wrap("ctx.DB.Exec", err)
+		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 	return nil

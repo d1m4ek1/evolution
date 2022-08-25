@@ -2,9 +2,10 @@ package models
 
 import (
 	"fmt"
+	newerror "iNote/www/backend/pkg/newerror"
+
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
-	newerror "iNote/www/backend/pkg/NewError"
 )
 
 type SettingsProfileData struct {
@@ -30,7 +31,7 @@ func SetBackupKeys(ctx *sqlx.DB, tplKeys string, userID int64) error {
 		    backup_keys=$1 
 		WHERE 
 		    id=$2`, tplKeys, userID); err != nil {
-		newerror.Wrap("ctx.DB.Exec", err)
+		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 	return nil
@@ -44,7 +45,7 @@ func SetPersonalData(ctx *sqlx.DB, tplPersonal string, userID int64) error {
 				%s 
 		WHERE 
 				id=$1`, tplPersonal), userID); err != nil {
-		newerror.Wrap("ctx.DB.Exec", err)
+		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 	return nil
@@ -59,7 +60,7 @@ func SelectPersonalData(ctx *sqlx.DB, userID int64) (email string, backupKeys []
 		    users_data 
 		WHERE 
 		    id=$1`, userID).Scan(&email, pq.Array(&backupKeys)); err != nil {
-		newerror.Wrap("ctx.DB.QueryRow", err)
+		newerror.NewAppError("ctx.DB.QueryRow", err, pathToLogFile, isTimeAmPm)
 		return "", nil, err
 	}
 	return email, backupKeys, nil
@@ -74,7 +75,7 @@ func SetSettingsProfile(ctx *sqlx.DB, tplSettings, tplConnection, tplUser string
 				%s 
 		WHERE 
 				settings_id=(SELECT settings_id FROM identifiers WHERE user_id=$1)`, tplSettings), userID); err != nil {
-			newerror.Wrap("ctx.DB.Exec", err)
+			newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 			return err
 		}
 	}
@@ -87,7 +88,7 @@ func SetSettingsProfile(ctx *sqlx.DB, tplSettings, tplConnection, tplUser string
 				%s 
 		WHERE 
 				connection_id=(SELECT connection_id FROM identifiers WHERE user_id=$1)`, tplConnection), userID); err != nil {
-			newerror.Wrap("ctx.DB.Exec", err)
+			newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 			return err
 		}
 	}
@@ -100,7 +101,7 @@ func SetSettingsProfile(ctx *sqlx.DB, tplSettings, tplConnection, tplUser string
 				%s 
 		WHERE 
 				user_id=$1`, tplUser), userID); err != nil {
-			newerror.Wrap("ctx.DB.Exec", err)
+			newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 			return err
 		}
 	}
@@ -119,7 +120,7 @@ func SelectFilePath(ctx *sqlx.DB, keyFile string, userID int64) (path string, er
 			ids.user_id=$1 
 		AND 
 			ids.settings_id=sgs.settings_id`, keyFile), userID); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return "", err
 	}
 	return path, nil
@@ -133,7 +134,7 @@ func SetFilePath(ctx *sqlx.DB, keyFile, filePath string, userID int64) error {
 				%s=$1
 		WHERE 
 			settings_id=(SELECT settings_id FROM identifiers WHERE user_id=$2)`, keyFile), filePath, userID); err != nil {
-		newerror.Wrap("ctx.DB.Exec", err)
+		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 	return nil
@@ -147,7 +148,7 @@ func SelectProfileSettings(ctx *sqlx.DB, userID int64) (spd SettingsProfileData,
 		    users 
 		WHERE 
 		    user_id=$1`, userID); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return SettingsProfileData{}, err
 	}
 
@@ -166,7 +167,7 @@ func SelectProfileSettings(ctx *sqlx.DB, userID int64) (spd SettingsProfileData,
 		    t2.user_id=$1 
 		  AND 
 		    t2.settings_id=t1.settings_id`, userID); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return SettingsProfileData{}, err
 	}
 
@@ -184,7 +185,7 @@ func SelectProfileSettings(ctx *sqlx.DB, userID int64) (spd SettingsProfileData,
 		    t2.user_id=$1 
 		  AND 
 		    t2.connection_id=t1.connection_id`, userID); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return SettingsProfileData{}, err
 	}
 

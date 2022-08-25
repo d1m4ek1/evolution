@@ -2,10 +2,11 @@ package models
 
 import (
 	"fmt"
-	"github.com/jmoiron/sqlx"
-	newerror "iNote/www/backend/pkg/NewError"
+	newerror "iNote/www/backend/pkg/newerror"
 	"math/rand"
 	"time"
+
+	"github.com/jmoiron/sqlx"
 )
 
 type CheckSignin struct {
@@ -28,7 +29,7 @@ func (c *CheckSignin) CheckUserOnSignin(ctx *sqlx.DB) error {
 		    id=$1 
 		  AND 
 		    token=$2;`, c.Id, c.Token); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 	return nil
@@ -46,7 +47,7 @@ func (c *ConfirmitadePassword) ConfirmPassword(ctx *sqlx.DB, userId int64, token
 		    token=$2 
 		  AND 
 		    password=$3`, userId, token, confPass); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 	return nil
@@ -55,7 +56,7 @@ func (c *ConfirmitadePassword) ConfirmPassword(ctx *sqlx.DB, userId int64, token
 func SignInData(ctx *sqlx.DB, login, password, newToken string) (userID int64, netStatus string, err error) {
 	isVerify, err := VerifUser(ctx, login, password)
 	if err != nil {
-		newerror.Wrap("VerifUser", err)
+		newerror.NewAppError("VerifUser", err, pathToLogFile, isTimeAmPm)
 		return 0, "", nil
 	}
 
@@ -73,18 +74,18 @@ func SignInData(ctx *sqlx.DB, login, password, newToken string) (userID int64, n
 			    ud.password=$2
 				AND
 			    ud.id=u.id`, login, password).Scan(&userID, &netStatus); err != nil {
-			newerror.Wrap("ctx.DB.QueryRow", err)
+			newerror.NewAppError("ctx.DB.QueryRow", err, pathToLogFile, isTimeAmPm)
 			return 0, "", nil
 		}
 
 		if userID != 0 && newToken != "" {
 			if err := SetNewToken(ctx, userID, newToken); err != nil {
-				newerror.Wrap("SetNewToken", err)
+				newerror.NewAppError("SetNewToken", err, pathToLogFile, isTimeAmPm)
 				return 0, "", nil
 			}
 
 			if err := SetNetworkStatusOnline(ctx, userID); err != nil {
-				newerror.Wrap("SetNetworkStatusOnline", err)
+				newerror.NewAppError("SetNetworkStatusOnline", err, pathToLogFile, isTimeAmPm)
 				return 0, "", err
 			}
 		}
@@ -101,7 +102,7 @@ func SetNewToken(ctx *sqlx.DB, userID int64, newToken string) error {
 		    token=$1 
 		WHERE 
 		    users_data.id=$2`, newToken, userID); err != nil {
-		newerror.Wrap("ctx.DB.Exec", err)
+		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 	return nil
@@ -117,7 +118,7 @@ func SetNetworkStatusOnline(ctx *sqlx.DB, userID int64) error {
 		    user_id=$1 
 		  AND 
 		    net_status='offline'`, userID); err != nil {
-		newerror.Wrap("ctx.DB.Exec", err)
+		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 	return nil
@@ -133,7 +134,7 @@ func SetNetworkStatusOffline(ctx *sqlx.DB, userID int64) error {
 		    id=$1 
 		  AND 
 		    net_status<>'offline'`, userID); err != nil {
-		newerror.Wrap("ctx.DB.Exec", err)
+		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 	return nil
@@ -149,7 +150,7 @@ func UserSignOut(ctx *sqlx.DB, userId string) error {
 		    id=$1 
 		  AND 
 		    net_status<>'offline'`, userId); err != nil {
-		newerror.Wrap("ctx.DB.Exec", err)
+		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 
@@ -160,7 +161,7 @@ func UserSignOut(ctx *sqlx.DB, userId string) error {
 		    token=DEFAULT 
 		WHERE 
 		    id=$1`, userId); err != nil {
-		newerror.Wrap("ctx.DB.Exec", err)
+		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 	return nil
@@ -176,7 +177,7 @@ func CheckLogin(ctx *sqlx.DB, login string) (bool, error) {
 		    users_data 
 		WHERE 
 		    login=$1`, login); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return user, err
 	}
 	return user, nil
@@ -184,23 +185,7 @@ func CheckLogin(ctx *sqlx.DB, login string) (bool, error) {
 
 var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
-func setConnectionIdentificate(id int) string {
-	var length int = 63
-
-	rand.Seed(time.Now().UnixNano())
-
-	var token = make([]rune, length)
-
-	for i := range token {
-		token[i] = letters[rand.Intn(len(letters))]
-	}
-
-	return string(token) + fmt.Sprint(id)
-}
-
-func setSettingsIdentificate(id int) string {
-	var length int = 63
-
+func setIdentificate(id int, length int) string {
 	rand.Seed(time.Now().UnixNano())
 
 	var token = make([]rune, length)
@@ -221,27 +206,28 @@ func CreateAccount(ctx *sqlx.DB, login, password, email, token, nickname string)
 		    ($1, $2, $3, $4) 
 		RETURNING 
 		    id`, login, password, email, token); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 
 	if _, err := ctx.DB.Exec(`INSERT INTO users (user_id, name) VALUES ($1, $2)`, identificate, nickname); err != nil {
-		newerror.Wrap("ctx.Get", err)
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 
-	var connectionId string = setConnectionIdentificate(identificate)
-	var settingsId string = setSettingsIdentificate(identificate)
+	var connectionID = setIdentificate(identificate, 63)
+	var settingsID = setIdentificate(identificate, 63)
+	var albumsID = setIdentificate(identificate, 127)
 
 	if _, err := ctx.DB.Exec(`
 		INSERT INTO 
-		    identifiers (user_id, connection_id, settings_id) 
+		    identifiers (user_id, connection_id, settings_id, albums_id) 
 		VALUES 
-		    ($1, $2, $3)`,
+		    ($1, $2, $3, $4)`,
 		identificate,
-		connectionId,
-		settingsId); err != nil {
-		newerror.Wrap("ctx.DB.Exec", err)
+		connectionID,
+		settingsID, albumsID); err != nil {
+		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 
@@ -250,8 +236,8 @@ func CreateAccount(ctx *sqlx.DB, login, password, email, token, nickname string)
 		    connection (connection_id) 
 		VALUES 
 		    ($1)`,
-		connectionId); err != nil {
-		newerror.Wrap("ctx.DB.Exec", err)
+		connectionID); err != nil {
+		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 
@@ -260,8 +246,8 @@ func CreateAccount(ctx *sqlx.DB, login, password, email, token, nickname string)
 		    settings (settings_id) 
 		VALUES 
 		    ($1)`,
-		settingsId); err != nil {
-		newerror.Wrap("ctx.DB.Exec", err)
+		settingsID); err != nil {
+		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
 		return err
 	}
 

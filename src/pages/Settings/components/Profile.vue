@@ -116,10 +116,7 @@
         <h3>Баннер сейчас</h3>
         <div class="inlineblock">
           <div class="inlineblock_left banner">
-            <img
-              :src="userData.banner.old"
-              alt="Нет баннера"
-            />
+            <img :src="userData.banner.old" alt="Нет баннера" />
           </div>
           <div class="upload_content">
             <input
@@ -135,10 +132,7 @@
               </template>
               <template v-else>
                 <div class="img">
-                  <img
-                    :src="userData.banner.preview"
-                    alt="Нет баннера"
-                  />
+                  <img :src="userData.banner.preview" alt="Нет баннера" />
                 </div>
               </template>
             </label>
@@ -196,6 +190,10 @@
     <div class="change_section">
       <div class="change_section__title">
         <h2>Изменить контактную информацию</h2>
+        <p>
+          Каждое поле будет выделяться логотипом социальной сети
+          <span class="note"></span>
+        </p>
       </div>
       <div class="change_content">
         <h3>Telegram</h3>
@@ -291,61 +289,61 @@ export default {
     return {
       userData: {
         logo: {
-          old: '',
-          preview: '',
+          old: "",
+          preview: "",
           file: null,
-          error: '',
-          new: '',
+          error: "",
+          new: "",
         },
         banner: {
-          old: '',
-          preview: '',
+          old: "",
+          preview: "",
           file: null,
-          error: '',
-          new: '',
+          error: "",
+          new: "",
         },
         name: {
-          old: '',
-          new: '',
+          old: "",
+          new: "",
         },
         language: {
-          old: '',
-          new: '',
+          old: "",
+          new: "",
         },
         aboutMe: {
           title: {
-            old: '',
-            new: '',
+            old: "",
+            new: "",
           },
           content: {
-            old: '',
-            new: '',
+            old: "",
+            new: "",
           },
         },
         theme_page: {
-          old: '',
-          new: '',
+          old: "",
+          new: "",
         },
         connection: {
           telegram: {
-            old: '',
-            new: '',
+            old: "",
+            new: "",
           },
           instagram: {
-            old: '',
-            new: '',
+            old: "",
+            new: "",
           },
           facebook: {
-            old: '',
-            new: '',
+            old: "",
+            new: "",
           },
           vk: {
-            old: '',
-            new: '',
+            old: "",
+            new: "",
           },
           tiktok: {
-            old: '',
-            new: '',
+            old: "",
+            new: "",
           },
         },
       },
@@ -353,28 +351,28 @@ export default {
   },
   methods: {
     traceFile(e = Object, key = String) {
-      const extens = ['.png', '.jpg', '.jpeg', '.gif'];
+      const extens = [".png", ".jpg", ".jpeg", ".gif"];
       let extenErrorCount = 0;
 
       extens.forEach((exten = String) => {
         if (e.target.files[0].name.indexOf(exten) !== -1) {
-          const fileName = e.target.files[0].name.split('.');
+          const fileName = e.target.files[0].name.split(".");
 
           if (
-            fileName[fileName.length - 1] === 'png'
-            || fileName[fileName.length - 1] === 'jpg'
-            || fileName[fileName.length - 1] === 'jpeg'
-            || fileName[fileName.length - 1] === 'gif'
+            fileName[fileName.length - 1] === "png" ||
+            fileName[fileName.length - 1] === "jpg" ||
+            fileName[fileName.length - 1] === "jpeg" ||
+            fileName[fileName.length - 1] === "gif"
           ) {
             this.userData[key].new = e.target.files[0].name;
-            this.userData[key].error = '';
+            this.userData[key].error = "";
             this.userData[key].file = e.target.files;
 
             const reader = new FileReader();
             this.addListeners(reader, key);
             reader.readAsDataURL(e.target.files[0]);
           } else {
-            this.userData[key].error = 'Файл не является изображением';
+            this.userData[key].error = "Файл не является изображением";
           }
         } else {
           extenErrorCount += 1;
@@ -382,37 +380,39 @@ export default {
       });
 
       if (extenErrorCount === 4) {
-        this.userData[key].error = 'Файл не является изображением';
+        this.userData[key].error = "Файл не является изображением";
       }
     },
     validateLogoBanner(logo = String, banner = String) {
-      if (logo === 'not_logo.png') {
-        this.userData.logo.old = '/user_images/profile/logo/notLogo/not_logo.png';
+      if (logo === "not_logo.png") {
+        this.userData.logo.old =
+          "/user_files/profile/logo/notLogo/not_logo.png";
       } else {
-        this.userData.logo.old = `/user_images/profile/logo/saved/${logo}`;
+        this.userData.logo.old = `/user_files/profile/logo/saved/${logo}`;
       }
-      if (banner === 'not_banner.png') {
-        this.userData.banner.old = '/user_images/profile/banner/notBanner/not_banner.png';
+      if (banner === "not_banner.png") {
+        this.userData.banner.old =
+          "/user_files/profile/banner/notBanner/not_banner.png";
       } else {
-        this.userData.banner.old = `/user_images/profile/banner/saved/${banner}`;
+        this.userData.banner.old = `/user_files/profile/banner/saved/${banner}`;
       }
     },
     validateLanguage(lang = String) {
       switch (lang) {
-        case 'ru':
-          this.userData.language.old = 'Русский';
+        case "ru":
+          this.userData.language.old = "Русский";
           break;
-        case 'en':
-          this.userData.language.old = 'English';
+        case "en":
+          this.userData.language.old = "English";
           break;
 
         default:
-          this.userData.language.old = 'Не задано';
+          this.userData.language.old = "Не задано";
           break;
       }
     },
     getUserData() {
-      fetch('/api/get_settings/profile').then((response = Object) => {
+      fetch("/api/get_settings/profile").then((response = Object) => {
         response.json().then((data = Object) => {
           this.validateLogoBanner(data.logo, data.banner);
           this.validateLanguage(data.language);
@@ -431,74 +431,77 @@ export default {
       });
     },
     saveSettings() {
-      const defUrl = '/api/save_settings/profile?';
+      const defUrl = "/api/save_settings/profile?";
       const urlParam = [];
       const formData = new FormData();
-      let fullUrl = '';
+      let fullUrl = "";
 
       Object.keys(this.userData).forEach((keyMain = String) => {
-        if (keyMain === 'aboutMe') {
+        if (keyMain === "aboutMe") {
           if (
-            this.userData.aboutMe.title.old !== this.userData.aboutMe.title.new && this.userData.aboutMe.title.new !== ""
+            this.userData.aboutMe.title.old !==
+              this.userData.aboutMe.title.new &&
+            this.userData.aboutMe.title.new !== ""
           ) {
             urlParam.push(
               `aboutme_title=${encodeURIComponent(
-                this.userData.aboutMe.title.new,
-              )}`,
+                this.userData.aboutMe.title.new
+              )}`
             );
           }
           if (
-            this.userData.aboutMe.content.old
-            !== this.userData.aboutMe.content.new && this.userData.aboutMe.content.new !== ""
+            this.userData.aboutMe.content.old !==
+              this.userData.aboutMe.content.new &&
+            this.userData.aboutMe.content.new !== ""
           ) {
             urlParam.push(
               `aboutme_content=${encodeURIComponent(
-                this.userData.aboutMe.content.new,
-              )}`,
+                this.userData.aboutMe.content.new
+              )}`
             );
           }
-        } else if (keyMain === 'connection') {
+        } else if (keyMain === "connection") {
           Object.keys(this.userData.connection).forEach((key = String) => {
-            if (this.userData.connection[key].new !== '') {
+            if (this.userData.connection[key].new !== "") {
               if (
-                this.userData.connection[key].old
-                  !== this.userData.connection[key].new
-                && this.userData.connection[key].new !== ''
+                this.userData.connection[key].old !==
+                  this.userData.connection[key].new &&
+                this.userData.connection[key].new !== ""
               ) {
                 urlParam.push(
                   `${key}=${encodeURIComponent(
-                    this.userData.connection[key].new,
-                  )}`,
+                    this.userData.connection[key].new
+                  )}`
                 );
               }
             }
           });
-        } else if (keyMain === 'logo' || keyMain === 'banner') {
+        } else if (keyMain === "logo" || keyMain === "banner") {
           if (
-            this.userData[keyMain].old !== this.userData[keyMain].new
-            && this.userData[keyMain].new !== ''
+            this.userData[keyMain].old !== this.userData[keyMain].new &&
+            this.userData[keyMain].new !== ""
           ) {
             if (this.userData[keyMain].file !== null) {
               formData.append(keyMain, this.userData[keyMain].file[0]);
               urlParam.push(
-                `${keyMain}=${encodeURIComponent(this.userData[keyMain].new)}`,
+                `${keyMain}=${encodeURIComponent(this.userData[keyMain].new)}`
               );
             }
           }
-        } else if (this.userData[keyMain].new !== '') {
+        } else if (this.userData[keyMain].new !== "") {
           if (this.userData[keyMain].old !== this.userData[keyMain].new) {
             urlParam.push(
-              `${keyMain}=${encodeURIComponent(this.userData[keyMain].new)}`,
+              `${keyMain}=${encodeURIComponent(this.userData[keyMain].new)}`
             );
           }
         }
       });
 
-      fullUrl += defUrl + urlParam.join('&');
+      fullUrl += defUrl + urlParam.join("&");
 
       if (fullUrl !== defUrl) {
         fetch(fullUrl, {
-          method: 'POST',
+          method: "POST",
           body: formData,
         })
           .then((response) => {
@@ -511,36 +514,36 @@ export default {
     },
     resetSettings() {
       Object.keys(this.userData).forEach((keyMain = String) => {
-        if (keyMain === 'aboutMe') {
+        if (keyMain === "aboutMe") {
           Object.keys(this.userData.aboutMe).forEach((key = String) => {
-            this.userData.aboutMe[key].new = '';
+            this.userData.aboutMe[key].new = "";
           });
-        } else if (keyMain === 'connection') {
+        } else if (keyMain === "connection") {
           Object.keys(this.userData.connection).forEach((key = String) => {
-            this.userData.connection[key].new = '';
+            this.userData.connection[key].new = "";
           });
         } else {
-          this.userData[keyMain].new = '';
+          this.userData[keyMain].new = "";
         }
       });
     },
     addListeners(reader = Object, key = String) {
-      reader.addEventListener('loadstart', () => {
+      reader.addEventListener("loadstart", () => {
         this.userData[key].preview = reader.result;
       });
-      reader.addEventListener('load', () => {
+      reader.addEventListener("load", () => {
         this.userData[key].preview = reader.result;
       });
-      reader.addEventListener('loadend', () => {
+      reader.addEventListener("loadend", () => {
         this.userData[key].preview = reader.result;
       });
-      reader.addEventListener('progress', () => {
+      reader.addEventListener("progress", () => {
         this.userData[key].preview = reader.result;
       });
-      reader.addEventListener('error', () => {
+      reader.addEventListener("error", () => {
         this.userData[key].preview = reader.result;
       });
-      reader.addEventListener('abort', () => {
+      reader.addEventListener("abort", () => {
         this.userData[key].preview = reader.result;
       });
     },

@@ -9,11 +9,11 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- <script src="http://localhost:8098"></script> -->
-    <link rel="stylesheet" href="/ui/assets/css/EUMdm6kAppJWQ4noDsa.css" type="text/css">
-    <link rel="stylesheet" href="/ui/assets/css/3NuQP0YtcSgcfKAYD8G.css" type="text/css">
-    <link rel="stylesheet" href="/ui/assets/css/Header/DZHftSm1GwwvwN5v2q0.css" type="text/css">
-    <link rel="stylesheet" href="/ui/assets/css/Header/AYgITDWsgLzbGDxKBby.css" type="text/css">
-<link rel="icon" href="/ui/assets/images/favicon.png"><script defer src="/ui/assets/js/_index.d54b436f3c841cc76634.js"></script></head>
+    <link rel="stylesheet" href="/ui/assets/css/0lMOD3tJ6oGqrJmYrCg.css" type="text/css">
+    <link rel="stylesheet" href="/ui/assets/css/WQkvwWqQxasGW9asGuw.css" type="text/css">
+    <link rel="stylesheet" href="/ui/assets/css/Header/xUOKcswYTpTqhg5bjE5.css" type="text/css">
+    <link rel="stylesheet" href="/ui/assets/css/Header/Rn1Uu2sTdpl7LNWDBYE.css" type="text/css">
+<link rel="icon" href="/ui/assets/images/favicon.png"><script defer src="/ui/assets/js/_index.b6a4ec589f7158f8f2ea.js"></script></head>
 
 <body>
     <!-- Area of visibility VUE.typescript -->
@@ -72,7 +72,7 @@
                 <div id="add_settings" class="add_window" v-show="settings">
                     <div class="add_window__content">
                         <a href="/customize">Настроить профиль</a>
-                        <a href="/customize/shop">Настроить магазин</a>
+                        <a href="/customize/inBeats">Настроить inBeats</a>
                         <a href="/customize/personal-data">Настроить личные данные</a>
                     </div>
                 </div>
@@ -100,7 +100,6 @@
     </div>
 </header>
 <!-- END Header block -->
-
 
         
 <!-- START STICKY HEADER block -->
@@ -173,8 +172,8 @@
           <p>Настроить профиль</p>
         </div>
         <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/customize/shop"></a>
-          <p>Настроить магазин</p>
+          <a @click="hideStickyHeader()" href="/customize/inBeats"></a>
+          <p>Настроить inBeats</p>
         </div>
         <div class="btn btn_link">
           <a @click="hideStickyHeader()" href="/customize/personal-data"></a>
@@ -216,7 +215,6 @@
   </div>
 </header>
 <!-- END STICKY HEADER block -->
-
 
         <!-- END HEADER LAYOUT TEMPLATES -->
 
@@ -297,6 +295,8 @@
                     </section>
                 </div>
             </div>
+            <ui-message-notificate :chat-data="chatData" :show-notif="showNotifMessage" @close-notif="onCloseNotif">
+            </ui-message-notificate>
         </main>
         <!-- END Main block for VUE.JS -->
     </div>
