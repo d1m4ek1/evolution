@@ -76,12 +76,7 @@
             <img :src="userData.logo.old" />
           </div>
           <div class="upload_content">
-            <input
-              @change="traceFile($event, 'logo')"
-              id="upload_logo_file"
-              type="file"
-              name="upload_file"
-            />
+            <input @change="traceFile($event, 'logo')" id="upload_logo_file" type="file" name="upload_file" />
             <label for="upload_logo_file" id="label_input_drop">
               <template v-if="userData.logo.new === ''">
                 <h2>Загрузить аватарку</h2>
@@ -95,11 +90,7 @@
             </label>
           </div>
         </div>
-        <button
-          v-if="userData.logo.new !== ''"
-          @click="(userData.logo.preview = ''), (userData.logo.new = '')"
-          class="btn btn-red"
-        >
+        <button v-if="userData.logo.new !== ''" @click="(userData.logo.preview = ''), (userData.logo.new = '')" class="btn btn-red">
           Сбросить аватарку
         </button>
         <p class="error" v-if="userData.logo.error !== ''">
@@ -119,12 +110,7 @@
             <img :src="userData.banner.old" alt="Нет баннера" />
           </div>
           <div class="upload_content">
-            <input
-              @change="traceFile($event, 'banner')"
-              id="upload_banner_file"
-              type="file"
-              name="upload_file"
-            />
+            <input @change="traceFile($event, 'banner')" id="upload_banner_file" type="file" name="upload_file" />
             <label for="upload_banner_file" id="label_input_drop">
               <template v-if="userData.banner.new === ''">
                 <h2>Загрузить баннер</h2>
@@ -138,11 +124,7 @@
             </label>
           </div>
         </div>
-        <button
-          v-if="userData.banner.new !== ''"
-          @click="(userData.banner.new = ''), (userData.banner.preview = '')"
-          class="btn btn-red"
-        >
+        <button v-if="userData.banner.new !== ''" @click="(userData.banner.new = ''), (userData.banner.preview = '')" class="btn btn-red">
           Сбросить баннер
         </button>
         <p class="error" v-if="userData.banner.error !== ''">
@@ -164,11 +146,7 @@
             </div>
           </div>
           <div class="inlineblock_right">
-            <input
-              v-model="userData.aboutMe.title.new"
-              type="text"
-              maxlength="300"
-            />
+            <input v-model="userData.aboutMe.title.new" type="text" maxlength="300" />
           </div>
         </div>
         <h3>Содержимое</h3>
@@ -177,11 +155,7 @@
             <div class="old_text" v-html="userData.aboutMe.content.old"></div>
           </div>
           <div class="inlineblock_right">
-            <textarea
-              v-model="userData.aboutMe.content.new"
-              type="text"
-              maxlength="2500"
-            />
+            <textarea v-model="userData.aboutMe.content.new" type="text" maxlength="2500" />
           </div>
         </div>
       </div>
@@ -204,11 +178,7 @@
             </div>
           </div>
           <div class="inlineblock_right">
-            <input
-              v-model="userData.connection.telegram.new"
-              type="text"
-              maxlength="250"
-            />
+            <input v-model="userData.connection.telegram.new" type="text" maxlength="250" />
           </div>
         </div>
         <h3>Instagram</h3>
@@ -219,11 +189,7 @@
             </div>
           </div>
           <div class="inlineblock_right">
-            <input
-              v-model="userData.connection.instagram.new"
-              type="text"
-              maxlength="250"
-            />
+            <input v-model="userData.connection.instagram.new" type="text" maxlength="250" />
           </div>
         </div>
         <h3>Facebook</h3>
@@ -234,11 +200,7 @@
             </div>
           </div>
           <div class="inlineblock_right">
-            <input
-              v-model="userData.connection.facebook.new"
-              type="text"
-              maxlength="250"
-            />
+            <input v-model="userData.connection.facebook.new" type="text" maxlength="250" />
           </div>
         </div>
         <h3>VK</h3>
@@ -249,11 +211,7 @@
             </div>
           </div>
           <div class="inlineblock_right">
-            <input
-              v-model="userData.connection.vk.new"
-              type="text"
-              maxlength="250"
-            />
+            <input v-model="userData.connection.vk.new" type="text" maxlength="250" />
           </div>
         </div>
         <h3>TikTok</h3>
@@ -264,11 +222,7 @@
             </div>
           </div>
           <div class="inlineblock_right">
-            <input
-              v-model="userData.connection.tiktok.new"
-              type="text"
-              maxlength="250"
-            />
+            <input v-model="userData.connection.tiktok.new" type="text" maxlength="250" />
           </div>
         </div>
       </div>
@@ -276,9 +230,7 @@
     <!-- SAVE BUTTON OR DEFAULT SETTINGS -->
     <div class="change_section btns">
       <button @click="saveSettings()" class="btn">Сохранить</button>
-      <button @click="resetSettings()" class="btn btn-red">
-        Сбросить все изменения
-      </button>
+      <button @click="resetSettings()" class="btn btn-red">Сбросить все изменения</button>
     </div>
   </section>
 </template>
@@ -385,14 +337,12 @@ export default {
     },
     validateLogoBanner(logo = String, banner = String) {
       if (logo === "not_logo.png") {
-        this.userData.logo.old =
-          "/user_files/profile/logo/notLogo/not_logo.png";
+        this.userData.logo.old = "/user_files/profile/logo/notLogo/not_logo.png";
       } else {
         this.userData.logo.old = `/user_files/profile/logo/saved/${logo}`;
       }
       if (banner === "not_banner.png") {
-        this.userData.banner.old =
-          "/user_files/profile/banner/notBanner/not_banner.png";
+        this.userData.banner.old = "/user_files/profile/banner/notBanner/not_banner.png";
       } else {
         this.userData.banner.old = `/user_files/profile/banner/saved/${banner}`;
       }
@@ -438,61 +388,30 @@ export default {
 
       Object.keys(this.userData).forEach((keyMain = String) => {
         if (keyMain === "aboutMe") {
-          if (
-            this.userData.aboutMe.title.old !==
-              this.userData.aboutMe.title.new &&
-            this.userData.aboutMe.title.new !== ""
-          ) {
-            urlParam.push(
-              `aboutme_title=${encodeURIComponent(
-                this.userData.aboutMe.title.new
-              )}`
-            );
+          if (this.userData.aboutMe.title.old !== this.userData.aboutMe.title.new && this.userData.aboutMe.title.new !== "") {
+            urlParam.push(`aboutme_title=${encodeURIComponent(this.userData.aboutMe.title.new)}`);
           }
-          if (
-            this.userData.aboutMe.content.old !==
-              this.userData.aboutMe.content.new &&
-            this.userData.aboutMe.content.new !== ""
-          ) {
-            urlParam.push(
-              `aboutme_content=${encodeURIComponent(
-                this.userData.aboutMe.content.new
-              )}`
-            );
+          if (this.userData.aboutMe.content.old !== this.userData.aboutMe.content.new && this.userData.aboutMe.content.new !== "") {
+            urlParam.push(`aboutme_content=${encodeURIComponent(this.userData.aboutMe.content.new)}`);
           }
         } else if (keyMain === "connection") {
           Object.keys(this.userData.connection).forEach((key = String) => {
             if (this.userData.connection[key].new !== "") {
-              if (
-                this.userData.connection[key].old !==
-                  this.userData.connection[key].new &&
-                this.userData.connection[key].new !== ""
-              ) {
-                urlParam.push(
-                  `${key}=${encodeURIComponent(
-                    this.userData.connection[key].new
-                  )}`
-                );
+              if (this.userData.connection[key].old !== this.userData.connection[key].new && this.userData.connection[key].new !== "") {
+                urlParam.push(`${key}=${encodeURIComponent(this.userData.connection[key].new)}`);
               }
             }
           });
         } else if (keyMain === "logo" || keyMain === "banner") {
-          if (
-            this.userData[keyMain].old !== this.userData[keyMain].new &&
-            this.userData[keyMain].new !== ""
-          ) {
+          if (this.userData[keyMain].old !== this.userData[keyMain].new && this.userData[keyMain].new !== "") {
             if (this.userData[keyMain].file !== null) {
               formData.append(keyMain, this.userData[keyMain].file[0]);
-              urlParam.push(
-                `${keyMain}=${encodeURIComponent(this.userData[keyMain].new)}`
-              );
+              urlParam.push(`${keyMain}=${encodeURIComponent(this.userData[keyMain].new)}`);
             }
           }
         } else if (this.userData[keyMain].new !== "") {
           if (this.userData[keyMain].old !== this.userData[keyMain].new) {
-            urlParam.push(
-              `${keyMain}=${encodeURIComponent(this.userData[keyMain].new)}`
-            );
+            urlParam.push(`${keyMain}=${encodeURIComponent(this.userData[keyMain].new)}`);
           }
         }
       });

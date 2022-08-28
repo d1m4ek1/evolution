@@ -39,14 +39,14 @@ type ProfileData struct {
 
 func (P *ProfileData) ValidLogoBanner(logo string, banner string) {
 	if banner != "not_banner.png" {
-		P.Banner = "/user_images/profile/banner/saved/" + banner
+		P.Banner = "/user_files/profile/banner/saved/" + banner
 	} else {
-		P.Banner = "/user_images/profile/banner/notBanner/not_banner.png"
+		P.Banner = "/user_files/profile/banner/notBanner/not_banner.png"
 	}
 	if logo != "not_logo.png" {
-		P.Logo = "/user_images/profile/logo/saved/" + logo
+		P.Logo = "/user_files/profile/logo/saved/" + logo
 	} else {
-		P.Logo = "/user_images/profile/logo/notLogo/not_logo.png"
+		P.Logo = "/user_files/profile/logo/notLogo/not_logo.png"
 	}
 }
 

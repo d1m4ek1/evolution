@@ -1,5 +1,6 @@
 // JS
 import { createApp } from "vue";
+import { store } from "../../store/store";
 import "lazysizes";
 import { websocket } from "../../assets/javascript/websockets";
 import { router } from "../../router/Settings/settings.router";
@@ -14,6 +15,7 @@ import StickyHeader from "../../assets/javascript/stickyHeader";
 StickyHeader();
 
 import UiMessageNotif from "../../assets/UIComponents/Notifications/UiMessageNotif.vue";
+import GlobalPlayer from "../../assets/UIComponents/Players/GlobalPlayer.vue";
 
 const app = createApp({
   delimiters: ["{%", "%}"],
@@ -105,6 +107,7 @@ const app = createApp({
   },
   components: {
     "ui-message-notificate": UiMessageNotif,
+    "global-player": GlobalPlayer,
   },
 });
-app.use(router).mount("#wrapper");
+app.use(store).use(router).mount("#wrapper");

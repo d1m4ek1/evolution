@@ -137,8 +137,11 @@ func handle(ctx *sqlx.DB) {
 
 	ginRouter.StaticFS("/ui/images/", http.Dir("./ui/images/"))
 	ginRouter.StaticFS("/ui/assets/", http.Dir("./ui/assets/"))
-	ginRouter.StaticFS("/user_images/profile/banner/", http.Dir("./user_images/profile/banner/"))
-	ginRouter.StaticFS("/user_images/profile/logo/", http.Dir("./user_images/profile/logo/"))
+
+	ginRouter.StaticFS("/user_files/profile/banner/", http.Dir("./user_files/profile/banner/"))
+	ginRouter.StaticFS("/user_files/profile/logo/", http.Dir("./user_files/profile/logo/"))
+	ginRouter.StaticFS("/user_files/inbeats/cover_album/", http.Dir("./user_files/inbeats/cover_album/"))
+	ginRouter.StaticFS("/user_files/inbeats/beats/", http.Dir("./user_files/inbeats/beats/"))
 
 	log.Println("Function handler -> Static files initialized")
 	log.Println("Function handler -> Server started successfully")

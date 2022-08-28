@@ -1,0 +1,137 @@
+
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.DB.QueryRow;
+	Line: 97;
+	File: /home/dmitrydvp/go/src/iNote/www/backend/internal/controllers/controllers.go;
+	Date: 22 August 2022;
+	Time: 10:42 AM Second: 35;
+
+ERROR:
+	Error: pq: duplicate key value violates unique constraint "chats_user_id_one_key";
+	Message: ctx.DB.Exec;
+	Line: 226;
+	File: /home/dmitrydvp/go/src/iNote/www/backend/models/messages.go;
+	Date: 22 August 2022;
+	Time: 11:45 AM Second: 50;
+
+ERROR:
+	Error: pq: duplicate key value violates unique constraint "chats_user_id_one_key";
+	Message: models.SelectChat;
+	Line: 60;
+	File: /home/dmitrydvp/go/src/iNote/www/backend/api/messages/chat.go;
+	Date: 22 August 2022;
+	Time: 11:45 AM Second: 50;
+
+ERROR:
+	Error: pq: duplicate key value violates unique constraint "chats_user_id_one_key";
+	Message: ctx.DB.Exec;
+	Line: 226;
+	File: /home/dmitrydvp/go/src/iNote/www/backend/models/messages.go;
+	Date: 22 August 2022;
+	Time: 11:45 AM Second: 57;
+
+ERROR:
+	Error: pq: duplicate key value violates unique constraint "chats_user_id_one_key";
+	Message: models.SelectChat;
+	Line: 60;
+	File: /home/dmitrydvp/go/src/iNote/www/backend/api/messages/chat.go;
+	Date: 22 August 2022;
+	Time: 11:45 AM Second: 57;
+
+ERROR:
+	Error: pq: duplicate key value violates unique constraint "chats_user_id_one_key";
+	Message: ctx.DB.Exec;
+	Line: 226;
+	File: /home/dmitrydvp/go/src/iNote/www/backend/models/messages.go;
+	Date: 22 August 2022;
+	Time: 11:47 AM Second: 08;
+
+ERROR:
+	Error: pq: duplicate key value violates unique constraint "chats_user_id_one_key";
+	Message: models.SelectChat;
+	Line: 60;
+	File: /home/dmitrydvp/go/src/iNote/www/backend/api/messages/chat.go;
+	Date: 22 August 2022;
+	Time: 11:47 AM Second: 08;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/iNote/www/backend/models/checkVerification.go;
+	Date: 22 August 2022;
+	Time: 6:04 PM Second: 0;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/iNote/www/backend/api/userData/userData.go;
+	Date: 22 August 2022;
+	Time: 6:04 PM Second: 0;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 27 August 2022;
+	Time: 6:16 PM Second: 43;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 27 August 2022;
+	Time: 6:16 PM Second: 43;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.DB.QueryRow;
+	Line: 97;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/internal/controllers/controllers.go;
+	Date: 27 August 2022;
+	Time: 6:42 PM Second: 06;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.DB.QueryRow;
+	Line: 97;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/internal/controllers/controllers.go;
+	Date: 27 August 2022;
+	Time: 6:42 PM Second: 08;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 27 August 2022;
+	Time: 8:02 PM Second: 03;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 27 August 2022;
+	Time: 8:02 PM Second: 03;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 28 August 2022;
+	Time: 2:23 PM Second: 02;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 28 August 2022;
+	Time: 2:23 PM Second: 02;
