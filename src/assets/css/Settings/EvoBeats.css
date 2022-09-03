@@ -1,0 +1,104 @@
+.creator_block_album {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.creator_block {
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.creator_block>* {
+  padding-bottom: 10px;
+}
+
+.creater_block__indet {
+  width: 100%;
+  margin-bottom: 30px;
+  border: 4px rgb(210, 210, 210) dashed;
+  padding: 10px;
+}
+
+button.create_album.btn {
+  max-width: 500px;
+  margin: 0 10px;
+  height: 40px;
+}
+
+.customize_input {
+  padding-bottom: 20px;
+}
+
+.checkbox_label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.checkbox_label>input {
+  width: 20px;
+  height: 20px;
+  min-width: unset;
+  min-height: unset;
+}
+
+.label_indent {
+  padding-left: 20px;
+  white-space: nowrap;
+}
+
+.customize_input img {
+  width: 400px;
+  height: 400px;
+  max-width: unset;
+}
+
+.tag_item {
+  border-radius: 5px;
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+}
+
+.tag_item>button {
+  width: 100px;
+}
+
+.customize_input__tags>input {
+  margin-bottom: 10px;
+}
+
+.tag_item {
+  margin-top: 10px;
+}

@@ -1,6 +1,6 @@
 {$ define_template="stickyheader_layout" $}
 <!-- START STICKY HEADER block -->
-<header class="header_sticky" v-if="showStickyHeader">
+<header class="header_sticky" v-if="showMobileHeader">
   <div class="header_sticky_nav">
     <div class="header_sticky_nav__item">
       <div class="header_sticky_main_logo block-link">
@@ -17,44 +17,37 @@
     </div>
     <div class="header_sticky_nav__item">
       <div class="btn btn_link">
-        <a @click="community = !community"></a>
+        <a @click="hideStickyHeader()" href="/messenger"></a>
+        <p>Сообщения</p>
+      </div>
+    </div>
+    <div class="header_sticky_nav__item">
+      <div class="btn btn_link">
+        <a @click="beats = !beats"></a>
         <p>
-          Проекты
-          <span class="arrow_list_close" :class="rotateArrowCommunity"></span>
+          Поиск
+          <span class="arrow_list_close" :class="rotateArrowBeats"></span>
         </p>
       </div>
-      <div v-show="community" class="sticy_add_window">
+      <div v-show="beats" class="sticy_add_window">
         <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/inSocial"></a>
-          <p>inSocial</p>
+          <a @click="hideStickyHeader()" href="/beats"></a>
+          <p>Биты</p>
         </div>
         <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/inMusic"></a>
-          <p>inMusic</p>
+          <a @click="hideStickyHeader()" href="/beats/favorites"></a>
+          <p>Избранное</p>
         </div>
         <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/inBeats"></a>
-          <p>inBeats</p>
+          <a @click="hideStickyHeader()" href="/beats/my-albums"></a>
+          <p>Мои альбомы</p>
         </div>
       </div>
     </div>
     <div class="header_sticky_nav__item">
       <div class="btn btn_link">
-        <a @click="commerce = !commerce"></a>
-        <p>
-          Коммерция
-          <span class="arrow_list_close" :class="rotateArrowCommerce"></span>
-        </p>
-      </div>
-      <div v-show="commerce" class="sticy_add_window">
-        <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/subscriptions"></a>
-          <p>Подписки</p>
-        </div>
-        <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/orders"></a>
-          <p>Заказы</p>
-        </div>
+        <a @click="hideStickyHeader()" href="/subscriptions"></a>
+        <p>Подписки</p>
       </div>
     </div>
     <div class="header_sticky_nav__item">
@@ -67,10 +60,6 @@
         <div class="btn btn_link">
           <a @click="hideStickyHeader()" href="/customize"></a>
           <p>Настроить профиль</p>
-        </div>
-        <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/customize/inBeats"></a>
-          <p>Настроить inBeats</p>
         </div>
         <div class="btn btn_link">
           <a @click="hideStickyHeader()" href="/customize/personal-data"></a>

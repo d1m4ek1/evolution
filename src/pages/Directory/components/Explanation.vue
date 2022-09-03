@@ -8,9 +8,7 @@
     </section>
     <section class="content_explanation">
       <template v-if="documentation[paragraph][typeContent].content != []">
-        <template
-          v-for="(item, idx) in documentation[paragraph][typeContent].content"
-        >
+        <template v-for="(item, idx) in documentation[paragraph][typeContent].content">
           <p v-if="item.tag == 'p'" :key="idx">
             {{ item.value }}
           </p>
@@ -32,101 +30,95 @@
 
 <script>
 export default {
-  props: ['paragraph', 'typeContent'],
+  props: ["paragraph", "typeContent"],
   data() {
     return {
       documentation: {
         greetings: {
           hello: {
-            title: 'Приветствие!',
+            title: "Приветствие!",
             content: [
               {
-                tag: 'p',
-                value: 'Какое-либо приветствие!',
+                tag: "p",
+                value: "Какое-либо приветствие!",
               },
             ],
           },
         },
         1: {
           basic: {
-            title: 'Основная документация',
+            title: "Основная документация",
             content: [
               {
-                tag: 'p',
-                value: 'Доброго времени суток!',
+                tag: "p",
+                value: "Доброго времени суток!",
               },
               {
-                tag: 'p',
-                value:
-                  'В справочнике вы сможете ознакомиться с юридическики вопросами',
+                tag: "p",
+                value: "В справочнике вы сможете ознакомиться с юридическики вопросами",
               },
               {
-                tag: 'p',
-                value:
-                  'А также получить вопросы по тех. поддержке и многое другое',
+                tag: "p",
+                value: "А также получить вопросы по тех. поддержке и многое другое",
               },
             ],
           },
           serviceInformation: {
-            title: 'Информация о сервисе',
+            title: "Информация о сервисе",
           },
           serviceFounders: {
-            title: 'Основатели сервиса',
+            title: "Основатели сервиса",
           },
         },
         2: {
           privacyPolicy: {
-            title: 'Политика конфиденциальности',
+            title: "Политика конфиденциальности",
             content: [
               {
-                tag: 'ul',
-                value: [
-                  'Продолжение следует',
-                  'Продолжение следует',
-                  'Продолжение следует',
-                ],
+                tag: "ul",
+                value: ["Продолжение следует", "Продолжение следует", "Продолжение следует"],
               },
             ],
           },
           termsOfUs: {
-            title: 'Пользовательское соглашение',
+            title: "Пользовательское соглашение",
             content: [],
           },
         },
         9: {
           profile: {
-            title: 'Профиль',
+            title: "Профиль",
             content: [
               {
-                tag: 'p',
-                value: 'Описание',
+                tag: "p",
+                value: "Описание",
               },
             ],
           },
           commerce: {
-            title: 'Коммерция',
+            title: "Коммерция",
             content: [
               {
-                tag: 'p',
-                value: 'Описание',
+                tag: "p",
+                value: "Описание",
               },
             ],
           },
           community: {
-            title: 'Сообщество',
+            title: "Сообщество",
             content: [
               {
-                tag: 'p',
-                value: 'Описание',
+                tag: "p",
+                value: "Описание",
               },
             ],
           },
           settings: {
-            title: 'Настройки',
+            title: "Настройки",
             content: [
               {
-                tag: 'p',
-                value: 'Описание',
+                tag: "p",
+                value: "Описание",
               },
             ],
           },
@@ -136,10 +128,10 @@ export default {
   },
   methods: {
     hideComponent() {
-      this.$emit('hidecomponent', {
+      this.$emit("hidecomponent", {
         hide: true,
       });
-      window.history.pushState(null, 'Directory', '/directory');
+      window.history.pushState(null, "Directory", "/directory");
     },
     setTitle() {
       document.title = this.documentation[this.paragraph][this.typeContent].title;

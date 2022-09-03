@@ -1,33 +1,16 @@
 <template>
   <div class="card-sign-content">
     <div class="description">
-      <div
-        class="description-content"
-        v-for="(item, idx) in inputs.logins"
-        :key="idx + '2'"
-      >
+      <div class="description-content" v-for="(item, idx) in inputs.logins" :key="idx + '2'">
         <div class="necessarily">
-          <input
-            v-model="item.value"
-            :type="item.type"
-            :name="item.id"
-            :placeholder="item.placeholder + '...'"
-            :maxlength="item.maxlength"
-          />
+          <input v-model="item.value" :type="item.type" :name="item.id" :placeholder="item.placeholder + '...'" :maxlength="item.maxlength" />
         </div>
       </div>
-      <div
-        class="description-content"
-        v-for="(item, idx) in inputs.passwords"
-        :key="idx + '3'"
-      >
+      <div class="description-content" v-for="(item, idx) in inputs.passwords" :key="idx + '3'">
         <div class="necessarily">
           <input
             v-model="item.value"
-            @input="
-              validPassword($event.target.value, item),
-                samePassword($event.target.value, idx)
-            "
+            @input="validPassword($event.target.value, item), samePassword($event.target.value, idx)"
             :class="{ 'not-valid': item.valid }"
             :type="item.type"
             :name="item.id"
@@ -36,9 +19,7 @@
         </div>
       </div>
     </div>
-    <button @click="createUrl(), createAccount()" class="btn">
-      Зарегистрироваться
-    </button>
+    <button @click="createUrl(), createAccount()" class="btn">Зарегистрироваться</button>
     <p v-if="validation.symbols.valid">{{ validation.symbols.value }}</p>
     <p v-if="validation.same.valid">{{ validation.same.value }}</p>
     <p v-if="validation.allInputs.valid">
@@ -51,8 +32,7 @@
 import MD5 from "crypto-js/md5";
 
 function rndsh(sumString = Number()) {
-  const symbolArr =
-    "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+  const symbolArr = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
   let rtsdnr = "";
   for (let i = 0; i < sumString; i += 1) {
     const index = Math.floor(Math.random() * symbolArr.length);
@@ -176,20 +156,15 @@ export default {
       if (this.urlCreateAccount.length !== 0) {
         const cookie = `token=${MD5(rndsh(64)) + rndsh(8)}`;
 
-        fetch(
-          `/api/create_account?${this.urlCreateAccount.join("&")}&${cookie}`,
-          {
-            method: "POST",
-          }
-        )
+        fetch(`/api/create_account?${this.urlCreateAccount.join("&")}&${cookie}`, {
+          method: "POST",
+        })
           .then((response) => {
             response.json().then((data) => {
               if (data.aut) {
                 document.cookie = `${cookie}; path=/;`;
                 fetch(
-                  `/api/signin_account?signin=true&login=${
-                    this.inputs.logins[2].value
-                  }&password=${MD5(this.inputs.passwords[1].value)}&${cookie}`
+                  `/api/signin_account?signin=true&login=${this.inputs.logins[2].value}&password=${MD5(this.inputs.passwords[1].value)}&${cookie}`
                 ).then((preresponse) => {
                   preresponse.json().then((predata) => {
                     if (predata.user_id !== undefined) {

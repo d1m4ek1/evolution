@@ -13,6 +13,9 @@
     {$ path_style="/src/assets/css/News.css" $}
     {$ path_style="/src/assets/css/Header/Header.css" $}
     {$ path_style="/src/assets/css/Header/StickyHeader.css" $}
+    {$ path_style="/src/assets/css/Audio/Audio.css" $}
+    {$ path_style="/src/assets/css/Album/Album.css" $}
+    {$ path_style="/src/assets/css/Audio/GlobalPlayer.css" $}
 </head>
 
 <body>
@@ -109,6 +112,7 @@
             </div>
             <ui-message-notificate :chat-data="chatData" :show-notif="showNotifMessage" @close-notif="onCloseNotif">
             </ui-message-notificate>
+            <global-player v-if="userAuthorized"></global-player>
         </main>
         <!-- END Main block for VUE.JS -->
     </div>

@@ -51,7 +51,7 @@
             </div>
             <ui-message-notificate :chat-data="chatData" :show-notif="showNotifMessage" @close-notif="onCloseNotif">
             </ui-message-notificate>
-            <global-player></global-player>
+            <global-player v-if="userAuthorized"></global-player>
         </main>
         <!-- END Main block for VUE.JS -->
     </div>

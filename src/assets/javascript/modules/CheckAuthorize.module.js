@@ -1,30 +1,28 @@
 import GetCookie from "../getCookie";
 import OpenConnectWebSocket from "../websockets";
 
-const MODULE_CHECK_AUTHORIZE_USER = () => {
+const MODULE_CHECK_AUTHORIZE_USER = async () => {
   const token = GetCookie("token");
   const userId = GetCookie("userId");
 
-  if (
-    token !== undefined &&
-    userId !== undefined &&
-    token !== "" &&
-    userId !== ""
-  ) {
-    fetch(`/api/check_authorization?token=${token}&userId=${userId}`, {
+  if (token !== undefined && userId !== undefined && token !== "" && userId !== "") {
+    const response = await fetch(`/api/check_authorization?token=${token}&userId=${userId}`, {
       method: "GET",
-    }).then((response) => {
-      response.json().then((data) => {
-        if (data !== null) {
-          if (data.isVerify) {
-            sessionStorage.setItem("verify", data.isVerify);
-            OpenConnectWebSocket();
-          }
-        }
-      });
     });
+    const jsonResponse = await response.json();
+
+    if (jsonResponse !== undefined) {
+      if (jsonResponse.isVerify) {
+        sessionStorage.setItem("verify", jsonResponse.isVerify);
+        OpenConnectWebSocket();
+      }
+      return true;
+    } else {
+      return false;
+    }
   } else {
     sessionStorage.setItem("verify", false);
+    return false;
   }
 };
 

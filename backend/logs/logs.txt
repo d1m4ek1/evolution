@@ -135,3 +135,83 @@ ERROR:
 	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
 	Date: 28 August 2022;
 	Time: 2:23 PM Second: 02;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.DB.QueryRow;
+	Line: 97;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/internal/controllers/controllers.go;
+	Date: 29 August 2022;
+	Time: 1:59 PM Second: 49;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.DB.QueryRow;
+	Line: 97;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/internal/controllers/controllers.go;
+	Date: 29 August 2022;
+	Time: 1:59 PM Second: 50;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 29 August 2022;
+	Time: 2:01 PM Second: 22;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 29 August 2022;
+	Time: 2:01 PM Second: 22;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.DB.QueryRow;
+	Line: 97;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/internal/controllers/controllers.go;
+	Date: 30 August 2022;
+	Time: 1:32 PM Second: 33;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.DB.QueryRow;
+	Line: 97;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/internal/controllers/controllers.go;
+	Date: 30 August 2022;
+	Time: 1:32 PM Second: 35;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 3 September 2022;
+	Time: 1:57 PM Second: 08;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 3 September 2022;
+	Time: 1:57 PM Second: 08;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "inSocial";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 3 September 2022;
+	Time: 1:59 PM Second: 06;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "inSocial";
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 3 September 2022;
+	Time: 1:59 PM Second: 06;

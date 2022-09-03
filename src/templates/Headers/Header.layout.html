@@ -1,6 +1,6 @@
 {$ define_template="header_layout" $}
 <!-- START Header block -->
-<header class="header" v-if="dropHeader">
+<header class="header" v-if="!showMobileHeader">
     <div class="container">
         <div class="header_nav">
             <div class="header_nav__item">
@@ -14,28 +14,22 @@
                 <a href="/{{ $.HeaderData.UserId }}">Профиль</a>
             </div>
             <div class="header_nav__item">
-                <a class="open_window" v-hide-elem="{id:'add_community', val:['community']}"
-                    @click="community = !community">Проекты
-                    <span class="arrow_list_close" :class="rotateArrowCommunity"></span>
+                <a class="open_window" v-hide-elem="{id:'add_beats', val:['beats']}" @click="beats = !beats">Биты
+                    <span class="arrow_list_close" :class="rotateArrowbeats"></span>
                 </a>
-                <div id="add_community" class="add_window" v-show="community">
+                <div id="add_beats" class="add_window" v-show="beats">
                     <div class="add_window__content">
-                        <a href="/inSocial">inSocial - общение с подписчиками</a>
-                        <a href="/inMusic">inMusic - музыка всего мира</a>
-                        <a href="/inBeats">inBeats - торговля битов</a>
+                        <a href="/beats">Поиск</a>
+                        <a href="/beats/favorites">Избранное</a>
+                        <a href="/beats/my-albums">Мои альбомы</a>
                     </div>
                 </div>
             </div>
             <div class="header_nav__item">
-                <a class="open_window" v-hide-elem="{id:'add_commerce', val:['commerce']}"
-                    @click="commerce = !commerce">Коммерция
-                    <span class="arrow_list_close" :class="rotateArrowCommerce"></span></a>
-                <div id="add_commerce" class="add_window" v-show="commerce">
-                    <div class="add_window__content">
-                        <a href="/subscriptions">Подписки</a>
-                        <a href="/orders">Заказы</a>
-                    </div>
-                </div>
+                <a href="/messenger">Сообщения</a>
+            </div>
+            <div class="header_nav__item">
+                <a href="/subscriptions">Подписки</a>
             </div>
             <div class="header_nav__item">
                 <a class="open_window" v-hide-elem="{id:'add_settings', val:['settings']}"
@@ -44,7 +38,6 @@
                 <div id="add_settings" class="add_window" v-show="settings">
                     <div class="add_window__content">
                         <a href="/customize">Настроить профиль</a>
-                        <a href="/customize/inBeats">Настроить inBeats</a>
                         <a href="/customize/personal-data">Настроить личные данные</a>
                     </div>
                 </div>

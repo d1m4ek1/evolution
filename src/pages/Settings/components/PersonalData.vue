@@ -4,13 +4,8 @@
     <div class="change_section">
       <div class="change_section__title">
         <h2>Ключи восстановления аккаунта</h2>
-        <p>
-          Поля ключей восстановления аккаунта нужно заполнить все, либо оставить
-          пустыми <span class="note"></span>
-        </p>
-        <p v-if="userData.backupKeys.available">
-          У вас есть ключ восстановления, но вы может изменить его в любое время
-        </p>
+        <p>Поля ключей восстановления аккаунта нужно заполнить все, либо оставить пустыми <span class="note"></span></p>
+        <p v-if="userData.backupKeys.available">У вас есть ключ восстановления, но вы может изменить его в любое время</p>
         <p v-else>
           Ключа восстановления нет, создайте ключи, затем запишите их
           <span class="note"></span>
@@ -40,22 +35,13 @@
       <div class="change_content">
         <div class="change_content__title">
           <h3>Новый пароль</h3>
-          <p>
-            Безопаснее всего создать пароль длиною более 16 символов, что и
-            делает генератор <span class="note"></span>
-          </p>
+          <p>Безопаснее всего создать пароль длиною более 16 символов, что и делает генератор <span class="note"></span></p>
         </div>
         <div class="inlineblock">
-          <input
-            v-model="userData.password.new"
-            type="text"
-            placeholder="Новый пароль..."
-          />
+          <input v-model="userData.password.new" type="text" placeholder="Новый пароль..." />
         </div>
         <div class="inlineblock">
-          <button @click="generatePassword()" class="btn">
-            Сгенерировать пароль - 20 символов
-          </button>
+          <button @click="generatePassword()" class="btn">Сгенерировать пароль - 20 символов</button>
         </div>
       </div>
     </div>
@@ -68,9 +54,8 @@
         <div class="change_content__title">
           <h3>Новая электронная почта</h3>
           <p>
-            Электронная почта нужна для получения рекламных новостей (не
-            обязательно), аутентификации, а также для подтверждения изменения
-            каких-либо персональных данных <span class="note"></span>
+            Электронная почта нужна для получения рекламных новостей (не обязательно), аутентификации, а также для подтверждения изменения каких-либо
+            персональных данных <span class="note"></span>
           </p>
         </div>
         <div class="inlineblock">
@@ -80,12 +65,7 @@
             </div>
           </div>
           <div class="inlineblock_right">
-            <input
-              v-model="userData.email.new"
-              type="email"
-              placeholder="example@example.com"
-              maxlength="80"
-            />
+            <input v-model="userData.email.new" type="email" placeholder="example@example.com" maxlength="80" />
           </div>
         </div>
       </div>
@@ -97,23 +77,15 @@
           <div class="change_content__title">
             <h3>Подтверждение</h3>
             <p>
-              Только с подтверждением пароля, можно изменить персональные
-              данные.<span class="note"></span><br />
+              Только с подтверждением пароля, можно изменить персональные данные.<span class="note"></span><br />
               <a href="#">Забыли пароль?</a>
             </p>
           </div>
           <div class="inlineblock">
-            <input
-              v-model="completePassword.password"
-              name="now_password"
-              type="password"
-              placeholder="Текущий пароль..."
-            />
+            <input v-model="completePassword.password" name="now_password" type="password" placeholder="Текущий пароль..." />
           </div>
         </div>
-        <button @click="sendOnConfirmPassword()" class="btn">
-          Подвердить пароль
-        </button>
+        <button @click="sendOnConfirmPassword()" class="btn">Подвердить пароль</button>
       </template>
       <template v-else>
         <div class="change_content__title">
@@ -121,17 +93,13 @@
             Сохраняя данные вы согласны с
             <a href="/directory/terms-of-use"> пользовательским соглашением</a>
             и
-            <a href="/directory/privacy-policy"
-              >политикой конфиденциальности.</a
-            >
+            <a href="/directory/privacy-policy">политикой конфиденциальности.</a>
             <span class="note"></span>
           </p>
         </div>
         <button @click="saveSettings()" class="btn">Сохранить</button>
       </template>
-      <button @click="resetSettings()" class="btn btn-red">
-        Сбросить все изменения
-      </button>
+      <button @click="resetSettings()" class="btn btn-red">Сбросить все изменения</button>
     </div>
   </section>
 </template>
@@ -140,8 +108,7 @@
 import MD5 from "crypto-js/md5";
 
 function rndsh(sumString = Number()) {
-  const symbolArr =
-    "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+  const symbolArr = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
   let rtsdnr = "";
   for (let i = 0; i < sumString; i += 1) {
     const index = Math.floor(Math.random() * symbolArr.length);
@@ -257,17 +224,10 @@ export default {
       }
 
       if (this.userData.password.new !== "") {
-        urlParam.push(
-          `${this.userData.password.param}=${MD5(this.userData.password.new)}`
-        );
+        urlParam.push(`${this.userData.password.param}=${MD5(this.userData.password.new)}`);
       }
-      if (
-        this.userData.email.old !== this.userData.email.new &&
-        this.userData.email.new !== ""
-      ) {
-        urlParam.push(
-          `${this.userData.email.param}=${this.userData.email.new}`
-        );
+      if (this.userData.email.old !== this.userData.email.new && this.userData.email.new !== "") {
+        urlParam.push(`${this.userData.email.param}=${this.userData.email.new}`);
       }
 
       fullUrl += urlParam.join("&");

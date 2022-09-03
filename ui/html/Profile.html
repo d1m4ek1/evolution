@@ -1,41 +1,6 @@
-{{ define "profile" }}
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    {{ if $.ProfileData.Name }}
-    <title>{{ $.ProfileData.Name }}</title>
-    {{ else }}
-    <title>Профиль</title>
-    {{ end }}
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <link rel="stylesheet" href="/ui/assets/css/dH3zJm41AvPzGhEixvh.css" type="text/css">
-    <link rel="stylesheet" href="/ui/assets/css/VDvfSpadnNyOS2BAKeJ.css" type="text/css">
-    <link rel="stylesheet" href="/ui/assets/css/UserProfile/iChScSmWW2xLXhHHsFu.css" type="text/css">
-    <link rel="stylesheet" href="/ui/assets/css/Header/vRnHem7LY2e8yZGIs3G.css" type="text/css">
-    <link rel="stylesheet" href="/ui/assets/css/Header/4QI5wLOtrnrVgBkjIv7.css" type="text/css">
-<link rel="icon" href="/ui/assets/images/favicon.png"><script defer src="/ui/assets/js/_profile.7dda8095e62618c79b35.js"></script></head>
-
-<body>
-    <!-- Area of visibility VUE.typescript -->
-    <div id="wrapper" class="show_content">
-        <div class="preloader" :class="setDeletePreloader" v-if="preload">
-            {{ if $.ProfileData.Name }}
-            <h1>Evade | {{ $.ProfileData.Name }}</h1>
-            {{ else }}
-            <h1>Evade | Profile</h1>
-            {{ end }}
-            <div class="progress"></div>
-        </div>
-
-        <!-- HEADER LAYOUT TEMPLATES -->
-        
+{{ define "profile" }}<!doctype html><html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/>{{ if $.ProfileData.Name }}<title>{{ $.ProfileData.Name }}</title>{{ else }}<title>Профиль</title>{{ end }}<meta name="description" content=""/><meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="stylesheet" href="/ui/assets/css/LThHMSPkvJDuzEaZBK7.css" type="text/css"> <link rel="stylesheet" href="/ui/assets/css/noZN1lNMgQpPiVVQqM2.css" type="text/css"> <link rel="stylesheet" href="/ui/assets/css/UserProfile/GW0nWdNBqbpQ8VOnVBW.css" type="text/css"> <link rel="stylesheet" href="/ui/assets/css/Header/XMUIpVSz0N1mpJqBf6P.css" type="text/css"> <link rel="stylesheet" href="/ui/assets/css/Header/g21O5I0wbNZUYZc44iM.css" type="text/css"> <link rel="stylesheet" href="/ui/assets/css/Audio/EoUk1dSEeiBGDrsSAUR.css" type="text/css"> <link rel="stylesheet" href="/ui/assets/css/Audio/EndUNNxme38zzGvjMVr.css" type="text/css"> <link rel="stylesheet" href="/ui/assets/css/Album/vs8QOkfEoytx4yihgm3.css" type="text/css"><link rel="shortcut icon" href="/ui/assets/images/favicon.ico"><link rel="icon" type="image/png" sizes="16x16" href="/ui/assets/images/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/ui/assets/images/favicon-32x32.png"><link rel="icon" type="image/png" sizes="48x48" href="/ui/assets/images/favicon-48x48.png"><link rel="manifest" href="/ui/assets/images/manifest.json"><meta name="mobile-web-app-capable" content="yes"><meta name="theme-color" content="#fff"><meta name="application-name" content="evolution"><link rel="apple-touch-icon" sizes="57x57" href="/ui/assets/images/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/ui/assets/images/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/ui/assets/images/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/ui/assets/images/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/ui/assets/images/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/ui/assets/images/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/ui/assets/images/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/ui/assets/images/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="167x167" href="/ui/assets/images/apple-touch-icon-167x167.png"><link rel="apple-touch-icon" sizes="180x180" href="/ui/assets/images/apple-touch-icon-180x180.png"><link rel="apple-touch-icon" sizes="1024x1024" href="/ui/assets/images/apple-touch-icon-1024x1024.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="evolution"><link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/ui/assets/images/apple-touch-startup-image-640x1136.png"><link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/ui/assets/images/apple-touch-startup-image-750x1334.png"><link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/ui/assets/images/apple-touch-startup-image-828x1792.png"><link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/ui/assets/images/apple-touch-startup-image-1125x2436.png"><link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/ui/assets/images/apple-touch-startup-image-1242x2208.png"><link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/ui/assets/images/apple-touch-startup-image-1242x2688.png"><link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/ui/assets/images/apple-touch-startup-image-1536x2048.png"><link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/ui/assets/images/apple-touch-startup-image-1668x2224.png"><link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/ui/assets/images/apple-touch-startup-image-1668x2388.png"><link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/ui/assets/images/apple-touch-startup-image-2048x2732.png"><link rel="apple-touch-startup-image" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/ui/assets/images/apple-touch-startup-image-1620x2160.png"><link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/ui/assets/images/apple-touch-startup-image-1136x640.png"><link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/ui/assets/images/apple-touch-startup-image-1334x750.png"><link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/ui/assets/images/apple-touch-startup-image-1792x828.png"><link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="/ui/assets/images/apple-touch-startup-image-2436x1125.png"><link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="/ui/assets/images/apple-touch-startup-image-2208x1242.png"><link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="/ui/assets/images/apple-touch-startup-image-2688x1242.png"><link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/ui/assets/images/apple-touch-startup-image-2048x1536.png"><link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/ui/assets/images/apple-touch-startup-image-2224x1668.png"><link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/ui/assets/images/apple-touch-startup-image-2388x1668.png"><link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/ui/assets/images/apple-touch-startup-image-2732x2048.png"><link rel="apple-touch-startup-image" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/ui/assets/images/apple-touch-startup-image-2160x1620.png"><link rel="icon" type="image/png" sizes="228x228" href="/ui/assets/images/coast-228x228.png"><meta name="msapplication-TileColor" content="#fff"><meta name="msapplication-TileImage" content="/ui/assets/images/mstile-144x144.png"><meta name="msapplication-config" content="/ui/assets/images/browserconfig.xml"><link rel="yandex-tableau-widget" href="/ui/assets/images/yandex-browser-manifest.json"><script defer="defer" src="/ui/assets/js/_profile.b8acfca5cfffb9da9fdf.js"></script></head><body><div id="wrapper" class="show_content"><div class="preloader" :class="setDeletePreloader" v-if="preload">{{ if $.ProfileData.Name }}<h1>Evade | {{ $.ProfileData.Name }}</h1>{{ else }}<h1>Evade | Profile</h1>{{ end }}<div class="progress"></div></div>
 <!-- START Header block -->
-<header class="header" v-if="dropHeader">
+<header class="header" v-if="!showMobileHeader">
     <div class="container">
         <div class="header_nav">
             <div class="header_nav__item">
@@ -49,28 +14,22 @@
                 <a href="/{{ $.HeaderData.UserId }}">Профиль</a>
             </div>
             <div class="header_nav__item">
-                <a class="open_window" v-hide-elem="{id:'add_community', val:['community']}"
-                    @click="community = !community">Проекты
-                    <span class="arrow_list_close" :class="rotateArrowCommunity"></span>
+                <a class="open_window" v-hide-elem="{id:'add_beats', val:['beats']}" @click="beats = !beats">Биты
+                    <span class="arrow_list_close" :class="rotateArrowbeats"></span>
                 </a>
-                <div id="add_community" class="add_window" v-show="community">
+                <div id="add_beats" class="add_window" v-show="beats">
                     <div class="add_window__content">
-                        <a href="/inSocial">inSocial - общение с подписчиками</a>
-                        <a href="/inMusic">inMusic - музыка всего мира</a>
-                        <a href="/inBeats">inBeats - торговля битов</a>
+                        <a href="/beats">Поиск</a>
+                        <a href="/beats/favorites">Избранное</a>
+                        <a href="/beats/my-albums">Мои альбомы</a>
                     </div>
                 </div>
             </div>
             <div class="header_nav__item">
-                <a class="open_window" v-hide-elem="{id:'add_commerce', val:['commerce']}"
-                    @click="commerce = !commerce">Коммерция
-                    <span class="arrow_list_close" :class="rotateArrowCommerce"></span></a>
-                <div id="add_commerce" class="add_window" v-show="commerce">
-                    <div class="add_window__content">
-                        <a href="/subscriptions">Подписки</a>
-                        <a href="/orders">Заказы</a>
-                    </div>
-                </div>
+                <a href="/messenger">Сообщения</a>
+            </div>
+            <div class="header_nav__item">
+                <a href="/subscriptions">Подписки</a>
             </div>
             <div class="header_nav__item">
                 <a class="open_window" v-hide-elem="{id:'add_settings', val:['settings']}"
@@ -79,7 +38,6 @@
                 <div id="add_settings" class="add_window" v-show="settings">
                     <div class="add_window__content">
                         <a href="/customize">Настроить профиль</a>
-                        <a href="/customize/inBeats">Настроить inBeats</a>
                         <a href="/customize/personal-data">Настроить личные данные</a>
                     </div>
                 </div>
@@ -107,10 +65,9 @@
     </div>
 </header>
 <!-- END Header block -->
-
-        
+ 
 <!-- START STICKY HEADER block -->
-<header class="header_sticky" v-if="showStickyHeader">
+<header class="header_sticky" v-if="showMobileHeader">
   <div class="header_sticky_nav">
     <div class="header_sticky_nav__item">
       <div class="header_sticky_main_logo block-link">
@@ -127,44 +84,37 @@
     </div>
     <div class="header_sticky_nav__item">
       <div class="btn btn_link">
-        <a @click="community = !community"></a>
+        <a @click="hideStickyHeader()" href="/messenger"></a>
+        <p>Сообщения</p>
+      </div>
+    </div>
+    <div class="header_sticky_nav__item">
+      <div class="btn btn_link">
+        <a @click="beats = !beats"></a>
         <p>
-          Проекты
-          <span class="arrow_list_close" :class="rotateArrowCommunity"></span>
+          Поиск
+          <span class="arrow_list_close" :class="rotateArrowBeats"></span>
         </p>
       </div>
-      <div v-show="community" class="sticy_add_window">
+      <div v-show="beats" class="sticy_add_window">
         <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/inSocial"></a>
-          <p>inSocial</p>
+          <a @click="hideStickyHeader()" href="/beats"></a>
+          <p>Биты</p>
         </div>
         <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/inMusic"></a>
-          <p>inMusic</p>
+          <a @click="hideStickyHeader()" href="/beats/favorites"></a>
+          <p>Избранное</p>
         </div>
         <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/inBeats"></a>
-          <p>inBeats</p>
+          <a @click="hideStickyHeader()" href="/beats/my-albums"></a>
+          <p>Мои альбомы</p>
         </div>
       </div>
     </div>
     <div class="header_sticky_nav__item">
       <div class="btn btn_link">
-        <a @click="commerce = !commerce"></a>
-        <p>
-          Коммерция
-          <span class="arrow_list_close" :class="rotateArrowCommerce"></span>
-        </p>
-      </div>
-      <div v-show="commerce" class="sticy_add_window">
-        <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/subscriptions"></a>
-          <p>Подписки</p>
-        </div>
-        <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/orders"></a>
-          <p>Заказы</p>
-        </div>
+        <a @click="hideStickyHeader()" href="/subscriptions"></a>
+        <p>Подписки</p>
       </div>
     </div>
     <div class="header_sticky_nav__item">
@@ -177,10 +127,6 @@
         <div class="btn btn_link">
           <a @click="hideStickyHeader()" href="/customize"></a>
           <p>Настроить профиль</p>
-        </div>
-        <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/customize/inBeats"></a>
-          <p>Настроить inBeats</p>
         </div>
         <div class="btn btn_link">
           <a @click="hideStickyHeader()" href="/customize/personal-data"></a>
@@ -222,73 +168,4 @@
   </div>
 </header>
 <!-- END STICKY HEADER block -->
-
-        <!-- END HEADER LAYOUT TEMPLATES -->
-
-        <!-- START Main block for VUE.JS -->
-        <main class="main indent-top">
-            <div class="main__body_content container">
-                <div class="profile show_content">
-                    <h1 class="connect_bd">Связано с Базой данных</h1>
-                    <div class="content_header">
-                        <div class="content_title">
-                            <div class="content_images">
-                                <div class="banner">
-                                    <img class="lazyload" data-src="{{ $.ProfileData.Banner }}" />
-                                </div>
-                                <div class="logo {{ $.ProfileData.NetworkStatus }}">
-                                    <img class="lazyload" data-src="{{ $.ProfileData.Logo }}" />
-                                </div>
-                            </div>
-                            <div class="content_header__main_data">
-                                <div class="content_header__user_data">
-                                    <h1>{{ $.ProfileData.Name }}</h1>
-                                    <!-- <h2>{ userData.position }</h2> -->
-                                </div>
-                                <div class="content_header__user_data">
-                                    <h3>
-                                        Подписчики: {% isCountSubscribers %}
-                                    </h3>
-                                    {{ if not $.ProfileData.Auth }}
-                                    <button v-if="!isSubscriber" class="btn not_subs"
-                                        @click="appendSubscriber('{{ $.HeaderData.UserUrlId }}')">
-                                        Подписаться
-                                    </button>
-                                    <button v-else class="btn yes_subs"
-                                        @click="deleteSubscriber('{{ $.HeaderData.UserUrlId }}')">
-                                        Отписаться
-                                    </button>
-                                    {{ end }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content_subheader">
-                            <div class="content_subheader__items">
-                                <div class="content_subheader__item">
-                                    <router-link :to="`/{{ $.HeaderData.UserUrlId }}`">Новости</router-link>
-                                </div>
-                                <div class="content_subheader__item">
-                                    <router-link :to="`/{{ $.HeaderData.UserUrlId }}/aboutMe`">Обо мне</router-link>
-                                </div>
-                                <div class="content_subheader__item">
-                                    <a href="/inBeats/user_{{ $.HeaderData.UserUrlId }}">inBeats</a>
-                                </div>
-                                <div class="content_subheader__item">
-                                    <a @click="openChat()">Сообщение</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <router-view :title="aboutme.title" :content="aboutme.content"></router-view>
-                </div>
-            </div>
-            <ui-message-notificate :chat-data="chatData" :show-notif="showNotifMessage" @close-notif="onCloseNotif">
-            </ui-message-notificate>
-        </main>
-        <!-- END Main block for VUE.JS -->
-    </div>
-    <!-- END Area of visibility VUE.typescript -->
-</body>
-
-</html>
-{{ end }}
+<main class="main indent-top"><div class="main__body_content container"><div class="profile show_content"><div class="content_header"><div class="content_title"><div class="content_images"><div class="banner"><img class="lazyload" data-src="{{ $.ProfileData.Banner }}"/></div><div class="logo {{ $.ProfileData.NetworkStatus }}"><img class="lazyload" data-src="{{ $.ProfileData.Logo }}"/></div></div><div class="content_header__main_data"><div class="content_header__user_data"><h1>{{ $.ProfileData.Name }}</h1></div><div class="content_header__user_data"><h3>Подписчики: {% isCountSubscribers %}</h3>{{ if not $.ProfileData.Auth }} <button v-if="!isSubscriber" class="btn not_subs" @click="appendSubscriber('{{ $.HeaderData.UserUrlId }}')">Подписаться</button> <button v-else class="btn yes_subs" @click="deleteSubscriber('{{ $.HeaderData.UserUrlId }}')">Отписаться</button> {{ end }}</div></div></div><div class="content_subheader"><div class="content_subheader__items"><div class="content_subheader__item"><router-link :to="`/{{ $.HeaderData.UserUrlId }}`">Новости</router-link></div><div class="content_subheader__item"><router-link :to="`/{{ $.HeaderData.UserUrlId }}/aboutMe`">Обо мне</router-link></div><div class="content_subheader__item"><a @click="openChat()">Сообщение</a></div></div></div></div><router-view :title="aboutme.title" :content="aboutme.content"></router-view></div></div><ui-message-notificate :chat-data="chatData" :show-notif="showNotifMessage" @close-notif="onCloseNotif"></ui-message-notificate><global-player v-if="userAuthorized"></global-player></main></div></body></html>{{ end }}

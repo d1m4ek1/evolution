@@ -18,6 +18,9 @@
     {$ path_style="/src/assets/css/UserProfile/UserMain.css" $}
     {$ path_style="/src/assets/css/Header/Header.css" $}
     {$ path_style="/src/assets/css/Header/StickyHeader.css" $}
+    {$ path_style="/src/assets/css/Audio/GlobalPlayer.css" $}
+    {$ path_style="/src/assets/css/Audio/Audio.css" $}
+    {$ path_style="/src/assets/css/Album/Album.css" $}
 </head>
 
 <body>
@@ -41,7 +44,6 @@
         <main class="main indent-top">
             <div class="main__body_content container">
                 <div class="profile show_content">
-                    <h1 class="connect_bd">Связано с Базой данных</h1>
                     <div class="content_header">
                         <div class="content_title">
                             <div class="content_images">
@@ -83,9 +85,6 @@
                                     <router-link :to="`/{{ $.HeaderData.UserUrlId }}/aboutMe`">Обо мне</router-link>
                                 </div>
                                 <div class="content_subheader__item">
-                                    <a href="/inBeats/user_{{ $.HeaderData.UserUrlId }}">inBeats</a>
-                                </div>
-                                <div class="content_subheader__item">
                                     <a @click="openChat()">Сообщение</a>
                                 </div>
                             </div>
@@ -96,6 +95,7 @@
             </div>
             <ui-message-notificate :chat-data="chatData" :show-notif="showNotifMessage" @close-notif="onCloseNotif">
             </ui-message-notificate>
+            <global-player v-if="userAuthorized"></global-player>
         </main>
         <!-- END Main block for VUE.JS -->
     </div>

@@ -9,18 +9,16 @@ const Webpack = require("webpack");
 const pathEntryFiles = "/src/entry_points/";
 
 module.exports = {
-  devtool: "inline-source-map",
+  // devtool: "inline-source-map",
   entry: {
-    _index: `${pathEntryFiles}_index/index.js`,
-    _autoriz: `${pathEntryFiles}_autoriz/autoriz.js`,
-    _profile: `${pathEntryFiles}_profile/profile.js`,
-    _directory: `${pathEntryFiles}_directory/directory.js`,
-    _settings: `${pathEntryFiles}_settings/settings.js`,
-    _insocial: `${pathEntryFiles}__projects/insocial.js`,
-    _inmusic: `${pathEntryFiles}__projects/inmusic.js`,
-    _inbeats: `${pathEntryFiles}__projects/inbeats.js`,
-    _subscriptions: `${pathEntryFiles}__commerce/subscriptions.js`,
-    _orders: `${pathEntryFiles}__commerce/orders.js`,
+    _index: `${pathEntryFiles}index.js`,
+    _autoriz: `${pathEntryFiles}autoriz.js`,
+    _profile: `${pathEntryFiles}profile.js`,
+    _directory: `${pathEntryFiles}directory.js`,
+    _settings: `${pathEntryFiles}settings.js`,
+    _messenger: `${pathEntryFiles}messenger.js`,
+    _search: `${pathEntryFiles}search.js`,
+    _subscriptions: `${pathEntryFiles}subscriptions.js`,
   },
   output: {
     filename: "assets/js/[name].[chunkhash].js",
@@ -108,29 +106,19 @@ module.exports = {
       chunks: ["_settings"],
     }),
     new HtmlWebpackPlugin({
-      filename: "html/inSocial.html",
-      template: "src/pages/__projects/inSocial/inSocial.html",
-      chunks: ["_insocial"],
+      filename: "html/Messanger.html",
+      template: "src/pages/Messenger/Messenger.html",
+      chunks: ["_messenger"],
     }),
     new HtmlWebpackPlugin({
-      filename: "html/inMusic.html",
-      template: "src/pages/__projects/inMusic/inMusic.html",
-      chunks: ["_inmusic"],
-    }),
-    new HtmlWebpackPlugin({
-      filename: "html/inBeats.html",
-      template: "src/pages/__projects/inBeats/inBeats.html",
-      chunks: ["_inbeats"],
+      filename: "html/Search.html",
+      template: "src/pages/Search/Search.html",
+      chunks: ["_search"],
     }),
     new HtmlWebpackPlugin({
       filename: "html/Subscriptions.html",
-      template: "src/pages/__commerce/Subscriptions/Subscriptions.html",
+      template: "src/pages/Subscriptions/Subscriptions.html",
       chunks: ["_subscriptions"],
-    }),
-    new HtmlWebpackPlugin({
-      filename: "html/Orders.html",
-      template: "src/pages/__commerce/Orders/Orders.html",
-      chunks: ["_orders"],
     }),
     new copyPlugin({
       patterns: [

@@ -62,16 +62,14 @@ func handle(ctx *sqlx.DB) {
 	ginRouter.GET("/signup", controllers.AutorizTemplate(ctx))
 
 	// MESSAGE ROUTERS
-	ginRouter.GET("/inSocial", controllers.InSocialTemplate(ctx))
-	ginRouter.GET("/inSocial/favorites", controllers.InSocialTemplate(ctx))
-	ginRouter.GET("/inSocial/chat_:chatId", controllers.InSocialTemplate(ctx))
-
-	// MUSIC ROUTERS
-	ginRouter.GET("/inMusic", controllers.InMusicTemplate(ctx))
+	ginRouter.GET("/messenger", controllers.MessengerTemplate(ctx))
+	ginRouter.GET("/messenger/favorites", controllers.MessengerTemplate(ctx))
+	ginRouter.GET("/messenger/chat_:chatId", controllers.MessengerTemplate(ctx))
 
 	//SUBSCRIPTIONS ROUTERS
-	ginRouter.GET("/inBeats", controllers.InBeatsTemplate(ctx))
-	ginRouter.GET("/inBeats/user_:userId", controllers.InBeatsTemplate(ctx))
+	ginRouter.GET("/beats", controllers.BeatsTemplate(ctx))
+	ginRouter.GET("/beats/my-albums", controllers.BeatsTemplate(ctx))
+	ginRouter.GET("/beats/favorites", controllers.BeatsTemplate(ctx))
 
 	// SETTINGS ROUTERS
 	ginRouter.GET("/customize", controllers.SettingsTemplate(ctx))
@@ -83,9 +81,6 @@ func handle(ctx *sqlx.DB) {
 
 	// SUBSCRIPTIONS ROUTERS
 	ginRouter.GET("/subscriptions", controllers.SubscriptionsTemplate(ctx))
-
-	// SUBSCRIPTIONS ROUTERS
-	ginRouter.GET("/orders", controllers.OrdersTemplate(ctx))
 
 	//PROFILE ROUTERS
 	ginRouter.GET("/:userName", controllers.ProfileTemplate(ctx))

@@ -8,10 +8,7 @@ const connetionToWebsocket = setInterval(() => {
 
   if (isVerify) {
     const locationHost = window.location.host;
-    websocket = new WebSocket(
-      `ws://${locationHost}/websocket/connect`,
-      "contact"
-    );
+    websocket = new WebSocket(`ws://${locationHost}/websocket/connect`, "contact");
 
     clearInterval(connetionToWebsocket);
   }
