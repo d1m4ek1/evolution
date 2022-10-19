@@ -3,21 +3,25 @@
 <header class="header_sticky" v-if="showMobileHeader">
   <div class="header_sticky_nav">
     <div class="header_sticky_nav__item">
-      <div class="header_sticky_main_logo block-link">
-        <a class="point-link" href="/"></a>
-        <img class="lazyload" data-src="/ui/assets/images/main_logo.png" />
+      <div class="header_sticky_nav__logo">
+        <h1>
+          <span class="evo_start">evo</span><span class="evo_end">beat</span>
+        </h1>
       </div>
     </div>
     {{ if $.HeaderData.Auth }}
     <div class="header_sticky_nav__item">
       <div class="btn btn_link">
-        <a @click="hideStickyHeader()" href="/{{ $.HeaderData.UserId }}"></a>
+        <router-link
+          @click="hideStickyHeader()"
+          to="/{{ $.HeaderData.UserId }}"
+        ></router-link>
         <p>Профиль</p>
       </div>
     </div>
     <div class="header_sticky_nav__item">
       <div class="btn btn_link">
-        <a @click="hideStickyHeader()" href="/messenger"></a>
+        <router-link @click="hideStickyHeader()" to="/messenger"></router-link>
         <p>Сообщения</p>
       </div>
     </div>
@@ -31,22 +35,31 @@
       </div>
       <div v-show="beats" class="sticy_add_window">
         <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/beats"></a>
+          <router-link @click="hideStickyHeader()" to="/beats"></router-link>
           <p>Биты</p>
         </div>
         <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/beats/favorites"></a>
+          <router-link
+            @click="hideStickyHeader()"
+            to="/beats/favorites"
+          ></router-link>
           <p>Избранное</p>
         </div>
         <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/beats/my-albums"></a>
+          <router-link
+            @click="hideStickyHeader()"
+            to="/beats/my-albums"
+          ></router-link>
           <p>Мои альбомы</p>
         </div>
       </div>
     </div>
     <div class="header_sticky_nav__item">
       <div class="btn btn_link">
-        <a @click="hideStickyHeader()" href="/subscriptions"></a>
+        <router-link
+          @click="hideStickyHeader()"
+          to="/subscriptions"
+        ></router-link>
         <p>Подписки</p>
       </div>
     </div>
@@ -58,42 +71,46 @@
       </div>
       <div v-show="settings" class="sticy_add_window">
         <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/customize"></a>
+          <router-link
+            @click="hideStickyHeader()"
+            to="/customize"
+          ></router-link>
           <p>Настроить профиль</p>
         </div>
         <div class="btn btn_link">
-          <a @click="hideStickyHeader()" href="/customize/personal-data"></a>
+          <router-link
+            @click="hideStickyHeader()"
+            to="/customize/personal-data"
+          ></router-link>
           <p>Настроить личные данные</p>
         </div>
       </div>
     </div>
     <div class="header_sticky_nav__item">
       <div class="btn btn_link">
-        <a @click="hideStickyHeader()" href="/directory"></a>
+        <router-link @click="hideStickyHeader()" to="/directory"></router-link>
         <p>Справочник</p>
       </div>
     </div>
     <div class="header_sticky_nav__item">
-      <button @click="signOut(), hideStickyHeader()" class="btn">
-        Выход
-      </button>
+      <button @click="signOut(), hideStickyHeader()" class="btn">Выход</button>
     </div>
     {{ else }}
     <div class="header_sticky_nav__item">
       <div class="btn btn_link">
-        <a @click="hideStickyHeader()" href="/signin"></a>
+        <router-link @click="hideStickyHeader()" to="/signin"></router-link>
         <p>Вход</p>
       </div>
     </div>
     <div class="header_sticky_nav__item">
       <div class="btn btn_link">
-        <a @click="hideStickyHeader()" href="/signup"></a>
+        <router-link @click="hideStickyHeader()" to="/signup"></router-link>
         <p>Регистрация</p>
       </div>
     </div>
     <div class="header_sticky_nav__item">
       <div class="btn btn_link">
-        <a @click="hideStickyHeader()" href="/directory"></a>
+        <router-link @click="hideStickyHeader()" to="/directory"></router-link>
         <p>Справочник</p>
       </div>
     </div>

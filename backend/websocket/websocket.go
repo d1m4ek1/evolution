@@ -5,50 +5,11 @@ import (
 	"fmt"
 	"iNote/www/backend/models"
 	newerror "iNote/www/backend/pkg/newerror"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"github.com/jmoiron/sqlx"
 )
-
-const pathToLogFile string = "backend/logs/logs.txt"
-const isTimeAmPm bool = true
-
-var users = make(map[int64]WSConnect)
-
-var upgraded = websocket.Upgrader{
-	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
-	Subprotocols:    []string{"contact"},
-}
-
-type WSConnect struct {
-	Id        int64           `json:"id"`
-	Name      string          `json:"name"`
-	NetStatus string          `json:"netStatus"`
-	Conn      *websocket.Conn `json:"conn"`
-}
-
-type GettedMessage struct {
-	ChatId         string `json:"chatId"`
-	SenderId       int64  `json:"sender_id"`
-	RecipientId    int64  `json:"recipient_id"`
-	IsMessageCheck bool   `json:"isMessageCheck"`
-	Message        string `json:"message"`
-	Date           string `json:"date"`
-}
-
-func appendClient(conn *websocket.Conn, login string, userID int64) {
-	if _, ok := users[userID]; !ok {
-		users[userID] = WSConnect{
-			Id:        userID,
-			Name:      login,
-			NetStatus: "online",
-			Conn:      conn,
-		}
-	}
-}
 
 func listenConnect(ctx *sqlx.DB, conn *websocket.Conn, login string, userID int64) {
 	for {
@@ -70,6 +31,7 @@ func listenConnect(ctx *sqlx.DB, conn *websocket.Conn, login string, userID int6
 				newerror.NewAppError("json.Unmarshal", err, pathToLogFile, isTimeAmPm)
 				return
 			}
+
 			if messageJSON.IsMessageCheck {
 				if err := models.SetMessage(ctx, messageJSON.ChatId, messageJSON.Message); err != nil {
 					newerror.NewAppError("models.SetMessage", err, pathToLogFile, isTimeAmPm)
@@ -119,40 +81,4 @@ func listenConnect(ctx *sqlx.DB, conn *websocket.Conn, login string, userID int6
 			}
 		}
 	}
-}
-
-func WebSocketConnect(ctx *sqlx.DB) gin.HandlerFunc {
-	return gin.HandlerFunc(func(context *gin.Context) {
-		token, _ := context.Cookie("token")
-		userID, _ := context.Cookie("userId")
-
-		if token != "" && userID != "" {
-			userIDConv, err := strconv.ParseInt(userID, 10, 0)
-			if err != nil {
-				newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
-				return
-			}
-
-			conn, err := upgraded.Upgrade(context.Writer, context.Request, nil)
-			if err != nil {
-				newerror.NewAppError("upgraded.Upgrade", err, pathToLogFile, isTimeAmPm)
-				return
-			}
-			defer conn.Close()
-
-			login, err := models.SelectLoginByIdToken(ctx, userIDConv, token)
-			if err != nil {
-				newerror.NewAppError("models.SelectLoginByIdToken", err, pathToLogFile, isTimeAmPm)
-				return
-			}
-
-			if err := models.SetNetworkStatusOnline(ctx, userIDConv); err != nil {
-				newerror.NewAppError("models.SetNetworkStatusOnline", err, pathToLogFile, isTimeAmPm)
-				return
-			}
-
-			appendClient(conn, login, userIDConv)
-			listenConnect(ctx, conn, login, userIDConv)
-		}
-	})
 }

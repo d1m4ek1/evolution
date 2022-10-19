@@ -18,6 +18,9 @@ func SignOut(ctx *sqlx.DB) gin.HandlerFunc {
 				newerror.NewAppError("models.UserSignOut", err, pathToLogFile, isTimeAmPm)
 				return
 			}
+
+			context.SetCookie("token", "", -1, "/", "localhost", false, true)
+			context.SetCookie("userId", "", -1, "/", "localhost", false, true)
 		}
 	})
 }

@@ -15,11 +15,22 @@ const isTimeAmPm bool = true
 
 func CheckAuthoriztion(ctx *sqlx.DB) gin.HandlerFunc {
 	return gin.HandlerFunc(func(context *gin.Context) {
-		token := context.Query("token")
-		userId := context.Query("userId")
+		token, err := context.Cookie("token")
+		if err != nil {
+			context.JSON(http.StatusOK, gin.H{
+				"isVerify": false,
+			})
+			return
+		}
 
-		if token != "" && userId != "" {
-			userIDConv, err := strconv.ParseInt(userId, 10, 0)
+		userID, err := context.Cookie("userId")
+		if err != nil {
+			newerror.NewAppError("context.Cookie", err, pathToLogFile, isTimeAmPm)
+			return
+		}
+
+		if token != "" && userID != "" {
+			userIDConv, err := strconv.ParseInt(userID, 10, 0)
 			if err != nil {
 				newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 				return

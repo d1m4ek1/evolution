@@ -1,3 +1,7 @@
+body {
+    padding-bottom: unset;
+}
+
 .messages {
     width: 100%;
     position: relative;
@@ -113,44 +117,44 @@
 
 .new_message_animation {
     -webkit-animation-name: newMessage;
-            animation-name: newMessage;
+    animation-name: newMessage;
     -webkit-animation-duration: 2s;
-            animation-duration: 2s;
+    animation-duration: 2s;
     -webkit-animation-iteration-count: infinite;
-            animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
 }
 
 @-webkit-keyframes newMessage {
     from {
         -webkit-box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
-                box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
+        box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
     }
 
     50% {
         -webkit-box-shadow: 0 0 6px 3px #4fa3ff;
-                box-shadow: 0 0 6px 3px #4fa3ff;
+        box-shadow: 0 0 6px 3px #4fa3ff;
     }
 
     to {
         -webkit-box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
-                box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
+        box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
     }
 }
 
 @keyframes newMessage {
     from {
         -webkit-box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
-                box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
+        box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
     }
 
     50% {
         -webkit-box-shadow: 0 0 6px 3px #4fa3ff;
-                box-shadow: 0 0 6px 3px #4fa3ff;
+        box-shadow: 0 0 6px 3px #4fa3ff;
     }
 
     to {
         -webkit-box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
-                box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
+        box-shadow: 0 0 6px 3px rgba(0, 0, 0, .2);
     }
 }
 
@@ -178,7 +182,7 @@
     width: 100%;
     height: auto;
     -webkit-filter: blur(5px);
-            filter: blur(5px);
+    filter: blur(5px);
 }
 
 /* Message Exchange */
@@ -285,8 +289,8 @@
 .message_send .write_message {
     min-height: 70px;
     max-height: 200px;
-    max-width: 75%;
-    min-width: 75%;
+    width: 70%;
+    margin-right: 10px;
     overflow-y: auto;
     outline: none;
 }
@@ -298,7 +302,7 @@
 }
 
 .control_message {
-    width: 20%;
+    width: 30%;
 }
 
 .control_message button {
@@ -373,6 +377,11 @@
 }
 
 
+@media screen and (max-width: 960px) {
+    .message__main_content {
+        height: 90vh;
+    }
+}
 
 @media screen and (max-width: 600px) {
     .message_item__info {
@@ -387,10 +396,6 @@
     .message_item__logo {
         width: 50px;
         height: 50px;
-    }
-
-    .message__main_content {
-        height: 85vh;
     }
 
     .message_view_friend__content,

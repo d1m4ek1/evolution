@@ -13,13 +13,17 @@ import (
 func getUserAuthData(context *gin.Context) (string, int64, error) {
 	token, _ := context.Cookie("token")
 	userId, _ := context.Cookie("userId")
-	userIDConv, err := strconv.ParseInt(userId, 10, 0)
-	if err != nil {
-		newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
-		return "", 0, err
+	if token != "" && userId != "" {
+		userIDConv, err := strconv.ParseInt(userId, 10, 0)
+		if err != nil {
+			newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
+			return "", 0, err
+		}
+
+		return token, userIDConv, nil
 	}
 
-	return token, userIDConv, nil
+	return "", 0, nil
 }
 
 func GetUserCardMessages(ctx *sqlx.DB) gin.HandlerFunc {
@@ -27,6 +31,13 @@ func GetUserCardMessages(ctx *sqlx.DB) gin.HandlerFunc {
 		token, userID, err := getUserAuthData(context)
 		if err != nil {
 			newerror.NewAppError("getUserAuthData", err, pathToLogFile, isTimeAmPm)
+		}
+
+		if token == "" && userID == 0 {
+			context.JSON(http.StatusOK, gin.H{
+				"isAuthorized": false,
+			})
+			return
 		}
 
 		user := models.CheckSignin{
@@ -48,9 +59,10 @@ func GetUserCardMessages(ctx *sqlx.DB) gin.HandlerFunc {
 			context.JSON(http.StatusOK, gin.H{
 				"isCardSubscriptions": isCardSubscriptions,
 				"isCardSubscribers":   isCardSubscribers,
+				"isAuthorized":        true,
 			})
 		} else {
-			context.Redirect(http.StatusMovedPermanently, "/signin")
+			context.Redirect(http.StatusFound, "/signin")
 		}
 	})
 }

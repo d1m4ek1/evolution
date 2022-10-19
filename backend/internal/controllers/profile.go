@@ -1,9 +1,10 @@
 package controllers
 
 import (
+	userdata "iNote/www/backend/api/userData"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jmoiron/sqlx"
-	userdata "iNote/www/backend/api/userData"
 )
 
 func ProfileTemplate(ctx *sqlx.DB) gin.HandlerFunc {
@@ -16,7 +17,7 @@ func ProfileTemplate(ctx *sqlx.DB) gin.HandlerFunc {
 		profileDefaultData := userdata.GetUserDataStatic(ctx, token, userUrlId, context)
 
 		replyBasedOnToken(ctx, &ReplyBaseOnToken{
-			Define:    "profile",
+			Define:    "index",
 			UserUrlId: userUrlId,
 			Token:     token,
 			UserId:    userId,

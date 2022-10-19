@@ -1,68 +1,76 @@
 {$ define_template="header_layout" $}
 <!-- START Header block -->
 <header class="header" v-if="!showMobileHeader">
-    <div class="container">
-        <div class="header_nav">
-            <div class="header_nav__item">
-                <div class="header_main_logo block-link">
-                    <a class="point-link" href="/"></a>
-                    <img class="lazyload" data-src="/ui/assets/images/main_logo.png" />
-                </div>
-            </div>
-            {{ if $.HeaderData.Auth }}
-            <div class="header_nav__item">
-                <a href="/{{ $.HeaderData.UserId }}">Профиль</a>
-            </div>
-            <div class="header_nav__item">
-                <a class="open_window" v-hide-elem="{id:'add_beats', val:['beats']}" @click="beats = !beats">Биты
-                    <span class="arrow_list_close" :class="rotateArrowbeats"></span>
-                </a>
-                <div id="add_beats" class="add_window" v-show="beats">
-                    <div class="add_window__content">
-                        <a href="/beats">Поиск</a>
-                        <a href="/beats/favorites">Избранное</a>
-                        <a href="/beats/my-albums">Мои альбомы</a>
-                    </div>
-                </div>
-            </div>
-            <div class="header_nav__item">
-                <a href="/messenger">Сообщения</a>
-            </div>
-            <div class="header_nav__item">
-                <a href="/subscriptions">Подписки</a>
-            </div>
-            <div class="header_nav__item">
-                <a class="open_window" v-hide-elem="{id:'add_settings', val:['settings']}"
-                    @click="settings = !settings">Настройки
-                    <span class="arrow_list_close" :class="rotateArrowSettings"></span></a>
-                <div id="add_settings" class="add_window" v-show="settings">
-                    <div class="add_window__content">
-                        <a href="/customize">Настроить профиль</a>
-                        <a href="/customize/personal-data">Настроить личные данные</a>
-                    </div>
-                </div>
-            </div>
-            <div class="header_nav__item">
-                <a href="/directory">Справочник</a>
-            </div>
-            <div class="header_nav__item">
-                <button @click="signOut()" class="btn">
-                    Выход
-                </button>
-            </div>
-            {{ else }}
-            <div class="header_nav__item">
-                <a href="/signin">Вход</a>
-            </div>
-            <div class="header_nav__item">
-                <a href="/signup">Регистрация</a>
-            </div>
-            <div class="header_nav__item">
-                <a href="/directory">Справочник</a>
-            </div>
-            {{ end }}
+  <div class="container">
+    <div class="header_nav">
+      <div class="header_nav__item logo_header">
+        <h1>
+          <span class="evo_start">evo</span><span class="evo_end">beat</span>
+        </h1>
+        <router-link to="/"></router-link>
+      </div>
+      {{ if $.HeaderData.Auth }}
+      <div class="header_nav__item">
+        <router-link to="/{{ $.HeaderData.UserId }}">профиль</router-link>
+      </div>
+      <div class="header_nav__item">
+        <a
+          class="open_window"
+          v-hide-elem="{id:'add_beats', val:['beats']}"
+          @click="beats = !beats"
+          >биты
+          <span class="arrow_list_close" :class="rotateArrowbeats"></span>
+        </a>
+        <div id="add_beats" class="add_window" v-show="beats">
+          <div class="add_window__content">
+            <router-link to="/beats">поиск</router-link>
+            <router-link to="/beats/favorites">избранное</router-link>
+            <router-link to="/beats/my-albums">мои альбомы</router-link>
+          </div>
         </div>
+      </div>
+      <div class="header_nav__item">
+        <router-link to="/messenger">сообщения</router-link>
+      </div>
+      <div class="header_nav__item">
+        <router-link to="/subscriptions">подписки</router-link>
+      </div>
+      <div class="header_nav__item">
+        <a
+          class="open_window"
+          v-hide-elem="{id:'add_settings', val:['settings']}"
+          @click="settings = !settings"
+          >настройки
+          <span class="arrow_list_close" :class="rotateArrowSettings"></span
+        ></a>
+        <div id="add_settings" class="add_window" v-show="settings">
+          <div class="add_window__content">
+            <router-link to="/customize">настроить профиль</router-link>
+            <router-link to="/customize/personal-data"
+              >настроить личные данные</router-link
+            >
+          </div>
+        </div>
+      </div>
+      <div class="header_nav__item">
+        <router-link to="/directory">справочник</router-link>
+      </div>
+      <div class="header_nav__item">
+        <a @click="signOut()"> выход </a>
+      </div>
+      {{ else }}
+      <div class="header_nav__item">
+        <router-link to="/signin">вход</router-link>
+      </div>
+      <div class="header_nav__item">
+        <router-link to="/signup">регистрация</router-link>
+      </div>
+      <div class="header_nav__item">
+        <router-link to="/directory">справочник</router-link>
+      </div>
+      {{ end }}
     </div>
+  </div>
 </header>
 <!-- END Header block -->
 {$ end_template $}

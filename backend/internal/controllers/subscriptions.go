@@ -16,7 +16,7 @@ func SubscriptionsTemplate(ctx *sqlx.DB) gin.HandlerFunc {
 		})
 
 		replyBasedOnToken(ctx, &ReplyBaseOnToken{
-			Define:  "subscriptions",
+			Define:  "index",
 			Token:   token,
 			UserId:  userId,
 			Context: context,

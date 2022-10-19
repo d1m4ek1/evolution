@@ -71,3 +71,18 @@ func SelectUserDataDefault(ctx *sqlx.DB, userID int64) (name, logo string, err e
 
 	return name, logo, nil
 }
+
+func SelectUserName(ctx *sqlx.DB, userID int64) (string, error) {
+	var userName string
+	if err := ctx.Get(&userName, `
+	SELECT
+		name
+	FROM
+		users
+	WHERE
+		user_id=$1`, userID); err != nil {
+		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
+		return "", err
+	}
+	return userName, nil
+}

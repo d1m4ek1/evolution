@@ -49,7 +49,7 @@ func profileDefault(ctx *sqlx.DB, id string) (general.ProfileData, int64, error)
 func GetUserDataStatic(ctx *sqlx.DB, token, userUrlId string, context *gin.Context) general.ProfileData {
 	profileDefaultData, isVerify, err := profileDefault(ctx, userUrlId)
 	if err != nil {
-		context.Redirect(http.StatusMovedPermanently, "/")
+		context.Redirect(http.StatusFound, "/")
 	}
 
 	if token != "" {

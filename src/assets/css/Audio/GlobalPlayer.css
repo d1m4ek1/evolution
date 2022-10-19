@@ -12,18 +12,13 @@
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+  transition: 0.3s;
+  z-index: 9999;
 }
 
 .header_player {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+  flex-direction: column;
   margin-bottom: 20px;
   height: 70px;
   width: 100%;
@@ -42,7 +37,7 @@
 
 @-webkit-keyframes hiddenPlayer {
   0% {
-    top: 60px;
+    top: 50px;
   }
 
   100% {
@@ -52,7 +47,7 @@
 
 @keyframes hiddenPlayer {
   0% {
-    top: 60px;
+    top: 50px;
   }
 
   100% {
@@ -62,7 +57,7 @@
 
 .showed {
   height: 100%;
-  top: 60px;
+  top: 50px;
   -webkit-animation-name: showPlayer;
   animation-name: showPlayer;
   -webkit-animation-duration: 0.3s;
@@ -96,14 +91,14 @@
   width: 100%;
 }
 
-
 .btn_open {
   width: 100px;
   height: 30px;
 }
 
 .content_player {
-  padding-top: 100px;
+  padding-top: 20px;
+  border-top: 2px solid;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -123,4 +118,81 @@
 
 .cliped {
   display: none;
+}
+
+.timeUpdate {
+  display: flex;
+  justify-content: space-between;
+}
+
+.timeUpdate p {
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.hide-full {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.show-full {
+  opacity: 1;
+}
+
+.treck_info {
+  display: flex;
+}
+.treck_names {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.treck_names p:last-child {
+  font-size: 13px;
+}
+
+@media screen and (max-width: 960px) {
+  .showed {
+    top: 0;
+  }
+  .sidebar_left {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    max-width: none;
+  }
+  .content_player {
+    flex-direction: column;
+    justify-content: unset;
+  }
+  .global_player {
+    padding: 10px 10px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .header_player {
+    height: auto;
+  }
+
+  .header_player > .audio_item {
+    justify-content: unset;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .header_player > .audio_item > div,
+  .header_player > .audio_item > button {
+    margin-bottom: 10px;
+  }
+
+  .album_item {
+    margin: 0;
+    width: 100%;
+    height: auto;
+  }
+
+  .album_item__cover {
+    height: auto;
+  }
 }

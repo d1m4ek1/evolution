@@ -26,7 +26,6 @@ func CheckChat(ctx *sqlx.DB) gin.HandlerFunc {
 		}
 
 		if token != "" && userId != "" {
-			var userIdTwo int64
 			var chatID int64
 			user := models.CheckSignin{
 				Id:       userIDConv,
@@ -38,14 +37,6 @@ func CheckChat(ctx *sqlx.DB) gin.HandlerFunc {
 				return
 			}
 
-			if context.Query("user_id_two") != "" {
-				userIdTwo, err = strconv.ParseInt(context.Query("user_id_two"), 10, 0)
-				if err != nil {
-					newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
-					return
-				}
-			}
-
 			if context.Query("chat_id") != "" {
 				chatID, err = strconv.ParseInt(context.Query("chat_id"), 10, 0)
 				if err != nil {
@@ -55,7 +46,7 @@ func CheckChat(ctx *sqlx.DB) gin.HandlerFunc {
 			}
 
 			if user.Autorize {
-				chatData, err := models.SelectChat(ctx, userIDConv, userIdTwo, chatID)
+				chatData, err := models.SelectChat(ctx, userIDConv, user.Id, chatID)
 				if err != nil {
 					newerror.NewAppError("models.SelectChat", err, pathToLogFile, isTimeAmPm)
 					return

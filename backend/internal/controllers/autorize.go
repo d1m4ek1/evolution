@@ -11,7 +11,7 @@ func AutorizTemplate(ctx *sqlx.DB) gin.HandlerFunc {
 		userId, _ := context.Cookie("userId")
 
 		replyBasedOnToken(ctx, &ReplyBaseOnToken{
-			Define:  "autoriz",
+			Define:  "index",
 			Token:   token,
 			UserId:  userId,
 			Context: context,

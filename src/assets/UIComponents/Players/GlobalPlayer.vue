@@ -1,19 +1,26 @@
 <template>
   <div class="global_player container" :class="showHidePlayer">
-    <div class="global_player__block">
+    <div v-if="$store.getters.getAudioSettings.loadedAudio" class="global_player__block">
       <div class="header_player">
-        <div v-if="$store.getters.getAudioSettings.loadedAudio" class="audio_item">
-          <div class="treck_cover">
-            <img :src="'/user_files/inbeats/cover_album' + $store.getters.getAudioSettings.album.cover" />
+        <div class="timer">
+          <progress-bar-time
+            :duration="$store.state.audioSettings.loadedAudio.duration"
+            :currentTime="$store.state.audioSettings.loadedAudio.currentTime"
+          ></progress-bar-time>
+          <div class="timeUpdate">
+            <p class="now_time">{{ time.nowTime }}</p>
+            <p class="amount_time">{{ time.totalTime }}</p>
           </div>
-          <div class="treck_name_time_progres">
-            <p>{{ $store.getters.getAudioSettings.name }}</p>
-          </div>
-          <div class="timer">
-            <div class="progress_bar_time"></div>
-            <div class="timeUpdate">
-              <p>{{ time.nowTime }}</p>
-              <p>{{ time.totalTime }}</p>
+        </div>
+        <div class="audio_item">
+          <button class="btn btn_open" @click="showPlayer()">{{ showHideText }}</button>
+          <div class="treck_info">
+            <div class="treck_cover">
+              <img :src="'/user_files/beats/cover_album/' + $store.getters.getAudioSettings.album.covers" />
+            </div>
+            <div class="treck_names">
+              <p>{{ $store.getters.getAudioSettings.name }}</p>
+              <p>{{ $store.getters.getAudioSettings.album.creator }}</p>
             </div>
           </div>
           <div class="treck_price_buy">{{ $store.getters.getAudioSettings.price }}</div>
@@ -22,29 +29,36 @@
             <button class="btn" v-else @click="pauseTreck()">Pause</button>
           </div>
         </div>
-        <h2 v-else>Выберите трек</h2>
-        <button class="btn btn_open" @click="showPlayer()">{{ showHideText }}</button>
       </div>
       <div class="content_player">
         <div class="sidebar_left">
           <div class="album_item" v-if="$store.getters.getAudioSettings.album.id !== undefined">
             <div class="album_item__cover">
-              <img :src="'/user_files/inbeats/cover_album' + $store.getters.getAudioSettings.album.cover" />
+              <img :src="'/user_files/beats/cover_album/' + $store.getters.getAudioSettings.album.covers" />
               <button v-if="!$store.getters.getAudioSettings.album.played" @click="playTreck()">Play</button>
               <button v-else @click="pauseTreck()">Pause</button>
             </div>
+            <h1>{{ $store.getters.getAudioSettings.album.name }}</h1>
+            <h3>Date: {{ $store.getters.getAudioSettings.album.dateOfRelease }}</h3>
           </div>
         </div>
         <div class="content_player__main">
           <template v-if="$store.getters.getAudioSettings.album.trecks.length !== 0">
             <button class="btn" @click="showHideTrecks('.audio_items')">{{ clipPathTrecksBlockText }} trecks</button>
             <div class="audio_items" :class="clipPathTrecksBlock">
-              <div v-for="(treckItem, idx) in $store.getters.getAudioSettings.album.trecks" class="audio_item" :key="'player_treck_item_' + idx">
-                <div class="treck_cover">
-                  <img :src="'/user_files/inbeats/cover_album' + $store.getters.getAudioSettings.album.cover" />
-                </div>
-                <div class="treck_name_time_progres">
-                  <p>{{ treckItem.name }}</p>
+              <div
+                v-for="(treckItem, idx) in $store.getters.getAudioSettings.album.trecks"
+                class="audio_item"
+                :key="'player_treck_item_' + idx"
+              >
+                <div class="treck_info">
+                  <div class="treck_cover">
+                    <img :src="'/user_files/beats/cover_album/' + $store.getters.getAudioSettings.album.covers" />
+                  </div>
+                  <div class="treck_names">
+                    <p>{{ treckItem.name }}</p>
+                    <p>{{ $store.getters.getAudioSettings.album.creator }}</p>
+                  </div>
                 </div>
                 <div class="treck_price_buy">{{ treckItem.price }}</div>
                 <div class="treck_control">
@@ -61,13 +75,15 @@
 </template>
 
 <script>
+import ProgressBarTime from './ProgressBarTime.vue';
 export default {
+  components: { ProgressBarTime },
   data() {
     return {
       hidenPlayer: true,
       time: {
-        nowTime: "0:00",
-        totalTime: "",
+        nowTime: '0:00',
+        totalTime: '',
         nowTimeNumber: 0,
       },
       clipPath: {
@@ -76,11 +92,11 @@ export default {
     };
   },
   watch: {
-    "$store.getters.getAudioSettings.treckId": {
+    '$store.getters.getAudioSettings.treckId': {
       handler(value) {
         const audioSettings = this.$store.state.audioSettings;
 
-        this.time.nowTime = "0:00";
+        this.time.nowTime = '0:00';
         this.time.nowTimeNumber = 0;
 
         const setTotalTime = setInterval(() => {
@@ -88,7 +104,9 @@ export default {
             let totalMinute = Math.floor(audioSettings.loadedAudio.duration / 60);
             let totalSecond = Math.floor(audioSettings.loadedAudio.duration - totalMinute * 60);
 
-            this.time.totalTime = `${totalMinute < 10 ? "0" + totalMinute : totalMinute} : ${totalSecond < 10 ? "0" + totalSecond : totalSecond}`;
+            this.time.totalTime = `${totalMinute < 10 ? '0' + totalMinute : totalMinute} : ${
+              totalSecond < 10 ? '0' + totalSecond : totalSecond
+            }`;
           } else {
             clearInterval(setTotalTime);
           }
@@ -101,7 +119,7 @@ export default {
         const timer = setInterval(() => {
           let minute = Math.floor(audioSettings.loadedAudio.currentTime / 60);
           let second = Math.floor(audioSettings.loadedAudio.currentTime - minute * 60);
-          this.time.nowTime = `${minute < 10 ? "0" + minute : minute} : ${second < 10 ? "0" + second : second}`;
+          this.time.nowTime = `${minute < 10 ? '0' + minute : minute} : ${second < 10 ? '0' + second : second}`;
 
           this.time.nowTimeNumber = audioSettings.loadedAudio.currentTime;
         }, 100);
@@ -137,7 +155,7 @@ export default {
 
       if (audioSettings.treckId !== audioSettings.album.trecks[treckIdInArray].id) {
         audioSettings.treckId = audioSettings.album.trecks[treckIdInArray].id;
-        audioSettings.loadedAudio = new Audio("/user_files/inbeats/beats" + audioSettings.album.trecks[treckIdInArray].path);
+        audioSettings.loadedAudio = new Audio('/user_files/beats/trecks/' + audioSettings.album.trecks[treckIdInArray].path);
         audioSettings.loadedAudio.volume = audioSettings.volume;
         audioSettings.name = audioSettings.album.trecks[treckIdInArray].name;
         audioSettings.price = audioSettings.album.trecks[treckIdInArray].price;
@@ -183,11 +201,16 @@ export default {
   },
   computed: {
     showHidePlayer() {
-      document.body.style.overflow = this.hidenPlayer ? "unset" : "hidden";
-      return this.hidenPlayer ? "hidden" : "showed";
+      document.body.style.overflow = this.hidenPlayer ? 'unset' : 'hidden';
+      return {
+        hidden: this.hidenPlayer,
+        showed: !this.hidenPlayer,
+        'hide-full': !this.$store.getters.getAudioSettings.loadedAudio,
+        'show-full': this.$store.getters.getAudioSettings.loadedAudio,
+      };
     },
     showHideText() {
-      return this.hidenPlayer ? "Show" : "Hidde";
+      return this.hidenPlayer ? 'Show' : 'Hidde';
     },
     clipPathTrecksBlock() {
       return {
@@ -195,7 +218,7 @@ export default {
       };
     },
     clipPathTrecksBlockText() {
-      return this.clipPath.trecksBlock ? "Show" : "Hidden";
+      return this.clipPath.trecksBlock ? 'Show' : 'Hidden';
     },
   },
 };

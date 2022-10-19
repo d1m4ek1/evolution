@@ -10,19 +10,12 @@
 </template>
 
 <script>
-import MD5 from "crypto-js/md5";
-
-function rndsh(sumString = Number()) {
-  const symbolArr = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
-  let rtsdnr = "";
-  for (let i = 0; i < sumString; i += 1) {
-    const index = Math.floor(Math.random() * symbolArr.length);
-    rtsdnr += symbolArr[index];
-  }
-  return rtsdnr;
-}
+import MD5 from 'crypto-js/md5';
 
 export default {
+  props: {
+    activetitle: String,
+  },
   data() {
     return {
       dataSignIn: {
@@ -34,16 +27,9 @@ export default {
   },
   methods: {
     sendData() {
-      const cookie = `token=${MD5(rndsh(64)) + rndsh(8)}`;
-      fetch(`/api/signin_account?signin=true&login=${this.dataSignIn.login}&password=${MD5(this.dataSignIn.password)}&${cookie}`).then((response) => {
+      fetch(`/api/signin_account?signin=true&login=${this.dataSignIn.login}&password=${MD5(this.dataSignIn.password)}`).then((response) => {
         response.json().then((data) => {
           if (data.error === undefined && data.num === undefined) {
-            if (data.olt !== "") {
-              document.cookie = `token=${data.olt}; path=/;`;
-            } else {
-              document.cookie = `${cookie}; path=/;`;
-            }
-            document.cookie = `userId=${data.user_id}; path=/;`;
             window.location.href = `/${data.user_id}`;
           } else {
             this.error = data.error;
@@ -51,11 +37,6 @@ export default {
         });
       });
     },
-  },
-  created() {
-    this.$emit("changed-background", {
-      backgroundNumber: 1,
-    });
   },
 };
 </script>

@@ -1,39 +1,47 @@
-import { createStore } from "vuex";
+import { createStore } from 'vuex';
 
-import GetCookie from "../assets/javascript/getCookie.js";
+import GetCookie from '../assets/javascript/getCookie.js';
 
 export const store = createStore({
   state() {
     return {
-      chatData: undefined,
-      userId: GetCookie("userId"),
+      messengerData: {
+        chats: [],
+        subscribers: [],
+        subscriptions: [],
+      },
+      userId: GetCookie('userId'),
       audioSettings: {
         treckId: undefined,
         loadedAudio: null,
-        name: "",
-        producer: "",
-        feat: "",
+        name: '',
+        producer: '',
+        feat: '',
         tags: [],
-        typeTreck: "",
-        volume: 0.05,
+        volume: 0.2,
         played: false,
         repeat: false,
         price: undefined,
         album: {
-          name: "",
-          id: undefined,
-          cover: "",
-          typeTrecks: "",
-          date: "",
+          name: '',
+          creator: '',
+          albumId: undefined,
+          covers: '',
+          dateOfRelease: '',
           played: false,
           trecks: [],
         },
       },
+      userAlbums: {
+        albums: [],
+        isInit: false,
+      },
     };
   },
   getters: {
-    getChatData: (state) => state.chatData,
+    getMessengerData: (state) => state.messengerData,
     getUserId: (state) => state.userId,
     getAudioSettings: (state) => state.audioSettings,
+    getUserAlbums: (state) => state.userAlbums,
   },
 });

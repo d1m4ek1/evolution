@@ -197,7 +197,7 @@ func setIdentificate(id int, length int) string {
 	return string(token) + fmt.Sprint(id)
 }
 
-func CreateAccount(ctx *sqlx.DB, login, password, email, token, nickname string) error {
+func CreateAccount(ctx *sqlx.DB, login, password, email, token, nickname string) (int, error) {
 	var identificate int
 	if err := ctx.Get(&identificate, `
 		INSERT INTO 
@@ -207,12 +207,12 @@ func CreateAccount(ctx *sqlx.DB, login, password, email, token, nickname string)
 		RETURNING 
 		    id`, login, password, email, token); err != nil {
 		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
-		return err
+		return 0, err
 	}
 
 	if _, err := ctx.DB.Exec(`INSERT INTO users (user_id, name) VALUES ($1, $2)`, identificate, nickname); err != nil {
 		newerror.NewAppError("ctx.Get", err, pathToLogFile, isTimeAmPm)
-		return err
+		return 0, err
 	}
 
 	var connectionID = setIdentificate(identificate, 63)
@@ -228,7 +228,7 @@ func CreateAccount(ctx *sqlx.DB, login, password, email, token, nickname string)
 		connectionID,
 		settingsID, albumsID); err != nil {
 		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
-		return err
+		return 0, err
 	}
 
 	if _, err := ctx.DB.Exec(`
@@ -238,7 +238,7 @@ func CreateAccount(ctx *sqlx.DB, login, password, email, token, nickname string)
 		    ($1)`,
 		connectionID); err != nil {
 		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
-		return err
+		return 0, err
 	}
 
 	if _, err := ctx.DB.Exec(`
@@ -248,8 +248,8 @@ func CreateAccount(ctx *sqlx.DB, login, password, email, token, nickname string)
 		    ($1)`,
 		settingsID); err != nil {
 		newerror.NewAppError("ctx.DB.Exec", err, pathToLogFile, isTimeAmPm)
-		return err
+		return 0, err
 	}
 
-	return nil
+	return identificate, nil
 }

@@ -1,3 +1,7 @@
+body {
+  padding-bottom: unset;
+}
+
 .creator_block_album {
   width: 100%;
   display: -webkit-box;

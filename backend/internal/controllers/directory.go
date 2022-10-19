@@ -11,7 +11,7 @@ func DirectoryTemplate(ctx *sqlx.DB) gin.HandlerFunc {
 		userId, _ := context.Cookie("userId")
 
 		replyBasedOnToken(ctx, &ReplyBaseOnToken{
-			Define:  "directory",
+			Define:  "index",
 			Token:   token,
 			UserId:  userId,
 			Context: context,

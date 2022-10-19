@@ -215,3 +215,1163 @@ ERROR:
 	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
 	Date: 3 September 2022;
 	Time: 1:59 PM Second: 06;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.DB.QueryRow;
+	Line: 97;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/internal/controllers/controllers.go;
+	Date: 3 September 2022;
+	Time: 10:12 PM Second: 53;
+
+ERROR:
+	Error: http: named cookie not present;
+	Message: context.Cookie;
+	Line: 20;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/authorization/checkAuthorize.go;
+	Date: 7 October 2022;
+	Time: 7:50 AM Second: 46;
+
+ERROR:
+	Error: http: named cookie not present;
+	Message: context.Cookie;
+	Line: 25;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/authorization/checkAuthorize.go;
+	Date: 7 October 2022;
+	Time: 7:50 AM Second: 46;
+
+ERROR:
+	Error: http: named cookie not present;
+	Message: context.Cookie;
+	Line: 20;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/authorization/checkAuthorize.go;
+	Date: 7 October 2022;
+	Time: 7:51 AM Second: 17;
+
+ERROR:
+	Error: http: named cookie not present;
+	Message: context.Cookie;
+	Line: 25;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/authorization/checkAuthorize.go;
+	Date: 7 October 2022;
+	Time: 7:51 AM Second: 17;
+
+ERROR:
+	Error: http: named cookie not present;
+	Message: context.Cookie;
+	Line: 20;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/authorization/checkAuthorize.go;
+	Date: 7 October 2022;
+	Time: 8:09 AM Second: 28;
+
+ERROR:
+	Error: http: named cookie not present;
+	Message: context.Cookie;
+	Line: 25;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/authorization/checkAuthorize.go;
+	Date: 7 October 2022;
+	Time: 8:09 AM Second: 28;
+
+ERROR:
+	Error: http: named cookie not present;
+	Message: context.Cookie;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/authorization/checkAuthorize.go;
+	Date: 7 October 2022;
+	Time: 8:13 AM Second: 56;
+
+ERROR:
+	Error: http: named cookie not present;
+	Message: context.Cookie;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/authorization/checkAuthorize.go;
+	Date: 7 October 2022;
+	Time: 8:14 AM Second: 23;
+
+ERROR:
+	Error: http: named cookie not present;
+	Message: context.Cookie;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/authorization/checkAuthorize.go;
+	Date: 7 October 2022;
+	Time: 8:14 AM Second: 35;
+
+ERROR:
+	Error: pq: value too long for type character varying(64);
+	Message: ctx.DB.Exec;
+	Line: 105;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/autorization.go;
+	Date: 7 October 2022;
+	Time: 8:33 AM Second: 27;
+
+ERROR:
+	Error: pq: value too long for type character varying(64);
+	Message: SetNewToken;
+	Line: 83;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/autorization.go;
+	Date: 7 October 2022;
+	Time: 8:33 AM Second: 27;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 7 October 2022;
+	Time: 8:33 AM Second: 27;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 7 October 2022;
+	Time: 8:33 AM Second: 27;
+
+ERROR:
+	Error: pq: value too long for type character varying(64);
+	Message: ctx.DB.Exec;
+	Line: 105;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/autorization.go;
+	Date: 7 October 2022;
+	Time: 8:36 AM Second: 34;
+
+ERROR:
+	Error: pq: value too long for type character varying(64);
+	Message: SetNewToken;
+	Line: 83;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/autorization.go;
+	Date: 7 October 2022;
+	Time: 8:36 AM Second: 34;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 7 October 2022;
+	Time: 8:36 AM Second: 34;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 7 October 2022;
+	Time: 8:36 AM Second: 34;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.DB.QueryRow;
+	Line: 97;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/internal/controllers/controllers.go;
+	Date: 7 October 2022;
+	Time: 8:36 AM Second: 34;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.DB.QueryRow;
+	Line: 97;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/internal/controllers/controllers.go;
+	Date: 7 October 2022;
+	Time: 8:36 AM Second: 34;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.DB.QueryRow;
+	Line: 97;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/internal/controllers/controllers.go;
+	Date: 7 October 2022;
+	Time: 8:37 AM Second: 09;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.DB.QueryRow;
+	Line: 97;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/internal/controllers/controllers.go;
+	Date: 7 October 2022;
+	Time: 8:37 AM Second: 11;
+
+ERROR:
+	Error: must pass a pointer, not a value, to StructScan destination;
+	Message: ctx.Get;
+	Line: 32;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/dataProfile.go;
+	Date: 7 October 2022;
+	Time: 12:22 PM Second: 38;
+
+ERROR:
+	Error: must pass a pointer, not a value, to StructScan destination;
+	Message: Qmodels.SelectProfileData;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/dataProfile/dataProfile.go;
+	Date: 7 October 2022;
+	Time: 12:22 PM Second: 38;
+
+ERROR:
+	Error: must pass a pointer, not a value, to StructScan destination;
+	Message: ctx.Get;
+	Line: 32;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/dataProfile.go;
+	Date: 7 October 2022;
+	Time: 12:23 PM Second: 31;
+
+ERROR:
+	Error: must pass a pointer, not a value, to StructScan destination;
+	Message: Qmodels.SelectProfileData;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/dataProfile/dataProfile.go;
+	Date: 7 October 2022;
+	Time: 12:23 PM Second: 31;
+
+ERROR:
+	Error: must pass a pointer, not a value, to StructScan destination;
+	Message: ctx.Get;
+	Line: 31;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/dataProfile.go;
+	Date: 7 October 2022;
+	Time: 12:26 PM Second: 27;
+
+ERROR:
+	Error: must pass a pointer, not a value, to StructScan destination;
+	Message: Qmodels.SelectProfileData;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/dataProfile/dataProfile.go;
+	Date: 7 October 2022;
+	Time: 12:26 PM Second: 27;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "undefined";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 7 October 2022;
+	Time: 12:33 PM Second: 06;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "undefined";
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 7 October 2022;
+	Time: 12:33 PM Second: 06;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "customize": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 23;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/dataProfile/dataProfile.go;
+	Date: 7 October 2022;
+	Time: 5:30 PM Second: 07;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "customize": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 146;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/subscription/subscription.go;
+	Date: 7 October 2022;
+	Time: 5:30 PM Second: 07;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "customize";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/subscription.go;
+	Date: 7 October 2022;
+	Time: 5:30 PM Second: 07;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "customize";
+	Message: models.SelectSubscriber;
+	Line: 124;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/subscription/subscription.go;
+	Date: 7 October 2022;
+	Time: 5:30 PM Second: 07;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "customize": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 146;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/subscription/subscription.go;
+	Date: 7 October 2022;
+	Time: 5:30 PM Second: 07;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 8:59 PM Second: 46;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: getUserAuthData;
+	Line: 29;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 8:59 PM Second: 46;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 9:02 PM Second: 03;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: getUserAuthData;
+	Line: 29;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 9:02 PM Second: 03;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 9:02 PM Second: 04;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: getUserAuthData;
+	Line: 29;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 9:02 PM Second: 04;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 9:02 PM Second: 25;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: getUserAuthData;
+	Line: 29;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 9:02 PM Second: 25;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 9:02 PM Second: 40;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: getUserAuthData;
+	Line: 29;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 9:02 PM Second: 40;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 9:07 PM Second: 18;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: getUserAuthData;
+	Line: 29;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 9:07 PM Second: 18;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 9:10 PM Second: 51;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: getUserAuthData;
+	Line: 29;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 9:10 PM Second: 51;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 9:24 PM Second: 28;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: getUserAuthData;
+	Line: 29;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 9:24 PM Second: 28;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 10:49 PM Second: 33;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: getUserAuthData;
+	Line: 29;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 10:49 PM Second: 33;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 10:49 PM Second: 44;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: getUserAuthData;
+	Line: 29;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 10:49 PM Second: 44;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 10:49 PM Second: 56;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: getUserAuthData;
+	Line: 29;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/messages/subscriptions.go;
+	Date: 8 October 2022;
+	Time: 10:49 PM Second: 56;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 8 October 2022;
+	Time: 10:59 PM Second: 45;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 8 October 2022;
+	Time: 10:59 PM Second: 52;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 14;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 8 October 2022;
+	Time: 11:01 PM Second: 56;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 14;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 8 October 2022;
+	Time: 11:02 PM Second: 30;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 8 October 2022;
+	Time: 11:09 PM Second: 31;
+
+ERROR:
+	Error: websocket: the client is not using the websocket protocol: 'upgrade' token not found in 'Connection' header;
+	Message: upgraded.Upgrade;
+	Line: 65;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/websocket/initWebsocket.go;
+	Date: 8 October 2022;
+	Time: 11:09 PM Second: 36;
+
+ERROR:
+	Error: websocket: the client is not using the websocket protocol: 'upgrade' token not found in 'Connection' header;
+	Message: upgraded.Upgrade;
+	Line: 65;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/websocket/initWebsocket.go;
+	Date: 8 October 2022;
+	Time: 11:09 PM Second: 39;
+
+ERROR:
+	Error: websocket: the client is not using the websocket protocol: 'upgrade' token not found in 'Connection' header;
+	Message: upgraded.Upgrade;
+	Line: 65;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/websocket/initWebsocket.go;
+	Date: 8 October 2022;
+	Time: 11:13 PM Second: 58;
+
+ERROR:
+	Error: websocket: the client is not using the websocket protocol: 'upgrade' token not found in 'Connection' header;
+	Message: upgraded.Upgrade;
+	Line: 65;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/websocket/initWebsocket.go;
+	Date: 8 October 2022;
+	Time: 11:17 PM Second: 39;
+
+ERROR:
+	Error: websocket: the client is not using the websocket protocol: 'upgrade' token not found in 'Connection' header;
+	Message: upgraded.Upgrade;
+	Line: 65;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/websocket/initWebsocket.go;
+	Date: 8 October 2022;
+	Time: 11:18 PM Second: 07;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.DB.QueryRow;
+	Line: 97;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/internal/controllers/controllers.go;
+	Date: 8 October 2022;
+	Time: 11:18 PM Second: 58;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.DB.QueryRow;
+	Line: 97;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/internal/controllers/controllers.go;
+	Date: 8 October 2022;
+	Time: 11:18 PM Second: 58;
+
+ERROR:
+	Error: websocket: the client is not using the websocket protocol: 'upgrade' token not found in 'Connection' header;
+	Message: upgraded.Upgrade;
+	Line: 65;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/websocket/initWebsocket.go;
+	Date: 8 October 2022;
+	Time: 11:19 PM Second: 09;
+
+ERROR:
+	Error: websocket: the client is not using the websocket protocol: 'upgrade' token not found in 'Connection' header;
+	Message: upgraded.Upgrade;
+	Line: 65;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/websocket/initWebsocket.go;
+	Date: 8 October 2022;
+	Time: 11:19 PM Second: 15;
+
+ERROR:
+	Error: websocket: the client is not using the websocket protocol: 'websocket' token not found in 'Upgrade' header;
+	Message: upgraded.Upgrade;
+	Line: 65;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/websocket/initWebsocket.go;
+	Date: 8 October 2022;
+	Time: 11:19 PM Second: 34;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 8 October 2022;
+	Time: 11:19 PM Second: 34;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 8 October 2022;
+	Time: 11:19 PM Second: 34;
+
+ERROR:
+	Error: websocket: the client is not using the websocket protocol: 'websocket' token not found in 'Upgrade' header;
+	Message: upgraded.Upgrade;
+	Line: 65;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/websocket/initWebsocket.go;
+	Date: 8 October 2022;
+	Time: 11:19 PM Second: 36;
+
+ERROR:
+	Error: websocket: the client is not using the websocket protocol: 'websocket' token not found in 'Upgrade' header;
+	Message: upgraded.Upgrade;
+	Line: 65;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/websocket/initWebsocket.go;
+	Date: 8 October 2022;
+	Time: 11:19 PM Second: 39;
+
+ERROR:
+	Error: websocket: the client is not using the websocket protocol: 'websocket' token not found in 'Upgrade' header;
+	Message: upgraded.Upgrade;
+	Line: 65;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/websocket/initWebsocket.go;
+	Date: 8 October 2022;
+	Time: 11:19 PM Second: 49;
+
+ERROR:
+	Error: websocket: the client is not using the websocket protocol: 'upgrade' token not found in 'Connection' header;
+	Message: upgraded.Upgrade;
+	Line: 65;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/websocket/initWebsocket.go;
+	Date: 8 October 2022;
+	Time: 11:19 PM Second: 59;
+
+ERROR:
+	Error: websocket: the client is not using the websocket protocol: 'upgrade' token not found in 'Connection' header;
+	Message: upgraded.Upgrade;
+	Line: 65;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/websocket/initWebsocket.go;
+	Date: 8 October 2022;
+	Time: 11:20 PM Second: 06;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "undefined": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 23;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/dataProfile/dataProfile.go;
+	Date: 13 October 2022;
+	Time: 3:03 PM Second: 13;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "undefined";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/subscription.go;
+	Date: 13 October 2022;
+	Time: 3:03 PM Second: 13;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "undefined": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 146;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/subscription/subscription.go;
+	Date: 13 October 2022;
+	Time: 3:03 PM Second: 13;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "undefined";
+	Message: models.SelectSubscriber;
+	Line: 124;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/subscription/subscription.go;
+	Date: 13 October 2022;
+	Time: 3:03 PM Second: 13;
+
+ERROR:
+	Error: strconv.ParseInt: parsing "undefined": invalid syntax;
+	Message: strconv.ParseInt;
+	Line: 146;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/subscription/subscription.go;
+	Date: 13 October 2022;
+	Time: 3:03 PM Second: 13;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "undefined";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 13 October 2022;
+	Time: 3:04 PM Second: 31;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "undefined";
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 13 October 2022;
+	Time: 3:04 PM Second: 31;
+
+ERROR:
+	Error: http: no such file;
+	Message: request.FormFile;
+	Line: 15;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/loadCoverAlbum.go;
+	Date: 13 October 2022;
+	Time: 5:01 PM Second: 45;
+
+ERROR:
+	Error: http: no such file;
+	Message: request.FormFile;
+	Line: 17;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/loadCoverAlbum.go;
+	Date: 13 October 2022;
+	Time: 5:04 PM Second: 29;
+
+ERROR:
+	Error: http: no such file;
+	Message: request.FormFile;
+	Line: 17;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/loadCoverAlbum.go;
+	Date: 13 October 2022;
+	Time: 5:05 PM Second: 33;
+
+ERROR:
+	Error: http: no such file;
+	Message: request.FormFile;
+	Line: 17;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/loadCoverAlbum.go;
+	Date: 13 October 2022;
+	Time: 5:08 PM Second: 08;
+
+ERROR:
+	Error: json: Unmarshal(non-pointer []string);
+	Message: json.Unmarshal;
+	Line: 11;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/parseForm.go;
+	Date: 15 October 2022;
+	Time: 4:11 PM Second: 23;
+
+ERROR:
+	Error: json: Unmarshal(non-pointer []int);
+	Message: json.Unmarshal;
+	Line: 41;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/parseForm.go;
+	Date: 15 October 2022;
+	Time: 4:11 PM Second: 23;
+
+ERROR:
+	Error: json: Unmarshal(non-pointer []int);
+	Message: json.Unmarshal;
+	Line: 41;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/parseForm.go;
+	Date: 15 October 2022;
+	Time: 4:11 PM Second: 23;
+
+ERROR:
+	Error: json: Unmarshal(non-pointer []bool);
+	Message: json.Unmarshal;
+	Line: 31;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/parseForm.go;
+	Date: 15 October 2022;
+	Time: 4:11 PM Second: 23;
+
+ERROR:
+	Error: json: Unmarshal(non-pointer []string);
+	Message: json.Unmarshal;
+	Line: 11;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/parseForm.go;
+	Date: 15 October 2022;
+	Time: 4:11 PM Second: 23;
+
+ERROR:
+	Error: json: Unmarshal(non-pointer [][5]string);
+	Message: json.Unmarshal;
+	Line: 21;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/parseForm.go;
+	Date: 15 October 2022;
+	Time: 4:11 PM Second: 23;
+
+ERROR:
+	Error: http: no such file;
+	Message: request.FormFile;
+	Line: 19;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/loadTreckFiles.go;
+	Date: 15 October 2022;
+	Time: 4:36 PM Second: 17;
+
+ERROR:
+	Error: http: no such file;
+	Message: request.FormFile;
+	Line: 20;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/loadTreckFiles.go;
+	Date: 15 October 2022;
+	Time: 4:38 PM Second: 25;
+
+ERROR:
+	Error: pq: column "release_date" of relation "albums" does not exist;
+	Message: ctx.DB.Exec;
+	Line: 36;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/album.go;
+	Date: 15 October 2022;
+	Time: 4:49 PM Second: 02;
+
+ERROR:
+	Error: pq: column "release_date" of relation "albums" does not exist;
+	Message: models.SaveAlbum;
+	Line: 102;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/saveAlbum.go;
+	Date: 15 October 2022;
+	Time: 4:49 PM Second: 02;
+
+ERROR:
+	Error: pq: INSERT has more target columns than expressions;
+	Message: ctx.DB.Exec;
+	Line: 36;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/album.go;
+	Date: 15 October 2022;
+	Time: 4:51 PM Second: 03;
+
+ERROR:
+	Error: pq: INSERT has more target columns than expressions;
+	Message: models.SaveAlbum;
+	Line: 102;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/saveAlbum.go;
+	Date: 15 October 2022;
+	Time: 4:51 PM Second: 03;
+
+ERROR:
+	Error: pq: null value in column "release_date" of relation "beats" violates not-null constraint;
+	Message: ctx.DB.Exec;
+	Line: 55;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/album.go;
+	Date: 15 October 2022;
+	Time: 4:52 PM Second: 31;
+
+ERROR:
+	Error: pq: null value in column "release_date" of relation "beats" violates not-null constraint;
+	Message: models.SaveTreckItems;
+	Line: 107;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/saveAlbum.go;
+	Date: 15 October 2022;
+	Time: 4:52 PM Second: 31;
+
+ERROR:
+	Error: expected slice but got struct;
+	Message: ctx.Select;
+	Line: 92;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/album.go;
+	Date: 15 October 2022;
+	Time: 5:33 PM Second: 55;
+
+ERROR:
+	Error: expected slice but got struct;
+	Message: models.GetUserAlbums;
+	Line: 37;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/getAlbum.go;
+	Date: 15 October 2022;
+	Time: 5:33 PM Second: 55;
+
+ERROR:
+	Error: sql: Scan error on column index 0, name "album_id": pq: unable to parse array; expected '{' at offset 0;
+	Message: ctx.Select;
+	Line: 92;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/album.go;
+	Date: 15 October 2022;
+	Time: 5:34 PM Second: 37;
+
+ERROR:
+	Error: sql: Scan error on column index 0, name "album_id": pq: unable to parse array; expected '{' at offset 0;
+	Message: models.GetUserAlbums;
+	Line: 37;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/getAlbum.go;
+	Date: 15 October 2022;
+	Time: 5:34 PM Second: 37;
+
+ERROR:
+	Error: sql: Scan error on column index 0, name "album_id": pq: unable to parse array; expected '{' at offset 0;
+	Message: ctx.Select;
+	Line: 92;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/album.go;
+	Date: 15 October 2022;
+	Time: 5:36 PM Second: 33;
+
+ERROR:
+	Error: sql: Scan error on column index 0, name "album_id": pq: unable to parse array; expected '{' at offset 0;
+	Message: models.GetUserAlbums;
+	Line: 37;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/getAlbum.go;
+	Date: 15 October 2022;
+	Time: 5:36 PM Second: 33;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.Select;
+	Line: 110;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/album.go;
+	Date: 15 October 2022;
+	Time: 5:37 PM Second: 32;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: models.GetUserAlbums;
+	Line: 37;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/getAlbum.go;
+	Date: 15 October 2022;
+	Time: 5:37 PM Second: 32;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.Select;
+	Line: 113;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/album.go;
+	Date: 15 October 2022;
+	Time: 5:37 PM Second: 57;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: models.GetUserAlbums;
+	Line: 37;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/getAlbum.go;
+	Date: 15 October 2022;
+	Time: 5:37 PM Second: 57;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.Select;
+	Line: 114;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/album.go;
+	Date: 15 October 2022;
+	Time: 5:38 PM Second: 50;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: models.GetUserAlbums;
+	Line: 37;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/getAlbum.go;
+	Date: 15 October 2022;
+	Time: 5:38 PM Second: 50;
+
+ERROR:
+	Error: scannable dest type slice with >1 columns (5) in result;
+	Message: ctx.Select;
+	Line: 110;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/album.go;
+	Date: 15 October 2022;
+	Time: 5:41 PM Second: 35;
+
+ERROR:
+	Error: scannable dest type slice with >1 columns (5) in result;
+	Message: models.GetUserAlbums;
+	Line: 37;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/getAlbum.go;
+	Date: 15 October 2022;
+	Time: 5:41 PM Second: 35;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "undefined";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 15 October 2022;
+	Time: 6:0 PM Second: 23;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "undefined";
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 15 October 2022;
+	Time: 6:0 PM Second: 23;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "undefined";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 15 October 2022;
+	Time: 6:0 PM Second: 37;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "undefined";
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 15 October 2022;
+	Time: 6:0 PM Second: 37;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "undefined";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 15 October 2022;
+	Time: 6:0 PM Second: 58;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "undefined";
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 15 October 2022;
+	Time: 6:0 PM Second: 58;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 15 October 2022;
+	Time: 6:02 PM Second: 30;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 15 October 2022;
+	Time: 6:02 PM Second: 30;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 15 October 2022;
+	Time: 6:22 PM Second: 27;
+
+ERROR:
+	Error: pq: invalid input syntax for type integer: "favicon.ico";
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 15 October 2022;
+	Time: 6:22 PM Second: 27;
+
+ERROR:
+	Error: sql: Scan error on column index 5, name "genre": converting driver.Value type string ("Orchestral") to a int: invalid syntax;
+	Message: ctx.Select;
+	Line: 112;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/album.go;
+	Date: 15 October 2022;
+	Time: 6:49 PM Second: 36;
+
+ERROR:
+	Error: sql: Scan error on column index 5, name "genre": converting driver.Value type string ("Orchestral") to a int: invalid syntax;
+	Message: models.GetUserAlbums;
+	Line: 37;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/getAlbum.go;
+	Date: 15 October 2022;
+	Time: 6:49 PM Second: 36;
+
+ERROR:
+	Error: sql: Scan error on column index 5, name "name": converting NULL to string is unsupported;
+	Message: ctx.Select;
+	Line: 102;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/album.go;
+	Date: 16 October 2022;
+	Time: 4:25 AM Second: 29;
+
+ERROR:
+	Error: sql: Scan error on column index 5, name "name": converting NULL to string is unsupported;
+	Message: models.GetUserAlbums;
+	Line: 37;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/getAlbum.go;
+	Date: 16 October 2022;
+	Time: 4:25 AM Second: 29;
+
+ERROR:
+	Error: json: cannot unmarshal string into Go value of type bool;
+	Message: json.Unmarshal;
+	Line: 31;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/parseForm.go;
+	Date: 16 October 2022;
+	Time: 4:39 AM Second: 46;
+
+ERROR:
+	Error: pq: INSERT has more target columns than expressions;
+	Message: ctx.DB.Exec;
+	Line: 60;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/album.go;
+	Date: 16 October 2022;
+	Time: 4:39 AM Second: 46;
+
+ERROR:
+	Error: pq: INSERT has more target columns than expressions;
+	Message: models.SaveAlbum;
+	Line: 111;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/saveAlbum.go;
+	Date: 16 October 2022;
+	Time: 4:39 AM Second: 46;
+
+ERROR:
+	Error: json: cannot unmarshal string into Go value of type bool;
+	Message: json.Unmarshal;
+	Line: 31;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/parseForm.go;
+	Date: 16 October 2022;
+	Time: 4:43 AM Second: 26;
+
+ERROR:
+	Error: json: cannot unmarshal string into Go value of type bool;
+	Message: json.Unmarshal;
+	Line: 31;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/album/parseForm.go;
+	Date: 16 October 2022;
+	Time: 4:44 AM Second: 01;
+
+ERROR:
+	Error: sql: Scan error on column index 0, name "?column?": sql/driver: couldn't convert <nil> (<nil>) into type bool;
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/subscription.go;
+	Date: 18 October 2022;
+	Time: 4:54 PM Second: 32;
+
+ERROR:
+	Error: sql: Scan error on column index 0, name "?column?": sql/driver: couldn't convert <nil> (<nil>) into type bool;
+	Message: models.SelectSubscriber;
+	Line: 124;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/subscription/subscription.go;
+	Date: 18 October 2022;
+	Time: 4:54 PM Second: 32;
+
+ERROR:
+	Error: sql: Scan error on column index 0, name "?column?": sql/driver: couldn't convert <nil> (<nil>) into type bool;
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/subscription.go;
+	Date: 18 October 2022;
+	Time: 4:54 PM Second: 38;
+
+ERROR:
+	Error: sql: Scan error on column index 0, name "?column?": sql/driver: couldn't convert <nil> (<nil>) into type bool;
+	Message: models.SelectSubscriber;
+	Line: 124;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/subscription/subscription.go;
+	Date: 18 October 2022;
+	Time: 4:54 PM Second: 38;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 18 October 2022;
+	Time: 4:55 PM Second: 09;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 18 October 2022;
+	Time: 4:55 PM Second: 09;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: ctx.Get;
+	Line: 18;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/models/checkVerification.go;
+	Date: 18 October 2022;
+	Time: 4:55 PM Second: 13;
+
+ERROR:
+	Error: sql: no rows in result set;
+	Message: models.CheckVerifByCustomID;
+	Line: 28;
+	File: /home/dmitrydvp/go/src/evolution/www/backend/api/userData/userData.go;
+	Date: 18 October 2022;
+	Time: 4:55 PM Second: 13;

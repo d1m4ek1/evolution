@@ -7,8 +7,8 @@ const StickyHeader = () => {
 
     const handleTouchStart = (e) => {
       if (
-        e.target.offsetParent !== null
-        && e.target.offsetParent.classList[0] === 'swiper-slide'
+        e.target.offsetParent !== null &&
+        e.target.offsetParent.classList[0] === "swiper-slide"
       ) {
         return;
       }
@@ -33,41 +33,38 @@ const StickyHeader = () => {
       if (Math.abs(xDiff) > Math.abs(yDiff)) {
         // right
         if (xDiff > 0) {
-
           const headerElements = {
-            headerSticky: document.querySelector('.header_sticky'),
-            main: document.querySelector('.main'),
-            mainBodyContent: document.querySelector('.main__body_content')
-          }
-          headerElements.headerSticky.style.transform = 'translateX(0px)';
+            headerSticky: document.querySelector(".header_sticky"),
+            main: document.querySelector(".main"),
+            mainBodyContent: document.querySelector(".main__body_content"),
+          };
+          headerElements.headerSticky.style.transform = "translateX(0px)";
 
-          headerElements.main.classList.remove('main_squeeze_before_remove');
-          headerElements.main.classList.add('main_squeeze_before_add');
+          headerElements.main.classList.remove("main_squeeze_before_remove");
+          headerElements.main.classList.add("main_squeeze_before_add");
 
-          headerElements.mainBodyContent.classList.remove('main_unclench');
-          headerElements.mainBodyContent.classList.add('main_squeeze');
+          headerElements.mainBodyContent.classList.remove("main_unclench");
+          headerElements.mainBodyContent.classList.add("main_squeeze");
 
-          document.body.style.overflow = 'hidden';
+          document.body.style.overflow = "hidden";
           stickyHeaderOpened = true;
-
         } else if (stickyHeaderOpened) {
-          
           const headerElements = {
-            headerSticky: document.querySelector('.header_sticky'),
-            main: document.querySelector('.main'),
-            mainBodyContent: document.querySelector('.main__body_content')
-          }
-          headerElements.headerSticky.style.transform = 'translateX(-200px)';
+            headerSticky: document.querySelector(".header_sticky"),
+            main: document.querySelector(".main"),
+            mainBodyContent: document.querySelector(".main__body_content"),
+          };
+          headerElements.headerSticky.style.transform = "translateX(-200px)";
 
-          headerElements.main.classList.remove('main_squeeze_before_add');
-          headerElements.main.classList.add('main_squeeze_before_remove');
+          headerElements.main.classList.remove("main_squeeze_before_add");
+          headerElements.main.classList.add("main_squeeze_before_remove");
 
-          headerElements.mainBodyContent.classList.remove('main_squeeze');
-          headerElements.mainBodyContent.classList.add('main_unclench');
+          headerElements.mainBodyContent.classList.remove("main_squeeze");
+          headerElements.mainBodyContent.classList.add("main_unclench");
           document.body.style.overflow = null;
 
           setTimeout(() => {
-            headerElements.main.classList.remove('main_squeeze_before_remove');
+            headerElements.main.classList.remove("main_squeeze_before_remove");
           }, 490);
           stickyHeaderOpened = false;
         }
@@ -80,9 +77,9 @@ const StickyHeader = () => {
       y1 = null;
     };
 
-    document.addEventListener('touchstart', handleTouchStart, false);
-    document.addEventListener('touchmove', handleTouchMove, false);
-    document.addEventListener('touchend', handleTouchEnd, false);
+    document.addEventListener("touchstart", handleTouchStart, false);
+    document.addEventListener("touchmove", handleTouchMove, false);
+    document.addEventListener("touchend", handleTouchEnd, false);
   }
 };
 export default StickyHeader;

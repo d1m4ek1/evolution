@@ -114,13 +114,13 @@ func defineHeaderForAutorize(ctx *sqlx.DB, token string) general.HeaderData {
 
 func redirectUser(ctx *sqlx.DB, context *gin.Context, redirector *Redirector) {
 	if redirector.Token == "" && redirector.UserId == "" {
-		context.Redirect(http.StatusMovedPermanently, "/signin")
+		context.Redirect(http.StatusFound, "/signin")
 		return
 	} else {
 		if !general.ValidateUser(ctx, redirector.Token, redirector.UserId) {
 			context.SetCookie("token", "", -1, "/", "localhost", false, true)
 			context.SetCookie("userId", "", -1, "/", "localhost", false, true)
-			context.Redirect(http.StatusMovedPermanently, "/signin")
+			context.Redirect(http.StatusFound, "/signin")
 		}
 	}
 }

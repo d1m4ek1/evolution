@@ -2,6 +2,7 @@ package dataprofile
 
 import (
 	"iNote/www/backend/models"
+	"iNote/www/backend/pkg/general"
 	"iNote/www/backend/pkg/newerror"
 	"net/http"
 	"strconv"
@@ -13,39 +14,31 @@ import (
 const pathToLogFile string = "backend/logs/logs.txt"
 const isTimeAmPm bool = true
 
-// Path to error
-const (
-	pathToError string = "api/dataProfile -> Function "
-)
+func sendAllData(ctx *sqlx.DB, context *gin.Context, userID string) {
+	visitorIDCookie, _ := context.Cookie("userId")
+	var err error
 
-const (
-	errorSendAllData string = pathToError + "sendAllData"
-)
-
-type DataProfile struct {
-	AboutMeTitle   string `json:"aboutmeTitle"`
-	AboutMeContent string `json:"aboutmeContent"`
-}
-
-func sendAllData(ctx *sqlx.DB, context *gin.Context, userId string) {
-	var dataProfile DataProfile
-
-	userIDConv, err := strconv.ParseInt(userId, 10, 0)
+	userIDConv, err := strconv.ParseInt(userID, 10, 0)
 	if err != nil {
 		newerror.NewAppError("strconv.ParseInt", err, pathToLogFile, isTimeAmPm)
 		return
 	}
 
-	aboutme, err := models.SelectProfileData(ctx, userIDConv)
+	profileData, err := models.SelectProfileData(ctx, userIDConv)
 	if err != nil {
 		newerror.NewAppError("Qmodels.SelectProfileData", err, pathToLogFile, isTimeAmPm)
 		return
 	}
 
-	dataProfile.AboutMeTitle = aboutme[0]
-	dataProfile.AboutMeContent = aboutme[1]
+	if visitorID, _ := models.CheckVerifByCustomID(ctx, visitorIDCookie); visitorID != 0 {
+		profileData.VisitorIsAuthorized = true
+	}
 
-	context.JSON(http.StatusOK, dataProfile)
+	profileData.Banner, profileData.Logo = general.ValidLogoBanner(profileData.Logo, profileData.Banner)
+
+	profileData.URLID = userID
+
+	context.JSON(http.StatusOK, profileData)
 }
 
 func ControlDataProfile(ctx *sqlx.DB) gin.HandlerFunc {

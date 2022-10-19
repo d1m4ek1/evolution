@@ -65,10 +65,10 @@ func AppendSubscription(ctx *sqlx.DB) gin.HandlerFunc {
 					return
 				}
 			} else {
-				context.Redirect(http.StatusMovedPermanently, "/signin")
+				context.Redirect(http.StatusFound, "/signin")
 			}
 		} else {
-			context.Redirect(http.StatusMovedPermanently, "/signin")
+			context.Redirect(http.StatusFound, "/signin")
 		}
 	})
 }
@@ -103,10 +103,10 @@ func DeleteSubscription(ctx *sqlx.DB) gin.HandlerFunc {
 					return
 				}
 			} else {
-				context.Redirect(http.StatusMovedPermanently, "/signin")
+				context.Redirect(http.StatusFound, "/signin")
 			}
 		} else {
-			context.Redirect(http.StatusMovedPermanently, "/signin")
+			context.Redirect(http.StatusFound, "/signin")
 		}
 	})
 }

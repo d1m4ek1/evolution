@@ -65,7 +65,7 @@ func GetPersonalData(ctx *sqlx.DB) gin.HandlerFunc {
 			if user.Autorize {
 				getOldPersonalData(ctx, context, userIDConv)
 			} else {
-				context.Redirect(http.StatusMovedPermanently, "signin")
+				context.Redirect(http.StatusFound, "signin")
 			}
 		}
 	})
@@ -127,7 +127,7 @@ func SavePersonalData(ctx *sqlx.DB) gin.HandlerFunc {
 			if user.Autorize {
 				SetPersonalData(ctx, context, userIDConv)
 			} else {
-				context.Redirect(http.StatusMovedPermanently, "/signin")
+				context.Redirect(http.StatusFound, "/signin")
 			}
 		}
 	})

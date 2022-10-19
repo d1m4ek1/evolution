@@ -50,6 +50,21 @@ func (P *ProfileData) ValidLogoBanner(logo string, banner string) {
 	}
 }
 
+func ValidLogoBanner(logo string, banner string) (newBanner, newLogo string) {
+	if banner != "not_banner.png" {
+		newBanner = "/user_files/profile/banner/saved/" + banner
+	} else {
+		newBanner = "/user_files/profile/banner/notBanner/not_banner.png"
+	}
+	if logo != "not_logo.png" {
+		newLogo = "/user_files/profile/logo/saved/" + logo
+	} else {
+		newLogo = "/user_files/profile/logo/notLogo/not_logo.png"
+	}
+
+	return newBanner, newLogo
+}
+
 type SettingsData struct {
 	Title string
 }

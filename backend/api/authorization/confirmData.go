@@ -41,7 +41,7 @@ func ConfirmPassword(ctx *sqlx.DB) gin.HandlerFunc {
 
 				context.JSON(http.StatusOK, confirmPassword)
 			} else {
-				context.Redirect(http.StatusMovedPermanently, "/signin")
+				context.Redirect(http.StatusFound, "/signin")
 			}
 		}
 	})

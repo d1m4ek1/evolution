@@ -1,3 +1,7 @@
+body {
+  padding-bottom: unset;
+}
+
 .change_section {
   padding-bottom: 60px;
 }

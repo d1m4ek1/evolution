@@ -1,6 +1,5 @@
 <template>
   <section class="container settings_content">
-    <h1 class="connect_bd">Связано с Базой данных</h1>
     <!-- NICKNAME -->
     <div class="change_section">
       <div class="change_section__title">

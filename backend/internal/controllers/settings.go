@@ -1,9 +1,10 @@
 package controllers
 
 import (
+	"iNote/www/backend/pkg/general"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jmoiron/sqlx"
-	"iNote/www/backend/pkg/general"
 )
 
 func SettingsTemplate(ctx *sqlx.DB) gin.HandlerFunc {
@@ -25,7 +26,7 @@ func SettingsTemplate(ctx *sqlx.DB) gin.HandlerFunc {
 		settingsData.SetTitle(title)
 
 		replyBasedOnToken(ctx, &ReplyBaseOnToken{
-			Define:   "settings",
+			Define:   "index",
 			Token:    token,
 			UserId:   userId,
 			Settings: settingsData,
